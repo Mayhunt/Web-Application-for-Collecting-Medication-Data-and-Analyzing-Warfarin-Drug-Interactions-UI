@@ -9,7 +9,7 @@
       <br>
       <h2>Drug Currently Used</h2>
     </div>
-    <div class="box is-clickable" v-for="(Currenly, index) in drugcurrently" :key="index" style="border-radius: 20px 20px 20px 20px">
+    <div class="box is-clickable" v-for="(Currenly, index) in drugcurrently" :key="index" style="border-radius: 30px 30px 30px 30px">
       <article class="media">
         <div class="media-left">
           <figure class="image is-64x64">
