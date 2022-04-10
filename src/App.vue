@@ -29,4 +29,7 @@ export default {
 .hero .navbar {
   background: rgb(121, 87, 213) !important;
 }
+.button{
+  font-family: 'Kanit';
+}
 </style>
