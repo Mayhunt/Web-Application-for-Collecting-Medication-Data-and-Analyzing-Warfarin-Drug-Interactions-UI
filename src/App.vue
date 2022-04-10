@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" style="font-family: 'Kanit'">
     <section class="hero">
       <!-- Hero head: will stick at the top -->
       <div class="hero-head is-white">
