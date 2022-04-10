@@ -1,14 +1,40 @@
 <template>
   <div style="background-color: rgb(121, 87, 213)">
+    <b-collapse
+      class="card"
+      animation="slide"
+      aria-id="contentIdForA11y3"
+      style="background-color: rgb(121, 87, 213)"
+    >
+      <template #trigger="props">
+        <div
+          class="card-header"
+          role="button"
+          aria-controls="contentIdForA11y3"
+          :aria-expanded="props.open"
+          style="font-family: 'Kanit'"
+        >
+          <p class="card-header-title"><font size="6">รายการยาวันนี้</font></p>
+          <a class="card-header-icon">
+            <b-icon :icon="props.open ? 'menu-down' : 'menu-up'"> </b-icon>
+          </a>
+        </div>
+      </template>
+
+      <div class="card-content">
+        <div class="content" style="font-family: 'Kanit'">รายการยาที่ต้องรับประทานวันนี้</div>
+      </div>
+    </b-collapse>
+
     <section
       class="hero is-white is-fullheight-with-navbar"
       style="border-radius: 60px 60px 0 0; margin-top: 1rem"
     >
       <div class="container" style="margin: 0 20px">
         <!-- <div class="container"> -->
-        <div class="content is-medium">
+        <div class="content is-medium" style="font-family: 'Kanit'">
           <br />
-          <h1 style="margin-top: 0">INR</h1>
+          <h2 style="margin-top: 0">INR</h2>
         </div>
         <div>
           <b-image
@@ -64,8 +90,11 @@
             </b-table-column>
           </b-table>
         </div>
-
         <!-- </div> -->
+         <div class="buttons" style="justify-content: center,font-family: 'Kanit'">
+          <b-button rounded type="is-primary" size="is-medium" expanded>บันทึกค่า INR</b-button>
+          <b-button rounded type="is-danger" size="is-medium" expanded>แก้ไขค่า INR</b-button>
+        </div>
       </div>
     </section>
   </div>
@@ -98,4 +127,5 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+</style>
