@@ -2,7 +2,7 @@
   <section class="hero is-primary is-fullheight-with-navbar">
     <div
       style="
-        background-color: rgba(189, 174, 230, 255);
+        background-color: #f2effb;
         border-radius: 60px 60px 0 0;
         margin-top: 1rem;
       "
@@ -12,7 +12,7 @@
           <br />
           <h1>Allergic Drugs</h1>
         </div>
-        <div class="box is-clickable" v-for="(AllergicAll, index) in allergics" :key="index">
+        <div class="box is-clickable" v-for="(AllergicAll, index) in allergics" :key="index" style="border-radius: 30px 30px 30px 30px">
           <article class="media">
             <div class="media-left">
               <figure class="image is-64x64">
@@ -77,7 +77,7 @@ export default {
   padding-right: 15px;
   left: 0%;
   bottom: 0px;
-  background-color: rgba(189, 174, 230, 255);
+  background-color: #f2effb;
   width: 100%;
   height: 10%;
 }
