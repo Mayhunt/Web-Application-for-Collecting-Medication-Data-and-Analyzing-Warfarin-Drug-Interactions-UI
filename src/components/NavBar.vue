@@ -2,7 +2,9 @@
   <b-navbar :fixed-top="true">
     <template #brand>
       <b-navbar-item href="#">
+        <router-link to="/home">
         <b-icon pack="fas" size="is-medium" icon="home" type="is-white"> </b-icon>
+        </router-link>
       </b-navbar-item>
       <b-navbar-item>
         <b-autocomplete rounded placeholder="e.g. Anne" icon="magnify" style="padding-left: 20px">
@@ -12,16 +14,22 @@
     <template #start>
       <b-navbar-item href="#">
         <b-icon pack="mdi" icon="pill" type="is-primary"> </b-icon>
-        <span style="padding-left: 16px"></span><span>Drug Currently Used</span>
+        <router-link to="/drug-used">
+          <span style="padding-left: 16px"></span><span>Drug Currently Used</span>
+        </router-link>
       </b-navbar-item>
       <b-navbar-item>
-        <b-icon pack="mdi" icon="exclamation" type="is-primary"> </b-icon>
-        <span style="padding-left: 16px"></span><span>Allergy Drug</span>
+          <router-link to="/allergic-used">
+            <b-icon pack="mdi" icon="exclamation" type="is-primary"> </b-icon>
+            <span style="padding-left: 16px"></span><span>Allergy Drug</span>
+          </router-link>
       </b-navbar-item>
       <hr />
       <b-navbar-item>
+        <router-link to="/profile">
         <b-icon pack="mdi" icon="account" type="is-primary"> </b-icon>
         <span style="padding-left: 16px"></span><span>Profile</span>
+        </router-link>
       </b-navbar-item>
       <hr />
     </template>
