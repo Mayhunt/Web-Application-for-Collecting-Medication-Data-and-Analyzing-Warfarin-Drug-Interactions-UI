@@ -13,6 +13,7 @@
           <h1>Allergic Drugs</h1>
         </div>
         <div class="box is-clickable" v-for="(AllergicAll, index) in allergics" :key="index" style="border-radius: 30px 30px 30px 30px">
+          <router-link to = '/edit-allergic'>
           <article class="media">
             <div class="media-left">
               <figure class="image is-64x64">
@@ -33,9 +34,12 @@
               </div>
             </div>
           </article>
+          </router-link>
         </div>
         <div class="fixedbutton">
-          <b-button class="mt-4" rounded type="is-primary" size="is-medium" expanded>รูปใบแพ้ยา</b-button>
+          <b-button class="mt-4" rounded type="is-primary" size="is-medium" expanded>
+            <router-link to ='/allergic-pic'>
+            รูปใบแพ้ยา</router-link></b-button>
         </div>
       </div>
     </div>

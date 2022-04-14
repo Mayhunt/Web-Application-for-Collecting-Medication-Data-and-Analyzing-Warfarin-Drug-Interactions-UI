@@ -96,7 +96,8 @@
           </section>
 
           <div class="buttons" style="justify-content: center">
-            <b-button rounded type="is-primary" size="is-medium" expanded>บันทึก</b-button>
+            <b-button rounded type="is-primary" size="is-medium" expanded>
+              <router-link to="/drug-used">บันทึก</router-link></b-button>
           </div>
         </div>
       </div>

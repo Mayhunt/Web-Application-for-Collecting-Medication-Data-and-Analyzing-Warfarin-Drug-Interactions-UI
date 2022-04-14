@@ -1,8 +1,8 @@
 <template>
   <div style="background-color: rgb(121, 87, 213)">
     <div style="background-color: rgb(121, 87, 213); max-height: 56px">
-      <b-icon pack="fas" icon="arrow-left" size="is-medium" type="is-white" style="margin: 12px">
-      </b-icon>
+      <b-icon class ='is-clickable' pack="fas" icon="arrow-left" size="is-medium" type="is-white" style="margin: 12px">
+      <router-link to="/register1"/></b-icon>
     </div>
     <!-- <section>
             <b-image
@@ -76,7 +76,8 @@
             class="buttons"
             style="justify-content: center; margin-top: 2.5rem; margin-bottom: 4rem"
           >
-            <b-button rounded type="is-primary" size="is-medium" expanded>Continue</b-button>
+            <b-button rounded type="is-primary" size="is-medium" expanded>
+              <router-link to="/question">Continue</router-link></b-button>
           </div>
         </form>
       </div>

@@ -10,6 +10,7 @@
       <h2>Drug Currently Used</h2>
     </div>
     <div class="box is-clickable" v-for="(Currenly, index) in drugcurrently" :key="index" style="border-radius: 30px 30px 30px 30px">
+      <router-link to="/edit-drugused">
       <article class="media">
         <div class="media-left">
           <figure class="image is-64x64">
@@ -30,6 +31,7 @@
           </div>
         </div>
       </article>
+      </router-link>
     </div>
   </div>
 

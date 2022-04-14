@@ -45,11 +45,12 @@
             </b-input>
           </b-field>
           <div class="buttons" style="justify-content: right">
-            <b-button type="is-text" size="is-small">Forget Password</b-button>
+            <b-button type="is-text" size="is-small">ลืมรหัสผ่าน</b-button>
           </div>
           <div class="buttons" style="justify-content: center">
-            <b-button rounded type="is-primary" size="is-medium" expanded>Sign In</b-button>
-            <b-button type="is-text">Register</b-button>
+            <b-button rounded type="is-primary" size="is-medium" expanded>
+              <router-link to="/home">เข้าสู่ระบบ</router-link></b-button>
+            <b-button type="is-text"><router-link to="/register1">ลงทะเบียนผู้ใช้ใหม่</router-link></b-button>
           </div>
         </form>
       </div>

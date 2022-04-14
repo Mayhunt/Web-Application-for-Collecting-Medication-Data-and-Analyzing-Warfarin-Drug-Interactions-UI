@@ -42,7 +42,8 @@
           </div> -->
 
           <div class="buttons" style="justify-content: center">
-            <b-button rounded type="is-primary is-light" size="is-medium" expanded>แก้ไข</b-button>
+            <b-button rounded type="is-primary is-light" size="is-medium" expanded>
+              <router-link to="/save-allergic">แก้ไข</router-link></b-button>
             <b-button rounded type="is-danger is-light" size="is-medium" expanded>ลบรายการยานี้</b-button>
           </div>
         </div>
