@@ -84,6 +84,16 @@ const routes = [
     name: 'EditAllergic',
     component: () => import(/* webpackChunkName: "ForTest" */ '../views/EditAllergic/index.vue'),
   },
+  {
+    path: '/edit-drugused',
+    name: 'EditDrugUsed',
+    component: () => import(/* webpackChunkName: "ForTest" */ '../views/EditDrugUsed/index.vue'),
+  },
+  {
+    path: '/save-inr',
+    name: 'SaveINR',
+    component: () => import(/* webpackChunkName: "ForTest" */ '../views/SaveINR/index.vue'),
+  },
 
 ];
 
