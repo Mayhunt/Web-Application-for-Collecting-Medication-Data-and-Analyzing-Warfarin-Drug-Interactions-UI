@@ -91,9 +91,120 @@
           </b-table>
         </div>
         <!-- </div> -->
-         <div class="buttons" style="justify-content: center,font-family: 'Kanit'">
-          <b-button rounded type="is-primary" size="is-medium" expanded>บันทึกค่า INR</b-button>
-          <b-button rounded type="is-danger" size="is-medium" expanded>แก้ไขค่า INR</b-button>
+        <div class="buttons" style="justify-content: center,font-family: 'Kanit'">
+          <!-- <b-button rounded type="is-primary" size="is-medium" expanded>บันทึกค่า INR</b-button> -->
+
+          <b-button
+            rounded
+            label="บันทึกค่า INR"
+            type="is-primary"
+            size="is-medium"
+            @click="isCardModalActive = true"
+            expanded
+          />
+
+          <b-modal v-model="isCardModalActive" :width="640" scroll="keep">
+            <div class="card">
+              <div>
+                <section
+                  class="hero is-white"
+                  style="border-radius: 60px 60px 0 0; margin-top: 1rem; padding: 1rem"
+                >
+                  <div>
+                    <div class="content is-medium">
+                      <h1 style="margin-top: 0; text-align: center; margin-bottom: 0.25rem">
+                        บันทึกค่า INR
+                      </h1>
+                    </div>
+                    <form class="box">
+                      <b-field label="วันที่">
+                        <b-datepicker
+                          placeholder="เลือกวันที่."
+                          icon="calendar-today"
+                          rounded
+                          trap-focus
+                        >
+                        </b-datepicker>
+                      </b-field>
+
+                      <b-field label="ค่า INR ที่คาดหวัง">
+                        <b-input placeholder="ใส่ค่า INR ที่คาดหวัง" rounded trap-focus></b-input>
+                      </b-field>
+
+                      <b-field label="ค่า INR ที่วัดได้จริง">
+                        <b-input
+                          placeholder="ใส่ค่า INR ที่วัดได้จริง"
+                          rounded
+                          trap-focus
+                        ></b-input>
+                      </b-field>
+                      <div class="buttons" style="justify-content: center; margin-top: 2rem">
+                        <b-button rounded type="is-primary" size="is-medium" expanded
+                          >บันทึก</b-button
+                        >
+                      </div>
+                    </form>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </b-modal>
+          <!-- <b-button rounded type="is-danger" size="is-medium" expanded>แก้ไขค่า INR</b-button> -->
+          <b-button
+            rounded
+            label="แก้ไขค่า INR"
+            type="is-danger"
+            size="is-medium"
+            @click="isCardModalActive = true"
+            expanded
+          />
+
+          <b-modal v-model="isCardModalActive" :width="640" scroll="keep">
+            <div class="card">
+              <div>
+                <section
+                  class="hero is-white"
+                  style="border-radius: 60px 60px 0 0; margin-top: 1rem; padding: 1rem"
+                >
+                  <div>
+                    <div class="content is-medium">
+                      <h1 style="margin-top: 0; text-align: center; margin-bottom: 0.25rem">
+                        แก้ไขค่า INR
+                      </h1>
+                    </div>
+                    <form class="box">
+                      <b-field label="วันที่">
+                        <b-datepicker
+                          placeholder="เลือกวันที่."
+                          icon="calendar-today"
+                          rounded
+                          trap-focus
+                        >
+                        </b-datepicker>
+                      </b-field>
+
+                      <b-field label="ค่า INR ที่คาดหวัง">
+                        <b-input placeholder="ใส่ค่า INR ที่คาดหวัง" rounded trap-focus></b-input>
+                      </b-field>
+
+                      <b-field label="ค่า INR ที่วัดได้จริง">
+                        <b-input
+                          placeholder="ใส่ค่า INR ที่วัดได้จริง"
+                          rounded
+                          trap-focus
+                        ></b-input>
+                      </b-field>
+                      <div class="buttons" style="justify-content: center; margin-top: 2rem">
+                        <b-button rounded type="is-primary" size="is-medium" expanded
+                          >บันทึก</b-button
+                        >
+                      </div>
+                    </form>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </b-modal>
         </div>
       </div>
     </section>
@@ -122,10 +233,18 @@ export default {
       isFocusable: false,
       isLoading: false,
       hasMobileCards: false,
+      isCardModalActive: false,
+      // isOpen: true,
     };
+  },
+  methods: {
+    handleSubmit() {
+      this.$nextTick(() => {
+        this.$bvModal.hide('modal-prevent-closing');
+      });
+    },
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>
