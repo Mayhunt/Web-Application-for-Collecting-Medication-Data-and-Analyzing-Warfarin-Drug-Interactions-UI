@@ -27,50 +27,52 @@
         </div>
         <form class="box">
           <b-field label="Name*" label-position="on-border">
-            <b-input placeholder="Name" rounded> </b-input>
+            <b-input v-model="first_name" placeholder="Name" rounded> </b-input>
           </b-field>
           <b-field label="Surname*" label-position="on-border">
-            <b-input placeholder="Surname" rounded> </b-input>
+            <b-input v-model="last_name" placeholder="Surname" rounded> </b-input>
           </b-field>
           <b-field label="ID Number" label-position="on-border">
-            <b-input placeholder="X-XXXX-XXXXX-XX-X" rounded> </b-input>
+            <b-input v-model="id_card_number" placeholder="X-XXXX-XXXXX-XX-X" rounded> </b-input>
           </b-field>
           <b-field label="Date of Birth" label-position="on-border">
-            <b-datepicker placeholder="Click to select..." icon="calendar-today" rounded trap-focus>
+            <b-datepicker v-model="selectedDate" placeholder="Click to select..." icon="calendar-today" :icon-right="selected ? 'close-circle' : ''"
+                icon-right-clickable
+                @icon-right-click="clearDate" rounded trap-focus>
             </b-datepicker>
           </b-field>
-          <b-field label="Blood Type" label-position="on-border">
-            <b-input placeholder="B+" rounded> </b-input>
+          <b-field label="Blood Group" label-position="on-border">
+            <b-input v-model="blood_group" placeholder="ตัวอย่าง B+" rounded> </b-input>
           </b-field>
           <b-field label="โรคประจำตัว" label-position="on-border">
-            <b-input placeholder="Heart Disease" rounded> </b-input>
+            <b-input v-model="medication_condition" placeholder="Heart Disease" rounded> </b-input>
           </b-field>
           <b-field label="น้ำหนัก" label-position="on-border">
-            <b-input placeholder="XX " rounded expanded> </b-input>
+            <b-input v-model="weight"  placeholder="XX " rounded expanded> </b-input>
             <p class="control">
               <span class="button is-static is-rounded">กิโลกรัม</span>
             </p>
           </b-field>
           <b-field label="ส่วนสูง" label-position="on-border">
-            <b-input placeholder="XXX " rounded expanded> </b-input>
+            <b-input v-model="height" placeholder="XXX " rounded expanded> </b-input>
             <p class="control">
               <span class="button is-static is-rounded">เซนติเมตร</span>
             </p>
           </b-field>
           <b-field label="BMI" label-position="on-border">
-            <b-input placeholder="ดัชนีมวลกาย" rounded disabled> </b-input>
+            <b-input v-model="bmi" placeholder="ดัชนีมวลกาย" rounded disabled> </b-input>
           </b-field>
           <b-field label="เบอร์โทร" label-position="on-border">
-            <b-input placeholder="XXX-XXXXXXX" rounded> </b-input>
+            <b-input v-model="phone_num" placeholder="XXX-XXXXXXX" rounded> </b-input>
           </b-field>
           <hr />
           <h4>ผู้ติดต่อฉุกเฉิน</h4>
           <br>
           <b-field label="ชื่อ" label-position="on-border">
-            <b-input placeholder="ชื่อ" rounded> </b-input>
+            <b-input v-model="emergency_contact" placeholder="ชื่อ" rounded> </b-input>
           </b-field>
           <b-field label="เบอร์โทร" label-position="on-border">
-            <b-input placeholder="XXX-XXXXXXX" rounded> </b-input>
+            <b-input v-model="emergency_phone_num" placeholder="XXX-XXXXXXX" rounded> </b-input>
           </b-field>
           <div
             class="buttons"

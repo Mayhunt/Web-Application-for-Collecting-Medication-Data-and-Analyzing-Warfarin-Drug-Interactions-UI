@@ -27,7 +27,7 @@
         </div>
         <form class="box">
           <b-field label="คำใบ้">
-            <b-input rounded expanded placeholder="เพิ่มคำใบ้"></b-input>
+            <b-input v-model="hint" rounded expanded placeholder="เพิ่มคำใบ้"></b-input>
           </b-field>
           <p>ตัวอย่าง</p>
           <p>คำถาม สุนัขตัวแรกชื่อว่าอะไร </p>

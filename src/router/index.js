@@ -89,12 +89,11 @@ const routes = [
     name: 'EditDrugUsed',
     component: () => import(/* webpackChunkName: "ForTest" */ '../views/EditDrugUsed/index.vue'),
   },
-  {
-    path: '/save-inr',
-    name: 'SaveINR',
-    component: () => import(/* webpackChunkName: "ForTest" */ '../views/SaveINR/index.vue'),
-  },
-
+  // {
+  //   path: '/save-inr',
+  //   name: 'SaveINR',
+  //   component: () => import(/* webpackChunkName: "ForTest" */ '../views/SaveINR/index.vue'),
+  // },
 ];
 
 const router = new VueRouter({
