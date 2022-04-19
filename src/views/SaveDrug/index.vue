@@ -18,7 +18,7 @@
         </b-image>
       </div>
 
-      <div class="media-content">
+      <div>
         <div class="content has-text-black">
           <br />
           <br />
