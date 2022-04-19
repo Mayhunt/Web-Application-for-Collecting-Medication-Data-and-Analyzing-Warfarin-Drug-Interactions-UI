@@ -44,7 +44,7 @@
           </b-field>
 
           <div class="buttons" style="justify-content: center">
-            <b-button type="is-text"><router-link to="/question2">เพิ่มคำใบ้</router-link></b-button>
+            <b-button type="is-text"><router-link to="/hint">เพิ่มคำใบ้</router-link></b-button>
           </div>
 
           <!-- <div class="buttons" style="justify-content: right"><b-button type="is-text" size="is-small">Forget Password</b-button></div> -->
