@@ -1,9 +1,6 @@
 <template>
   <div style="background-color: rgb(121, 87, 213)">
-    <div style="background-color: rgb(121, 87, 213); max-height: 56px">
-      <b-icon pack="fas" icon="arrow-left" size="is-medium" type="is-white" style="margin: 12px">
-      </b-icon>
-    </div>
+    <div style="background-color: rgb(121, 87, 213); max-height: 56px"></div>
     <!-- <section>
             <b-image
                 :src="require('@/assets/logo.png')"
@@ -25,8 +22,8 @@
         </div>
         <div>
           <b-field>
-            <b-checkbox :value="true" type="is-primary" size="is-medium" required>
-              Allow
+            <b-checkbox value="false" type="is-primary" size="is-medium" required>
+              เข้าใจเนื้อหาทั้งหมด
             </b-checkbox>
           </b-field>
         </div>
@@ -34,7 +31,15 @@
           class="buttons"
           style="justify-content: center; margin-top: 2.5rem; margin-bottom: 6rem"
         >
-          <b-button rounded type="is-primary" size="is-medium" expanded>Finish</b-button>
+          <b-button
+            rounded
+            type="is-primary"
+            size="is-medium"
+            expanded
+            disabled
+          >
+            <router-link to="/home">เสร็จสิ้น</router-link></b-button
+          >
         </div>
       </div>
     </section>
@@ -44,6 +49,9 @@
 <script>
 export default {
   name: 'RegisterPrivacyPage',
+  data() {
+    return {};
+  },
 };
 </script>
 
