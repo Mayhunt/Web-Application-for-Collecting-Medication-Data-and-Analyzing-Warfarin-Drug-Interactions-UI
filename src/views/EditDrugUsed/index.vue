@@ -18,7 +18,7 @@
         </b-image>
       </div>
 
-      <div class="media-content">
+      <div>
         <div class="content has-text-black">
           <br />
           <br />
@@ -61,11 +61,19 @@
                   <b-button rounded type="is-primary" outlined>หลังอาหาร</b-button>
                 </div>
                 <p>เวลา</p>
-                <div class="buttons">
-                  <b-button rounded type="is-primary" outlined>เช้า</b-button>
-                  <b-button rounded type="is-primary" outlined>กลางวัน</b-button>
-                  <b-button rounded type="is-primary" outlined>เย็น</b-button>
-                  <b-button rounded type="is-primary" outlined>ก่อนนอน</b-button>
+                <div>
+                  <b-field>
+                    <b-checkbox size="is-medium" :value="false"> เช้า </b-checkbox>
+                  </b-field>
+                  <b-field>
+                    <b-checkbox size="is-medium" :value="false"> กลางวัน </b-checkbox>
+                  </b-field>
+                  <b-field>
+                    <b-checkbox size="is-medium" :value="false"> เย็น </b-checkbox>
+                  </b-field>
+                  <b-field>
+                    <b-checkbox size="is-medium" :value="false"> ก่อนนอน</b-checkbox>
+                  </b-field>
                 </div>
                 <b-field label="ทุกๆ"
                   ><b-select placeholder="จำนวนชั่วโมง" rounded>
@@ -101,8 +109,11 @@
 
           <div class="buttons" style="justify-content: center">
             <b-button rounded type="is-primary is-light" size="is-medium" expanded>
-                <router-link to="/save-drug">แก้ไข</router-link></b-button>
-            <b-button rounded type="is-danger is-light" size="is-medium" expanded>ลบรายการยานี้</b-button>
+              <router-link to="/save-drug">แก้ไข</router-link></b-button
+            >
+            <b-button rounded type="is-danger is-light" size="is-medium" expanded>
+              <router-link to="/currently-drug">ลบรายการยานี้</router-link></b-button
+            >
           </div>
         </div>
       </div>

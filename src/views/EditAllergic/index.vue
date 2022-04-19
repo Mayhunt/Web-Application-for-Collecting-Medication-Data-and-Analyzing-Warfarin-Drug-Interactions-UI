@@ -17,7 +17,7 @@
         ></b-image>
       </div>
 
-      <div class="media-content">
+      <div>
         <div class="content has-text-black">
           <br />
           <br />
@@ -44,7 +44,8 @@
           <div class="buttons" style="justify-content: center">
             <b-button rounded type="is-primary is-light" size="is-medium" expanded>
               <router-link to="/save-allergic">แก้ไข</router-link></b-button>
-            <b-button rounded type="is-danger is-light" size="is-medium" expanded>ลบรายการยานี้</b-button>
+            <b-button rounded type="is-danger is-light" size="is-medium" expanded>
+              <router-link to="allergic-drug">ลบรายการยานี้</router-link></b-button>
           </div>
         </div>
       </div>
