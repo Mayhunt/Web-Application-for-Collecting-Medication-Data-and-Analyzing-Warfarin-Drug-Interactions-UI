@@ -40,7 +40,7 @@
             </b-select>
           </b-field>
           <b-field label="คำตอบ">
-            <b-input rounded expanded required placeholder="ใส่คำตอบ"></b-input>
+            <b-input v-model="answer" rounded expanded required placeholder="ใส่คำตอบ"></b-input>
           </b-field>
 
           <div class="buttons" style="justify-content: center">

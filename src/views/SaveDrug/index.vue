@@ -28,6 +28,7 @@
           <div class="box" style="margin-top: 1rem; padding: 0rem">
             <b-field label="วันที่ได้รับยา" label-position="on-border">
               <b-datepicker
+                v-model="selectedDate"
                 placeholder="Click to select..."
                 icon="calendar-today"
                 rounded
@@ -36,10 +37,10 @@
               </b-datepicker>
             </b-field>
             <b-field label="สถานที่ได้รับ" label-position="on-border">
-              <b-input placeholder="XXXXXXXXX" rounded> </b-input>
+              <b-input v-model="receive_place" placeholder="ตัวอย่าง โรงพยาบาลจุฬาภรณ์" rounded> </b-input>
             </b-field>
             <b-field label="บันทึกเพิ่มเติม" label-position="on-border">
-              <b-input placeholder="ตัวอย่าง มีผื่นแดงรอบปาก" rounded> </b-input>
+              <b-input v-model="more" placeholder="ตัวอย่าง มีผื่นแดงรอบปาก" rounded> </b-input>
             </b-field>
           </div>
 
@@ -51,7 +52,7 @@
               <hr />
               <div v-if="isHide">
                 <b-field label="จำนวนยา" label-position="on-border">
-                  <b-input placeholder=" 2 เม็ด" rounded> </b-input>
+                  <b-input v-model="tabs" placeholder=" 2 เม็ด" rounded> </b-input>
                 </b-field>
                 <div class="buttons">
                   <b-button rounded type="is-primary" outlined>ก่อนอาหาร</b-button>

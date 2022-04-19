@@ -32,4 +32,7 @@ export default {
 .button{
   font-family: 'Kanit';
 }
+.input{
+  font-family: 'Kanit';
+}
 </style>

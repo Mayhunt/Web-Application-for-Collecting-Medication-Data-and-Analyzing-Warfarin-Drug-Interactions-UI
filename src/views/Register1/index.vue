@@ -24,6 +24,7 @@
         <form class="box">
           <b-field label="Username">
             <b-input
+              v-model="Username"
               placeholder="Username"
               type="user"
               icon="account-circle"
@@ -34,7 +35,7 @@
             </b-input>
           </b-field>
           <b-field label="Password">
-            <b-input
+            <b-input v-model="password"
               placeholder="Password"
               type="password"
               icon="lock-question"
@@ -47,7 +48,7 @@
           </b-field>
           <b-field label="ConfirmPassword">
             <b-input
-              placeholder="Confirm  Password"
+              placeholder="Confirm Password"
               type="password"
               icon="lock-check"
               icon-clickable

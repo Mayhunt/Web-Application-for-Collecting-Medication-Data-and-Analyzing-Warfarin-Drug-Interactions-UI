@@ -47,7 +47,7 @@
 
         <div class="media-content" style="margin-top: 12px">
           <b-table
-            :data="isEmpty ? [] : data"
+            :data="isEmpty? [] : data"
             :bordered="isBordered"
             :striped="isStriped"
             :narrowed="isNarrowed"

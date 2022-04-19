@@ -26,13 +26,13 @@
           <hr />
           <!-- <div class="box"> -->
             <b-field label="อาการที่แพ้" label-position="on-border">
-              <b-input placeholder="มีผื่นแดงรอบปาก" rounded> </b-input>
+              <b-input v-model="symptom" placeholder="มีผื่นแดงรอบปาก" rounded> </b-input>
             </b-field>
             <b-field label="สถานที่ได้รับ" label-position="on-border">
-              <b-input placeholder="XXXXXXXXX" rounded> </b-input>
+              <b-input v-model="place" placeholder="XXXXXXXXX" rounded> </b-input>
             </b-field>
             <b-field label="บันทึกเพิ่มเติม" label-position="on-border">
-              <b-input placeholder="ตัวอย่าง มีผื่นแดงรอบปาก" rounded> </b-input>
+              <b-input v-model="more" placeholder="ตัวอย่าง มีผื่นแดงรอบปาก" rounded> </b-input>
             </b-field>
             <br>
             <br>
@@ -56,6 +56,9 @@
 <script>
 export default {
   name: 'SaveAllergic',
+  data() {
+    return {};
+  },
 };
 </script>
 
