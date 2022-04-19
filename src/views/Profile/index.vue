@@ -85,9 +85,8 @@
               <b-button rounded type="is-primary is-light" size="is-medium" expanded
                 >แก้ไข้ข้อมูล</b-button
               >
-              <b-button rounded type="is-danger is-light" size="is-medium" expanded
-                >ลบบัญชีผู้ใช้นี้</b-button
-              >
+                <b-button type="is-danger is-light" size="is-medium" rounded expanded>
+                  <router-link to="sign-in">ลบบัญชีผู้ใช้นี้</router-link></b-button>
             </div>
           </div>
         </form>
