@@ -37,7 +37,8 @@
               </b-datepicker>
             </b-field>
             <b-field label="สถานที่ได้รับ" label-position="on-border">
-              <b-input v-model="receive_place" placeholder="ตัวอย่าง โรงพยาบาลจุฬาภรณ์" rounded> </b-input>
+              <b-input v-model="receive_place" placeholder="ตัวอย่าง โรงพยาบาลจุฬาภรณ์" rounded>
+              </b-input>
             </b-field>
             <b-field label="บันทึกเพิ่มเติม" label-position="on-border">
               <b-input v-model="more" placeholder="ตัวอย่าง มีผื่นแดงรอบปาก" rounded> </b-input>
@@ -47,7 +48,8 @@
           <section>
             <div class="control">
               <b-field>
-                <b-switch size="is-medium" type="is-success" v-model="isHide">การตั้งแจ้งเตือนเวลาทานยา</b-switch>
+                <b-switch size="is-medium" type="is-success" v-model="isHide"
+                  >การตั้งแจ้งเตือนเวลาทานยา</b-switch>
               </b-field>
               <hr />
               <div v-if="isHide">
@@ -59,13 +61,22 @@
                   <b-button rounded type="is-primary" outlined>หลังอาหาร</b-button>
                 </div>
                 <p>เวลา</p>
-                <div class="buttons">
-                  <b-button rounded type="is-primary" outlined>เช้า</b-button>
-                  <b-button rounded type="is-primary" outlined>กลางวัน</b-button>
-                  <b-button rounded type="is-primary" outlined>เย็น</b-button>
-                  <b-button rounded type="is-primary" outlined>ก่อนนอน</b-button>
+                <div>
+                  <b-field>
+                    <b-checkbox size="is-medium" :value="false"> เช้า </b-checkbox>
+                  </b-field>
+                  <b-field>
+                    <b-checkbox size="is-medium" :value="false"> กลางวัน </b-checkbox>
+                  </b-field>
+                  <b-field>
+                    <b-checkbox size="is-medium" :value="false"> เย็น </b-checkbox>
+                  </b-field>
+                  <b-field>
+                    <b-checkbox size="is-medium" :value="false"> ก่อนนอน</b-checkbox>
+                  </b-field>
                 </div>
-                <b-field label="ทุกๆ"><b-select placeholder="จำนวนชั่วโมง" rounded>
+                <b-field label="ทุกๆ"
+                  ><b-select placeholder="จำนวนชั่วโมง" rounded>
                     <option value="1">1 ชั่วโมง</option>
                     <option value="2">2 ชั่วโมง</option>
                     <option value="3">3 ชั่วโมง</option>
@@ -98,7 +109,8 @@
 
           <div class="buttons" style="justify-content: center">
             <b-button rounded type="is-primary" size="is-medium" expanded>
-              <router-link to="/currently-drug">บันทึก</router-link></b-button>
+              <router-link to="/currently-drug">บันทึก</router-link></b-button
+            >
           </div>
         </div>
       </div>
