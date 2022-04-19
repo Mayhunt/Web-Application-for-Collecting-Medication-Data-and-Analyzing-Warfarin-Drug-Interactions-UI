@@ -48,7 +48,7 @@
 
         <div class="media-content" style="margin-top: 12px">
           <b-table
-            :data="isEmpty ? [] : data"
+            :data="data"
             :bordered="isBordered"
             :striped="isStriped"
             :narrowed="isNarrowed"
@@ -66,7 +66,7 @@
               v-slot="props"
             >
               <span class="tag is-primary is-light">
-                {{ new Date(props.row.date).toLocaleDateString() }}
+                {{ new Date(props.row.followDate).toLocaleDateString() }}
               </span>
             </b-table-column>
 
@@ -77,7 +77,7 @@
               centered
               v-slot="props"
             >
-              {{ props.row.expectedINR }}
+              {{ props.row.inrExpect }}
             </b-table-column>
 
             <b-table-column
@@ -87,7 +87,7 @@
               centered
               v-slot="props"
             >
-              {{ props.row.actualINR }}
+              {{ props.row.inrMeasure }}
             </b-table-column>
           </b-table>
         </div>
@@ -212,44 +212,33 @@
   </div>
 </template>
 
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-
+import axios from "axios"
 export default {
-  // components: {
-  //   Chart,
-  // },
   name: 'HomePage',
   data() {
-    const data = [
-      { date: '2016/7/15 13:43:27', expectedINR: '1.5', actualINR: '1.5' },
-      { date: '2016/8/15 13:43:27', expectedINR: '1.4', actualINR: '1.5' },
-      { date: '2016/9/15 13:43:27', expectedINR: '2.1', actualINR: '1.5' },
-      { date: '2016/10/15 13:43:27', expectedINR: '1.4', actualINR: '1.5' },
-      { date: '2016/11/15 13:43:27', expectedINR: '2.1', actualINR: '1.5' },
-      { date: '2016/12/15 13:43:27', expectedINR: '2.1', actualINR: '1.5' },
-    ];
     return {
-      data,
-      isEmpty: false,
-      isBordered: false,
-      isStriped: false,
-      isNarrowed: false,
-      isHoverable: false,
-      isFocusable: false,
-      isLoading: false,
-      hasMobileCards: false,
-      isCardModalActive: false,
-      // isOpen: true,
+        isEmpty: false,
+        isBordered: false,
+        isStriped: false,
+        isNarrowed: false,
+        isHoverable: false,
+        isFocusable: false,
+        isLoading: false,
+        hasMobileCards: false,
+        isCardModalActive: false,
+        data: [],
     };
   },
-  methods: {
-    handleSubmit() {
-      this.$nextTick(() => {
-        this.$bvModal.hide('modal-prevent-closing');
-      });
-    },
-  },
+  mounted() {
+      axios.get('http://localhost:8080/inr').then((response) => {
+        this.data = response.data;
+        console.log(response);
+      })
+  }
 };
+// สร้าง vue.config.js แล้ว แต่ดึงมาไม่ได้
 </script>
 
 <style></style>
