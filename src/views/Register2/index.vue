@@ -1,8 +1,16 @@
 <template>
   <div style="background-color: rgb(121, 87, 213)">
     <div style="background-color: rgb(121, 87, 213); max-height: 56px">
-      <b-icon class ='is-clickable' pack="fas" icon="arrow-left" size="is-medium" type="is-white" style="margin: 12px">
-      <router-link to="/register1"/></b-icon>
+      <b-icon
+        class="is-clickable"
+        pack="fas"
+        icon="arrow-left"
+        size="is-medium"
+        type="is-white"
+        style="margin: 12px"
+      >
+        <router-link to="/register1"
+      /></b-icon>
     </div>
     <!-- <section>
             <b-image
@@ -36,9 +44,16 @@
             <b-input v-model="id_card_number" placeholder="X-XXXX-XXXXX-XX-X" rounded> </b-input>
           </b-field>
           <b-field label="Date of Birth" label-position="on-border">
-            <b-datepicker v-model="selectedDate" placeholder="Click to select..." icon="calendar-today" :icon-right="selected ? 'close-circle' : ''"
-                icon-right-clickable
-                @icon-right-click="clearDate" rounded trap-focus>
+            <b-datepicker
+              v-model="selectedDate"
+              placeholder="Click to select..."
+              icon="calendar-today"
+              :icon-right="selected ? 'close-circle' : ''"
+              icon-right-clickable
+              @icon-right-click="clearDate"
+              rounded
+              trap-focus
+            >
             </b-datepicker>
           </b-field>
           <b-field label="Blood Group" label-position="on-border">
@@ -48,26 +63,27 @@
             <b-input v-model="medication_condition" placeholder="Heart Disease" rounded> </b-input>
           </b-field>
           <b-field label="น้ำหนัก" label-position="on-border">
-            <b-input v-model="weight"  placeholder="XX " rounded expanded> </b-input>
+            <b-input :value="weight" @change="updateWeight" placeholder="XX " rounded expanded> </b-input>
             <p class="control">
               <span class="button is-static is-rounded">กิโลกรัม</span>
             </p>
           </b-field>
           <b-field label="ส่วนสูง" label-position="on-border">
-            <b-input v-model="height" placeholder="XXX " rounded expanded> </b-input>
+            <b-input :value="height" @change="updateHeight" placeholder="XXX " rounded expanded>
+            </b-input>
             <p class="control">
               <span class="button is-static is-rounded">เซนติเมตร</span>
             </p>
           </b-field>
           <b-field label="BMI" label-position="on-border">
-            <b-input v-model="bmi" placeholder="ดัชนีมวลกาย" rounded disabled> </b-input>
+            <b-input :value="bmi" rounded disabled> </b-input>
           </b-field>
           <b-field label="เบอร์โทร" label-position="on-border">
             <b-input v-model="phone_num" placeholder="XXX-XXXXXXX" rounded> </b-input>
           </b-field>
           <hr />
           <h4>ผู้ติดต่อฉุกเฉิน</h4>
-          <br>
+          <br />
           <b-field label="ชื่อ" label-position="on-border">
             <b-input v-model="emergency_contact" placeholder="ชื่อ" rounded> </b-input>
           </b-field>
@@ -79,7 +95,8 @@
             style="justify-content: center; margin-top: 2.5rem; margin-bottom: 4rem"
           >
             <b-button rounded type="is-primary" size="is-medium" expanded>
-              <router-link to="/question">Continue</router-link></b-button>
+              <router-link to="/question">Continue</router-link></b-button
+            >
           </div>
         </form>
       </div>
@@ -90,6 +107,31 @@
 <script>
 export default {
   name: 'RegisterContinuePage',
+  data() {
+    return {
+      weight: 0,
+      height: 0,
+      bmi: 0,
+    };
+  },
+  methods: {
+    updateHeight(event) {
+      this.height = event.target.value;
+      this.bmi = this.weight / ((this.height / 100) * (this.height / 100));
+    },
+    updateWeight(event) {
+      this.height = event.target.value;
+      this.bmi = this.weight / ((this.height / 100) * (this.height / 100));
+    },
+    // updateR(event) {
+    //     this.form.sale_rate = event.target.value
+    //     this.form.sale_total = this.form.sale_quantity * this.form.sale_rate
+    //   }
+  },
+  // updateHeight(event) {
+  //   this.height = event.target.value;
+  //   this.bmi = this.weight / ((this.height / 100) * (this.height / 100));
+  // },
 };
 </script>
 

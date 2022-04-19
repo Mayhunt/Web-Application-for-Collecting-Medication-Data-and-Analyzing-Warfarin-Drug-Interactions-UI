@@ -5,7 +5,8 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/log-in',
+    // log-in -> sign-in
+    path: '/sign-in',
     name: 'Login',
     component: () => import(/* webpackChunkName: "Login" */ '../views/LogIn/index.vue'),
   },
@@ -15,12 +16,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "AllergicPic" */ '../views/AllergicPic/index.vue'),
   },
   {
-    path: '/allergic-used',
+    // allergic-used -> allergic-drug
+    path: '/allergic-drug',
     name: 'AllergicUsed',
     component: () => import(/* webpackChunkName: "AllergicUsed" */ '../views/AllergicUsed/index.vue'),
   },
   {
-    path: '/drug-used',
+    // drug-used -> currently-drug
+    path: '/currently-drug',
     name: 'DrugUsed',
     component: () => import(/* webpackChunkName: "DrugUsed" */ '../views/DrugUsed/index.vue'),
   },
@@ -35,7 +38,8 @@ const routes = [
     component: () => import(/* webpackChunkName: "Question" */ '../views/Question/index.vue'),
   },
   {
-    path: '/question2',
+    // question2 -> hint
+    path: '/hint',
     name: 'Question2',
     component: () => import(/* webpackChunkName: "Question" */ '../views/Question2/index.vue'),
   },
@@ -75,7 +79,8 @@ const routes = [
     component: () => import(/* webpackChunkName: "ForTest" */ '../views/ForTest/index.vue'),
   },
   {
-    path: '/profile',
+    // profile ->  me
+    path: '/me',
     name: 'Profile',
     component: () => import(/* webpackChunkName: "ForTest" */ '../views/Profile/index.vue'),
   },
