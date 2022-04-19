@@ -37,17 +37,18 @@
           <h2 style="margin-top: 0">INR</h2>
         </div>
         <div>
-          <b-image
+          <!-- <Chart></Chart> -->
+          <!-- <b-image
             src="https://picsum.photos/600/400"
             alt="A random image"
             ratio="6by4"
             :rounded="rounded"
-          ></b-image>
+          ></b-image> -->
         </div>
 
         <div class="media-content" style="margin-top: 12px">
           <b-table
-            :data="isEmpty? [] : data"
+            :data="isEmpty ? [] : data"
             :bordered="isBordered"
             :striped="isStriped"
             :narrowed="isNarrowed"
@@ -212,7 +213,11 @@
 </template>
 
 <script>
+
 export default {
+  // components: {
+  //   Chart,
+  // },
   name: 'HomePage',
   data() {
     const data = [
