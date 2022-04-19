@@ -3,32 +3,38 @@
     <template #brand>
       <b-navbar-item href="#">
         <router-link to="/home">
-          <b-icon pack="fas" size="is-medium" icon="home" type="is-white"> </b-icon>
+          <b-icon pack="fas" size="is-large" icon="home" type="is-white"> </b-icon>
         </router-link>
       </b-navbar-item>
       <b-navbar-item>
-        <b-autocomplete rounded placeholder="e.g. Anne" icon="magnify" style="padding-left: 20px">
+        <b-autocomplete rounded placeholder="e.g. Anne" icon="magnify" style="padding-left: 5px">
         </b-autocomplete>
       </b-navbar-item>
     </template>
     <template #start>
       <b-navbar-item href="#">
-        <b-icon pack="mdi" icon="pill" type="is-primary"> </b-icon>
+        <b-icon pack="mdi" icon="pill" type="is-primary" size="is-medium"> </b-icon>
         <router-link to="/currently-drug">
-          <span style="padding-left: 16px"></span><span>Drug Currently Used</span>
+          <span style="padding-left: 16px"></span><span>รายการยาที่ใช้ปัจจุบัน</span>
         </router-link>
       </b-navbar-item>
       <b-navbar-item>
         <router-link to="/allergic-drug">
-          <b-icon pack="mdi" icon="exclamation" type="is-primary"> </b-icon>
-          <span style="padding-left: 16px"></span><span>Allergy Drug</span>
+          <b-icon pack="mdi" icon="exclamation" type="is-primary" size="is-medium"> </b-icon>
+          <span style="padding-left: 16px"></span><span>รายการยาที่แพ้</span>
+        </router-link>
+      </b-navbar-item>
+      <b-navbar-item>
+        <router-link to="/allergic-pic">
+          <b-icon pack="fas" icon="fa-solid fa-file-image" type="is-primary" size="is-medium"> </b-icon>
+          <span style="padding-left: 16px"></span><span>รูปภาพใบแพ้ยา</span>
         </router-link>
       </b-navbar-item>
       <hr />
       <b-navbar-item>
         <router-link to="/me">
-          <b-icon pack="mdi" icon="account" type="is-primary"> </b-icon>
-          <span style="padding-left: 16px"></span><span>Profile</span>
+          <b-icon pack="mdi" icon="account" type="is-primary" size="is-medium"> </b-icon>
+          <span style="padding-left: 16px"></span><span>ข้อมูลส่วนตัว</span>
         </router-link>
       </b-navbar-item>
       <hr />
