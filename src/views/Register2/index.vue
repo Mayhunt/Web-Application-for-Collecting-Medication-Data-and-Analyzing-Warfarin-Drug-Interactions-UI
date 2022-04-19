@@ -1,16 +1,17 @@
 <template>
   <div style="background-color: rgb(121, 87, 213)">
     <div style="background-color: rgb(121, 87, 213); max-height: 56px">
-      <b-icon
-        class="is-clickable"
-        pack="fas"
-        icon="arrow-left"
-        size="is-medium"
-        type="is-white"
-        style="margin: 12px"
-      >
-        <router-link to="/register1"
-      /></b-icon>
+      <router-link to="/register1">
+        <b-icon
+          class="is-clickable"
+          pack="fas"
+          icon="arrow-left"
+          size="is-medium"
+          type="is-white"
+          style="margin: 12px"
+        >
+        </b-icon>
+      </router-link>
     </div>
     <!-- <section>
             <b-image
@@ -63,7 +64,8 @@
             <b-input v-model="medication_condition" placeholder="Heart Disease" rounded> </b-input>
           </b-field>
           <b-field label="น้ำหนัก" label-position="on-border">
-            <b-input :value="weight" @change="updateWeight" placeholder="XX " rounded expanded> </b-input>
+            <b-input :value="weight" @change="updateWeight" placeholder="XX " rounded expanded>
+            </b-input>
             <p class="control">
               <span class="button is-static is-rounded">กิโลกรัม</span>
             </p>
