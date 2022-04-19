@@ -196,7 +196,7 @@
                         ></b-input>
                       </b-field>
                       <div class="buttons" style="justify-content: center; margin-top: 2rem">
-                        <b-button rounded type="is-primary" size="is-medium" expanded
+                        <b-button class="button" @click="isCardModalActive=false" type="is-primary" size="is-medium" rounded expanded
                           >บันทึก</b-button
                         >
                       </div>
