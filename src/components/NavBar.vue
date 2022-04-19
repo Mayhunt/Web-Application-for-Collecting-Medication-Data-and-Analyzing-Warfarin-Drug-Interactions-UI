@@ -14,19 +14,19 @@
     <template #start>
       <b-navbar-item href="#">
         <b-icon pack="mdi" icon="pill" type="is-primary"> </b-icon>
-        <router-link to="/drug-used">
+        <router-link to="/currently-drug">
           <span style="padding-left: 16px"></span><span>Drug Currently Used</span>
         </router-link>
       </b-navbar-item>
       <b-navbar-item>
-          <router-link to="/allergic-used">
+          <router-link to="/allergic-drug">
             <b-icon pack="mdi" icon="exclamation" type="is-primary"> </b-icon>
             <span style="padding-left: 16px"></span><span>Allergy Drug</span>
           </router-link>
       </b-navbar-item>
       <hr />
       <b-navbar-item>
-        <router-link to="/profile">
+        <router-link to="/me">
         <b-icon pack="mdi" icon="account" type="is-primary"> </b-icon>
         <span style="padding-left: 16px"></span><span>Profile</span>
         </router-link>
