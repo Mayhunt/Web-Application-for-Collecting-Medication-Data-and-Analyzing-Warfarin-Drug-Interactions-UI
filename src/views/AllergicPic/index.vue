@@ -19,6 +19,8 @@
         ></b-image>
       </div>
       </div>
+      <div class = 'pb-5 pt-5'></div>
+      <div class = 'pb-5 pt-5'></div>
       <!-- <div class="fixedbutton"> -->
         <!-- <b-button class="button is-medium is-fullwidth" type="is-primary">เพิ่มรูปใบแพ้ยา</b-button> -->
       <!-- </div> -->
