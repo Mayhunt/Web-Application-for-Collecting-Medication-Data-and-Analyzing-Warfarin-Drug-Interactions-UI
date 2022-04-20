@@ -9,7 +9,7 @@
       <div class="mt-1"></div>
       <h2>รายการยาที่ใช้ปัจจุบัน</h2>
     </div>
-    <div class="box is-clickable" v-for="(Currenly, index) in drugcurrently" :key="index" style="border-radius: 30px 30px 30px 30px">
+    <div class="box is-clickable" v-for="(currentlyDrugAll, index) in currentlyDrug" :key="index" style="border-radius: 30px 30px 30px 30px">
       <router-link to="/edit-drugused">
       <article class="media">
         <div class="media-left">
@@ -22,11 +22,11 @@
             <p>
               <strong>ชื่อยาสามัญ</strong>
               <br />
-              xxxxxxx
+              {{ currentlyDrugAll.genericName}}
               <br />
               <strong>บันทึกเพิ่มเติม</strong>
               <br />
-              xxxxxxx
+              {{ currentlyDrugAll.more}}
             </p>
           </div>
         </div>
@@ -40,30 +40,19 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'drug-currenly',
   data: () => ({
-    drugcurrently: [
-      {
-        imgURL: '',
-      },
-      {
-        imgURL: '',
-      },
-      {
-        imgURL: '',
-      },
-      {
-        imgURL: '',
-      },
-      {
-        imgURL: '',
-      },
-      {
-        imgURL: '',
-      },
-    ],
+    currentlyDrug: [],
   }),
+  mounted() {
+    axios.get('http://localhost:8080/currently-drug').then((response) => {
+      this.currentlyDrug = response.data;
+      console.log(response);
+    });
+  },
 };
 </script>
 

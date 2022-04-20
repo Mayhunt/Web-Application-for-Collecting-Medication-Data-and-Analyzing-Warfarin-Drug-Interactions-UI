@@ -72,7 +72,7 @@
           <b-field label="ส่วนสูง" label-position="on-border">
             <b-input v-model="height" placeholder="XXX " rounded expanded> </b-input>
             <p class="control">
-              <span class="button is-static is-rounded">เซนติเมตร</span>
+              <span class="button is-static is-rounded" >เซนติเมตร </span>
             </p>
           </b-field>
           <b-field label="BMI" label-position="on-border">
@@ -82,7 +82,7 @@
             <b-input v-model="phone_num" placeholder="XXX-XXXXXXX" rounded> </b-input>
           </b-field>
           <hr />
-          <h4>ผู้ติดต่อฉุกเฉิน </h4>
+          <h4>ผู้ติดต่อฉุกเฉิน</h4>
           <br />
           <b-field label="ชื่อ" label-position="on-border">
             <b-input v-model="emergency_contact" placeholder="ชื่อ" rounded> </b-input>
@@ -105,6 +105,8 @@
 </template>
 
 <script>
+// import axios from 'axios';
+
 export default {
   name: 'RegisterContinuePage',
   data() {
