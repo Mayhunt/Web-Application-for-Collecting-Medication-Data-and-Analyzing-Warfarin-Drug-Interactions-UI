@@ -6,8 +6,8 @@
     >
   <div class="container" style="margin: 0 20px">
     <div class="content is-medium">
-      <br>
-      <h2>Drug Currently Used</h2>
+      <div class="mt-1"></div>
+      <h2>รายการยาที่ใช้ปัจจุบัน</h2>
     </div>
     <div class="box is-clickable" v-for="(Currenly, index) in drugcurrently" :key="index" style="border-radius: 30px 30px 30px 30px">
       <router-link to="/edit-drugused">
@@ -20,11 +20,11 @@
         <div class="media-content">
           <div class="content">
             <p>
-              <strong>Generic Name</strong>
+              <strong>ชื่อยาสามัญ</strong>
               <br />
               xxxxxxx
               <br />
-              <strong>More</strong>
+              <strong>บันทึกเพิ่มเติม</strong>
               <br />
               xxxxxxx
             </p>

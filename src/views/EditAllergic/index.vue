@@ -6,7 +6,7 @@
     <div class="container" style="margin: 0 50px">
       <div class="content">
         <br />
-        <h2>บันทึกรายการยาที่แพ้</h2>
+        <h2>แก้ไขรายการยาที่แพ้</h2>
       </div>
       <div>
         <b-image
@@ -43,7 +43,7 @@
 
           <div class="buttons" style="justify-content: center">
             <b-button rounded type="is-primary is-light" size="is-medium" expanded>
-              <router-link to="/save-allergic">แก้ไข</router-link></b-button>
+              บันทึก</b-button>
             <b-button rounded type="is-danger is-light" size="is-medium" expanded>
               <router-link to="allergic-drug">ลบรายการยานี้</router-link></b-button>
           </div>
