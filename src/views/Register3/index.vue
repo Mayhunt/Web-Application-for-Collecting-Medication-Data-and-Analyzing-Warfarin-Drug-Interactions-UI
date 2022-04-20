@@ -22,7 +22,7 @@
         </div>
         <div>
           <b-field>
-            <b-checkbox value="false" type="is-primary" size="is-medium" required>
+            <b-checkbox  v-model="isDisable" type="is-primary" size="is-medium" required>
               เข้าใจเนื้อหาทั้งหมด
             </b-checkbox>
           </b-field>
@@ -36,7 +36,7 @@
             type="is-primary"
             size="is-medium"
             expanded
-            disabled
+            disabled="isDisable === false"
           >
             <router-link to="/home">เสร็จสิ้น</router-link></b-button
           >
@@ -50,7 +50,10 @@
 export default {
   name: 'RegisterPrivacyPage',
   data() {
-    return {};
+    return {
+      isDisable: false,
+
+    };
   },
 };
 </script>
