@@ -1,36 +1,115 @@
 <template>
-  <b-field label="ทุกๆ">
-    <b-select placeholder="จำนวนชั่วโมง" rounded>
-      <option value="1">1 ชั่วโมง</option>
-      <option value="2">2 ชั่วโมง</option>
-      <option value="3">3 ชั่วโมง</option>
-      <option value="4">4 ชั่วโมง</option>
-      <option value="5">5 ชั่วโมง</option>
-      <option value="6">6 ชั่วโมง</option>
-      <option value="7">7 ชั่วโมง</option>
-      <option value="8">8 ชั่วโมง</option>
-      <option value="9">9 ชั่วโมง</option>
-      <option value="10">10 ชั่วโมง</option>
-      <option value="11">11 ชั่วโมง</option>
-      <option value="12">12 ชั่วโมง</option>
-      <option value="13">13 ชั่วโมง</option>
-      <option value="14">14 ชั่วโมง</option>
-      <option value="15">15 ชั่วโมง</option>
-      <option value="16">16 ชั่วโมง</option>
-      <option value="17">17 ชั่วโมง</option>
-      <option value="18">18 ชั่วโมง</option>
-      <option value="19">19 ชั่วโมง</option>
-      <option value="20">20 ชั่วโมง</option>
-      <option value="21">21 ชั่วโมง</option>
-      <option value="22">22 ชั่วโมง</option>
-      <option value="23">23 ชั่วโมง</option>
-      <option value="24">24 ชั่วโมง</option>
-    </b-select>
-  </b-field>
+  <section class="hero is-primary is-fullheight-with-navbar">
+    <div style="background-color: #f2effb; border-radius: 60px 60px 0 0; margin-top: 1rem">
+      <div class="container" style="margin: 0 20px">
+        <div class="content is-medium">
+          <div class="mt-1"></div>
+          <h2>test</h2>
+        </div>
+        <div
+          class="box is-clickable"
+          @click="isCardModalActive = true"
+          v-for="(Currenly, index) in drugcurrently"
+          :key="index"
+          style="border-radius: 30px 30px 30px 30px"
+        >
+          <article class="media">
+            <div class="media-left">
+              <figure class="image is-64x64">
+                <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image" />
+              </figure>
+            </div>
+            <div class="media-content">
+              <div class="content">
+                <p>
+                  <strong>ชื่อยาสามัญ</strong>
+                  <br />
+                  xxxxxxx
+                  <br />
+                  <strong>บันทึกเพิ่มเติม</strong>
+                  <br />
+                  xxxxxxx
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+      <b-modal v-model="isCardModalActive" :width="640" scroll="keep">
+        <div class="card">
+          <div>
+            <section
+              class="hero is-white"
+              style="border-radius: 60px 60px 0 0; margin-top: 1rem; padding: 1rem"
+            >
+              <div>
+                <div class="content is-medium">
+                  <h1 style="margin-top: 0; text-align: center; margin-bottom: 0.25rem">
+                    แก้ไขรายการยานี้
+                  </h1>
+                </div>
+                <article class="media">
+                  <div class="media-left">
+                    <figure class="image is-64x64">
+                      <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image" />
+                    </figure>
+                  </div>
+                  <div class="media-content">
+                    <div class="content">
+                      <p>
+                        <strong>ชื่อยาสามัญ</strong>
+                        <br />
+                        xxxxxxx
+                        <br />
+                        <strong>บันทึกเพิ่มเติม</strong>
+                        <br />
+                        xxxxxxx
+                      </p>
+                    </div>
+                  </div>
+                </article>
+                <div class="buttons" style="justify-content: center; margin-top: 2rem">
+                  <b-button class="button" type="is-danger" size="is-medium" rounded expanded>
+                    <router-link to="/edit-drugused"> แก้ไขรายการยานี้</router-link></b-button
+                  >
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </b-modal>
+    </div>
+  </section>
 </template>
 
 <script>
-export default {};
+export default {
+  name: 'drug-currenly',
+  data: () => ({
+    drugcurrently: [
+      {
+        imgURL: '',
+      },
+      {
+        imgURL: '',
+      },
+      {
+        imgURL: '',
+      },
+      {
+        imgURL: '',
+      },
+      {
+        imgURL: '',
+      },
+      {
+        imgURL: '',
+      },
+    ],
+    isImageModalActive: false,
+    isCardModalActive: false,
+  }),
+};
 </script>
 
 <style></style>
