@@ -64,27 +64,25 @@
             <b-input v-model="medication_condition" placeholder="Heart Disease" rounded> </b-input>
           </b-field>
           <b-field label="น้ำหนัก" label-position="on-border">
-            <b-input :value="weight" @change="updateWeight" placeholder="XX " rounded expanded>
-            </b-input>
+            <b-input v-model="weight" placeholder="XX " rounded expanded> </b-input>
             <p class="control">
               <span class="button is-static is-rounded">กิโลกรัม</span>
             </p>
           </b-field>
           <b-field label="ส่วนสูง" label-position="on-border">
-            <b-input :value="height" @change="updateHeight" placeholder="XXX " rounded expanded>
-            </b-input>
+            <b-input v-model="height" placeholder="XXX " rounded expanded> </b-input>
             <p class="control">
               <span class="button is-static is-rounded">เซนติเมตร</span>
             </p>
           </b-field>
           <b-field label="BMI" label-position="on-border">
-            <b-input :value="bmi" rounded disabled> </b-input>
+            <b-input v-model="calBMI" rounded disabled> </b-input>
           </b-field>
           <b-field label="เบอร์โทร" label-position="on-border">
             <b-input v-model="phone_num" placeholder="XXX-XXXXXXX" rounded> </b-input>
           </b-field>
           <hr />
-          <h4>ผู้ติดต่อฉุกเฉิน</h4>
+          <h4>ผู้ติดต่อฉุกเฉิน </h4>
           <br />
           <b-field label="ชื่อ" label-position="on-border">
             <b-input v-model="emergency_contact" placeholder="ชื่อ" rounded> </b-input>
@@ -113,27 +111,38 @@ export default {
     return {
       weight: 0,
       height: 0,
-      bmi: 0,
     };
   },
-  methods: {
-    updateHeight(event) {
-      this.height = event.target.value;
-      this.bmi = this.weight / ((this.height / 100) * (this.height / 100));
+  computed: {
+    calBMI() {
+      const bmi = parseFloat(this.weight / (this.height / 100) ** 2).toFixed(2);
+      return bmi;
+      // if (isFinite(bmi) && bmi > 0) {
+      //   return bmi;
+      // } else {
+      //   return '0';
+      // }
     },
-    updateWeight(event) {
-      this.height = event.target.value;
-      this.bmi = this.weight / ((this.height / 100) * (this.height / 100));
-    },
-    // updateR(event) {
-    //     this.form.sale_rate = event.target.value
-    //     this.form.sale_total = this.form.sale_quantity * this.form.sale_rate
-    //   }
   },
+  // watch: {
+  //   $data: {
+  //     // This will let Vue know to look inside the array
+  //     deep: true,
+  //     // We have to move our method to a handler field
+  //     handler(val) {
+  //       this.debounceInput(val);
+  //       console.log('The form has changed!');
+  //     },
+  //   },
+  // },
+  // updateR(event) {
+  //     this.form.sale_rate = event.target.value
+  //     this.form.sale_total = this.form.sale_quantity * this.form.sale_rate
+  //   }
+
   // updateHeight(event) {
   //   this.height = event.target.value;
   //   this.bmi = this.weight / ((this.height / 100) * (this.height / 100));
-  // },
 };
 </script>
 
