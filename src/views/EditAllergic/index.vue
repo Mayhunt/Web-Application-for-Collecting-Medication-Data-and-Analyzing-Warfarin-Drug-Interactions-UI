@@ -43,9 +43,9 @@
 
           <div class="buttons" style="justify-content: center">
             <b-button rounded type="is-primary is-light" size="is-medium" expanded>
-              บันทึก</b-button>
+              <router-link to="/allergic-drug">บันทึก</router-link></b-button>
             <b-button rounded type="is-danger is-light" size="is-medium" expanded>
-              <router-link to="allergic-drug">ลบรายการยานี้</router-link></b-button>
+              <router-link to="/allergic-drug">ลบรายการยานี้</router-link></b-button>
           </div>
         </div>
       </div>
