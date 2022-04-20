@@ -94,6 +94,11 @@ const routes = [
     name: 'EditDrugUsed',
     component: () => import(/* webpackChunkName: "ForTest" */ '../views/EditDrugUsed/index.vue'),
   },
+  {
+    path: '/update-me',
+    name: 'UpdateMe',
+    component: () => import(/* webpackChunkName: "UpdateMe" */ '../views/UpdateMe/index.vue'),
+  },
 ];
 
 const router = new VueRouter({
