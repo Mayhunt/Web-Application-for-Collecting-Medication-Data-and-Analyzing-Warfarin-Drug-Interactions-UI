@@ -6,7 +6,7 @@
     <div class="container" style="margin: 0 45px">
       <div class="content">
         <br />
-        <h2>บันทึกรายการยาปัจจุบัน</h2>
+        <h2>แก้ไขรายการยาปัจจุบัน</h2>
       </div>
       <div>
         <b-image
