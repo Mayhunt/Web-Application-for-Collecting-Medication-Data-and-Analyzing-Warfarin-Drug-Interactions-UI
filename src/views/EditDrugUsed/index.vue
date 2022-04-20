@@ -109,7 +109,7 @@
 
           <div class="buttons" style="justify-content: center">
             <b-button rounded type="is-primary is-light" size="is-medium" expanded>
-              <router-link to="/save-drug">แก้ไข</router-link></b-button
+              <router-link to="/currently-drug">บันทึก</router-link></b-button
             >
             <b-button rounded type="is-danger is-light" size="is-medium" expanded>
               <router-link to="/currently-drug">ลบรายการยานี้</router-link></b-button
