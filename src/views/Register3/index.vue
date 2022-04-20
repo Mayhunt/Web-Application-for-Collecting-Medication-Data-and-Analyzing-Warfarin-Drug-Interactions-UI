@@ -36,7 +36,7 @@
             type="is-primary"
             size="is-medium"
             expanded
-            disabled="isDisable === false"
+            :disabled="!isDisable"
           >
             <router-link to="/home">เสร็จสิ้น</router-link></b-button
           >
@@ -52,7 +52,6 @@ export default {
   data() {
     return {
       isDisable: false,
-
     };
   },
 };
