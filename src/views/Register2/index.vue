@@ -29,7 +29,7 @@
         <!-- <div class="content is-medium">
                 <h1 style="margin-top:0; text-align:center; margin-bottom:0.25rem">Create Account</h1>
             </div> -->
-        <div class="media-body">
+        <div class="media-body" style="padding-left: 115px">
           <figure class="image is-128x128">
             <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png" />
           </figure>
