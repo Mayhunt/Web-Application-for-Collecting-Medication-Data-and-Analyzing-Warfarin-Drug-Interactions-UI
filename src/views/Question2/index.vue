@@ -35,7 +35,7 @@
           <p>คำใบ้ ขนมไทยในน้ำกะทิ</p>
 
           <div class="buttons" style="justify-content: center; margin-top: 2rem">
-            <b-button rounded type="is-primary" size="is-medium" expanded>
+            <b-button @click="addHint()" rounded type="is-primary" size="is-medium" expanded>
               <router-link to="/register3">บันทึก</router-link></b-button>
           </div>
 
@@ -47,8 +47,23 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'QuestionPage',
+  data() {
+    return {
+      hint: '',
+    };
+  },
+  methods: {
+    async addHint() {
+      const result = await axios.post('http://localhost:8080/hint', {
+        hint: this.hint,
+      });
+      console.warn(result);
+    },
+  },
 };
 </script>
 

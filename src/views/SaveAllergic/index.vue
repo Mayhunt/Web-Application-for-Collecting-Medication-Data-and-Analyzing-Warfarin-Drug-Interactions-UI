@@ -17,7 +17,7 @@
         ></b-image>
       </div>
 
-      <div class="media-content">
+      <div>
         <div class="content has-text-black">
           <br />
           <br />
@@ -25,25 +25,32 @@
           <strong><h5>Bismuth subsalicylate tab 1048 mg</h5></strong>
           <hr />
           <!-- <div class="box"> -->
-            <b-field label="อาการที่แพ้" label-position="on-border">
-              <b-input v-model="symptom" placeholder="มีผื่นแดงรอบปาก" rounded> </b-input>
-            </b-field>
-            <b-field label="สถานที่ได้รับ" label-position="on-border">
-              <b-input v-model="place" placeholder="XXXXXXXXX" rounded> </b-input>
-            </b-field>
-            <b-field label="บันทึกเพิ่มเติม" label-position="on-border">
-              <b-input v-model="more" placeholder="ตัวอย่าง มีผื่นแดงรอบปาก" rounded> </b-input>
-            </b-field>
-            <br>
-            <br>
+          <b-field label="อาการที่แพ้" label-position="on-border">
+            <b-input v-model="symptom" placeholder="มีผื่นแดงรอบปาก" rounded> </b-input>
+          </b-field>
+          <b-field label="สถานที่ได้รับ" label-position="on-border">
+            <b-input v-model="place" placeholder="XXXXXXXXX" rounded> </b-input>
+          </b-field>
+          <b-field label="บันทึกเพิ่มเติม" label-position="on-border">
+            <b-input v-model="more" placeholder="ตัวอย่าง มีผื่นแดงรอบปาก" rounded> </b-input>
+          </b-field>
+          <br />
+          <br />
           <!-- </div> -->
           <!-- <div class="buttons has-addons is-centered">
             <b-button class="button" size="is-medium" type="is-primary is-light">บันทึก</b-button>
           </div> -->
 
           <div class="buttons" style="justify-content: center">
-            <b-button rounded type="is-primary" size="is-medium" expanded>
-              <router-link to="/allergic-used">บันทึก</router-link></b-button>
+            <b-button
+              @click="addAllergicDrug()"
+              rounded
+              type="is-primary"
+              size="is-medium"
+              expanded
+            >
+              <router-link to="/allergic-drug">บันทึก</router-link></b-button
+            >
           </div>
         </div>
       </div>
@@ -54,10 +61,26 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'SaveAllergic',
   data() {
-    return {};
+    return {
+      symptom: '',
+      place: '',
+      more: '',
+    };
+  },
+  methods: {
+    async addAllergicDrug() {
+      const result = await axios.post('http://localhost:8080/allergic-drug', {
+        symptom: this.symptom,
+        place: this.place,
+        more: this.more,
+      });
+      console.warn(result);
+    },
   },
 };
 </script>

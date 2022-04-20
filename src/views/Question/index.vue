@@ -27,7 +27,7 @@
         </div>
         <form class="box">
           <b-field label="คำถาม">
-            <b-select
+            <b-select v-model="question"
               rounded
               expanded
               required
@@ -49,7 +49,7 @@
 
           <!-- <div class="buttons" style="justify-content: right"><b-button type="is-text" size="is-small">Forget Password</b-button></div> -->
           <div class="buttons" style="justify-content: center; margin-top: 2rem">
-            <b-button rounded type="is-primary" size="is-medium" expanded>
+            <b-button @click="addQuestion()" type="is-primary" size="is-medium" expanded>
               <router-link to="/register3">Continue</router-link></b-button>
             <!-- <button class="button is-text">Register</button> -->
           </div>
@@ -61,8 +61,25 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'QuestionPage',
+  data() {
+    return {
+      question: '',
+      answer: '',
+    };
+  },
+  methods: {
+    async addQuestion() {
+      const result = await axios.post('http://localhost:8080/question', {
+        question: this.question,
+        answer: this.answer,
+      });
+      console.warn(result);
+    },
+  },
 };
 </script>
 

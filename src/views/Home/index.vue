@@ -120,6 +120,7 @@
                     <form class="box">
                       <b-field label="วันที่">
                         <b-datepicker
+                          v-model="selectedDate"
                           placeholder="เลือกวันที่."
                           icon="calendar-today"
                           rounded
@@ -129,7 +130,7 @@
                       </b-field>
 
                       <b-field label="ค่า INR ที่คาดหวัง">
-                        <b-input placeholder="ใส่ค่า INR ที่คาดหวัง" rounded trap-focus></b-input>
+                        <b-input v-model="inrExpect" placeholder="ใส่ค่า INR ที่คาดหวัง" rounded trap-focus></b-input>
                       </b-field>
 
                       <b-field label="ค่า INR ที่วัดได้จริง">
@@ -137,10 +138,11 @@
                           placeholder="ใส่ค่า INR ที่วัดได้จริง"
                           rounded
                           trap-focus
+                          v-model="inrMeasure"
                         ></b-input>
                       </b-field>
                       <div class="buttons" style="justify-content: center; margin-top: 2rem">
-                        <b-button rounded type="is-primary" size="is-medium" expanded
+                        <b-button @click="addInr()" rounded type="is-primary" size="is-medium" expanded
                           >บันทึก</b-button
                         >
                       </div>
@@ -219,6 +221,9 @@ export default {
   name: 'HomePage',
   data() {
     return {
+        selectedDate: new Date(),
+        inrMeasure: 0,
+        inrExpect: 0,
         isEmpty: false,
         isBordered: false,
         isStriped: false,
@@ -230,6 +235,16 @@ export default {
         isCardModalActive: false,
         data: [],
     };
+  },
+  methods: {
+    async addInr() {
+      const result = await axios.post('http://localhost:8080/inr', {
+        followDate: this.selectedDate,
+        inrExpect: this.inrExpect,
+        inrMeasure: this.inrMeasure,
+      });
+      console.warn(result);
+    },
   },
   mounted() {
       axios.get('http://localhost:8080/inr').then((response) => {
