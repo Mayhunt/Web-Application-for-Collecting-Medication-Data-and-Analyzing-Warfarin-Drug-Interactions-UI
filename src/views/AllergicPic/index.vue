@@ -47,24 +47,6 @@ export default {
       {
         imgURL: '',
       },
-      {
-        imgURL: '',
-      },
-      {
-        imgURL: '',
-      },
-      {
-        imgURL: '',
-      },
-      {
-        imgURL: '',
-      },
-      {
-        imgURL: '',
-      },
-      {
-        imgURL: '',
-      },
     ],
   }),
 };
