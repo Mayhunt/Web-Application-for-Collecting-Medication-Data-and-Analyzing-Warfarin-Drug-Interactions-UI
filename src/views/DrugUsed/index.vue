@@ -1,6 +1,6 @@
 <template>
   <section class="hero is-primary is-fullheight-with-navbar">
-    <div style="background-color: #f2effb; border-radius: 60px 60px 0 0; margin-top: 1rem">
+    <div class="hero is-fullheight-with-navbar" style="background-color: #f2effb; border-radius: 60px 60px 0 0; margin-top: 1rem">
       <div class="container" style="margin: 0 20px">
         <div class="content is-medium">
           <div class="mt-1"></div>
@@ -99,21 +99,6 @@ export default {
   name: 'drug-currenly',
   data: () => ({
     drugcurrently: [
-      {
-        imgURL: '',
-      },
-      {
-        imgURL: '',
-      },
-      {
-        imgURL: '',
-      },
-      {
-        imgURL: '',
-      },
-      {
-        imgURL: '',
-      },
       {
         imgURL: '',
       },
