@@ -130,7 +130,12 @@
                       </b-field>
 
                       <b-field label="ค่า INR ที่คาดหวัง">
-                        <b-input v-model="inrExpect" placeholder="ใส่ค่า INR ที่คาดหวัง" rounded trap-focus></b-input>
+                        <b-input
+                          v-model.number="inrExpect"
+                          placeholder="ใส่ค่า INR ที่คาดหวัง"
+                          rounded
+                          trap-focus
+                        ></b-input>
                       </b-field>
 
                       <b-field label="ค่า INR ที่วัดได้จริง">
@@ -138,13 +143,18 @@
                           placeholder="ใส่ค่า INR ที่วัดได้จริง"
                           rounded
                           trap-focus
-                          v-model="inrMeasure"
+                          v-model.number="inrMeasure"
                         ></b-input>
                       </b-field>
                       <div class="buttons" style="justify-content: center; margin-top: 2rem">
-                        <b-button @click="addInr()" rounded type="is-primary" size="is-medium" expanded
-                          >บันทึก</b-button
-                        >
+                        <b-button
+                          @click="addInr(); reloadPage()"
+                          rounded
+                          type="is-primary"
+                          size="is-medium"
+                          expanded
+                          ><router-link to="/home">บันทึก
+                        </router-link></b-button>
                       </div>
                     </form>
                   </div>
@@ -158,11 +168,11 @@
             label="แก้ไขค่า INR"
             type="is-danger"
             size="is-medium"
-            @click="isCardModalActive = true"
+            @click="isCardModalActive2 = true"
             expanded
           />
 
-          <b-modal v-model="isCardModalActive" :width="640" scroll="keep">
+          <b-modal v-model="isCardModalActive2" :width="640" scroll="keep">
             <div class="card">
               <div>
                 <section
@@ -198,7 +208,13 @@
                         ></b-input>
                       </b-field>
                       <div class="buttons" style="justify-content: center; margin-top: 2rem">
-                        <b-button class="button" @click="isCardModalActive=false" type="is-primary" size="is-medium" rounded expanded
+                        <b-button
+                          class="button"
+                          @click="isCardModalActive2 = false"
+                          type="is-primary"
+                          size="is-medium"
+                          rounded
+                          expanded
                           >บันทึก</b-button
                         >
                       </div>
@@ -216,42 +232,46 @@
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-import axios from "axios"
+import axios from 'axios';
 export default {
   name: 'HomePage',
   data() {
     return {
-        selectedDate: new Date(),
-        inrMeasure: 0,
-        inrExpect: 0,
-        isEmpty: false,
-        isBordered: false,
-        isStriped: false,
-        isNarrowed: false,
-        isHoverable: false,
-        isFocusable: false,
-        isLoading: false,
-        hasMobileCards: false,
-        isCardModalActive: false,
-        data: [],
+      selectedDate: new Date(),
+      inrMeasure: Number(),
+      inrExpect: Number(),
+      isEmpty: false,
+      isBordered: false,
+      isStriped: false,
+      isNarrowed: false,
+      isHoverable: false,
+      isFocusable: false,
+      isLoading: false,
+      hasMobileCards: false,
+      isCardModalActive: false,
+      isCardModalActive2: false,
+      data: [],
     };
   },
   methods: {
     async addInr() {
-      const result = await axios.post('http://localhost:8080/inr', {
+      const result = await axios.post(`http://localhost:8080/api/inr`, {
         followDate: this.selectedDate,
         inrExpect: this.inrExpect,
         inrMeasure: this.inrMeasure,
       });
       console.warn(result);
     },
+    reloadPage() {
+      window.location.reload();
+    },
   },
   mounted() {
-      axios.get('http://localhost:8080/inr').then((response) => {
-        this.data = response.data;
-        console.log(response);
-      })
-  }
+    axios.get(`http://localhost:8080/api/inr`).then((response) => {
+      this.data = response.data;
+      console.log(response);
+    });
+  },
 };
 // สร้าง vue.config.js แล้ว แต่ดึงมาไม่ได้
 </script>

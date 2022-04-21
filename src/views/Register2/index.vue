@@ -46,7 +46,7 @@
           </b-field>
           <b-field label="Date of Birth" label-position="on-border">
             <b-datepicker
-              v-model="selectedDate"
+              v-model="selected_date"
               placeholder="Click to select..."
               icon="calendar-today"
               :icon-right="selected ? 'close-circle' : ''"
@@ -72,7 +72,7 @@
           <b-field label="ส่วนสูง" label-position="on-border">
             <b-input v-model="height" placeholder="XXX " rounded expanded> </b-input>
             <p class="control">
-              <span class="button is-static is-rounded" >เซนติเมตร </span>
+              <span class="button is-static is-rounded">เซนติเมตร </span>
             </p>
           </b-field>
           <b-field label="BMI" label-position="on-border">
@@ -82,7 +82,7 @@
             <b-input v-model="phone_num" placeholder="XXX-XXXXXXX" rounded> </b-input>
           </b-field>
           <hr />
-          <h4>ผู้ติดต่อฉุกเฉิน</h4>
+          <h4>ผู้ติดต่อฉุกเฉิน : {{ $store.getters.username }}</h4>
           <br />
           <b-field label="ชื่อ" label-position="on-border">
             <b-input v-model="emergency_contact" placeholder="ชื่อ" rounded> </b-input>
@@ -94,8 +94,8 @@
             class="buttons"
             style="justify-content: center; margin-top: 2.5rem; margin-bottom: 4rem"
           >
-            <b-button rounded type="is-primary" size="is-medium" expanded>
-              <router-link to="/question">Continue</router-link></b-button
+            <b-button @click="addProfile()" rounded type="is-primary" size="is-medium" expanded>
+              <router-link to="/question">Continue {{ this.first_name }} </router-link></b-button
             >
           </div>
         </form>
@@ -105,15 +105,36 @@
 </template>
 
 <script>
-// import axios from 'axios';
+import axios from 'axios';
+import Store from '../../store/index';
 
 export default {
   name: 'RegisterContinuePage',
+  Store,
   data() {
     return {
       weight: 0,
       height: 0,
+      // first_name: '',
+      // last_name: '',
+      // id_card_number: '',
+      // // selected_date: '',
+      // blood_group: '',
+      // medication_condition: '',
+      // phone_num: '',
+
     };
+  },
+  methods: {
+    async addProfile() {
+      const result = await axios.post('http://localhost:8080/api/register2', {
+        userName: this.$store.getters.username,
+        password: this.$store.getters.password,
+        firstName: this.first_name,
+        lastName: this.last_name,
+      });
+      console.warn(result);
+    },
   },
   computed: {
     calBMI() {

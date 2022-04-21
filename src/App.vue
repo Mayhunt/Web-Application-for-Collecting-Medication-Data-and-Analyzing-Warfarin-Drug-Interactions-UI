@@ -16,9 +16,11 @@
 
 <script>
 import NavBar from './components/NavBar.vue';
+import Store from './store/index';
 
 export default {
   name: 'App',
+  Store,
   components: {
     NavBar,
   },
@@ -29,10 +31,10 @@ export default {
 .hero .navbar {
   background: rgb(121, 87, 213) !important;
 }
-.button{
+.button {
   font-family: 'Kanit';
 }
-.input{
+.input {
   font-family: 'Kanit';
 }
 </style>
