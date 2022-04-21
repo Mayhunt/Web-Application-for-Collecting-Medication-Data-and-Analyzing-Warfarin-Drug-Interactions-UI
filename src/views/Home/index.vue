@@ -14,7 +14,7 @@
           :aria-expanded="props.open"
           style="font-family: 'Kanit'"
         >
-          <p class="card-header-title"><font size="6">รายการยาวันนี้</font></p>
+          <p class="card-header-title" style="color:white;"><font size="6">รายการยาวันนี้</font></p>
           <a class="card-header-icon">
             <b-icon :icon="props.open ? 'menu-down' : 'menu-up'"> </b-icon>
           </a>
@@ -22,7 +22,7 @@
       </template>
 
       <div class="card-content">
-        <div class="content" style="font-family: 'Kanit'">รายการยาที่ต้องรับประทานวันนี้</div>
+        <div class="content" style="font-family: 'Kanit'; color:white;">รายการยาที่ต้องรับประทานวันนี้</div>
       </div>
     </b-collapse>
 
@@ -94,16 +94,25 @@
         <!-- </div> -->
         <div class="buttons" style="justify-content: center,font-family: 'Kanit'">
           <!-- <b-button rounded type="is-primary" size="is-medium" expanded>บันทึกค่า INR</b-button> -->
-
-          <b-button
-            rounded
-            label="บันทึกค่า INR"
-            type="is-primary"
-            size="is-medium"
-            @click="isCardModalActive = true"
-            expanded
-          />
-
+          <div class="fixedbutton">
+            <b-button
+              rounded
+              label="บันทึกค่า INR"
+              type="is-primary"
+              size="is-medium"
+              @click="isCardModalActive = true"
+              expanded
+            />
+            <b-button
+              rounded
+              label="แก้ไขค่า INR"
+              type="is-danger"
+              size="is-medium"
+              @click="isCardModalActive2 = true"
+              expanded
+            />
+          </div>
+          <!-- popup-add inr -->
           <b-modal v-model="isCardModalActive" :width="640" scroll="keep">
             <div class="card">
               <div>
@@ -148,13 +157,16 @@
                       </b-field>
                       <div class="buttons" style="justify-content: center; margin-top: 2rem">
                         <b-button
-                          @click="addInr(); reloadPage()"
+                          @click="
+                            addInr();
+                            reloadPage();
+                          "
                           rounded
                           type="is-primary"
                           size="is-medium"
                           expanded
-                          ><router-link to="/home">บันทึก
-                        </router-link></b-button>
+                          ><router-link to="/home">บันทึก </router-link></b-button
+                        >
                       </div>
                     </form>
                   </div>
@@ -162,16 +174,8 @@
               </div>
             </div>
           </b-modal>
-          <!-- <b-button rounded type="is-danger" size="is-medium" expanded>แก้ไขค่า INR</b-button> -->
-          <b-button
-            rounded
-            label="แก้ไขค่า INR"
-            type="is-danger"
-            size="is-medium"
-            @click="isCardModalActive2 = true"
-            expanded
-          />
 
+          <!-- popup edit inr -->
           <b-modal v-model="isCardModalActive2" :width="640" scroll="keep">
             <div class="card">
               <div>
@@ -210,12 +214,27 @@
                       <div class="buttons" style="justify-content: center; margin-top: 2rem">
                         <b-button
                           class="button"
-                          @click="isCardModalActive2 = false"
+                          @click="
+                            isCardModalActive2 = false;
+                            reloadPage();
+                          "
                           type="is-primary"
                           size="is-medium"
                           rounded
                           expanded
                           >บันทึก</b-button
+                        >
+                        <b-button
+                          class="button"
+                          @click="
+                            isCardModalActive2 = false;
+                            reloadPage();
+                          "
+                          type="is-danger"
+                          size="is-medium"
+                          rounded
+                          expanded
+                          >ลบรายการนี้</b-button
                         >
                       </div>
                     </form>
@@ -276,4 +295,14 @@ export default {
 // สร้าง vue.config.js แล้ว แต่ดึงมาไม่ได้
 </script>
 
-<style></style>
+<style>
+.fixedbutton {
+  position: fixed;
+  padding-left: 15px;
+  padding-right: 15px;
+  left: 0%;
+  bottom: 0px;
+  width: 100%;
+  height: 15%;
+}
+</style>
