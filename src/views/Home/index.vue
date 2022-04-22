@@ -14,7 +14,7 @@
           :aria-expanded="props.open"
           style="font-family: 'Kanit'"
         >
-          <p class="card-header-title" style="color:white;"><font size="6">รายการยาวันนี้</font></p>
+          <p class="card-header-title" style="color: white"><font size="6">รายการยาวันนี้</font></p>
           <a class="card-header-icon">
             <b-icon :icon="props.open ? 'menu-down' : 'menu-up'"> </b-icon>
           </a>
@@ -22,7 +22,9 @@
       </template>
 
       <div class="card-content">
-        <div class="content" style="font-family: 'Kanit'; color:white;">รายการยาที่ต้องรับประทานวันนี้</div>
+        <div class="content" style="font-family: 'Kanit'; color: white">
+          รายการยาที่ต้องรับประทานวันนี้
+        </div>
       </div>
     </b-collapse>
 
@@ -36,14 +38,8 @@
           <br />
           <h2 style="margin-top: 0">INR</h2>
         </div>
-        <div>
-          <!-- <Chart></Chart> -->
-          <!-- <b-image
-            src="https://picsum.photos/600/400"
-            alt="A random image"
-            ratio="6by4"
-            :rounded="rounded"
-          ></b-image> -->
+        <div class="INRChart">
+          <GChart type="LineChart" :options="options" :data="chartData" @ready="onChartReady" />
         </div>
 
         <div class="media-content" style="margin-top: 12px">
@@ -250,10 +246,16 @@
 </template>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 <script>
+import { GChart } from 'vue-google-charts';
 import axios from 'axios';
 export default {
   name: 'HomePage',
+  components: {
+    GChart,
+  },
   data() {
     return {
       selectedDate: new Date(),
@@ -270,6 +272,18 @@ export default {
       isCardModalActive: false,
       isCardModalActive2: false,
       data: [],
+      chartData: [
+        ['date'],
+        [],
+      ],
+      options: {
+        // title: ''
+        width: 350,
+        height: 300,
+        curveType: 'function', // curve
+        lineWidth: 4,
+        // colors: ['#e0440e'],
+      },
     };
   },
   methods: {
