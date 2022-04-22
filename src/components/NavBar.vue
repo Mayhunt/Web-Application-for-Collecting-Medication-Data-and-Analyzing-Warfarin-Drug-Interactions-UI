@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 <template>
   <b-navbar :fixed-top="true">
     <template #brand>
@@ -7,7 +8,20 @@
         </router-link>
       </b-navbar-item>
       <b-navbar-item>
-        <b-autocomplete rounded placeholder="e.g. Anne" icon="magnify" style="padding-left: 5px">
+        <b-autocomplete
+          rounded
+          placeholder="e.g. Anne"
+          icon="magnify"
+          v-model="name"
+          clearable
+          :data="filteredDataArray"
+          @select="
+            (option) => (selected = option)
+          "
+          @click.native="sendData()"
+          style="padding-left: 5px"
+        >
+          <template #empty>No results found</template>
         </b-autocomplete>
       </b-navbar-item>
     </template>
@@ -26,7 +40,8 @@
       </b-navbar-item>
       <b-navbar-item>
         <router-link to="/allergic-pic">
-          <b-icon pack="fas" icon="fa-solid fa-file-image" type="is-primary" size="is-medium"> </b-icon>
+          <b-icon pack="fas" icon="fa-solid fa-file-image" type="is-primary" size="is-medium">
+          </b-icon>
           <span style="padding-left: 16px"></span><span>รูปภาพใบแพ้ยา</span>
         </router-link>
       </b-navbar-item>
@@ -44,9 +59,9 @@
       <b-navbar-item tag="div">
         <div class="buttons" style="justify-content: center">
           <b-button type="is-ghost">Privacy Statement</b-button>
-          <b-button type="is-ghost">Terms of Use</b-button>
+          <b-button @click="sendData" type="is-ghost">Terms of Use</b-button>
           <router-link to="/sign-in">
-          <b-icon pack="mdi" icon="logout" type="is-primary" size="is-medium" ></b-icon>
+            <b-icon pack="mdi" icon="logout" type="is-primary" size="is-medium"></b-icon>
           </router-link>
         </div>
       </b-navbar-item>
@@ -55,7 +70,53 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'NavBar',
+  data() {
+    return {
+      data: [],
+      name: '',
+      selected: 'Aluminium Hydroxide',
+      allData: [],
+    };
+  },
+  computed: {
+    filteredDataArray() {
+      // eslint-disable-next-line arrow-body-style
+      return this.data.filter((option) => {
+        return option.toString().toLowerCase().indexOf(this.name.toLowerCase()) >= 0;
+      });
+    },
+  },
+  mounted() {
+    axios.get('http://localhost:8080/api/search').then((data) => {
+      // this.data = response.data;
+      this.allData = data.data;
+      data.data.forEach((item) => this.data.push(item.genericName));
+      // console.warn(this.selected);
+    });
+  },
+  methods: {
+    sendData() {
+      // eslint-disable-next-line no-restricted-syntax
+      this.allData.forEach((item) => {
+        if (item.genericName === this.selected) {
+          console.warn(item.genericName);
+        }
+      });
+
+      // (item in this.allData) {
+      //   if (item.genericName === this.selected) {
+      //     console.log(item.caution);
+      //   }
+      // }
+      // this.allData.forEach((item) => item.genericName === this.selected);
+      // return console.log(item.caution);
+      // this.$store.commit('setUsername', this.username);
+      // this.$store.commit('setPassword', this.password);
+    },
+  },
 };
 </script>

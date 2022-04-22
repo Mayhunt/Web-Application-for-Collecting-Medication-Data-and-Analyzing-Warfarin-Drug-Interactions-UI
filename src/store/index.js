@@ -7,6 +7,9 @@ export default new Vuex.Store({
   state: {
     username: 'may',
     password: '',
+    genericname: '',
+    caution: '',
+    picdrug: '',
   },
   mutations: {
     setUsername(state, username) {
@@ -15,11 +18,23 @@ export default new Vuex.Store({
     setPassword(state, password) {
       state.password = password;
     },
+    setGenericName(state, genericname) {
+      state.genericname = genericname;
+    },
+    setCaution(state, caution) {
+      state.caution = caution;
+    },
+    setpicdrug(state, picdrug) {
+      state.picdrug = picdrug;
+    },
   },
   actions: {},
   getters: {
     username: (state) => state.username,
     password: (state) => state.password,
+    genericname: (state) => state.username,
+    caution: (state) => state.caution,
+    picdrug: (state) => state.picdrug,
   },
   modules: {},
 });
