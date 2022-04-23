@@ -95,7 +95,7 @@
             style="justify-content: center; margin-top: 2.5rem; margin-bottom: 4rem"
           >
             <b-button @click="addProfile()" rounded type="is-primary" size="is-medium" expanded>
-              <router-link to="/question">Continue {{ this.first_name }} </router-link></b-button
+              <router-link to="/question">Continue</router-link></b-button
             >
           </div>
         </form>
