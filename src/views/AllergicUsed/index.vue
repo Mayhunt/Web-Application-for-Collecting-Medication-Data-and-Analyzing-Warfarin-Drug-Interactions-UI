@@ -111,7 +111,7 @@ export default {
     isCardModalActive: false,
   }),
   mounted() {
-    axios.get('http://localhost:8080/allergic-drug').then((response) => {
+    axios.get('http://localhost:8080/api/allergic-drug').then((response) => {
       this.allergicDrug = response.data;
       console.log(response);
     });
