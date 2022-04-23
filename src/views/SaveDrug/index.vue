@@ -23,7 +23,7 @@
           <br />
           <br />
           <strong><h3>ชื่อยาสามัญ</h3></strong>
-          <strong><h5>Bismuth subsalicylate tab 1048 mg</h5></strong>
+          <strong><h5>{{this.$store.getters.searchdrugs.genericName}}</h5></strong>
           <hr />
           <div class="box" style="margin-top: 1rem; padding: 0rem">
             <b-field label="วันที่ได้รับยา" label-position="on-border">
