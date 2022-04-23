@@ -45,13 +45,12 @@
         <div class="media-content" style="margin-top: 12px">
           <b-table
             :data="data"
-            :bordered="isBordered"
-            :striped="isStriped"
             :narrowed="isNarrowed"
             :hoverable="isHoverable"
             :loading="isLoading"
-            :focusable="isFocusable"
+            :selected.sync="selected"
             :mobile-cards="hasMobileCards"
+            style="table-cell-border: 0"
           >
             <b-table-column
               field="date"
@@ -197,7 +196,7 @@
                       </b-field>
 
                       <b-field label="ค่า INR ที่คาดหวัง">
-                        <b-input placeholder="ใส่ค่า INR ที่คาดหวัง" rounded trap-focus></b-input>
+                        <b-input  rounded trap-focus></b-input>
                       </b-field>
 
                       <b-field label="ค่า INR ที่วัดได้จริง">
@@ -271,11 +270,9 @@ export default {
       hasMobileCards: false,
       isCardModalActive: false,
       isCardModalActive2: false,
+      selected: null,
       data: [],
-      chartData: [
-        ['date'],
-        [],
-      ],
+      chartData: [['date'], []],
       options: {
         // title: ''
         width: 350,
@@ -298,6 +295,16 @@ export default {
     reloadPage() {
       window.location.reload();
     },
+    testData(test) {
+      console.warn(test);
+    },
+  },
+  watch: {
+    // whenever question changes, this function will run
+    selected() {
+      // return this.isCardModalActive2 = true;
+      console.warn(this.selected.inrMeasure)
+    },
   },
   mounted() {
     axios.get(`http://localhost:8080/api/inr`).then((response) => {
@@ -318,5 +325,12 @@ export default {
   bottom: 0px;
   width: 100%;
   height: 15%;
+}
+.table tr.is-selected td,
+.table tr.is-selected th {
+  border:0;
+  border-color: transparent;
+  background-color: #f2effb;
+  text-decoration-style: solid;
 }
 </style>
