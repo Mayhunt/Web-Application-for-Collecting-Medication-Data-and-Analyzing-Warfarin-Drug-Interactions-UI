@@ -15,10 +15,8 @@
           v-model="name"
           clearable
           :data="filteredDataArray"
-          @select="
-            (option) => (selected = option)
-          "
-          @click.native="sendData()"
+          field="genericName"
+          @select="(option) => (selected = option)"
           style="padding-left: 5px"
         >
           <template #empty>No results found</template>
@@ -71,6 +69,8 @@
 
 <script>
 import axios from 'axios';
+import router from '../router/index';
+// import Store from '../store/index';
 
 export default {
   name: 'NavBar',
@@ -78,34 +78,37 @@ export default {
     return {
       data: [],
       name: '',
-      selected: 'Aluminium Hydroxide',
-      allData: [],
+      selected: '',
+      // allData: [],
     };
   },
   computed: {
     filteredDataArray() {
       // eslint-disable-next-line arrow-body-style
       return this.data.filter((option) => {
-        return option.toString().toLowerCase().indexOf(this.name.toLowerCase()) >= 0;
+        // console.warn(this.selected);
+        return option.genericName.toString().toLowerCase().indexOf(this.name.toLowerCase()) >= 0;
+        // this.sendData(option);
       });
     },
   },
   mounted() {
-    axios.get('http://localhost:8080/api/search').then((data) => {
-      // this.data = response.data;
-      this.allData = data.data;
-      data.data.forEach((item) => this.data.push(item.genericName));
-      // console.warn(this.selected);
+    axios.get('http://localhost:8080/api/search').then((response) => {
+      this.data = response.data;
+      // this.allData = data.data;
+      // data.data.forEach((item) => this.data.push(item.genericName));
+      console.warn(this.selected);
     });
   },
   methods: {
-    sendData() {
+    sendData(option) {
+      this.$store.commit('setCaution', option.caution);
       // eslint-disable-next-line no-restricted-syntax
-      this.allData.forEach((item) => {
-        if (item.genericName === this.selected) {
-          console.warn(item.genericName);
-        }
-      });
+      // this.allData.forEach((item) => {
+      //   if (item.genericName === this.selected) {
+      //     console.warn(item.genericName);
+      //   }
+      // });
 
       // (item in this.allData) {
       //   if (item.genericName === this.selected) {
@@ -116,6 +119,14 @@ export default {
       // return console.log(item.caution);
       // this.$store.commit('setUsername', this.username);
       // this.$store.commit('setPassword', this.password);
+    },
+  },
+  watch: {
+    // whenever question changes, this function will run
+    selected() {
+      console.warn(this.selected);
+      router.push({ name: 'Search' });
+      this.$store.commit('setsearchdrugs', this.selected);
     },
   },
 };
