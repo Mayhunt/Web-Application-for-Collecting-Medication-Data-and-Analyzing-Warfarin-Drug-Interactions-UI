@@ -22,7 +22,7 @@
           <br />
           <br />
           <strong><h3>ชื่อยาสามัญ</h3></strong>
-          <strong><h5>Bismuth subsalicylate tab 1048 mg</h5></strong>
+          <strong><h5>{{this.$store.getters.searchdrugs.genericName}}</h5></strong>
           <hr />
           <!-- <div class="box"> -->
           <b-field label="อาการที่แพ้" label-position="on-border">
@@ -74,7 +74,8 @@ export default {
   },
   methods: {
     async addAllergicDrug() {
-      const result = await axios.post('http://localhost:8080/allergic-drug', {
+      const result = await axios.post('http://localhost:8080/api/allergic-drug', {
+        drugId: this.$store.getters.searchdrugs.id,
         symptom: this.symptom,
         place: this.place,
         more: this.more,
