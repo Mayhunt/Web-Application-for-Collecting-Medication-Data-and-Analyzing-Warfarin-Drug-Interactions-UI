@@ -7,7 +7,7 @@
       <!-- <div class="container"> -->
       <div class="content is-medium">
         <br />
-        <h1>Bismuth subsalicylate tab 1048 mg</h1>
+        <h1>{{this.$store.getters.searchdrugs.genericName}}</h1>
       </div>
       <div>
         <b-image :src="require('@/assets/ex1.png')" alt="ex1" ratio="2by1" :rounded="rounded">
