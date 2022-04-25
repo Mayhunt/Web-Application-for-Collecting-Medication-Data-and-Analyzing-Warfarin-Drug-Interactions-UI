@@ -81,9 +81,11 @@
                   </b-field>
                 </div>
                 <div class="buttons" style="justify-content: center; margin-top: 2rem">
-                  <b-button class="button" type="is-danger" size="is-medium" rounded expanded>
-                    <router-link to="/edit-drugused"> แก้ไขรายการยานี้</router-link></b-button
-                  >
+                  <router-link to="/edit-drugused">
+                    <b-button class="button" type="is-danger" size="is-medium" rounded expanded>
+                      แก้ไขรายการยานี้</b-button
+                    >
+                  </router-link>
                 </div>
               </div>
             </section>
