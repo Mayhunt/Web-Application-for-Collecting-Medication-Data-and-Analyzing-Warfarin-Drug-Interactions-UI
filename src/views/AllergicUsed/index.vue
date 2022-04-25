@@ -43,9 +43,9 @@
         <div class="pb-5 pt-5"></div>
         <div class="pb-5 pt-5"></div>
         <div class="fixedbutton">
-          <b-button class="mt-4" rounded type="is-primary" size="is-medium" expanded>
-            <router-link to="/allergic-pic"> รูปใบแพ้ยา</router-link></b-button
-          >
+          <router-link to="/allergic-pic"><b-button class="mt-4" rounded type="is-primary" size="is-medium" expanded>
+             รูปใบแพ้ยา</b-button
+          ></router-link>
         </div>
       </div>
       <b-modal v-model="isCardModalActive" :width="640" scroll="keep">
@@ -94,8 +94,13 @@
                   </b-field>
                 </div>
                 <div class="buttons" style="justify-content: center; margin-top: 2rem">
-                  <b-button class="button" type="is-danger" size="is-medium" rounded expanded>
-                    <router-link to="/edit-allergic"> แก้ไขรายการยานี้</router-link></b-button
+                  <b-button @click="sendEditDrug()" type="is-primary" size="is-medium" rounded expanded>
+                    <router-link to="/edit-allergic">แก้ไขรายการยานี้</router-link></b-button
+                  >
+                  <b-button @click="deleteDrug(); reloadPage()" type="is-danger" size="is-medium" rounded expanded>
+                    ลบรายการยานี้
+                    <!-- <router-link to="/edit-allergic">ลบรายการยานี้</router-link> -->
+                    </b-button
                   >
                 </div>
               </div>
@@ -128,6 +133,18 @@ export default {
       this.details = detail;
       return this.details;
       // console.warn(detail);
+    },
+    sendEditDrug() {
+      this.$store.commit('setEditDrug', this.details.id);
+    },
+    async deleteDrug() {
+      const result = await axios.delete(
+        `http://localhost:8080/api/allergic-drug/${this.details.id}/delete`,
+      );
+      console.warn(result);
+    },
+    reloadPage() {
+      window.location.reload();
     },
   },
 };
