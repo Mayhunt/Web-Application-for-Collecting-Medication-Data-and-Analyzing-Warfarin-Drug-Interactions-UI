@@ -58,22 +58,11 @@
                     <h4 style="margin-top: 0; text-align: center; margin-bottom: 0.25rem">
                       ลบรูปใบแพ้ยา
                     </h4>
-                    <br/>
-                    <div class="columns is-mobile is-centered">
-                         ท่านต้องการลบรูปภาพใบแพ้ยานี้
-                    </div>
+                    <br />
+                    <div class="columns is-mobile is-centered">ท่านต้องการลบรูปภาพใบแพ้ยานี้</div>
                   </div>
 
                   <div class="buttons" style="justify-content: center; margin-top: 2rem">
-                    <b-button
-                      class="button"
-                      @click="isCardModalActive = false"
-                      type="is-grey-lighter"
-                      size="is-medium"
-                      rounded
-                      expanded
-                      >ยกเลิก</b-button
-                    >
                     <b-button
                       class="button"
                       @click="isCardModalActive = false"
