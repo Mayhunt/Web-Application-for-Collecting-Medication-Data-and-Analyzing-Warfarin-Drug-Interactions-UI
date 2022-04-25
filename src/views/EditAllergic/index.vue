@@ -22,30 +22,36 @@
           <br />
           <br />
           <strong><h3>ชื่อยาสามัญ</h3></strong>
-          <strong><h5>Bismuth subsalicylate tab 1048 mg</h5></strong>
+          <strong
+            ><h5>{{ this.allergicDrug.genericName }}</h5></strong
+          >
           <hr />
           <!-- <div class="box"> -->
-            <b-field label="อาการที่แพ้" label-position="on-border">
-              <b-input v-model="symptom" placeholder="มีผื่นแดงรอบปาก" rounded> </b-input>
-            </b-field>
-            <b-field label="สถานที่ได้รับ" label-position="on-border">
-              <b-input v-model="place" placeholder="XXXXXXXXX" rounded> </b-input>
-            </b-field>
-            <b-field label="บันทึกเพิ่มเติม" label-position="on-border">
-              <b-input v-model="more" placeholder="ตัวอย่าง มีผื่นแดงรอบปาก" rounded> </b-input>
-            </b-field>
-            <br>
-            <br>
+          <b-field label="อาการที่แพ้" label-position="on-border">
+            <b-input v-model="allergicDrug.symptom" placeholder="มีผื่นแดงรอบปาก" rounded>
+            </b-input>
+          </b-field>
+          <b-field label="สถานที่ได้รับ" label-position="on-border">
+            <b-input v-model="allergicDrug.place" placeholder="XXXXXXXXX" rounded> </b-input>
+          </b-field>
+          <b-field label="บันทึกเพิ่มเติม" label-position="on-border">
+            <b-input v-model="allergicDrug.more" placeholder="ตัวอย่าง มีผื่นแดงรอบปาก" rounded>
+            </b-input>
+          </b-field>
+          <br />
+          <br />
           <!-- </div> -->
           <!-- <div class="buttons has-addons is-centered">
             <b-button class="button" size="is-medium" type="is-primary is-light">บันทึก</b-button>
           </div> -->
 
           <div class="buttons" style="justify-content: center">
-            <b-button rounded type="is-primary is-light" size="is-medium" expanded>
-              <router-link to="/allergic-drug">บันทึก</router-link></b-button>
-            <b-button rounded type="is-danger is-light" size="is-medium" expanded>
-              <router-link to="/allergic-drug">ลบรายการยานี้</router-link></b-button>
+            <b-button @click="updateDrug()" rounded type="is-primary is-light" size="is-medium" expanded>
+              <router-link to="/allergic-drug">บันทึก</router-link></b-button
+            >
+            <b-button @click="deleteDrug()" rounded type="is-danger is-light" size="is-medium" expanded>
+              <router-link to="/allergic-drug">ลบรายการยานี้</router-link></b-button
+            >
           </div>
         </div>
       </div>
@@ -56,8 +62,36 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'SaveAllergic',
+  data() {
+    return {
+      allergicDrug: {},
+    };
+  },
+  mounted() {
+    axios
+      .get(`http://localhost:8080/api/allergic-drug/${this.$store.getters.editdrug}`)
+      .then((response) => {
+        this.allergicDrug = response.data;
+        console.log(response);
+      });
+  },
+  methods: {
+    async updateDrug() {
+      const result = await axios.patch(
+        `http://localhost:8080/api/allergic-drug/${this.allergicDrug.id}/update`,
+        {
+          more: this.allergicDrug.more,
+          symptom: this.allergicDrug.symptom,
+          place: this.allergicDrug.place,
+        },
+      );
+      console.warn(result);
+    },
+  },
 };
 </script>
 
