@@ -42,15 +42,15 @@
           </div> -->
 
           <div class="buttons" style="justify-content: center">
-            <b-button
+            <router-link to="/allergic-drug"><b-button
               @click="addAllergicDrug()"
               rounded
               type="is-primary"
               size="is-medium"
               expanded
             >
-              <router-link to="/allergic-drug">บันทึก</router-link></b-button
-            >
+              บันทึก</b-button
+            ></router-link>
           </div>
         </div>
       </div>

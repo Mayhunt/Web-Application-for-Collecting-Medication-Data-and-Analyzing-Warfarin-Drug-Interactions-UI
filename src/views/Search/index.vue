@@ -44,12 +44,12 @@
           >
         </div> -->
       <div class="buttons" style="justify-content: center">
-        <b-button type="is-primary is-light" size="is-medium" expanded
-          ><router-link to="/save-drug">บันทึกไปรายการยาปัจจุบัน</router-link></b-button
-        >
-        <b-button rounded type="is-danger is-light" size="is-medium" expanded
-          ><router-link to="/save-allergic">บันทึกไปรายการยาที่แพ้</router-link></b-button
-        >
+        <router-link to="/save-drug"><b-button type="is-primary is-light" size="is-medium" rounded expanded
+          >บันทึกไปรายการยาปัจจุบัน</b-button
+        ></router-link>
+        <router-link to="/save-allergic"><b-button rounded type="is-danger is-light" size="is-medium" expanded
+          >บันทึกไปรายการยาที่แพ้</b-button
+        ></router-link>
       </div>
     </div>
 

@@ -98,10 +98,7 @@
           </b-table>
         </div>
         <!-- </div> -->
-        <div
-          class="buttons"
-          style="justify-content: center,font-family: 'Kanit'"
-        >
+        <div class="buttons" style="justify-content: center,font-family: 'Kanit'">
           <!-- <b-button rounded type="is-primary" size="is-medium" expanded>บันทึกค่า INR</b-button> -->
           <!-- <div class="fixedbutton"> -->
 
@@ -112,7 +109,7 @@
             size="is-medium"
             @click="isCardModalActive = true"
             expanded
-            style="margin-top:20px"
+            style="margin-top: 20px"
           />
           <!-- <b-button
               rounded
@@ -170,17 +167,17 @@
                         ></b-input>
                       </b-field>
                       <div class="buttons" style="justify-content: center; margin-top: 2rem">
-                        <b-button
-                          @click="
-                            addInr();
-                            reloadPage();
-                          "
-                          rounded
-                          type="is-primary"
-                          size="is-medium"
-                          expanded
-                          ><router-link to="/home">บันทึก</router-link></b-button
-                        >
+                       <b-button
+                            @click="
+                              addInr();
+                              reloadPage();
+                            "
+                            rounded
+                            type="is-primary"
+                            size="is-medium"
+                            expanded
+                            >บันทึก</b-button
+                          >
                       </div>
                     </form>
                   </div>

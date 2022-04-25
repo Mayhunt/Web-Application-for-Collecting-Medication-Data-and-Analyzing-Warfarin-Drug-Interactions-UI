@@ -22,7 +22,7 @@
         </div>
         <div>
           <b-field>
-            <b-checkbox  v-model="isDisable" type="is-primary" size="is-medium" required>
+            <b-checkbox v-model="isDisable" type="is-primary" size="is-medium" required>
               เข้าใจเนื้อหาทั้งหมด
             </b-checkbox>
           </b-field>
@@ -31,14 +31,10 @@
           class="buttons"
           style="justify-content: center; margin-top: 2.5rem; margin-bottom: 6rem"
         >
-          <b-button
-            rounded
-            type="is-primary"
-            size="is-medium"
-            expanded
-            :disabled="!isDisable"
-          >
-            <router-link to="/home">เสร็จสิ้น</router-link></b-button
+          <router-link to="/home">
+            <b-button rounded type="is-primary" size="is-medium" expanded :disabled="!isDisable">
+              เสร็จสิ้น</b-button
+            ></router-link
           >
         </div>
       </div>

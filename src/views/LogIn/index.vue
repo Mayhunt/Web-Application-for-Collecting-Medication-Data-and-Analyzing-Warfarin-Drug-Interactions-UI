@@ -48,9 +48,9 @@
             <b-button type="is-text" size="is-small">ลืมรหัสผ่าน</b-button>
           </div>
           <div class="buttons" style="justify-content: center">
-            <b-button rounded type="is-primary" size="is-medium" expanded>
-              <router-link to="/home">เข้าสู่ระบบ</router-link></b-button>
-            <b-button type="is-text"><router-link to="/register1">ลงทะเบียนผู้ใช้ใหม่</router-link></b-button>
+            <router-link to="/home"><b-button rounded type="is-primary" size="is-medium" expanded>
+              เข้าสู่ระบบ</b-button></router-link>
+            <router-link to="/register1"><b-button type="is-text">ลงทะเบียนผู้ใช้ใหม่</b-button></router-link>
           </div>
         </form>
       </div>

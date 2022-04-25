@@ -20,7 +20,7 @@
         <!-- <div class="content is-medium">
                 <h1 style="margin-top:0; text-align:center; margin-bottom:0.25rem">Create Account</h1>
             </div> -->
-        <div class="media-body">
+        <div class="media-body" style="padding-left: 115px">
           <!-- <figure class="image is-128x128 ">
             <img center class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png" />
           </figure> -->
@@ -82,11 +82,13 @@
             style="justify-content: center; margin-top: 2.5rem; margin-bottom: 4rem"
           >
             <div class="buttons" style="justify-content: center">
+              <router-link to="me">
               <b-button rounded type="is-primary is-light" size="is-medium" expanded
-                >แก้ไข้ข้อมูล</b-button
-              >
+                >บันทึก</b-button
+              ></router-link>
+                <router-link to="sign-in">
                 <b-button type="is-danger is-light" size="is-medium" rounded expanded>
-                  <router-link to="sign-in">ลบบัญชีผู้ใช้นี้</router-link></b-button>
+                  ลบบัญชีผู้ใช้นี้</b-button></router-link>
             </div>
           </div>
         </form>

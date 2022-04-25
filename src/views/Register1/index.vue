@@ -62,9 +62,12 @@
             <!-- </b-field> -->
             <!-- <div class="buttons" style="justify-content: right"><b-button type="is-text" size="is-small">Forget Password</b-button></div> -->
             <div class="buttons" style="justify-content: center; margin-top: 2rem">
-              <b-button @click="sendData" type="is-primary" size="is-medium" expanded>
-                <router-link to="/register2">Continue</router-link></b-button
+              <router-link to="/register2"
+                ><b-button @click="sendData" type="is-primary" size="is-medium" rounded expanded>
+                  ถัดไป</b-button
+                ></router-link
               >
+
               <!-- <button class="button is-text">Register</button> -->
             </div>
           </form>
