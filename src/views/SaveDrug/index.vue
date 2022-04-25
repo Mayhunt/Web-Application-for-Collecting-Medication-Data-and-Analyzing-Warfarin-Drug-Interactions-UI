@@ -84,7 +84,7 @@
           </section>
           <div class="pb-5 pt-5"></div>
 
-          <div class="buttons" style="justify-content: center">
+          <div class="fixedbuttons" style="justify-content: center">
             <router-link to="/currently-drug"> <b-button rounded type="is-primary" size="is-medium" expanded>
              บันทึก</b-button
             ></router-link>

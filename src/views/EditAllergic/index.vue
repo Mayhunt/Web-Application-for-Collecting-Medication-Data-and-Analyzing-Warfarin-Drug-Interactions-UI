@@ -45,7 +45,7 @@
             <b-button class="button" size="is-medium" type="is-primary is-light">บันทึก</b-button>
           </div> -->
 
-          <div class="buttons" style="justify-content: center">
+          <div class="fixedbuttons" style="justify-content: center">
             <router-link to="/allergic-drug"
               ><b-button
                 @click="updateDrug()"
@@ -57,6 +57,7 @@
                 บันทึก</b-button
               ></router-link
             >
+            <br/>
 
             <router-link to="/allergic-drug"
               ><b-button

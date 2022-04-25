@@ -166,7 +166,7 @@
                           v-model.number="inrMeasure"
                         ></b-input>
                       </b-field>
-                      <div class="buttons" style="justify-content: center; margin-top: 2rem">
+                      <div class="fixedbuttons" style="justify-content: center; margin-top: 2rem">
                        <b-button
                             @click="
                               addInr();

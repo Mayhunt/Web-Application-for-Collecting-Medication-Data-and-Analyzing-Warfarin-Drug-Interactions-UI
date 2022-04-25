@@ -93,10 +93,10 @@
                     </b-input>
                   </b-field>
                 </div>
-                <div class="buttons" style="justify-content: center; margin-top: 2rem">
-                  <b-button @click="sendEditDrug()" type="is-primary" size="is-medium" rounded expanded>
-                    <router-link to="/edit-allergic">แก้ไขรายการยานี้</router-link></b-button
-                  >
+                <div class="fixedbuttons" style="justify-content: center; margin-top: 2rem">
+                  <router-link to="/edit-allergic"><b-button @click="sendEditDrug()" type="is-primary" size="is-medium" rounded expanded>
+                    แก้ไขรายการยานี้</b-button
+                  ></router-link>
                   <b-button @click="deleteDrug(); reloadPage()" type="is-danger" size="is-medium" rounded expanded>
                     ลบรายการยานี้
                     <!-- <router-link to="/edit-allergic">ลบรายการยานี้</router-link> -->

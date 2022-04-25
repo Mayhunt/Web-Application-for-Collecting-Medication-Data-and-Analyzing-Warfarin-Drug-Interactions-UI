@@ -78,14 +78,15 @@
             <b-input placeholder="XXX-XXXXXXX" rounded> </b-input>
           </b-field>
           <div
-            class="buttons"
+            class="fixedbuttons"
             style="justify-content: center; margin-top: 2.5rem; margin-bottom: 4rem"
           >
-            <div class="buttons" style="justify-content: center">
+            <div class="fixedbuttons" style="justify-content: center">
               <router-link to="me">
               <b-button rounded type="is-primary is-light" size="is-medium" expanded
                 >บันทึก</b-button
               ></router-link>
+              <br/>
                 <router-link to="sign-in">
                 <b-button type="is-danger is-light" size="is-medium" rounded expanded>
                   ลบบัญชีผู้ใช้นี้</b-button></router-link>

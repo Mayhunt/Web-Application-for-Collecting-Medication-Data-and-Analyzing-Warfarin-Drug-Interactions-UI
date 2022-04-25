@@ -34,7 +34,7 @@
           <p>คำตอบ บัวลอย</p>
           <p>คำใบ้ ขนมไทยในน้ำกะทิ</p>
 
-          <div class="buttons" style="justify-content: center; margin-top: 2rem">
+          <div class="fixedbuttons" style="justify-content: center; margin-top: 2rem">
             <router-link to="/register3"><b-button @click="addHint()" rounded type="is-primary" size="is-medium" expanded>
               บันทึก</b-button></router-link>
           </div>

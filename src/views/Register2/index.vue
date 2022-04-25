@@ -91,7 +91,7 @@
             <b-input v-model="emergency_phone_num" placeholder="XXX-XXXXXXX" rounded> </b-input>
           </b-field>
           <div
-            class="buttons"
+            class="fixedbuttons"
             style="justify-content: center; margin-top: 2.5rem; margin-bottom: 4rem"
           >
             <router-link to="/question"><b-button @click="addProfile()" rounded type="is-primary" size="is-medium" expanded>

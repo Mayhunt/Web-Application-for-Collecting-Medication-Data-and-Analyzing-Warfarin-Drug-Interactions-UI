@@ -22,7 +22,9 @@
           <br />
           <br />
           <strong><h3>ชื่อยาสามัญ</h3></strong>
-          <strong><h5>{{this.$store.getters.searchdrugs.genericName}}</h5></strong>
+          <strong
+            ><h5>{{ this.$store.getters.searchdrugs.genericName }}</h5></strong
+          >
           <hr />
           <!-- <div class="box"> -->
           <b-field label="อาการที่แพ้" label-position="on-border">
@@ -40,17 +42,18 @@
           <!-- <div class="buttons has-addons is-centered">
             <b-button class="button" size="is-medium" type="is-primary is-light">บันทึก</b-button>
           </div> -->
-
-          <div class="buttons" style="justify-content: center">
-            <router-link to="/allergic-drug"><b-button
-              @click="addAllergicDrug()"
-              rounded
-              type="is-primary"
-              size="is-medium"
-              expanded
+          <div class="fixedbutton" style="justify-content: center">
+            <router-link to="/allergic-drug"
+              ><b-button
+                @click="addAllergicDrug()"
+                rounded
+                type="is-primary"
+                size="is-medium"
+                expanded
+              >
+                บันทึก</b-button
+              ></router-link
             >
-              บันทึก</b-button
-            ></router-link>
           </div>
         </div>
       </div>

@@ -49,7 +49,7 @@
             </div>
 
             <!-- <div class="buttons" style="justify-content: right"><b-button type="is-text" size="is-small">Forget Password</b-button></div> -->
-            <div class="buttons" style="justify-content: center; margin-top: 2rem">
+            <div class="fixedbuttons" style="justify-content: center; margin-top: 2rem">
               <router-link to="/register3"
                 ><b-button @click="addQuestion()" type="is-primary" size="is-medium" rounded expanded>
                   ถัดไป</b-button

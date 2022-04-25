@@ -47,10 +47,12 @@
           <div class="buttons" style="justify-content: right">
             <b-button type="is-text" size="is-small">ลืมรหัสผ่าน</b-button>
           </div>
-          <div class="buttons" style="justify-content: center">
+          <div class="fixedbuttons" style="justify-content: center">
             <router-link to="/home"><b-button rounded type="is-primary" size="is-medium" expanded>
               เข้าสู่ระบบ</b-button></router-link>
+            <div class="buttons" style="justify-content: center">
             <router-link to="/register1"><b-button type="is-text">ลงทะเบียนผู้ใช้ใหม่</b-button></router-link>
+            </div>
           </div>
         </form>
       </div>

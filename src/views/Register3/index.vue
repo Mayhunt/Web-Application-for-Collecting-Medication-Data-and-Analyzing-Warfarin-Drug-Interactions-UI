@@ -28,7 +28,7 @@
           </b-field>
         </div>
         <div
-          class="buttons"
+          class="fixedbuttons"
           style="justify-content: center; margin-top: 2.5rem; margin-bottom: 6rem"
         >
           <router-link to="/home">

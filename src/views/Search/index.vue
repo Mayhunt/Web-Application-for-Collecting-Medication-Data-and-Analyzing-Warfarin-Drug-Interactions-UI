@@ -43,10 +43,11 @@
             >Save to Allergic Drug Used</b-button
           >
         </div> -->
-      <div class="buttons" style="justify-content: center">
+      <div class="fixedbuttons" style="justify-content: center">
         <router-link to="/save-drug"><b-button type="is-primary is-light" size="is-medium" rounded expanded
           >บันทึกไปรายการยาปัจจุบัน</b-button
         ></router-link>
+        <br/>
         <router-link to="/save-allergic"><b-button rounded type="is-danger is-light" size="is-medium" expanded
           >บันทึกไปรายการยาที่แพ้</b-button
         ></router-link>
