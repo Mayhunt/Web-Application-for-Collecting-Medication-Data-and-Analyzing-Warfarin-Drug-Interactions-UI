@@ -95,7 +95,7 @@
             style="justify-content: center; margin-top: 2.5rem; margin-bottom: 4rem"
           >
             <b-button @click="addProfile()" rounded type="is-primary" size="is-medium" expanded>
-              <router-link to="/question">Continue {{ this.first_name }} </router-link></b-button
+              <router-link to="/question">Continue</router-link></b-button
             >
           </div>
         </form>
@@ -115,23 +115,37 @@ export default {
     return {
       weight: 0,
       height: 0,
-      // first_name: '',
-      // last_name: '',
-      // id_card_number: '',
-      // // selected_date: '',
-      // blood_group: '',
-      // medication_condition: '',
-      // phone_num: '',
-
+      first_name: 'm',
+      last_name: 'm',
+      id_card_number: 'm',
+      selected_date: new Date(),
+      blood_group: 'm',
+      medication_condition: 'm',
+      phone_num: 'm',
+      emergency_contact: 'm',
+      emergency_phone_num: 'm',
+      pic: 'm',
     };
   },
   methods: {
     async addProfile() {
-      const result = await axios.post('http://localhost:8080/api/register2', {
-        userName: this.$store.getters.username,
+      // const user =  this.$store.getters.username,
+      const result = await axios.post('http://localhost:8080/api/auth/register', {
+        username: this.$store.getters.username,
         password: this.$store.getters.password,
         firstName: this.first_name,
         lastName: this.last_name,
+        idCardNumber: this.id_card_number,
+        birthDate: this.selected_date,
+        bloodGroup: this.blood_group,
+        medicationCondition: this.medication_condition,
+        weight: this.weight,
+        height: this.height,
+        bmi: this.calBMI,
+        phoneNum: this.phone_num,
+        emergencyContact: this.emergency_contact,
+        emergencyPhoneNum: this.emergency_phone_num,
+        pic: this.pic,
       });
       console.warn(result);
     },

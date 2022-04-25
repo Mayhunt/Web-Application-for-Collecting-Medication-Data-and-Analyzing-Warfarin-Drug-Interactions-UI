@@ -7,7 +7,7 @@
       <!-- <div class="container"> -->
       <div class="content is-medium">
         <br />
-        <h1>Bismuth subsalicylate tab 1048 mg</h1>
+        <h1>{{this.$store.getters.searchdrugs.genericName}}</h1>
       </div>
       <div>
         <b-image :src="require('@/assets/ex1.png')" alt="ex1" ratio="2by1" :rounded="rounded">
@@ -29,10 +29,10 @@
           </p>
         </b-modal>
 
-        Bismuth subsalicylate tab 1048 mg
+        {{this.$store.getters.searchdrugs.genericName}}
         <hr />
         <strong><h2>ข้อควรระวัง</h2></strong>
-        ห้ามใช้เด็กอายุต่ำกว่า 12 ปี
+        {{this.$store.getters.searchdrugs.caution}}
       </div>
       <!-- <div class="fixedbutton justify-content-center is-fullwidth">
           <b-button size="is-medium" class="is-fullwidth" type="is-primary is-light"
@@ -44,7 +44,7 @@
           >
         </div> -->
       <div class="buttons" style="justify-content: center">
-        <b-button rounded type="is-primary is-light" size="is-medium" expanded
+        <b-button type="is-primary is-light" size="is-medium" expanded
           ><router-link to="/save-drug">บันทึกไปรายการยาปัจจุบัน</router-link></b-button
         >
         <b-button rounded type="is-danger is-light" size="is-medium" expanded
@@ -59,6 +59,8 @@
 </template>
 
 <script>
+// import store from '../../store/index';
+
 export default {
   name: 'SearchPage',
 };
