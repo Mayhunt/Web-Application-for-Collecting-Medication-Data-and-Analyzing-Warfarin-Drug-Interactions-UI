@@ -31,7 +31,7 @@
             <b-input v-model="symptom" placeholder="มีผื่นแดงรอบปาก" rounded> </b-input>
           </b-field>
           <b-field label="สถานที่ได้รับ" label-position="on-border">
-            <b-input v-model="place" placeholder="XXXXXXXXX" rounded> </b-input>
+            <b-input v-model="place" placeholder="โรงพยาบาลจุฬาภรณ์" rounded> </b-input>
           </b-field>
           <b-field label="บันทึกเพิ่มเติม" label-position="on-border">
             <b-input v-model="more" placeholder="ตัวอย่าง มีผื่นแดงรอบปาก" rounded> </b-input>

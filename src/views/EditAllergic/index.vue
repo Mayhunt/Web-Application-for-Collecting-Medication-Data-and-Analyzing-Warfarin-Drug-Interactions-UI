@@ -32,7 +32,7 @@
             </b-input>
           </b-field>
           <b-field label="สถานที่ได้รับ" label-position="on-border">
-            <b-input v-model="allergicDrug.place" placeholder="XXXXXXXXX" rounded> </b-input>
+            <b-input v-model="allergicDrug.place" placeholder="โรงพยาบาลจุฬาภรณ์" rounded> </b-input>
           </b-field>
           <b-field label="บันทึกเพิ่มเติม" label-position="on-border">
             <b-input v-model="allergicDrug.more" placeholder="ตัวอย่าง มีผื่นแดงรอบปาก" rounded>
