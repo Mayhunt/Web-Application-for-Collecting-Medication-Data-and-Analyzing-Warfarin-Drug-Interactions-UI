@@ -39,7 +39,18 @@
           <h2 style="margin-top: 0">INR</h2>
         </div>
         <div class="INRChart">
-          <GChart type="LineChart" :options="options" :data="chartData" @ready="onChartReady" />
+          <GChart
+            type="LineChart"
+            :options="options"
+            :data="chartData"
+            @ready="onChartReady"
+            :settings="{
+              packages: ['corechart'],
+              callback: () => {
+                this.drawData();
+              },
+            }"
+          />
         </div>
 
         <div class="media-content" style="margin-top: 12px">
@@ -87,26 +98,34 @@
           </b-table>
         </div>
         <!-- </div> -->
-        <div class="buttons" style="justify-content: center,font-family: 'Kanit'">
+        <div
+          class="buttons"
+          style="justify-content: center,font-family: 'Kanit'"
+        >
           <!-- <b-button rounded type="is-primary" size="is-medium" expanded>บันทึกค่า INR</b-button> -->
-          <div class="fixedbutton">
-            <b-button
-              rounded
-              label="บันทึกค่า INR"
-              type="is-primary"
-              size="is-medium"
-              @click="isCardModalActive = true"
-              expanded
-            />
-            <b-button
+          <!-- <div class="fixedbutton"> -->
+
+          <b-button
+            rounded
+            label="บันทึกค่า INR"
+            type="is-primary"
+            size="is-medium"
+            @click="isCardModalActive = true"
+            expanded
+            style="margin-top:20px"
+          />
+          <!-- <b-button
               rounded
               label="แก้ไขค่า INR"
               type="is-danger"
               size="is-medium"
-              @click="isCardModalActive2 = true"
+              @click="
+                isCardModalActive2 = true;
+                testData();
+              "
               expanded
-            />
-          </div>
+            /> -->
+          <!-- </div> -->
           <!-- popup-add inr -->
           <b-modal v-model="isCardModalActive" :width="640" scroll="keep">
             <div class="card">
@@ -160,7 +179,7 @@
                           type="is-primary"
                           size="is-medium"
                           expanded
-                          ><router-link to="/home">บันทึก </router-link></b-button
+                          ><router-link to="/home">บันทึก</router-link></b-button
                         >
                       </div>
                     </form>
@@ -187,6 +206,7 @@
                     <form class="box">
                       <b-field label="วันที่">
                         <b-datepicker
+                          v-model="selected.followDate"
                           placeholder="เลือกวันที่."
                           icon="calendar-today"
                           rounded
@@ -196,11 +216,12 @@
                       </b-field>
 
                       <b-field label="ค่า INR ที่คาดหวัง">
-                        <b-input  rounded trap-focus></b-input>
+                        <b-input v-model="selected.inrExpect" rounded trap-focus></b-input>
                       </b-field>
 
                       <b-field label="ค่า INR ที่วัดได้จริง">
                         <b-input
+                          v-model="selected.inrMeasure"
                           placeholder="ใส่ค่า INR ที่วัดได้จริง"
                           rounded
                           trap-focus
@@ -212,17 +233,19 @@
                           @click="
                             isCardModalActive2 = false;
                             reloadPage();
+                            updateInr();
                           "
                           type="is-primary"
                           size="is-medium"
                           rounded
                           expanded
-                          >บันทึก</b-button
-                        >
+                          >บันทึก {{ this.selected.followDate }}
+                        </b-button>
                         <b-button
                           class="button"
                           @click="
                             isCardModalActive2 = false;
+                            deleteInr();
                             reloadPage();
                           "
                           type="is-danger"
@@ -270,9 +293,10 @@ export default {
       hasMobileCards: false,
       isCardModalActive: false,
       isCardModalActive2: false,
-      selected: null,
+      selected: { id: '', inrMeasure: Number(), inrExpect: Number(), followDate: new Date() },
       data: [],
-      chartData: [['date'], []],
+      finalData: [],
+      chartData: [],
       options: {
         // title: ''
         width: 350,
@@ -290,20 +314,77 @@ export default {
         inrExpect: this.inrExpect,
         inrMeasure: this.inrMeasure,
       });
+      // console.warn(result);
+    },
+    async updateInr() {
+      const result = await axios.patch(`http://localhost:8080/api/inr/${this.selected.id}/update`, {
+        followDate: this.selected.followDate,
+        inrExpect: this.selected.inrExpect,
+        inrMeasure: this.selected.inrMeasure,
+      });
+      console.warn(result);
+    },
+    async deleteInr() {
+      const result = await axios.delete(
+        `http://localhost:8080/api/inr/${this.selected.id}/delete`,
+        {}
+      );
       console.warn(result);
     },
     reloadPage() {
       window.location.reload();
     },
-    testData(test) {
-      console.warn(test);
+    // testData() {
+    //   var round = 1;
+    //   this.data.forEach((item) => {
+    //     this.finalData.push([round, item.id, item.inrMeasure, inrExpect]);
+    //     round = round + 1;
+    //     // console.warn(this.finalData)
+    //   });
+    //   console.warn(this.finalData);
+    //   // this.data.forEach((item) => this.finalData.push([item.id,item.genericName]));
+    //   // console.warn(this.finalData)
+    // },
+    drawData() {
+      var round = 1;
+      this.data.forEach((item) => {
+        this.finalData.push([round, Number(item.inrMeasure), Number(item.inrExpect)]);
+        round = round + 1;
+      });
+      console.warn(this.finalData);
+      this.chartData = new google.visualization.DataTable();
+      this.chartData.addColumn('number', 'round');
+      this.chartData.addColumn('number', 'inrExpect');
+      this.chartData.addColumn('number', 'inrMeasure');
+      this.chartData.addRows(this.finalData);
+      // finalData=[]
+      // this.data.forEach(() => finalData.push([item.id,item.genericName]));
+      // console.warn(finalData)
+      // for (id in this.data) {
+      //   this.chartData.addRows(item.id,item.inrExpect,inrMeasure)
+      // }
+      // For each orgchart box, provide the name, manager, and tooltip to show.
+      // this.chartData.addRows([
+      //   [{v:'Mike', f:'Mike<div style="color:red; font-style:italic">President</div>'},
+      //   '', 'The President'],
+      //   [{v:'Jim', f:'Jim<div style="color:red; font-style:italic">Vice President</div>'},
+      //   'Mike', 'VP'],
+      //   ['Alice', 'Mike', ''],
+      //   ['Bob', 'Jim', 'Bob Sponge'],
+      //   ['Carol', 'Bob', '']
+      // ])
+
+      // Create the chart.
+      // var chart = new google.visualization.OrgChart(document.getElementById('tree'));
+      // // Draw the chart, setting the allowHtml option to true for the tooltips.
+      // chart.draw(this.chartData, {allowHtml:true});
     },
   },
   watch: {
     // whenever question changes, this function will run
     selected() {
-      // return this.isCardModalActive2 = true;
-      console.warn(this.selected.inrMeasure)
+      return (this.isCardModalActive2 = true);
+      // console.warn(this.selected)
     },
   },
   mounted() {
@@ -328,7 +409,8 @@ export default {
 }
 .table tr.is-selected td,
 .table tr.is-selected th {
-  border:0;
+  color: rgb(121, 87, 213);
+  border: 0;
   border-color: transparent;
   background-color: #f2effb;
   text-decoration-style: solid;
