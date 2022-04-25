@@ -10,7 +10,7 @@
       <b-navbar-item>
         <b-autocomplete
           rounded
-          placeholder="e.g. Anne"
+          placeholder="ค้นหาด้วยชื่อยาสามัญ"
           icon="magnify"
           v-model="name"
           clearable
@@ -25,8 +25,8 @@
     </template>
     <template #start>
       <b-navbar-item href="#">
-        <b-icon pack="mdi" icon="pill" type="is-primary" size="is-medium"> </b-icon>
         <router-link to="/currently-drug">
+        <b-icon pack="mdi" icon="pill" type="is-primary" size="is-medium"> </b-icon>
           <span style="padding-left: 16px"></span><span>รายการยาที่ใช้ปัจจุบัน</span>
         </router-link>
       </b-navbar-item>
