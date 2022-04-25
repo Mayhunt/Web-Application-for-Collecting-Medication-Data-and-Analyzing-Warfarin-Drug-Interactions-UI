@@ -45,7 +45,7 @@
             </b-input>
           </b-field>
           <div class="buttons" style="justify-content: right">
-            <b-button type="is-text" size="is-small">ลืมรหัสผ่าน</b-button>
+            <router-link to="/confirm-password"><b-button type="is-text" size="is-small">ลืมรหัสผ่าน</b-button></router-link>
           </div>
           <div class="fixedbuttons" style="justify-content: center">
             <router-link to="/home"><b-button rounded type="is-primary" size="is-medium" expanded>
