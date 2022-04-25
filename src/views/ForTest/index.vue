@@ -39,7 +39,7 @@
           <h2 style="margin-top: 0">INR</h2>
         </div>
         <div class="INRChart">
-          <GChart type="LineChart" :options="options" :data="chartData" @ready="onChartReady" />
+          <GChart type="LineChart" :options="options" :data="chartData" @ready="onChartReady"/>
         </div>
 
         <div class="media-content" style="margin-top: 12px">
@@ -273,8 +273,12 @@ export default {
       isCardModalActive2: false,
       data: [],
       chartData: [
-        ['date'],
-        ['','2'],
+        ['Weeks', 'Gold', 'Silver', 'Diamond'],
+        [1, 0, 5, 4],
+        [2, 2, 4, 3],
+        [3, 5, 4, 1],
+        [4, 1, 0, 4],
+        [5, 1, 5, 3],
       ],
       options: {
         // title: ''
@@ -282,6 +286,9 @@ export default {
         height: 300,
         curveType: 'function', // curve
         lineWidth: 4,
+        hAxis: {title: 'วันที่',  titleTextStyle: {color: '#333'}},
+        legend: { position: 'bottom' },
+        hAxis: {minValue: 0}
         // colors: ['#e0440e'],
       },
     };
@@ -319,4 +326,5 @@ export default {
   width: 100%;
   height: 15%;
 }
+
 </style>
