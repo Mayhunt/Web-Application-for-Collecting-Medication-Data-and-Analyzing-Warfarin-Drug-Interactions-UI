@@ -300,6 +300,7 @@ export default {
         height: 300,
         curveType: 'function', // curve
         lineWidth: 4,
+        legend: { position: 'bottom' },
         // colors: ['#e0440e'],
       },
     };
