@@ -99,6 +99,11 @@ const routes = [
     name: 'UpdateMe',
     component: () => import(/* webpackChunkName: "UpdateMe" */ '../views/UpdateMe/index.vue'),
   },
+  {
+    path: '/confirm-password',
+    name: 'ConfirmPassword',
+    component: () => import(/* webpackChunkName: "ConfirmPassword" */ '../views/ConfirmPassword/index.vue'),
+  },
 ];
 
 const router = new VueRouter({
