@@ -9,6 +9,7 @@ import router from './router';
 import store from './store';
 import 'buefy/dist/buefy.css';
 import 'vue-js-modal/dist/styles.css';
+import '../axios';
 
 Vue.use(Buefy);
 Vue.use(VModal);

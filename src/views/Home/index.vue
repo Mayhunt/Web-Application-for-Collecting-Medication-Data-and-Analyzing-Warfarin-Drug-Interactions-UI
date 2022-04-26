@@ -270,6 +270,7 @@
 <script>
 import { GChart } from 'vue-google-charts';
 import axios from 'axios';
+import { mapGetters } from 'vuex';
 export default {
   name: 'HomePage',
   components: {
@@ -303,6 +304,9 @@ export default {
         // colors: ['#e0440e'],
       },
     };
+  },
+  computed: {
+    ...mapGetters(['user']),
   },
   methods: {
     async addInr() {

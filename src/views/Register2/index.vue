@@ -64,19 +64,19 @@
             <b-input v-model="medication_condition" placeholder="Heart Disease" rounded> </b-input>
           </b-field>
           <b-field label="น้ำหนัก" label-position="on-border">
-            <b-input v-model="weight" placeholder="XX " rounded expanded> </b-input>
+            <b-input v-model.number="weight" placeholder="XX " rounded expanded> </b-input>
             <p class="control">
               <span class="button is-static is-rounded">กิโลกรัม</span>
             </p>
           </b-field>
           <b-field label="ส่วนสูง" label-position="on-border">
-            <b-input v-model="height" placeholder="XXX " rounded expanded> </b-input>
+            <b-input v-model.number="height" placeholder="XXX " rounded expanded> </b-input>
             <p class="control">
               <span class="button is-static is-rounded">เซนติเมตร </span>
             </p>
           </b-field>
           <b-field label="BMI" label-position="on-border">
-            <b-input v-model="calBMI" rounded disabled> </b-input>
+            <b-input v-model.number="calBMI" rounded disabled> </b-input>
           </b-field>
           <b-field label="เบอร์โทร" label-position="on-border">
             <b-input v-model="phone_num" placeholder="XXX-XXXXXXX" rounded> </b-input>
@@ -153,7 +153,7 @@ export default {
   computed: {
     calBMI() {
       const bmi = parseFloat(this.weight / (this.height / 100) ** 2).toFixed(2);
-      return bmi;
+      return Number(bmi);
       // if (isFinite(bmi) && bmi > 0) {
       //   return bmi;
       // } else {

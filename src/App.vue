@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import NavBar from './components/NavBar.vue';
 import Store from './store/index';
 
@@ -23,6 +24,10 @@ export default {
   Store,
   components: {
     NavBar,
+  },
+  async created() {
+    const response = await axios.get('http://localhost:8080/api/auth/me');
+    this.$store.dispatch('user', response.data);
   },
 };
 </script>
