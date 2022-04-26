@@ -17,7 +17,7 @@
         <div>
           <div class="content is-medium">
             <!-- <br> -->
-            <h1 style="margin-top: 0; text-align: center; margin-bottom: 0.25rem">
+            <h1 style="margin-top: 0; text-align: center; margin-bottom: 0.25rem; padding: 2rem">
               ยืนยันคำตอบเพื่อยืนยันตัวตน
             </h1>
             <p>กรุณาใส่คำตอบของคำถามที่ท่านได้เคยได้ตั้งไว้</p>
@@ -33,7 +33,7 @@
 
             <!-- <div class="buttons" style="justify-content: right"><b-button type="is-text" size="is-small">Forget Password</b-button></div> -->
             <div class="fixedbuttons" style="justify-content: center; margin-top: 2rem">
-              <b-button type="is-primary" size="is-medium" rounded expanded> ยืนยันคำตอบ</b-button>
+              <router-link to="/sign-in"><b-button type="is-primary" size="is-medium" rounded expanded> ยืนยันคำตอบ</b-button></router-link>
               <!-- <button class="button is-text">Register</button> -->
             </div>
           </form>
