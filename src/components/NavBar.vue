@@ -114,6 +114,9 @@ export default {
     });
   },
   methods: {
+    reloadPage() {
+      window.location.reload();
+    },
     // sendData(option) {
     //   this.$store.commit('setCaution', option.caution);
     // eslint-disable-next-line no-restricted-syntax

@@ -77,7 +77,7 @@ export default {
   },
   methods: {
     async addQuestion() {
-      const result = await axios.post('http://localhost:8080/question', {
+      const result = await axios.post('http://localhost:8080/api/question', {
         question: this.question,
         answer: this.answer,
       });

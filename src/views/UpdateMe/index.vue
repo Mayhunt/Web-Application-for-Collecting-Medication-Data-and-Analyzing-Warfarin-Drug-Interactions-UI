@@ -102,12 +102,30 @@
 </template>
 
 <script>
+import axios from 'axios';
+import { mapGetters } from 'vuex';
 import NavBar from '../../components/NavBar.vue';
 
 export default {
   name: 'UpdateMe',
   components: {
     NavBar,
+  },
+  data() {
+    return {
+      me: {},
+    };
+  },
+  mounted() {
+    axios
+      .get(`http://localhost:8080/api/auth/me/${this.$store.getters.user.id}`)
+      .then((response) => {
+        this.me = response.data;
+        console.log(response);
+      });
+  },
+  computed: {
+    ...mapGetters(['user']),
   },
 };
 </script>
