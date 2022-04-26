@@ -3,6 +3,7 @@
     class="hero is-white is-fullheight-with-navbar"
     style="border-radius: 60px 60px 0 0; margin-top: 1rem"
   >
+    <NavBar></NavBar>
     <div class="container" style="margin: 0 45px">
       <div class="content">
         <br />
@@ -23,7 +24,9 @@
           <br />
           <br />
           <strong><h3>ชื่อยาสามัญ</h3></strong>
-          <strong><h5>{{this.$store.getters.searchdrugs.genericName}}</h5></strong>
+          <strong
+            ><h5>{{ this.$store.getters.searchdrugs.genericName }}</h5></strong
+          >
           <hr />
           <div class="box" style="margin-top: 1rem; padding: 0rem">
             <b-field label="วันที่ได้รับยา" label-position="on-border">
@@ -85,9 +88,11 @@
           <div class="pb-5 pt-5"></div>
 
           <div class="fixedbuttons" style="justify-content: center">
-            <router-link to="/currently-drug"> <b-button rounded type="is-primary" size="is-medium" expanded>
-             บันทึก</b-button
-            ></router-link>
+            <router-link to="/currently-drug">
+              <b-button rounded type="is-primary" size="is-medium" expanded>
+                บันทึก</b-button
+              ></router-link
+            >
           </div>
         </div>
       </div>
@@ -96,8 +101,13 @@
 </template>
 
 <script>
+import NavBar from '../../components/NavBar.vue';
+
 export default {
   name: 'SaveDrug',
+  components: {
+    NavBar,
+  },
   data: () => ({
     isHide: false,
   }),

@@ -18,7 +18,7 @@
           <div class="content is-medium">
             <!-- <br> -->
             <h1 style="margin-top: 0; text-align: center; margin-bottom: 0.25rem">
-              ยืนยันคำตอบเพื่อกู้คืนรหัสผ่าน
+              ยืนยันคำตอบเพื่อยืนยันตัวตน
             </h1>
             <p>กรุณาใส่คำตอบของคำถามที่ท่านได้เคยได้ตั้งไว้</p>
             <!-- <h6 style="font-size:1rem; text-align:center">Welcome back you've been missed</h6> -->

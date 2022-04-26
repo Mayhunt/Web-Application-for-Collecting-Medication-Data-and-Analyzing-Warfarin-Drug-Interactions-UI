@@ -17,16 +17,27 @@
           :data="filteredDataArray"
           field="genericName"
           @select="(option) => (selected = option)"
-          style="padding-left: 5px"
+          style="padding-left: 1px"
         >
           <template #empty>No results found</template>
         </b-autocomplete>
+        <!-- infomation -->
+        <!-- <b-button type="is-primary" size="is-small" @click="isImageModalActive = true"  icon="alpha-i-circle-outline" /> -->
+        <!-- <b-navbar-item href="#">
+          <b-icon pack="mdi" size="is-small" icon="information" type="is-white" style="padding-rignt: 5px" @click="isImageModalActive = true"> </b-icon>
+        </b-navbar-item> -->
+        <b-modal v-model="isImageModalActive">
+          <p class="image is-1280x960">
+            <b-image :src="require('@/assets/i.png')" alt="i" :rounded="rounded"> </b-image>
+          </p>
+        </b-modal>
+        <!--  -->
       </b-navbar-item>
     </template>
     <template #start>
       <b-navbar-item href="#">
         <router-link to="/currently-drug">
-        <b-icon pack="mdi" icon="pill" type="is-primary" size="is-medium"> </b-icon>
+          <b-icon pack="mdi" icon="pill" type="is-primary" size="is-medium"> </b-icon>
           <span style="padding-left: 16px"></span><span>รายการยาที่ใช้ปัจจุบัน</span>
         </router-link>
       </b-navbar-item>
@@ -70,6 +81,7 @@
 <script>
 import axios from 'axios';
 import router from '../router/index';
+
 // import Store from '../store/index';
 
 export default {
@@ -80,6 +92,7 @@ export default {
       name: '',
       selected: '',
       // allData: [],
+      isImageModalActive: false,
     };
   },
   computed: {

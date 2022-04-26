@@ -3,6 +3,7 @@
     class="hero is-white is-fullheight-with-navbar"
     style="border-radius: 60px 60px 0 0; margin-top: 1rem"
   >
+    <NavBar></NavBar>
     <div class="container" style="margin: 0 50px">
       <div class="content">
         <br />
@@ -32,7 +33,8 @@
             </b-input>
           </b-field>
           <b-field label="สถานที่ได้รับ" label-position="on-border">
-            <b-input v-model="allergicDrug.place" placeholder="โรงพยาบาลจุฬาภรณ์" rounded> </b-input>
+            <b-input v-model="allergicDrug.place" placeholder="โรงพยาบาลจุฬาภรณ์" rounded>
+            </b-input>
           </b-field>
           <b-field label="บันทึกเพิ่มเติม" label-position="on-border">
             <b-input v-model="allergicDrug.more" placeholder="ตัวอย่าง มีผื่นแดงรอบปาก" rounded>
@@ -57,7 +59,7 @@
                 บันทึก</b-button
               ></router-link
             >
-            <br/>
+            <br />
 
             <router-link to="/allergic-drug"
               ><b-button
@@ -81,9 +83,13 @@
 
 <script>
 import axios from 'axios';
+import NavBar from '../../components/NavBar.vue';
 
 export default {
   name: 'SaveAllergic',
+  components: {
+    NavBar,
+  },
   data() {
     return {
       allergicDrug: {},

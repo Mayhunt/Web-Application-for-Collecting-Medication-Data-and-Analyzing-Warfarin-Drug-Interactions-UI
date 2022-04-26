@@ -3,6 +3,7 @@
     class="hero is-white is-fullheight-with-navbar"
     style="border-radius: 60px 60px 0 0; margin-top: 1rem"
   >
+  <NavBar></NavBar>
     <div class="container" style="margin: 0 45px">
       <div class="content">
         <br />
@@ -103,8 +104,13 @@
 </template>
 
 <script>
+import NavBar from '../../components/NavBar.vue';
+
 export default {
   name: 'EditDrugUsed',
+  components: {
+    NavBar,
+  },
   data: () => ({
     isHide: false,
   }),

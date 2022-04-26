@@ -3,7 +3,7 @@
     <section class="hero">
       <!-- Hero head: will stick at the top -->
       <div class="hero-head is-white">
-        <NavBar></NavBar>
+        <!-- <NavBar></NavBar> -->
       </div>
 
       <!-- Hero content: will be in the middle -->
@@ -15,15 +15,15 @@
 </template>
 
 <script>
-import NavBar from './components/NavBar.vue';
+// import NavBar from './components/NavBar.vue';
 import Store from './store/index';
 
 export default {
   name: 'App',
   Store,
-  components: {
-    NavBar,
-  },
+  // components: {
+  //   NavBar,
+  // },
 };
 </script>
 

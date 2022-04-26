@@ -3,6 +3,7 @@
     class="hero is-white is-fullheight-with-navbar"
     style="border-radius: 60px 60px 0 0; margin-top: 1rem"
   >
+  <NavBar></NavBar>
     <div class="container" style="margin: 0 50px">
       <div class="content">
         <br />
@@ -65,9 +66,13 @@
 
 <script>
 import axios from 'axios';
+import NavBar from '../../components/NavBar.vue';
 
 export default {
   name: 'SaveAllergic',
+  components: {
+    NavBar,
+  },
   data() {
     return {
       symptom: '',

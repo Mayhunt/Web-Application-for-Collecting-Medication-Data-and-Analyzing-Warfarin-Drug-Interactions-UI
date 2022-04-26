@@ -1,4 +1,6 @@
 <template>
+<section class="hero is-primary is-fullheight-with-navbar">
+    <NavBar></NavBar>
   <div style="background-color: rgb(121, 87, 213)">
     <b-collapse
       class="card"
@@ -262,6 +264,7 @@
       </div>
     </section>
   </div>
+</section>
 </template>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -270,10 +273,12 @@
 <script>
 import { GChart } from 'vue-google-charts';
 import axios from 'axios';
+import NavBar from '../../components/NavBar.vue';
 export default {
   name: 'HomePage',
   components: {
     GChart,
+    NavBar,
   },
   data() {
     return {

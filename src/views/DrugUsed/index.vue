@@ -1,5 +1,6 @@
 <template>
   <section class="hero is-primary is-fullheight-with-navbar">
+    <NavBar></NavBar>
     <div style="background-color: #f2effb; border-radius: 60px 60px 0 0; margin-top: 1rem">
       <div class="container" style="margin: 0 20px">
         <div class="content is-medium">
@@ -97,8 +98,13 @@
 </template>
 
 <script>
+import NavBar from '../../components/NavBar.vue';
+
 export default {
   name: 'drug-currenly',
+  components: {
+    NavBar,
+  },
   data: () => ({
     drugcurrently: [
       {
