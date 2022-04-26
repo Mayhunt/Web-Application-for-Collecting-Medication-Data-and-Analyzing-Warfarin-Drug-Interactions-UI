@@ -1,6 +1,5 @@
 <template>
 <section class="hero is-primary is-fullheight-with-navbar">
-    <NavBar></NavBar>
   <div style="background-color: #f2effb; border-radius: 60px 60px 0 0; margin-top: 1rem">
     <!-- <div style="background-color: rgb(121, 87, 213); max-height: 56px">
       <b-icon pack="fas" icon="arrow-left" size="is-medium" type="is-white" style="margin: 12px">
@@ -102,13 +101,9 @@
 </template>
 
 <script>
-import NavBar from '../../components/NavBar.vue';
 
 export default {
   name: 'UpdateMe',
-  components: {
-    NavBar,
-  },
 };
 </script>
 

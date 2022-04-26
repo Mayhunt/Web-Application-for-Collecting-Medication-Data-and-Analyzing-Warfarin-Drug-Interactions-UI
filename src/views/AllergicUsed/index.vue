@@ -1,6 +1,5 @@
 <template>
   <section class="hero is-primary is-fullheight-with-navbar">
-    <NavBar></NavBar>
     <div
       class="hero is-fullheight-with-navbar"
       style="background-color: #f2effb; border-radius: 60px 60px 0 0; margin-top: 1rem"
@@ -44,9 +43,11 @@
         <div class="pb-5 pt-5"></div>
         <div class="pb-5 pt-5"></div>
         <div class="fixedbutton">
-          <router-link to="/allergic-pic"><b-button class="mt-4" rounded type="is-primary" size="is-medium" expanded>
-             รูปใบแพ้ยา</b-button
-          ></router-link>
+          <router-link to="/allergic-pic"
+            ><b-button class="mt-4" rounded type="is-primary" size="is-medium" expanded>
+              รูปใบแพ้ยา</b-button
+            ></router-link
+          >
         </div>
       </div>
       <b-modal v-model="isCardModalActive" :width="640" scroll="keep">
@@ -73,7 +74,9 @@
                   <div class="content">
                     <br />
                     <strong><h5>ชื่อยาสามัญ</h5></strong>
-                    <strong><h5> {{this.details.genericName}} </h5></strong>
+                    <strong
+                      ><h5>{{ this.details.genericName }}</h5></strong
+                    >
                   </div>
                   <b-field label="อาการที่แพ้" label-position="on-border">
                     <b-input :value="this.details.symptom" Disabled> </b-input>
@@ -88,18 +91,39 @@
                     </b-input>
                   </b-field>
                   <b-field label="บันทึกเพิ่มเติม" label-position="on-border">
-                    <b-input :value="this.details.more" placeholder="ตัวอย่าง มีผื่นแดงรอบปาก" rounded Disabled>
+                    <b-input
+                      :value="this.details.more"
+                      placeholder="ตัวอย่าง มีผื่นแดงรอบปาก"
+                      rounded
+                      Disabled
+                    >
                     </b-input>
                   </b-field>
                 </div>
                 <div class="fixedbuttons" style="justify-content: center; margin-top: 2rem">
-                  <router-link to="/edit-allergic"><b-button @click="sendEditDrug()" type="is-primary" size="is-medium" rounded expanded>
-                    แก้ไขรายการยานี้</b-button
-                  ></router-link>
-                  <b-button @click="deleteDrug(); reloadPage()" type="is-danger" size="is-medium" rounded expanded>
-                    ลบรายการยานี้
-                    </b-button
+                  <router-link to="/edit-allergic"
+                    ><b-button
+                      @click="sendEditDrug()"
+                      type="is-primary"
+                      size="is-medium"
+                      rounded
+                      expanded
+                    >
+                      แก้ไขรายการยานี้</b-button
+                    ></router-link
                   >
+                  <b-button
+                    @click="
+                      deleteDrug();
+                      reloadPage();
+                    "
+                    type="is-danger"
+                    size="is-medium"
+                    rounded
+                    expanded
+                  >
+                    ลบรายการยานี้
+                  </b-button>
                 </div>
               </div>
             </section>
@@ -112,13 +136,9 @@
 
 <script>
 import axios from 'axios';
-import NavBar from '../../components/NavBar.vue';
 
 export default {
   name: 'AllergicAll',
-  components: {
-    NavBar,
-  },
   data: () => ({
     allergicDrug: [],
     isCardModalActive: false,

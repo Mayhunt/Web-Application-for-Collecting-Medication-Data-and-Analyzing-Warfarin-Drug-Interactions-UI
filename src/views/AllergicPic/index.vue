@@ -1,6 +1,5 @@
 <template>
   <section class="hero is-primary is-fullheight-with-navbar">
-    <NavBar></NavBar>
     <div
       class="hero is-fullheight-with-navbar"
       style="background-color: #f2effb; border-radius: 60px 60px 0 0; margin-top: 1rem"
@@ -85,13 +84,9 @@
 </template>
 
 <script>
-import NavBar from '../../components/NavBar.vue';
-
 export default {
   name: 'AllergicPage',
-  components: {
-    NavBar,
-  },
+
   data: () => ({
     allergics: [
       {
@@ -116,5 +111,8 @@ export default {
   background-color: #f2effb;
   width: 100%;
   height: 10%;
+}
+.hero .navbar {
+  background: rgb(121, 87, 213) !important;
 }
 </style>
