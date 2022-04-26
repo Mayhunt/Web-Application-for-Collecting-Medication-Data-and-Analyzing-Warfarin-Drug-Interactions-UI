@@ -17,7 +17,7 @@
         <div>
           <div class="content is-medium">
             <!-- <br> -->
-            <h1 style="margin-top: 0; text-align: center; margin-bottom: 0.25rem">
+            <h1 style="margin-top: 0; text-align: center; margin-bottom: 0.25rem; padding: 1rem">
               คำถามรักษาความปลอดภัย
             </h1>
             <p>
