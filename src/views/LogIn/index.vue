@@ -16,7 +16,6 @@
       >
         <div>
           <div class="content is-medium">
-            <!-- <br> -->
             <h1 style="margin-top: 0; text-align: center; margin-bottom: 0.25rem">Hello Again!</h1>
             <h6 style="font-size: 1rem; text-align: center">Welcome back you've been missed</h6>
           </div>
@@ -53,10 +52,10 @@
               <router-link to="/home"
                 ><b-button @click="logIn()" rounded type="is-primary" size="is-medium" expanded>
                   เข้าสู่ระบบ</b-button
-                ></router-link
-              >
+                ></router-link>
               <!-- <b-button @click="logIn()" rounded type="is-primary" size="is-medium" expanded>
-              เข้าสู่ระบบ</b-button> -->
+                เข้าสู่ระบบ</b-button
+              > -->
               <div class="buttons" style="justify-content: center">
                 <router-link to="/register1"
                   ><b-button type="is-text">ลงทะเบียนผู้ใช้ใหม่</b-button></router-link
@@ -72,17 +71,33 @@
 
 <script>
 import axios from 'axios';
+// import { mapActions } from 'vuex';
+// import login from '../../store/auth'
 
 export default {
   name: 'LogInPage',
+  data() {
+    return {
+      username: this.username,
+      password: this.password,
+    };
+  },
   methods: {
+    // ...mapActions({
+    //   logIn: 'auth/logIn',
+    // }),
+    // submit() {
+    //   this.logIn(this.form);
+    // },
     async logIn() {
       const result = await axios.post('http://localhost:8080/api/auth/sign-in', {
+        // console.log(result.data);
         username: this.username,
         password: this.password,
       });
-      localStorage.setItem('token', result.data.token);
+      localStorage.setItem('token', result.data.accessToken);
       this.$store.dispatch('user', result.data.user);
+      console.warn(localStorage.getItem('token'));
     },
   },
 };

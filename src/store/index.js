@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+// import auth from './auth';
 
 Vue.use(Vuex);
 
@@ -28,7 +29,7 @@ export default new Vuex.Store({
     setEditDrug(state, editdrug) {
       state.editdrug = editdrug;
     },
-    setUser(state, user) {
+    user(state, user) {
       state.user = user;
     },
     // setGenericName(state, genericname) {
@@ -52,6 +53,9 @@ export default new Vuex.Store({
     searchdrugs: (state) => state.searchdrugs,
     editdrug: (state) => state.editdrug,
     user: (state) => state.user,
+    // loggedIn(state) {
+    //   return state.user !== null;
+    // },
     // genericname: (state) => state.username,
     // caution: (state) => state.caution,
     // picdrug: (state) => state.picdrug,

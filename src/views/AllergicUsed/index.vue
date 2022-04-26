@@ -73,8 +73,6 @@
                     <br />
                     <strong><h5>ชื่อยาสามัญ</h5></strong>
                     <strong><h5> {{this.details.genericName}} </h5></strong>
-                    <!-- <strong><h5>บันทึกเพิ่มเติม</h5></strong>
-                    <h4> {{this.details.more}} </h4> -->
                   </div>
                   <b-field label="อาการที่แพ้" label-position="on-border">
                     <b-input :value="this.details.symptom" Disabled> </b-input>
@@ -99,7 +97,6 @@
                   ></router-link>
                   <b-button @click="deleteDrug(); reloadPage()" type="is-danger" size="is-medium" rounded expanded>
                     ลบรายการยานี้
-                    <!-- <router-link to="/edit-allergic">ลบรายการยานี้</router-link> -->
                     </b-button
                   >
                 </div>

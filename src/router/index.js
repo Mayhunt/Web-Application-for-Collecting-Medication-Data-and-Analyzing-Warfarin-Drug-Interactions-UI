@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+// import store from '../store';
 
 Vue.use(VueRouter);
 
@@ -106,5 +107,25 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
+
+// router.beforeEach((to, from, next) => {
+//   if (to.matched.some((record) => record.meta.requiresAuth)) {
+//     if (!store.getters.loggedIn) {
+//       next({
+//         name: 'Login ',
+//       });
+//     }
+//   }
+// });
+// router.beforeEach((to, from, next) => {
+//   if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
+//   else next()
+// })
+
+// router.beforeEach(async (to, from) => {
+//   // canUserAccess() returns `true` or `false`
+//   const canAccess = await canUserAccess(to);
+//   if (!canAccess) return '/login';
+// });
 
 export default router;

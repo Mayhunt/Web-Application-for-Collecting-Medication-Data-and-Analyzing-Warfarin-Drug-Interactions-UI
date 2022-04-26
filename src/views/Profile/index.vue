@@ -84,7 +84,7 @@
             <div class="fixedbutton" style="justify-content: center">
               <router-link to="update-me">
                 <b-button rounded type="is-primary is-light" size="is-medium" expanded
-                  >แก้ไข้ข้อมูล</b-button
+                  >แก้ไขข้อมูล</b-button
                 ></router-link
               >
             </div>
@@ -110,7 +110,6 @@ export default {
   mounted() {
     axios.get('http://localhost:8080/api/auth/me').then((response) => {
       this.me = response.data;
-      console.log(response);
     });
   },
 };

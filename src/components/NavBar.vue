@@ -57,7 +57,7 @@
       <b-navbar-item tag="div">
         <div class="buttons" style="justify-content: center">
           <b-button type="is-ghost">Privacy Statement</b-button>
-          <b-button @click="sendData" type="is-ghost">Terms of Use</b-button>
+          <b-button type="is-ghost">Terms of Use</b-button>
           <router-link to="/sign-in">
             <b-icon pack="mdi" icon="logout" type="is-primary" size="is-medium"></b-icon>
           </router-link>
@@ -101,25 +101,24 @@ export default {
     });
   },
   methods: {
-    sendData(option) {
-      this.$store.commit('setCaution', option.caution);
-      // eslint-disable-next-line no-restricted-syntax
-      // this.allData.forEach((item) => {
-      //   if (item.genericName === this.selected) {
-      //     console.warn(item.genericName);
-      //   }
-      // });
-
-      // (item in this.allData) {
-      //   if (item.genericName === this.selected) {
-      //     console.log(item.caution);
-      //   }
-      // }
-      // this.allData.forEach((item) => item.genericName === this.selected);
-      // return console.log(item.caution);
-      // this.$store.commit('setUsername', this.username);
-      // this.$store.commit('setPassword', this.password);
-    },
+    // sendData(option) {
+    //   this.$store.commit('setCaution', option.caution);
+    // eslint-disable-next-line no-restricted-syntax
+    // this.allData.forEach((item) => {
+    //   if (item.genericName === this.selected) {
+    //     console.warn(item.genericName);
+    //   }
+    // });
+    // (item in this.allData) {
+    //   if (item.genericName === this.selected) {
+    //     console.log(item.caution);
+    //   }
+    // }
+    // this.allData.forEach((item) => item.genericName === this.selected);
+    // return console.log(item.caution);
+    // this.$store.commit('setUsername', this.username);
+    // this.$store.commit('setPassword', this.password);
+    // },
   },
   watch: {
     // whenever question changes, this function will run

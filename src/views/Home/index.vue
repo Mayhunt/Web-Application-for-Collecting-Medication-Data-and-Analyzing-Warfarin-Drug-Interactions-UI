@@ -33,7 +33,6 @@
       style="border-radius: 60px 60px 0 0; margin-top: 1rem"
     >
       <div class="container" style="margin: 0 20px">
-        <!-- <div class="container"> -->
         <div class="content is-medium" style="font-family: 'Kanit'">
           <br />
           <h2 style="margin-top: 0">INR</h2>
@@ -97,10 +96,7 @@
             </b-table-column>
           </b-table>
         </div>
-        <!-- </div> -->
         <div class="buttons" style="justify-content: center,font-family: 'Kanit'">
-          <!-- <b-button rounded type="is-primary" size="is-medium" expanded>บันทึกค่า INR</b-button> -->
-          <!-- <div class="fixedbutton"> -->
 
           <b-button
             rounded
@@ -111,18 +107,6 @@
             expanded
             style="margin-top: 20px"
           />
-          <!-- <b-button
-              rounded
-              label="แก้ไขค่า INR"
-              type="is-danger"
-              size="is-medium"
-              @click="
-                isCardModalActive2 = true;
-                testData();
-              "
-              expanded
-            /> -->
-          <!-- </div> -->
           <!-- popup-add inr -->
           <b-modal v-model="isCardModalActive" :width="640" scroll="keep">
             <div class="card">
@@ -358,27 +342,6 @@ export default {
       this.chartData.addColumn('number', 'inrExpect');
       this.chartData.addColumn('number', 'inrMeasure');
       this.chartData.addRows(this.finalData);
-      // finalData=[]
-      // this.data.forEach(() => finalData.push([item.id,item.genericName]));
-      // console.warn(finalData)
-      // for (id in this.data) {
-      //   this.chartData.addRows(item.id,item.inrExpect,inrMeasure)
-      // }
-      // For each orgchart box, provide the name, manager, and tooltip to show.
-      // this.chartData.addRows([
-      //   [{v:'Mike', f:'Mike<div style="color:red; font-style:italic">President</div>'},
-      //   '', 'The President'],
-      //   [{v:'Jim', f:'Jim<div style="color:red; font-style:italic">Vice President</div>'},
-      //   'Mike', 'VP'],
-      //   ['Alice', 'Mike', ''],
-      //   ['Bob', 'Jim', 'Bob Sponge'],
-      //   ['Carol', 'Bob', '']
-      // ])
-
-      // Create the chart.
-      // var chart = new google.visualization.OrgChart(document.getElementById('tree'));
-      // // Draw the chart, setting the allowHtml option to true for the tooltips.
-      // chart.draw(this.chartData, {allowHtml:true});
     },
   },
   watch: {
@@ -395,7 +358,7 @@ export default {
     });
   },
 };
-// สร้าง vue.config.js แล้ว แต่ดึงมาไม่ได้
+
 </script>
 
 <style>
