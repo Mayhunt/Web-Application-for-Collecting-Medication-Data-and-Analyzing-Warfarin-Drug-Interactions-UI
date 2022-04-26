@@ -25,8 +25,8 @@
           <b-button type="is-white" size="is-meduim" @click="isImageModalActive = true"  icon-right="alpha-i-circle-outline" />
         </div>
         <b-modal v-model="isImageModalActive">
-          <p class="image is-1280x960">
-            <b-image :src="require('@/assets/i.png')" alt="i" :rounded="rounded"> </b-image>
+          <p class="image">
+            <b-image :src="require('@/assets/info.png')" alt="i" :rounded="rounded"> </b-image>
           </p>
         </b-modal>
 
