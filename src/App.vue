@@ -3,7 +3,7 @@
     <section class="hero">
       <!-- Hero head: will stick at the top -->
       <div class="hero-head is-white">
-        <!-- <NavBar></NavBar> -->
+        <NavBar></NavBar>
       </div>
 
       <!-- Hero content: will be in the middle -->
@@ -15,17 +15,16 @@
 </template>
 
 <script>
-// import NavBar from './components/NavBar.vue';
 // import axios from 'axios';
-// import NavBar from './components/NavBar.vue';
+import NavBar from './components/NavBar.vue';
 import Store from './store/index';
 
 export default {
   name: 'App',
   Store,
-  // components: {
-  //   NavBar,
-  // },
+  components: {
+    NavBar,
+  },
   // async created() {
   //   const response = await axios.get('http://localhost:8080/api/auth/me');
   //   this.$store.dispatch('user', response.data);
