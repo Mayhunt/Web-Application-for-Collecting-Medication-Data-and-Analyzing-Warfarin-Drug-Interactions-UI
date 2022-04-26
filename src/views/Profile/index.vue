@@ -13,7 +13,6 @@
         class="hero is-white is-fullheight"
         style="border-radius: 60px 60px 0 0; padding: 1rem"
       >
-        <NavBar></NavBar>
         <div>
           <!-- <div class="content is-medium">
                 <h1 style="margin-top:0; text-align:center; margin-bottom:0.25rem">Create Account</h1>
@@ -102,13 +101,9 @@
 <script>
 import axios from 'axios';
 import { mapGetters } from 'vuex';
-import NavBar from '../../components/NavBar.vue';
 
 export default {
   name: 'Profile',
-  components: {
-    NavBar,
-  },
   data: () => ({
     me: {},
   }),
