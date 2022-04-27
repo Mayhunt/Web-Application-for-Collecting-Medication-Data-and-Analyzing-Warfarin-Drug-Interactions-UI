@@ -7,6 +7,7 @@
         <b-image :src="require('@/assets/info.png')" alt="i" :rounded="rounded"> </b-image>
       </p>
     </b-modal>
+    <!--  -->
     <b-navbar :fixed-top="true">
       <template #brand>
         <b-navbar-item href="#">
@@ -29,14 +30,8 @@
             <template #empty>No results found</template>
           </b-autocomplete>
           <!-- infomation -->
-          <b-icon pack="fas" icon="info" type="is-black" @click.native="isImageModalActive = true">
+          <b-icon pack="fas" icon="info" type="is-grey-lighter" @click.native="isImageModalActive = true" style="padding-left: 5px">
           </b-icon>
-          <!-- b modal infomation picture -->
-          <!-- <b-modal v-model="isImageModalActive">
-          <p class="image">
-            <b-image :src="require('@/assets/info.png')" alt="i" :rounded="rounded"> </b-image>
-          </p>
-        </b-modal> -->
           <!--  -->
         </b-navbar-item>
       </template>
@@ -72,11 +67,10 @@
 
       <template #end>
         <b-navbar-item tag="div">
-          <div class="buttons" style="justify-content: center">
-            <b-button type="is-ghost">Privacy Statement</b-button>
-            <b-button type="is-ghost">Terms of Use</b-button>
+          <div class="buttons" style="justify-content: right; padding-right: 20px">
             <router-link to="/sign-in">
               <b-icon pack="mdi" icon="logout" type="is-primary" size="is-medium"></b-icon>
+              <span style="padding-right: 10px"></span><span>ออกจากระบบ</span>
             </router-link>
           </div>
         </b-navbar-item>
