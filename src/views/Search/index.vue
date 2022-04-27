@@ -21,13 +21,13 @@
         <div>
           <span class="is-size-3"><strong>ชื่อยาสามัญ</strong></span>
           <!-- <b-icon pack="mdi" icon="alpha-i-circle-outline" type="is-primary" @click="isImageModalActive = true"> </b-icon> -->
-          <b-button type="is-white" size="is-meduim" @click="isImageModalActive = true"  icon-right="alpha-i-circle-outline" />
+          <!-- <b-button type="is-white" size="is-meduim" @click="isImageModalActive = true"  icon-right="alpha-i-circle-outline" /> -->
         </div>
-        <b-modal v-model="isImageModalActive">
+        <!-- <b-modal v-model="isImageModalActive">
           <p class="image">
             <b-image :src="require('@/assets/info.png')" alt="i" :rounded="rounded"> </b-image>
           </p>
-        </b-modal>
+        </b-modal> -->
 
         {{this.$store.getters.searchdrugs.genericName}}
         <hr />
