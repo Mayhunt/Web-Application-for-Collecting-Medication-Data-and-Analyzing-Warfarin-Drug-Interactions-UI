@@ -3,9 +3,8 @@
     <section class="hero">
       <!-- Hero head: will stick at the top -->
       <div class="hero-head is-white">
-        <NavBar></NavBar>
+        <NavBar v-if="isLogin & isQuestion & isQuestion2 & isRegister1 & isRegister2 & isRegister3 & isConfirm" />
       </div>
-
       <!-- Hero content: will be in the middle -->
       <section class="hero is-primary is-fullheight-with-navbar">
         <router-view />
@@ -29,6 +28,29 @@ export default {
   //   const response = await axios.get('http://localhost:8080/api/auth/me');
   //   this.$store.dispatch('user', response.data);
   // },
+  computed: {
+    isLogin() {
+      return this.$route.name !== 'Login';
+    },
+    isQuestion() {
+      return this.$route.name !== 'Question';
+    },
+    isQuestion2() {
+      return this.$route.name !== 'Question2';
+    },
+    isRegister1() {
+      return this.$route.name !== 'Register1';
+    },
+    isRegister2() {
+      return this.$route.name !== 'Register2';
+    },
+    isRegister3() {
+      return this.$route.name !== 'Register3';
+    },
+    isConfirm() {
+      return this.$route.name !== 'ConfirmPassword';
+    },
+  },
 };
 </script>
 
