@@ -1,81 +1,88 @@
 /* eslint-disable no-restricted-syntax */
 <template>
-  <b-navbar :fixed-top="true">
-    <template #brand>
-      <b-navbar-item href="#">
-        <router-link to="/home">
-          <b-icon pack="fas" size="is-large" icon="home" type="is-white"> </b-icon>
-        </router-link>
-      </b-navbar-item>
-      <b-navbar-item>
-        <b-autocomplete
-          rounded
-          placeholder="ค้นหาด้วยชื่อยาสามัญ"
-          icon="magnify"
-          v-model="name"
-          clearable
-          :data="filteredDataArray"
-          field="genericName"
-          @select="(option) => (selected = option)"
-          style="padding-left: 1px"
-        >
-          <template #empty>No results found</template>
-        </b-autocomplete>
-        <!-- infomation -->
-        <!-- <b-button type="is-primary" size="is-small" @click="isImageModalActive = true"  icon="alpha-i-circle-outline" /> -->
-        <!-- <b-navbar-item href="#">
-          <b-icon pack="mdi" size="is-small" icon="information" type="is-white" style="padding-rignt: 5px" @click="isImageModalActive = true"> </b-icon>
-        </b-navbar-item> -->
-        <b-modal v-model="isImageModalActive">
-          <p class="image is-1280x960">
-            <b-image :src="require('@/assets/i.png')" alt="i" :rounded="rounded"> </b-image>
-          </p>
-        </b-modal>
-        <!--  -->
-      </b-navbar-item>
-    </template>
-    <template #start>
-      <b-navbar-item href="#">
-        <router-link to="/currently-drug">
-          <b-icon pack="mdi" icon="pill" type="is-primary" size="is-medium"> </b-icon>
-          <span style="padding-left: 16px"></span><span>รายการยาที่ใช้ปัจจุบัน</span>
-        </router-link>
-      </b-navbar-item>
-      <b-navbar-item>
-        <router-link to="/allergic-drug">
-          <b-icon pack="mdi" icon="exclamation" type="is-primary" size="is-medium"> </b-icon>
-          <span style="padding-left: 16px"></span><span>รายการยาที่แพ้</span>
-        </router-link>
-      </b-navbar-item>
-      <router-link to="/allergic-pic">
-      <b-navbar-item>
-          <b-icon pack="fas" icon="fa-solid fa-file-image" type="is-primary" size="is-medium">
-          </b-icon>
-          <span style="padding-left: 16px"></span><span>รูปภาพใบแพ้ยา</span>
-      </b-navbar-item>
-      </router-link>
-      <hr />
-      <router-link to="/me">
-        <b-navbar-item>
-          <b-icon pack="mdi" icon="account" type="is-primary" size="is-medium"> </b-icon>
-          <span style="padding-left: 16px"></span><span>ข้อมูลส่วนตัว</span>
-        </b-navbar-item>
-      </router-link>
-      <hr />
-    </template>
-
-    <template #end>
-      <b-navbar-item tag="div">
-        <div class="buttons" style="justify-content: center">
-          <b-button type="is-ghost">Privacy Statement</b-button>
-          <b-button type="is-ghost">Terms of Use</b-button>
-          <router-link to="/sign-in">
-            <b-icon pack="mdi" icon="logout" type="is-primary" size="is-medium"></b-icon>
+  <section>
+    <!-- b modal infomation picture -->
+    <b-modal v-model="isImageModalActive">
+      <p class="image">
+        <b-image :src="require('@/assets/info.png')" alt="i" :rounded="rounded"> </b-image>
+      </p>
+    </b-modal>
+    <b-navbar :fixed-top="true">
+      <template #brand>
+        <b-navbar-item href="#">
+          <router-link to="/home">
+            <b-icon pack="fas" size="is-large" icon="home" type="is-white"> </b-icon>
           </router-link>
-        </div>
-      </b-navbar-item>
-    </template>
-  </b-navbar>
+        </b-navbar-item>
+        <b-navbar-item>
+          <b-autocomplete
+            rounded
+            placeholder="ค้นหาด้วยชื่อยาสามัญ"
+            icon="magnify"
+            v-model="name"
+            clearable
+            :data="filteredDataArray"
+            field="genericName"
+            @select="(option) => (selected = option)"
+            style="padding-left: 1px"
+          >
+            <template #empty>No results found</template>
+          </b-autocomplete>
+          <!-- infomation -->
+          <b-icon pack="fas" icon="info" type="is-black" @click.native="isImageModalActive = true">
+          </b-icon>
+          <!-- b modal infomation picture -->
+          <!-- <b-modal v-model="isImageModalActive">
+          <p class="image">
+            <b-image :src="require('@/assets/info.png')" alt="i" :rounded="rounded"> </b-image>
+          </p>
+        </b-modal> -->
+          <!--  -->
+        </b-navbar-item>
+      </template>
+      <template #start>
+        <router-link to="/currently-drug">
+          <b-navbar-item href="#">
+            <b-icon pack="mdi" icon="pill" type="is-primary" size="is-medium"> </b-icon>
+            <span style="padding-left: 16px"></span><span>รายการยาที่ใช้ปัจจุบัน</span>
+          </b-navbar-item>
+        </router-link>
+        <router-link to="/allergic-drug">
+          <b-navbar-item>
+            <b-icon pack="mdi" icon="exclamation" type="is-primary" size="is-medium"> </b-icon>
+            <span style="padding-left: 16px"></span><span>รายการยาที่แพ้</span>
+          </b-navbar-item>
+        </router-link>
+        <router-link to="/allergic-pic">
+          <b-navbar-item>
+            <b-icon pack="fas" icon="fa-solid fa-file-image" type="is-primary" size="is-medium">
+            </b-icon>
+            <span style="padding-left: 16px"></span><span>รูปภาพใบแพ้ยา</span>
+          </b-navbar-item>
+        </router-link>
+        <hr />
+        <router-link to="/me">
+          <b-navbar-item>
+            <b-icon pack="mdi" icon="account" type="is-primary" size="is-medium"> </b-icon>
+            <span style="padding-left: 16px"></span><span>ข้อมูลส่วนตัว</span>
+          </b-navbar-item>
+        </router-link>
+        <hr />
+      </template>
+
+      <template #end>
+        <b-navbar-item tag="div">
+          <div class="buttons" style="justify-content: center">
+            <b-button type="is-ghost">Privacy Statement</b-button>
+            <b-button type="is-ghost">Terms of Use</b-button>
+            <router-link to="/sign-in">
+              <b-icon pack="mdi" icon="logout" type="is-primary" size="is-medium"></b-icon>
+            </router-link>
+          </div>
+        </b-navbar-item>
+      </template>
+    </b-navbar>
+  </section>
 </template>
 
 <script>
