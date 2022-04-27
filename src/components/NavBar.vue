@@ -47,20 +47,20 @@
           <span style="padding-left: 16px"></span><span>รายการยาที่แพ้</span>
         </router-link>
       </b-navbar-item>
+      <router-link to="/allergic-pic">
       <b-navbar-item>
-        <router-link to="/allergic-pic">
           <b-icon pack="fas" icon="fa-solid fa-file-image" type="is-primary" size="is-medium">
           </b-icon>
           <span style="padding-left: 16px"></span><span>รูปภาพใบแพ้ยา</span>
-        </router-link>
       </b-navbar-item>
+      </router-link>
       <hr />
-      <b-navbar-item>
-        <router-link to="/me">
+      <router-link to="/me">
+        <b-navbar-item>
           <b-icon pack="mdi" icon="account" type="is-primary" size="is-medium"> </b-icon>
           <span style="padding-left: 16px"></span><span>ข้อมูลส่วนตัว</span>
-        </router-link>
-      </b-navbar-item>
+        </b-navbar-item>
+      </router-link>
       <hr />
     </template>
 
