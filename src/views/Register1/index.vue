@@ -81,7 +81,7 @@
 import Store from '../../store/index';
 
 export default {
-  name: 'RegisterPage',
+  name: 'RegisterPage1',
   Store,
   data() {
     return {
