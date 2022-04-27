@@ -50,7 +50,7 @@
 import axios from 'axios';
 
 export default {
-  name: 'QuestionPage',
+  name: 'QuestionPage2',
   data() {
     return {
       hint: '',
