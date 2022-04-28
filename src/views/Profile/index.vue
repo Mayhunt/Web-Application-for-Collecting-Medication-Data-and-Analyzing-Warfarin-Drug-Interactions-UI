@@ -39,10 +39,13 @@
             </b-field>
             <b-field label="วันเกิด" label-position="on-border">
               <b-datepicker
+                :value="me.birthDate"
+                :locale="ES"
                 placeholder="กดเลือกวันเกิด"
                 icon="calendar-today"
                 rounded
                 trap-focus
+                disabled
               >
               </b-datepicker>
             </b-field>
@@ -85,7 +88,12 @@
             >
               <!-- <div class="fixedbutton" style="justify-content: center"> -->
               <router-link to="update-me">
-                <b-button @click="sendData()" rounded type="is-primary is-light" size="is-medium" expanded
+                <b-button
+                  @click="sendData()"
+                  rounded
+                  type="is-primary is-light"
+                  size="is-medium"
+                  expanded
                   >แก้ไขข้อมูล</b-button
                 ></router-link
               >
@@ -101,6 +109,7 @@
 <script>
 import axios from 'axios';
 import { mapGetters } from 'vuex';
+// import dayjs from 'dayjs';
 
 export default {
   name: 'Profile',
@@ -113,7 +122,8 @@ export default {
   mounted() {
     axios.get('http://localhost:8080/api/auth/me').then((response) => {
       this.me = response.data;
-      console.warn(this.user);
+      this.me.birthDate = new Date(this.me.birthDate);
+      console.warn(this.me.birthDate);
     });
   },
   methods: {
