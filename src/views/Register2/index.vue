@@ -35,16 +35,16 @@
           </figure>
         </div>
         <form class="box">
-          <b-field label="Name*" label-position="on-border">
-            <b-input v-model="first_name" placeholder="Name" rounded> </b-input>
+          <b-field label="ชื่อ*" label-position="on-border">
+            <b-input v-model="first_name" placeholder="ชื่อ" rounded> </b-input>
           </b-field>
-          <b-field label="Surname*" label-position="on-border">
-            <b-input v-model="last_name" placeholder="Surname" rounded> </b-input>
+          <b-field label="นามสกุล*" label-position="on-border">
+            <b-input v-model="last_name" placeholder="นามสกุล" rounded> </b-input>
           </b-field>
-          <b-field label="ID Number" label-position="on-border">
-            <b-input v-model="id_card_number" placeholder="X-XXXX-XXXXX-XX-X" rounded> </b-input>
+          <b-field label="เลขประจำตัวประชาชน" label-position="on-border">
+            <b-input v-model="id_card_number" placeholder="เลขประจำตัวประชาชน 13 หลัก" rounded> </b-input>
           </b-field>
-          <b-field label="Date of Birth" label-position="on-border">
+          <b-field label="วันเกิด" label-position="on-border">
             <b-datepicker
               v-model="selected_date"
               placeholder="Click to select..."
@@ -57,11 +57,11 @@
             >
             </b-datepicker>
           </b-field>
-          <b-field label="Blood Group" label-position="on-border">
+          <b-field label="หมู่เลือด" label-position="on-border">
             <b-input v-model="blood_group" placeholder="ตัวอย่าง B+" rounded> </b-input>
           </b-field>
           <b-field label="โรคประจำตัว" label-position="on-border">
-            <b-input v-model="medication_condition" placeholder="Heart Disease" rounded> </b-input>
+            <b-input v-model="medication_condition" placeholder="โรคหัวใจ,โรคเบาหวาน" rounded> </b-input>
           </b-field>
           <b-field label="น้ำหนัก" label-position="on-border">
             <b-input v-model.number="weight" placeholder="XX " rounded expanded> </b-input>
@@ -82,7 +82,7 @@
             <b-input v-model="phone_num" placeholder="XXX-XXXXXXX" rounded> </b-input>
           </b-field>
           <hr />
-          <h4>ผู้ติดต่อฉุกเฉิน : {{ $store.getters.username }}</h4>
+          <h4>ผู้ติดต่อฉุกเฉิน</h4>
           <br />
           <b-field label="ชื่อ" label-position="on-border">
             <b-input v-model="emergency_contact" placeholder="ชื่อ" rounded> </b-input>

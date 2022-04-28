@@ -65,7 +65,7 @@
           >
             <b-table-column
               field="date"
-              label="Date"
+              label="วันที่"
               :th-attrs="dateThAttrs"
               :td-attrs="columnTdAttrs"
               centered
@@ -78,7 +78,7 @@
 
             <b-table-column
               field="expectedINR"
-              label="Expected INR"
+              label="ค่า INR ที่คาดหวัง"
               :td-attrs="columnTdAttrs"
               centered
               v-slot="props"
@@ -88,7 +88,7 @@
 
             <b-table-column
               field="actualINR"
-              label="Actual INR"
+              label="ค่า INR ที่วัดได้"
               :td-attrs="columnTdAttrs"
               centered
               v-slot="props"
@@ -288,7 +288,7 @@ export default {
         curveType: 'function', // curve
         lineWidth: 4,
         legend: { position: 'bottom' },
-        // colors: ['#e0440e'],
+        // colors: ['#F1E065,#FF89E2'],
       },
     };
   },
@@ -342,8 +342,8 @@ export default {
       console.warn(this.finalData);
       this.chartData = new google.visualization.DataTable();
       this.chartData.addColumn('number', 'round');
-      this.chartData.addColumn('number', 'inrExpect');
-      this.chartData.addColumn('number', 'inrMeasure');
+      this.chartData.addColumn('number', 'ค่า INR ที่คาดหวัง');
+      this.chartData.addColumn('number', 'ค่า INR ที่วัดได้');
       this.chartData.addRows(this.finalData);
     },
   },

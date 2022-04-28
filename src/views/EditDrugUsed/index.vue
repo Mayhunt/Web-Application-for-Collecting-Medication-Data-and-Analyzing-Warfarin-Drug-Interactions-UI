@@ -3,7 +3,6 @@
     class="hero is-white is-fullheight-with-navbar"
     style="border-radius: 60px 60px 0 0; margin-top: 1rem"
   >
-  <NavBar></NavBar>
     <div class="container" style="margin: 0 45px">
       <div class="content">
         <br />
@@ -26,7 +25,7 @@
           <strong><h3>ชื่อยาสามัญ</h3></strong>
           <strong><h5>Bismuth subsalicylate tab 1048 mg</h5></strong>
           <hr />
-          <div class="box" style="margin-top: 1rem; padding: 0rem">
+          <div style="margin-top: 1rem; padding: 0rem">
             <b-field label="วันที่ได้รับยา" label-position="on-border">
               <b-datepicker
                 v-model="selectedDate"
@@ -43,6 +42,7 @@
             <b-field label="บันทึกเพิ่มเติม" label-position="on-border">
               <b-input v-model="more" placeholder="ตัวอย่าง มีผื่นแดงรอบปาก" rounded> </b-input>
             </b-field>
+            <hr />
           </div>
 
           <section>
@@ -52,7 +52,7 @@
                   >การตั้งแจ้งเตือนเวลาทานยา</b-switch
                 >
               </b-field>
-              <hr />
+
               <div v-if="isHide">
                 <b-field label="จำนวนยา" label-position="on-border">
                   <b-input v-model="tabs" placeholder=" 2 เม็ด" rounded> </b-input>
@@ -79,8 +79,9 @@
                 <b-field label="ทุกๆ">
                   <b-input placeholder="6 ชั่วโมง (ใส่แค่ตัวเลข)" rounded trap-focus></b-input>
                 </b-field>
-                <br/>
+                <br />
               </div>
+              <br/>
             </div>
           </section>
 
@@ -90,7 +91,7 @@
                 บันทึก</b-button
               ></router-link
             >
-            <br/>
+            <br />
             <router-link to="/currently-drug"
               ><b-button rounded type="is-danger is-light" size="is-medium" expanded>
                 ลบรายการยานี้</b-button
@@ -104,13 +105,8 @@
 </template>
 
 <script>
-import NavBar from '../../components/NavBar.vue';
-
 export default {
   name: 'EditDrugUsed',
-  components: {
-    NavBar,
-  },
   data: () => ({
     isHide: false,
   }),

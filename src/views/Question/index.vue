@@ -20,7 +20,7 @@
             <h1 style="margin-top: 0; text-align: center; margin-bottom: 0.25rem; padding: 1rem">
               คำถามรักษาความปลอดภัย
             </h1>
-            <p>
+            <p style="margin-top: 0; text-align: center; margin-bottom: 0.25rem; padding: 2rem">
               คำถามรักษาความปลอดภัยตั้งขึ้นเพื่อใช้ในการยืนยันตัวตนในกรณีที่ผู้ใช้งานลืมรหัสผ่านในการเข้าใช้งาน
             </p>
             <!-- <h6 style="font-size:1rem; text-align:center">Welcome back you've been missed</h6> -->
@@ -36,8 +36,11 @@
                 icon="question"
                 icon-pack="fas"
               >
-                <option value="question1">สุนัขตัวแรกชื่อว่าอะไร</option>
-                <option value="question2">บ้านเกิดของคุณชื่อ</option>
+                <option value="question1">สัตว์เลี้ยงตัวแรกชื่อว่าอะไร</option>
+                <option value="question2">บ้านเกิดของคุณคือที่ไหน</option>
+                <option value="question3">อาหารที่คุณชอบรับประทานที่สุดคือเมนูใด</option>
+                <option value="question4">เพื่อนสนิทของคุณชื่ออะไร</option>
+                <option value="question5">รถคันแรกของคุณสีอะไร</option>
               </b-select>
             </b-field>
             <b-field label="คำตอบ">

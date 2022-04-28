@@ -29,10 +29,10 @@
           <b-field label="คำใบ้">
             <b-input v-model="hint" rounded expanded placeholder="เพิ่มคำใบ้"></b-input>
           </b-field>
-          <p>ตัวอย่าง</p>
-          <p>คำถาม สุนัขตัวแรกชื่อว่าอะไร </p>
-          <p>คำตอบ บัวลอย</p>
-          <p>คำใบ้ ขนมไทยในน้ำกะทิ</p>
+          <p style="margin-left: 10px"><strong>ตัวอย่าง</strong></p>
+          <p style="margin-left: 20px">คำถาม สัตว์์เลี้ยงตัวแรกแรกชื่อว่าอะไร </p>
+          <p style="margin-left: 20px">คำตอบ บัวลอย</p>
+          <p style="margin-left: 20px">คำใบ้ ขนมไทยในน้ำกะทิ</p>
 
           <div class="fixedbuttons" style="justify-content: center; margin-top: 2rem">
             <router-link to="/register3"><b-button @click="addHint()" rounded type="is-primary" size="is-medium" expanded>
@@ -50,7 +50,7 @@
 import axios from 'axios';
 
 export default {
-  name: 'QuestionPage',
+  name: 'QuestionPage2',
   data() {
     return {
       hint: '',

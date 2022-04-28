@@ -27,7 +27,7 @@
             ><h5>{{ this.$store.getters.searchdrugs.genericName }}</h5></strong
           >
           <hr />
-          <div class="box" style="margin-top: 1rem; padding: 0rem">
+          <div style="margin-top: 1rem; padding: 0rem">
             <b-field label="วันที่ได้รับยา" label-position="on-border">
               <b-datepicker
                 v-model="selectedDate"
@@ -45,6 +45,7 @@
             <b-field label="บันทึกเพิ่มเติม" label-position="on-border">
               <b-input v-model="more" placeholder="ตัวอย่าง มีผื่นแดงรอบปาก" rounded> </b-input>
             </b-field>
+            <hr />
           </div>
 
           <section>
@@ -54,7 +55,7 @@
                   >การตั้งแจ้งเตือนเวลาทานยา</b-switch
                 >
               </b-field>
-              <hr />
+
               <div v-if="isHide">
                 <b-field label="จำนวนยา" label-position="on-border">
                   <b-input v-model="tabs" placeholder=" 2 เม็ด" rounded> </b-input>
@@ -100,7 +101,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'SaveDrug',
   data: () => ({
