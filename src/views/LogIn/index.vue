@@ -98,7 +98,7 @@ export default {
         password: this.password,
       });
       localStorage.setItem('token', result.data.accessToken);
-      this.$store.dispatch('user', result.data.user);
+      this.$store.dispatch('user', result.data);
       console.warn(localStorage.getItem('token'));
     },
   },

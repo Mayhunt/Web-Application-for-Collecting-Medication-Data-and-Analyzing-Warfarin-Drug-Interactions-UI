@@ -55,22 +55,23 @@
               <b-input v-model="me.bloodGroup" placeholder="B+" rounded> </b-input>
             </b-field>
             <b-field label="โรคประจำตัว" label-position="on-border">
-              <b-input v-model="me.medicationCondition" placeholder="Heart Disease" rounded> </b-input>
+              <b-input v-model="me.medicationCondition" placeholder="Heart Disease" rounded>
+              </b-input>
             </b-field>
             <b-field label="น้ำหนัก" label-position="on-border">
-              <b-input v-model="me.weight" placeholder="XX " rounded expanded> </b-input>
+              <b-input v-model.number="me.weight" placeholder="XX " rounded expanded> </b-input>
               <p class="control">
                 <span class="button is-static is-rounded">กิโลกรัม</span>
               </p>
             </b-field>
             <b-field label="ส่วนสูง" label-position="on-border">
-              <b-input v-model="me.height" placeholder="XXX " rounded expanded> </b-input>
+              <b-input v-model.number="me.height" placeholder="XXX " rounded expanded> </b-input>
               <p class="control">
                 <span class="button is-static is-rounded">เซนติเมตร</span>
               </p>
             </b-field>
             <b-field label="BMI" label-position="on-border">
-              <b-input v-model="calBMI" placeholder="ดัชนีมวลกาย" rounded disabled> </b-input>
+              <b-input v-model.number="calBMI" placeholder="ดัชนีมวลกาย" rounded disabled> </b-input>
             </b-field>
             <b-field label="เบอร์โทร" label-position="on-border">
               <b-input v-model="me.phoneNum" placeholder="XXX-XXXXXXX" rounded> </b-input>
@@ -90,7 +91,7 @@
             >
               <div class="fixedbuttons" style="justify-content: center">
                 <router-link to="me">
-                  <b-button rounded type="is-primary is-light" size="is-medium" expanded
+                  <b-button @click="updateProfile()" rounded type="is-primary is-light" size="is-medium" expanded
                     >บันทึก</b-button
                   ></router-link
                 >
@@ -115,23 +116,51 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'UpdateMe',
-  components: {
-  },
+  components: {},
   data() {
     return {
+      selectedDate: new Date(),
       me: {},
+      pic: '',
     };
   },
   mounted() {
-    axios
-      .get(`http://localhost:8080/api/auth/me/${this.$store.getters.user.id}`)
-      .then((response) => {
-        this.me = response.data;
-        console.log(response);
-      });
+    axios.get(`http://localhost:8080/api/auth/me?id=${this.$store.getters.id}`).then((response) => {
+      this.me = response.data;
+      console.log(response);
+    });
   },
   computed: {
     ...mapGetters(['user']),
+    calBMI() {
+      const bmi = parseFloat(this.me.weight / (this.me.height / 100) ** 2).toFixed(2);
+      return Number(bmi);
+    },
+  },
+  methods: {
+    async updateProfile() {
+      const result = await axios.patch(
+        `http://localhost:8080/api/auth/${this.$store.getters.id}/update`,
+        {
+          username: this.me.username,
+          password: this.me.password,
+          firstName: this.me.first_name,
+          lastName: this.me.last_name,
+          idCardNumber: this.me.id_card_number,
+          birthDate: this.selectedDate,
+          bloodGroup: this.me.blood_group,
+          medicationCondition: this.me.medication_condition,
+          weight: this.me.weight,
+          height: this.me.height,
+          bmi: this.me.calBMI,
+          phoneNum: this.me.phone_num,
+          emergencyContact: this.me.emergency_contact,
+          emergencyPhoneNum: this.me.emergency_phone_num,
+          pic: this.me.pic,
+        },
+      );
+      console.warn(result);
+    },
   },
 };
 </script>

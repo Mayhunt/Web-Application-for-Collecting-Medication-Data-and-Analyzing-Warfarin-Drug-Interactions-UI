@@ -85,7 +85,7 @@
             >
               <!-- <div class="fixedbutton" style="justify-content: center"> -->
               <router-link to="update-me">
-                <b-button rounded type="is-primary is-light" size="is-medium" expanded
+                <b-button @click="sendData()" rounded type="is-primary is-light" size="is-medium" expanded
                   >แก้ไขข้อมูล</b-button
                 ></router-link
               >
@@ -113,7 +113,13 @@ export default {
   mounted() {
     axios.get('http://localhost:8080/api/auth/me').then((response) => {
       this.me = response.data;
+      console.warn(this.user);
     });
+  },
+  methods: {
+    sendData() {
+      this.$store.commit('getId', this.me.id);
+    },
   },
 };
 </script>
