@@ -12,6 +12,7 @@
     "buefy": "^0.9.19",
     "chart.js": "^3.7.1",
     "core-js": "^3.6.5",
+    "dayjs": "^1.11.1",
     "google-fonts-webpack-plugin": "^0.4.4",
     "hchs-vue-charts": "^1.2.8",
     "lodash": "^4.17.21",
