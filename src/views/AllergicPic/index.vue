@@ -14,14 +14,10 @@
           v-for="(allergic, index) in allergics"
           :key="index"
           style="border-radius: 30px 30px 30px 30px"
+          @click="isImageModalActive = true"
         >
           <div>
-            <b-image
-              :src="require('@/assets/allergicpic2.png')"
-              alt="The Buefy Logo"
-              ratio="2by1"
-              :rounded="rounded"
-            >
+            <b-image :src="require('@/assets/allergicpic2.png')" alt="The Buefy Logo" ratio="2by1">
             </b-image>
           </div>
           <div class="pb-1 pt-1"></div>
@@ -36,6 +32,13 @@
             >ลบรูปใบแพ้ยา</b-button
           >
         </div>
+        <!-- pop up -->
+        <b-modal v-model="isImageModalActive">
+          <p class="image">
+            <b-image :src="require('@/assets/allergicpic2.png')" alt="i" :rounded="rounded"> </b-image>
+          </p>
+        </b-modal>
+        <!--  -->
         <div class="pb-5 pt-5"></div>
         <div class="pb-5 pt-5"></div>
         <!-- <div class="fixedbutton"> -->
@@ -65,7 +68,7 @@
                   <div class="buttons" style="justify-content: center; margin-top: 2rem">
                     <b-button
                       class="button"
-                      @click="isCardModalActive = false"
+                      @click="isCardModalActive = false, isImageModalActive = false"
                       type="is-danger"
                       size="is-medium"
                       rounded
@@ -97,6 +100,7 @@ export default {
       },
     ],
     isCardModalActive: false,
+    isImageModalActive: false,
   }),
 };
 </script>
