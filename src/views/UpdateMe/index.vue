@@ -32,30 +32,30 @@
             </figure>
           </div>
           <form class="box">
-            <b-field label="Name*" label-position="on-border">
-              <b-input v-model="me.firstName" placeholder="Name" rounded> </b-input>
+            <b-field label="=ชื่อ*" label-position="on-border">
+              <b-input v-model="me.firstName" placeholder="ชื่อ" rounded> </b-input>
             </b-field>
-            <b-field label="Surname*" label-position="on-border">
-              <b-input v-model="me.lastName" placeholder="Surname" rounded> </b-input>
+            <b-field label="นามสกุล*" label-position="on-border">
+              <b-input v-model="me.lastName" placeholder="นามสกุล" rounded> </b-input>
             </b-field>
-            <b-field label="ID Number" label-position="on-border">
-              <b-input v-model="me.idCardNumber" placeholder="X-XXXX-XXXXX-XX-X" rounded> </b-input>
+            <b-field label="เลขประจำตัวประชาชน" label-position="on-border">
+              <b-input v-model="me.idCardNumber" placeholder="เลขประจำตัวประชาชน 13 หลัก" rounded> </b-input>
             </b-field>
-            <b-field label="Date of Birth" label-position="on-border">
+            <b-field label="วันเกิด" label-position="on-border">
               <b-datepicker
                 v-model="selectedDate"
-                placeholder="Click to select..."
+                placeholder="กดเลือกวันเกิด"
                 icon="calendar-today"
                 rounded
                 trap-focus
               >
               </b-datepicker>
             </b-field>
-            <b-field label="Blood Type" label-position="on-border">
+            <b-field label="หมู่เลือด" label-position="on-border">
               <b-input v-model="me.bloodGroup" placeholder="B+" rounded> </b-input>
             </b-field>
             <b-field label="โรคประจำตัว" label-position="on-border">
-              <b-input v-model="me.medicationCondition" placeholder="Heart Disease" rounded> </b-input>
+              <b-input v-model="me.medicationCondition" placeholder="โรคหัวใจ,โรคเบาหวาน" rounded> </b-input>
             </b-field>
             <b-field label="น้ำหนัก" label-position="on-border">
               <b-input v-model="me.weight" placeholder="XX " rounded expanded> </b-input>

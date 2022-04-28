@@ -18,15 +18,15 @@
           <div class="content is-medium">
             <!-- <br> -->
             <h1 style="margin-top: 0; text-align: center; margin-bottom: 0.25rem">
-              Create Account
+              สร้างบัญชีผู้ใช้งาน
             </h1>
             <!-- <h6 style="font-size:1rem; text-align:center">Welcome back you've been missed</h6> -->
           </div>
           <form class="box">
-            <b-field label="Username">
+            <b-field label="ชื่อผู้ใช้">
               <b-input
                 v-model="username"
-                placeholder="Username"
+                placeholder="ชื่อผู้ใช้"
                 type="user"
                 icon="account-circle"
                 icon-clickable
@@ -35,10 +35,10 @@
               >
               </b-input>
             </b-field>
-            <b-field label="Password">
+            <b-field label="รหัสผ่าน">
               <b-input
                 v-model="password"
-                placeholder="Password"
+                placeholder="รหัสผ่าน"
                 type="password"
                 icon="lock-question"
                 icon-clickable

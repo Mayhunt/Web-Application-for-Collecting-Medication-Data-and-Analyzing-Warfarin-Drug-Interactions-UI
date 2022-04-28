@@ -28,25 +28,25 @@
             </figure>
           </div>
           <form class="box">
-            <b-field label="Name*" label-position="on-border">
+            <b-field label="ชื่อ*" label-position="on-border">
               <b-input :value="me.firstName" rounded disabled> </b-input>
             </b-field>
-            <b-field label="Surname*" label-position="on-border">
+            <b-field label="นามสกุล*" label-position="on-border">
               <b-input :value="me.lastName" rounded disabled> </b-input>
             </b-field>
-            <b-field label="ID Number" label-position="on-border">
+            <b-field label="เลขประจำตัวประชาชน" label-position="on-border">
               <b-input :value="me.idCardNumber" rounded disabled> </b-input>
             </b-field>
-            <b-field label="Date of Birth" label-position="on-border">
+            <b-field label="วันเกิด" label-position="on-border">
               <b-datepicker
-                placeholder="Click to select..."
+                placeholder="กดเลือกวันเกิด"
                 icon="calendar-today"
                 rounded
                 trap-focus
               >
               </b-datepicker>
             </b-field>
-            <b-field label="Blood Type" label-position="on-border">
+            <b-field label="หมู่เลือด" label-position="on-border">
               <b-input :value="me.bloodGroup" placeholder="B+" rounded disabled> </b-input>
             </b-field>
             <b-field label="โรคประจำตัว" label-position="on-border">
