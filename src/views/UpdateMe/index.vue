@@ -39,11 +39,13 @@
               <b-input v-model="me.lastName" placeholder="นามสกุล" rounded> </b-input>
             </b-field>
             <b-field label="เลขประจำตัวประชาชน" label-position="on-border">
-              <b-input v-model="me.idCardNumber" placeholder="เลขประจำตัวประชาชน 13 หลัก" rounded> </b-input>
+              <b-input v-model="me.idCardNumber" placeholder="เลขประจำตัวประชาชน 13 หลัก" rounded>
+              </b-input>
             </b-field>
             <b-field label="วันเกิด" label-position="on-border">
               <b-datepicker
-                v-model="selectedDate"
+                v-model="me.birthDate"
+                locale="es-ES"
                 placeholder="กดเลือกวันเกิด"
                 icon="calendar-today"
                 rounded
@@ -55,7 +57,8 @@
               <b-input v-model="me.bloodGroup" placeholder="B+" rounded> </b-input>
             </b-field>
             <b-field label="โรคประจำตัว" label-position="on-border">
-              <b-input v-model="me.medicationCondition" placeholder="โรคหัวใจ,โรคเบาหวาน" rounded> </b-input>
+              <b-input v-model="me.medicationCondition" placeholder="โรคหัวใจ,โรคเบาหวาน" rounded>
+              </b-input>
             </b-field>
             <b-field label="น้ำหนัก" label-position="on-border">
               <b-input v-model.number="me.weight" placeholder="XX " rounded expanded> </b-input>
@@ -70,16 +73,17 @@
               </p>
             </b-field>
             <b-field label="BMI" label-position="on-border">
-              <b-input v-model.number="calBMI" placeholder="ดัชนีมวลกาย" rounded disabled> </b-input>
+              <b-input v-model.number="calBMI" placeholder="ดัชนีมวลกาย" rounded disabled>
+              </b-input>
             </b-field>
             <b-field label="เบอร์โทร" label-position="on-border">
-              <b-input v-model="me.phoneNum" placeholder="XXX-XXXXXXX" rounded> </b-input>
+              <b-input v-model="me.birthDate" placeholder="XXX-XXXXXXX" rounded> </b-input>
             </b-field>
             <hr />
             <h4>ผู้ติดต่อฉุกเฉิน</h4>
             <br />
             <b-field label="ชื่อ" label-position="on-border">
-              <b-input v-model="me.emergencyContact" placeholder="ชื่อ" rounded> </b-input>
+              <b-input v-model="this.birthDate" placeholder="ชื่อ" rounded> </b-input>
             </b-field>
             <b-field label="เบอร์โทร" label-position="on-border">
               <b-input v-model="me.emergencyPhoneNum" placeholder="XXX-XXXXXXX" rounded> </b-input>
@@ -90,7 +94,12 @@
             >
               <div class="fixedbuttons" style="justify-content: center">
                 <router-link to="me">
-                  <b-button @click="updateProfile()" rounded type="is-primary is-light" size="is-medium" expanded
+                  <b-button
+                    @click="updateProfile()"
+                    rounded
+                    type="is-primary is-light"
+                    size="is-medium"
+                    expanded
                     >บันทึก</b-button
                   ></router-link
                 >
@@ -112,13 +121,15 @@
 <script>
 import axios from 'axios';
 import { mapGetters } from 'vuex';
+// import dayjs from 'dayjs';
 
 export default {
   name: 'UpdateMe',
   components: {},
   data() {
     return {
-      selectedDate: new Date(),
+      // selectedDate: 'Thu Apr 19 2022 11:47:31 GMT+0700 (Indochina Time)',
+      // // selectedDate: new Date(),
       me: {},
       pic: '',
     };
@@ -126,6 +137,7 @@ export default {
   mounted() {
     axios.get(`http://localhost:8080/api/auth/me?id=${this.$store.getters.id}`).then((response) => {
       this.me = response.data;
+      this.me.birthDate = new Date(this.me.birthDate);
       console.log(response);
     });
   },
@@ -134,6 +146,11 @@ export default {
     calBMI() {
       const bmi = parseFloat(this.me.weight / (this.me.height / 100) ** 2).toFixed(2);
       return Number(bmi);
+    },
+    sampleFormat() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.me.birthDate = new Date(this.me.birthDate);
+      return this.me.birthDate;
     },
   },
   methods: {
@@ -146,7 +163,7 @@ export default {
           firstName: this.me.first_name,
           lastName: this.me.last_name,
           idCardNumber: this.me.id_card_number,
-          birthDate: this.selectedDate,
+          birthDate: this.me.birthDate,
           bloodGroup: this.me.blood_group,
           medicationCondition: this.me.medication_condition,
           weight: this.me.weight,
