@@ -10,6 +10,7 @@ export default new Vuex.Store({
     password: '',
     editdrug: '',
     user: '',
+    id: '',
     // genericname: '',
     // caution: '',
     // picdrug: '',
@@ -32,6 +33,9 @@ export default new Vuex.Store({
     user(state, user) {
       state.user = user;
     },
+    getId(state, id) {
+      state.id = id;
+    },
     // setGenericName(state, genericname) {
     //   state.genericname = genericname;
     // },
@@ -53,6 +57,7 @@ export default new Vuex.Store({
     searchdrugs: (state) => state.searchdrugs,
     editdrug: (state) => state.editdrug,
     user: (state) => state.user,
+    id: (state) => state.id,
     // loggedIn(state) {
     //   return state.user !== null;
     // },

@@ -47,7 +47,8 @@
             <b-input v-model="last_name" placeholder="นามสกุล" rounded> </b-input>
           </b-field>
           <b-field label="เลขประจำตัวประชาชน" label-position="on-border">
-            <b-input v-model="id_card_number" placeholder="เลขประจำตัวประชาชน 13 หลัก" rounded> </b-input>
+            <b-input v-model="id_card_number" placeholder="เลขประจำตัวประชาชน 13 หลัก" rounded>
+            </b-input>
           </b-field>
           <b-field label="วันเกิด" label-position="on-border">
             <b-datepicker
@@ -66,7 +67,8 @@
             <b-input v-model="blood_group" placeholder="ตัวอย่าง B+" rounded> </b-input>
           </b-field>
           <b-field label="โรคประจำตัว" label-position="on-border">
-            <b-input v-model="medication_condition" placeholder="โรคหัวใจ,โรคเบาหวาน" rounded> </b-input>
+            <b-input v-model="medication_condition" placeholder="โรคหัวใจ,โรคเบาหวาน" rounded>
+            </b-input>
           </b-field>
           <b-field label="น้ำหนัก" label-position="on-border">
             <b-input v-model.number="weight" placeholder="XX " rounded expanded> </b-input>
@@ -99,9 +101,11 @@
             class="fixedbuttons"
             style="justify-content: center; margin-top: 2.5rem; margin-bottom: 4rem"
           >
-            <router-link to="/question"><b-button @click="addProfile()" rounded type="is-primary" size="is-medium" expanded>
-              ถัดไป</b-button
-            ></router-link>
+            <router-link to="/question"
+              ><b-button @click="addProfile()" rounded type="is-primary" size="is-medium" expanded>
+                ถัดไป</b-button
+              ></router-link
+            >
           </div>
         </form>
       </div>
@@ -111,6 +115,7 @@
 
 <script>
 import axios from 'axios';
+import dayjs from 'dayjs';
 import Store from '../../store/index';
 
 export default {
@@ -131,6 +136,7 @@ export default {
       emergency_contact: '',
       emergency_phone_num: '',
       pic: '',
+      modifyDate: dayjs(this.selected_date).toISOString(),
     };
   },
   methods: {
