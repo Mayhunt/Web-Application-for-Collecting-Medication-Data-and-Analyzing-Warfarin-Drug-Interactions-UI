@@ -21,7 +21,7 @@
           <!-- <div class="content is-medium">
                 <h1 style="margin-top:0; text-align:center; margin-bottom:0.25rem">Create Account</h1>
             </div> -->
-          <div class="media-body" style="padding-left: 115px">
+          <div class="media-body" align="center">
             <!-- <figure class="image is-128x128 ">
             <img center class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png" />
           </figure> -->
@@ -31,15 +31,22 @@
               </p>
             </figure>
           </div>
+          <!-- edit image icon -->
+          <div class="buttons" style="justify-content: center">
+            <b-button type="is-text" @click="isAddImage = true" icon-right="camera">แก้ไขรูปภาพ</b-button>
+          </div>
+          <!--  -->
+
           <form class="box">
-            <b-field label="=ชื่อ*" label-position="on-border">
+            <b-field label="ชื่อ*" label-position="on-border">
               <b-input v-model="me.firstName" placeholder="ชื่อ" rounded> </b-input>
             </b-field>
             <b-field label="นามสกุล*" label-position="on-border">
               <b-input v-model="me.lastName" placeholder="นามสกุล" rounded> </b-input>
             </b-field>
             <b-field label="เลขประจำตัวประชาชน" label-position="on-border">
-              <b-input v-model="me.idCardNumber" placeholder="เลขประจำตัวประชาชน 13 หลัก" rounded> </b-input>
+              <b-input v-model="me.idCardNumber" placeholder="เลขประจำตัวประชาชน 13 หลัก" rounded>
+              </b-input>
             </b-field>
             <b-field label="วันเกิด" label-position="on-border">
               <b-datepicker
@@ -55,7 +62,8 @@
               <b-input v-model="me.bloodGroup" placeholder="B+" rounded> </b-input>
             </b-field>
             <b-field label="โรคประจำตัว" label-position="on-border">
-              <b-input v-model="me.medicationCondition" placeholder="โรคหัวใจ,โรคเบาหวาน" rounded> </b-input>
+              <b-input v-model="me.medicationCondition" placeholder="โรคหัวใจ,โรคเบาหวาน" rounded>
+              </b-input>
             </b-field>
             <b-field label="น้ำหนัก" label-position="on-border">
               <b-input v-model="me.weight" placeholder="XX " rounded expanded> </b-input>
@@ -103,6 +111,51 @@
               </div>
             </div>
           </form>
+          <!-- popup add/remove image -->
+          <b-modal v-model="isAddImage" :width="640" scroll="keep">
+            <div class="card">
+              <div>
+                <section
+                  class="hero is-white"
+                  style="border-radius: 60px 60px 60px 60px; margin-top: 1rem; padding: 1rem"
+                >
+                  <div>
+                    <div class="content is-medium">
+                      <h4 style="margin-top: 0; text-align: center; margin-bottom: 0.25rem">
+                        แก้ไขรูปภาพประจำตัว
+                      </h4>
+                      <br />
+                      <div class="columns is-mobile is-centered">
+                        ท่านต้องการแก้ไขรูปภาพประจำตัว
+                      </div>
+                    </div>
+
+                    <div class="buttons" style="justify-content: center; margin-top: 2rem">
+                      <b-button
+                        class="button"
+                        @click="isAddImage = false"
+                        type="is-primary"
+                        size="is-medium"
+                        rounded
+                        expanded
+                        >เพิ่มรูปภาพ</b-button
+                      >
+                      <b-button
+                        class="button"
+                        @click="isAddImage = false"
+                        type="is-danger"
+                        size="is-medium"
+                        rounded
+                        expanded
+                        >ลบรูปภาพ</b-button
+                      >
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </b-modal>
+          <!--  -->
         </div>
       </section>
     </div>
@@ -115,10 +168,10 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'UpdateMe',
-  components: {
-  },
+  components: {},
   data() {
     return {
+      isAddImage: false,
       me: {},
     };
   },

@@ -29,11 +29,16 @@
         <!-- <div class="content is-medium">
                 <h1 style="margin-top:0; text-align:center; margin-bottom:0.25rem">Create Account</h1>
             </div> -->
-        <div class="media-body" style="padding-left: 115px">
+        <div class="media-body" align="center">
           <figure class="image is-128x128">
             <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png" />
           </figure>
         </div>
+         <!-- add image icon -->
+          <div class="buttons" style="justify-content: center">
+            <b-button type="is-text" @click="isAddImage = true" icon-right="camera">เพิ่มรูปภาพ</b-button>
+          </div>
+          <!--  -->
         <form class="box">
           <b-field label="ชื่อ*" label-position="on-border">
             <b-input v-model="first_name" placeholder="ชื่อ" rounded> </b-input>
@@ -113,6 +118,7 @@ export default {
   Store,
   data() {
     return {
+      isAddImage: false,
       weight: 0,
       height: 0,
       first_name: '',
