@@ -55,18 +55,75 @@
                   >การตั้งแจ้งเตือนเวลาทานยา</b-switch
                 >
               </b-field>
+              <br />
 
               <div v-if="isHide">
                 <b-field label="จำนวนยา" label-position="on-border">
-                  <b-input v-model="tabs" placeholder=" 2 เม็ด" rounded> </b-input>
+                  <b-input v-model.number="tabs" placeholder=" 2 เม็ด" rounded> </b-input>
                 </b-field>
-                <div class="buttons">
+                <b-field grouped position="is-center">
+                  <b-checkbox-button
+                    class="takes"
+                    v-model="takesGroup"
+                    native-value="before meal"
+                    type="is-primary is-light"
+                  >
+                    <span>ก่อนอาหาร</span>
+                  </b-checkbox-button>
+                  <b-checkbox-button
+                    class="takes"
+                    v-model="takesGroup"
+                    native-value="after meal"
+                    type="is-primary is-light"
+                  >
+                    <span>หลังอาหาร</span>
+                  </b-checkbox-button>
+                </b-field>
+                <!-- <div class="buttons">
                   <b-button rounded type="is-primary" outlined>ก่อนอาหาร</b-button>
                   <b-button rounded type="is-primary" outlined>หลังอาหาร</b-button>
-                </div>
+                </div> -->
                 <p>เวลา</p>
                 <div>
-                  <b-field>
+                  <b-field grouped group-multiline position="is-center">
+                    <b-checkbox-button
+                      class="choose"
+                      v-model="timeGroup"
+                      native-value="Breakfast"
+                      type="is-primary is-light"
+                    >
+                      <b-icon pack="mdi" icon="weather-partly-cloudy"></b-icon>
+                      <span>เช้า</span>
+                    </b-checkbox-button>
+                    <b-checkbox-button
+                      class="choose"
+                      v-model="timeGroup"
+                      native-value="Lunch"
+                      type="is-primary is-light"
+                    >
+                      <b-icon pack="mdi" icon="weather-sunny"></b-icon>
+                      <span>กลางวัน</span>
+                    </b-checkbox-button>
+                    <b-checkbox-button
+                      class="choose"
+                      v-model="timeGroup"
+                      native-value="Dinner"
+                      type="is-primary is-light"
+                    >
+                      <b-icon pack="mdi" icon="weather-night"></b-icon>
+                      <span>เย็น</span>
+                    </b-checkbox-button>
+                    <b-checkbox-button
+                      class="choose"
+                      v-model="timeGroup"
+                      native-value="Before Bed"
+                      type="is-primary is-light"
+                    >
+                      <b-icon pack="mdi" icon="bed"></b-icon>
+                      <span>ก่อนนอน</span>
+                    </b-checkbox-button>
+                  </b-field>
+                  <!-- <b-field>
                     <b-checkbox size="is-medium" :value="false"> เช้า </b-checkbox>
                   </b-field>
                   <b-field>
@@ -81,7 +138,8 @@
                 </div>
                 <b-field label="ทุกๆ">
                   <b-input placeholder="6 ชั่วโมง (ใส่แค่ตัวเลข)" rounded trap-focus></b-input>
-                </b-field>
+                </b-field> -->
+                </div>
               </div>
             </div>
           </section>
@@ -89,7 +147,7 @@
 
           <div class="fixedbuttons" style="justify-content: center">
             <router-link to="/currently-drug">
-              <b-button rounded type="is-primary" size="is-medium" expanded>
+              <b-button @click="addCurrentlyDrug()" rounded type="is-primary" size="is-medium" expanded>
                 บันทึก</b-button
               ></router-link
             >
@@ -101,16 +159,55 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'SaveDrug',
   data: () => ({
     isHide: false,
+    selectedDate: new Date(),
+    receive_place: '',
+    more: '',
+    tabs: Number(),
+    takesGroup: [],
+    timeGroup: [],
   }),
+  methods: {
+    async addCurrentlyDrug() {
+      await axios.post('http://localhost:8080/api/currently-drug', {
+        drugId: this.$store.getters.searchdrugs.id,
+        receiveDate: this.selectedDate,
+        receivePlace: this.receive_place,
+        more: this.more,
+        alertStatus: this.isHide,
+      });
+      console.warn(this.timeGroup);
+      if (this.isHide === true) {
+        const result2 = await axios.post('http://localhost:8080/api/drug-alert', {
+          tabs: this.tabs,
+          take: this.takesGroup[0],
+          time: this.timeGroup[0],
+        });
+        console.warn(result2);
+      }
+    },
+  },
 };
 </script>
 
 <style>
 .option {
   font-family: 'Kanit';
+}
+.choose {
+  /* margin-left: 10px; */
+  width: 135px;
+}
+.takes {
+  /* margin-left: 10px; */
+  width: 140px;
+}
+.control-label {
+  font-size: large;
 }
 </style>

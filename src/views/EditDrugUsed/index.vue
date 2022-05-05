@@ -23,12 +23,14 @@
           <br />
           <br />
           <strong><h3>ชื่อยาสามัญ</h3></strong>
-          <strong><h5>Bismuth subsalicylate tab 1048 mg</h5></strong>
+          <strong
+            ><h5>{{ currentlyDrug.genericName }}</h5></strong
+          >
           <hr />
           <div style="margin-top: 1rem; padding: 0rem">
             <b-field label="วันที่ได้รับยา" label-position="on-border">
               <b-datepicker
-                v-model="selectedDate"
+                v-model="currentlyDrug.receiveDate"
                 placeholder="Click to select..."
                 icon="calendar-today"
                 rounded
@@ -37,10 +39,12 @@
               </b-datepicker>
             </b-field>
             <b-field label="สถานที่ได้รับ" label-position="on-border">
-              <b-input v-model="receive_place" placeholder="XXXXXXXXX" rounded> </b-input>
+              <b-input v-model="currentlyDrug.receivePlace" placeholder="XXXXXXXXX" rounded>
+              </b-input>
             </b-field>
             <b-field label="บันทึกเพิ่มเติม" label-position="on-border">
-              <b-input v-model="more" placeholder="ตัวอย่าง มีผื่นแดงรอบปาก" rounded> </b-input>
+              <b-input v-model="currentlyDrug.more" placeholder="ตัวอย่าง มีผื่นแดงรอบปาก" rounded>
+              </b-input>
             </b-field>
             <hr />
           </div>
@@ -55,45 +59,85 @@
 
               <div v-if="isHide">
                 <b-field label="จำนวนยา" label-position="on-border">
-                  <b-input v-model="tabs" placeholder=" 2 เม็ด" rounded> </b-input>
+                  <b-input v-model.number="drugAlert.tabs" placeholder=" 2 เม็ด" rounded> </b-input>
                 </b-field>
-                <div class="buttons">
-                  <b-button rounded type="is-primary" outlined>ก่อนอาหาร</b-button>
-                  <b-button rounded type="is-primary" outlined>หลังอาหาร</b-button>
-                </div>
+                <b-field grouped position="is-center">
+                  <b-checkbox-button
+                    class="takes"
+                    v-model="takesGroup"
+                    native-value="before meal"
+                    type="is-primary is-light"
+                  >
+                    <span>ก่อนอาหาร</span>
+                  </b-checkbox-button>
+                  <b-checkbox-button
+                    class="takes"
+                    v-model="takesGroup"
+                    native-value="after meal"
+                    type="is-primary is-light"
+                  >
+                    <span>หลังอาหาร</span>
+                  </b-checkbox-button>
+                </b-field>
                 <p>เวลา</p>
                 <div>
-                  <b-field>
-                    <b-checkbox size="is-medium" :value="false"> เช้า </b-checkbox>
-                  </b-field>
-                  <b-field>
-                    <b-checkbox size="is-medium" :value="false"> กลางวัน </b-checkbox>
-                  </b-field>
-                  <b-field>
-                    <b-checkbox size="is-medium" :value="false"> เย็น </b-checkbox>
-                  </b-field>
-                  <b-field>
-                    <b-checkbox size="is-medium" :value="false"> ก่อนนอน</b-checkbox>
+                  <b-field grouped group-multiline position="is-center">
+                    <b-checkbox-button
+                      class="choose"
+                      v-model="timeGroup"
+                      native-value="Breakfast"
+                      type="is-primary is-light"
+                    >
+                      <b-icon pack="mdi" icon="weather-partly-cloudy"></b-icon>
+                      <span>เช้า</span>
+                    </b-checkbox-button>
+                    <b-checkbox-button
+                      class="choose"
+                      v-model="timeGroup"
+                      native-value="Lunch"
+                      type="is-primary is-light"
+                    >
+                      <b-icon pack="mdi" icon="weather-sunny"></b-icon>
+                      <span>กลางวัน</span>
+                    </b-checkbox-button>
+                    <b-checkbox-button
+                      class="choose"
+                      v-model="timeGroup"
+                      native-value="Dinner"
+                      type="is-primary is-light"
+                    >
+                      <b-icon pack="mdi" icon="weather-night"></b-icon>
+                      <span>เย็น</span>
+                    </b-checkbox-button>
+                    <b-checkbox-button
+                      class="choose"
+                      v-model="timeGroup"
+                      native-value="Before Bed"
+                      type="is-primary is-light"
+                    >
+                      <b-icon pack="mdi" icon="bed"></b-icon>
+                      <span>ก่อนนอน</span>
+                    </b-checkbox-button>
                   </b-field>
                 </div>
-                <b-field label="ทุกๆ">
+                <!-- <b-field label="ทุกๆ">
                   <b-input placeholder="6 ชั่วโมง (ใส่แค่ตัวเลข)" rounded trap-focus></b-input>
-                </b-field>
+                </b-field> -->
                 <br />
               </div>
-              <br/>
+              <br />
             </div>
           </section>
 
           <div class="fixedbuttons" style="justify-content: center">
             <router-link to="/currently-drug"
-              ><b-button rounded type="is-primary is-light" size="is-medium" expanded>
+              ><b-button @click="updateDrug()" type="is-primary is-light" size="is-medium" expanded>
                 บันทึก</b-button
               ></router-link
             >
             <br />
             <router-link to="/currently-drug"
-              ><b-button rounded type="is-danger is-light" size="is-medium" expanded>
+              ><b-button @click="deleteDrug();" type="is-danger is-light" size="is-medium" expanded>
                 ลบรายการยานี้</b-button
               ></router-link
             >
@@ -105,11 +149,81 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'EditDrugUsed',
   data: () => ({
     isHide: false,
+    currentlyDrug: {},
+    drugAlert: [],
+    takesGroup: [],
+    timeGroup: [],
   }),
+  mounted() {
+    axios
+      .get(`http://localhost:8080/api/currently-drug/${this.$store.getters.editdrug}`)
+      .then((response) => {
+        this.currentlyDrug = response.data;
+        this.currentlyDrug.receiveDate = new Date(this.currentlyDrug.receiveDate);
+        this.isHide = this.currentlyDrug.alertStatus;
+        console.log(this.currentlyDrug.receiveDate);
+      });
+    if (this.currentlyDrug.alertStatus !== false) {
+      axios.get('http://localhost:8080/api/drug-alert/').then((response) => {
+        // eslint-disable-next-line prefer-destructuring
+        this.drugAlert = response.data[0];
+        // this.drugAlert = this.drugAlert[0];
+        this.takesGroup = [this.drugAlert.take];
+        this.timeGroup = [this.drugAlert.time];
+        console.log(this.drugAlert);
+      });
+    }
+  },
+  methods: {
+    async updateDrug() {
+      const result = await axios.patch(
+        `http://localhost:8080/api/currently-drug/${this.currentlyDrug.id}/update`,
+        {
+          more: this.currentlyDrug.more,
+          receiveDate: this.currentlyDrug.receiveDate,
+          receivePlace: this.currentlyDrug.receivePlace,
+          alertStatus: this.isHide,
+        },
+      );
+      console.warn(result);
+      if (this.isHide === true) {
+        const result2 = await axios.patch(
+          `http://localhost:8080/api/drug-alert/${this.drugAlert.id}/update`,
+          {
+            tabs: this.drugAlert.tabs,
+            take: this.takesGroup[0],
+            time: this.timeGroup[0],
+          },
+        );
+        console.warn(result2);
+      }
+      const result2 = await axios.patch(
+        `http://localhost:8080/api/drug-alert/${this.drugAlert.id}/update`,
+        {
+          tabs: null,
+          take: null,
+          time: null,
+        },
+      );
+      console.warn(result2);
+    },
+    async deleteDrug() {
+      const result = await axios.delete(
+        `http://localhost:8080/api/currently-drug/${this.currentlyDrug.id}/delete`,
+        {},
+      );
+      console.warn(result);
+    },
+    reloadPage() {
+      window.location.reload();
+    },
+  },
 };
 </script>
 

@@ -24,13 +24,20 @@
             clearable
             :data="filteredDataArray"
             field="genericName"
-            @select="(option) => (selected = option)"
+            @select="option => (selected = option, searchDrug())"
+            confirm-keys="Select"
             style="padding-left: 1px"
           >
             <template #empty>No results found</template>
           </b-autocomplete>
           <!-- infomation -->
-          <b-icon pack="fas" icon="info" type="is-grey-lighter" @click.native="isImageModalActive = true" style="padding-left: 5px">
+          <b-icon
+            pack="fas"
+            icon="info"
+            type="is-grey-lighter"
+            @click.native="isImageModalActive = true"
+            style="padding-left: 5px"
+          >
           </b-icon>
           <!--  -->
         </b-navbar-item>
@@ -91,7 +98,7 @@ export default {
     return {
       data: [],
       name: '',
-      selected: '',
+      selected: 'Bisacodyl',
       // allData: [],
       isImageModalActive: false,
     };
@@ -100,9 +107,7 @@ export default {
     filteredDataArray() {
       // eslint-disable-next-line arrow-body-style
       return this.data.filter((option) => {
-        // console.warn(this.selected);
         return option.genericName.toString().toLowerCase().indexOf(this.name.toLowerCase()) >= 0;
-        // this.sendData(option);
       });
     },
   },
@@ -111,39 +116,46 @@ export default {
       this.data = response.data;
       // this.allData = data.data;
       // data.data.forEach((item) => this.data.push(item.genericName));
-      console.warn(this.selected);
     });
   },
   methods: {
-    reloadPage() {
-      window.location.reload();
-    },
-    // sendData(option) {
-    //   this.$store.commit('setCaution', option.caution);
-    // eslint-disable-next-line no-restricted-syntax
-    // this.allData.forEach((item) => {
-    //   if (item.genericName === this.selected) {
-    //     console.warn(item.genericName);
-    //   }
-    // });
-    // (item in this.allData) {
-    //   if (item.genericName === this.selected) {
-    //     console.log(item.caution);
-    //   }
-    // }
-    // this.allData.forEach((item) => item.genericName === this.selected);
-    // return console.log(item.caution);
-    // this.$store.commit('setUsername', this.username);
-    // this.$store.commit('setPassword', this.password);
-    // },
-  },
-  watch: {
-    // whenever question changes, this function will run
-    selected() {
+    searchDrug() {
       console.warn(this.selected);
-      router.push({ name: 'Search' });
-      this.$store.commit('setsearchdrugs', this.selected);
+      if (this.selected != null) {
+        router.push({ name: 'Search' });
+        this.$store.commit('setsearchdrugs', this.selected);
+      }
     },
   },
+  // reloadPage() {
+  //   window.location.reload();
+  // },
+  // sendData(option) {
+  //   this.$store.commit('setCaution', option.caution);
+  // eslint-disable-next-line no-restricted-syntax
+  // this.allData.forEach((item) => {
+  //   if (item.genericName === this.selected) {
+  //     console.warn(item.genericName);
+  //   }
+  // });
+  // (item in this.allData) {
+  //   if (item.genericName === this.selected) {
+  //     console.log(item.caution);
+  //   }
+  // }
+  // this.allData.forEach((item) => item.genericName === this.selected);
+  // return console.log(item.caution);
+  // this.$store.commit('setUsername', this.username);
+  // this.$store.commit('setPassword', this.password);
+  // },
+
+  // watch: {
+  //   // whenever question changes, this function will run
+  //   selected() {
+  //     console.warn(this.selected);
+  //     router.push({ name: 'Search' });
+  //     this.$store.commit('setsearchdrugs', this.selected);
+  //   },
+  // },
 };
 </script>

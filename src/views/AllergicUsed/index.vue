@@ -147,7 +147,7 @@ export default {
   mounted() {
     axios.get('http://localhost:8080/api/allergic-drug').then((response) => {
       this.allergicDrug = response.data;
-      console.log(response);
+      console.log(response.data);
     });
   },
   methods: {

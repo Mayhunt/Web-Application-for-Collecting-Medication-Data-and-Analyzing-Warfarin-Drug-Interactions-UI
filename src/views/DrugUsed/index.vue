@@ -8,8 +8,11 @@
         </div>
         <div
           class="box is-clickable"
-          @click="isCardModalActive = true"
-          v-for="(Currenly, index) in drugcurrently"
+          @click="
+            isCardModalActive = true;
+            sendData(Currently);
+          "
+          v-for="(Currently, index) in drugcurrently"
           :key="index"
           style="border-radius: 30px 30px 30px 30px"
         >
@@ -24,11 +27,11 @@
                 <p>
                   <strong>ชื่อยาสามัญ</strong>
                   <br />
-                  xxxxxxx
+                  {{ Currently.genericName }}
                   <br />
                   <strong>บันทึกเพิ่มเติม</strong>
                   <br />
-                  xxxxxxx
+                  {{ Currently.more }}
                 </p>
               </div>
             </div>
@@ -59,16 +62,29 @@
                   <div class="content">
                     <br />
                     <strong><h5>ชื่อยาสามัญ</h5></strong>
-                    <strong><h5>Bismuth subsalicylate tab 1048 mg</h5></strong>
+                    <strong><h5>{{ this.details.genericName }}</h5></strong>
                     <strong><h5>บันทึกเพิ่มเติม</h5></strong>
-                    <h4>xxxxxxx</h4>
+                    <h4>{{ this.details.more }}</h4>
                   </div>
+                  <b-field label="วันเกิด" label-position="on-border">
+              <b-datepicker
+                :value="new Date(this.details.receiveDate)"
+                :locale="ES"
+                placeholder="กดเลือกวันที่ได้รับยา"
+                icon="calendar-today"
+                rounded
+                trap-focus
+                disabled
+              >
+              </b-datepicker>
+                  </b-field>
+            <!-- </b-field>
                   <b-field label="วันที่ได้รับยา" label-position="on-border">
                     <b-input placeholder="" rounded Disabled> </b-input>
-                  </b-field>
+                  </b-field> -->
                   <b-field label="สถานที่ได้รับ" label-position="on-border">
                     <b-input
-                      v-model="receive_place"
+                      :value= this.details.receivePlace
                       placeholder="ตัวอย่าง โรงพยาบาลจุฬาภรณ์"
                       Disabled
                       rounded
@@ -82,7 +98,7 @@
                 </div>
                 <div class="fixedbutton" style="justify-content: center; margin-top: 2rem">
                   <router-link to="/edit-drugused">
-                    <b-button class="button" type="is-danger" size="is-medium" rounded expanded>
+                    <b-button @click="sendEditDrug()" class="button" type="is-danger" size="is-medium" rounded expanded>
                       แก้ไขรายการยานี้</b-button
                     >
                   </router-link>
@@ -97,32 +113,40 @@
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
   name: 'drug-currenly',
   data: () => ({
-    drugcurrently: [
-      {
-        imgURL: '',
-      },
-      {
-        imgURL: '',
-      },
-      {
-        imgURL: '',
-      },
-      {
-        imgURL: '',
-      },
-      {
-        imgURL: '',
-      },
-      {
-        imgURL: '',
-      },
-    ],
+    details: {},
+    drugcurrently: [],
     isCardModalActive: false,
   }),
+  mounted() {
+    axios.get('http://localhost:8080/api/currently-drug').then((response) => {
+      this.drugcurrently = response.data;
+      this.drugcurrently.receiveDate = new Date(this.drugcurrently.receiveDate);
+      console.log(this.drugcurrently);
+    });
+  },
+  methods: {
+    sendData(detail) {
+      this.details = detail;
+      return this.details;
+    },
+    sendEditDrug() {
+      this.$store.commit('setEditDrug', this.details.id);
+    },
+    async deleteDrug() {
+      const result = await axios.delete(
+        `http://localhost:8080/api/allergic-drug/${this.details.id}/delete`,
+      );
+      console.warn(result);
+    },
+    reloadPage() {
+      window.location.reload();
+    },
+  },
 };
 </script>
 
