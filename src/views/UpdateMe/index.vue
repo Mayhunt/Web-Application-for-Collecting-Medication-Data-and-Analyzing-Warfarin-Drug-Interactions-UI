@@ -32,9 +32,21 @@
             </figure>
           </div>
           <!-- edit image icon -->
-          <div class="buttons" style="justify-content: center">
-            <b-button type="is-text" @click="isAddImage = true" icon-right="camera">แก้ไขรูปภาพ</b-button>
-          </div>
+          <b-field
+            class="file is-white"
+            :class="{ 'has-name': !!file }"
+            style="justify-content: center"
+          >
+            <b-upload v-model="file" class="file-label" rounded>
+              <span class="file-cta">
+                <b-icon class="file-icon" icon="camera"></b-icon>
+                <span class="file-label">แก้ไขรูปภาพ</span>
+              </span>
+              <span class="file-name" v-if="file">
+                {{ file.name }}
+              </span>
+            </b-upload>
+          </b-field>
           <!--  -->
 
           <form class="box">
@@ -179,7 +191,7 @@ export default {
   components: {},
   data() {
     return {
-      isAddImage: false,
+      file: null,
       me: {},
       pic: '',
     };
