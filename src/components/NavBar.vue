@@ -75,7 +75,7 @@
       <template #end>
         <b-navbar-item tag="div">
           <div class="buttons" style="justify-content: right; padding-right: 20px">
-            <router-link to="/sign-in">
+            <router-link @click="logout()" to="/sign-in">
               <b-icon pack="mdi" icon="logout" type="is-primary" size="is-medium"></b-icon>
               <span style="padding-right: 10px"></span><span>ออกจากระบบ</span>
             </router-link>
@@ -125,6 +125,10 @@ export default {
         router.push({ name: 'Search' });
         this.$store.commit('setsearchdrugs', this.selected);
       }
+    },
+    logout() {
+      localStorage.removeItem('token');
+      console.log(localStorage.getItem('token'));
     },
   },
   // reloadPage() {

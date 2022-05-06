@@ -16,6 +16,7 @@
     "google-fonts-webpack-plugin": "^0.4.4",
     "hchs-vue-charts": "^1.2.8",
     "lodash": "^4.17.21",
+    "npm": "^8.9.0",
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.11",
     "vue-apexcharts": "^1.6.2",

@@ -176,6 +176,7 @@ export default {
     async addCurrentlyDrug() {
       await axios.post('http://localhost:8080/api/currently-drug', {
         drugId: this.$store.getters.searchdrugs.id,
+        caution: this.$store.getters.searchdrugs.caution,
         receiveDate: this.selectedDate,
         receivePlace: this.receive_place,
         more: this.more,
