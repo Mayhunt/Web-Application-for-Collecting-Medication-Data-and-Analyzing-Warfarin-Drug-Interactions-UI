@@ -1,6 +1,9 @@
 <template>
   <section class="hero is-primary is-fullheight-with-navbar">
-    <div style="background-color: #f2effb; border-radius: 60px 60px 0 0; margin-top: 1rem">
+    <div
+      class="hero is-fullheight-with-navbar"
+      style="background-color: #f2effb; border-radius: 60px 60px 0 0; margin-top: 1rem"
+    >
       <div class="container" style="margin: 0 20px">
         <div class="content is-medium">
           <div class="mt-1"></div>
@@ -62,29 +65,31 @@
                   <div class="content">
                     <br />
                     <strong><h5>ชื่อยาสามัญ</h5></strong>
-                    <strong><h5>{{ this.details.genericName }}</h5></strong>
+                    <strong
+                      ><h5>{{ this.details.genericName }}</h5></strong
+                    >
                     <strong><h5>บันทึกเพิ่มเติม</h5></strong>
                     <h4>{{ this.details.more }}</h4>
                   </div>
                   <b-field label="วันเกิด" label-position="on-border">
-              <b-datepicker
-                :value="new Date(this.details.receiveDate)"
-                :locale="ES"
-                placeholder="กดเลือกวันที่ได้รับยา"
-                icon="calendar-today"
-                rounded
-                trap-focus
-                disabled
-              >
-              </b-datepicker>
+                    <b-datepicker
+                      :value="new Date(this.details.receiveDate)"
+                      :locale="ES"
+                      placeholder="กดเลือกวันที่ได้รับยา"
+                      icon="calendar-today"
+                      rounded
+                      trap-focus
+                      disabled
+                    >
+                    </b-datepicker>
                   </b-field>
-            <!-- </b-field>
+                  <!-- </b-field>
                   <b-field label="วันที่ได้รับยา" label-position="on-border">
                     <b-input placeholder="" rounded Disabled> </b-input>
                   </b-field> -->
                   <b-field label="สถานที่ได้รับ" label-position="on-border">
                     <b-input
-                      :value= this.details.receivePlace
+                      :value="this.details.receivePlace"
                       placeholder="ตัวอย่าง โรงพยาบาลจุฬาภรณ์"
                       Disabled
                       rounded
@@ -98,7 +103,14 @@
                 </div>
                 <div class="fixedbutton" style="justify-content: center; margin-top: 2rem">
                   <router-link to="/edit-drugused">
-                    <b-button @click="sendEditDrug()" class="button" type="is-danger" size="is-medium" rounded expanded>
+                    <b-button
+                      @click="sendEditDrug()"
+                      class="button"
+                      type="is-danger"
+                      size="is-medium"
+                      rounded
+                      expanded
+                    >
                       แก้ไขรายการยานี้</b-button
                     >
                   </router-link>
@@ -108,6 +120,27 @@
           </div>
         </div>
       </b-modal>
+      <b-notification
+        v-model="isNotification"
+        type="is-warning"
+        role="alert"
+        has-icon
+        position="is-top"
+        aria-close-label="Close notification"
+      >
+        <p>
+          <strong>พบรายการยาที่อาจก่อให้เกิดอันตรกิริยากับยาวาร์ฟาริน ทั้งหมด {{this.druginteracts.length }} รายการ</strong>
+          <br>
+          <strong>รายการยา {{ this.druginteracts[0].genericName }}</strong>
+          <br />
+          อาจก่อให้เกิด{{ this.druginteracts[0].criteria }} และอาจ{{ this.druginteracts[0].effectInr }}
+          <br />
+          <strong style="font-size:small">*ผู้ใช้งานควรปรึกษาแพทย์ก่อนการใช้งาน</strong>
+          <!-- <strong>บันทึกเพิ่มเติม</strong>
+                  <br />
+                  {{ Currently.more }} -->
+        </p>
+      </b-notification>
     </div>
   </section>
 </template>
@@ -120,16 +153,43 @@ export default {
   data: () => ({
     details: {},
     drugcurrently: [],
+    druginteract: [],
+    druginteracts: [],
     isCardModalActive: false,
+    isNotification: false,
   }),
   mounted() {
+    axios.get('http://localhost:8080/api/interact').then((response) => {
+      this.druginteract = response.data;
+      console.log(this.druginteract);
+    });
     axios.get('http://localhost:8080/api/currently-drug').then((response) => {
       this.drugcurrently = response.data;
       this.drugcurrently.receiveDate = new Date(this.drugcurrently.receiveDate);
+      // eslint-disable-next-line consistent-return
+      this.drugcurrently.forEach((a) => {
+        if (a.id === 'fa879f4f-22af-438f-bf04-1e42d6b9249d') {
+          this.interact();
+          return console.warn('success');
+        }
+      });
       console.log(this.drugcurrently);
     });
   },
   methods: {
+    interact() {
+      this.drugcurrently.forEach((b) => {
+        // eslint-disable-next-line consistent-return
+        this.druginteract.forEach((c) => {
+          if (b.genericName === c.genericName) {
+            this.isNotification = true;
+            this.druginteracts.push(c);
+            return this.isNotification;
+          }
+        });
+        return console.warn(b.id);
+      });
+    },
     sendData(detail) {
       this.details = detail;
       return this.details;

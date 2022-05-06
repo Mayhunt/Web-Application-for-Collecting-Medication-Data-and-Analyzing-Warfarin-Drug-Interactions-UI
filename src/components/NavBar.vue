@@ -74,8 +74,8 @@
 
       <template #end>
         <b-navbar-item tag="div">
-          <div class="buttons" style="justify-content: right; padding-right: 20px">
-            <router-link @click="logout()" to="/sign-in">
+          <div class="buttons" @click="logout()" style="justify-content: right; padding-right: 20px">
+            <router-link to="/sign-in">
               <b-icon pack="mdi" icon="logout" type="is-primary" size="is-medium"></b-icon>
               <span style="padding-right: 10px"></span><span>ออกจากระบบ</span>
             </router-link>
