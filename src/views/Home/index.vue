@@ -22,9 +22,11 @@
         </div>
       </template>
 
-      <div class="card-content">
+      <div class="card-content" style="padding:18px">
         <div class="content" style="font-family: 'Kanit'; color: white">
-          รายการยาที่ต้องรับประทานวันนี้
+          <strong>เช้า</strong>
+          <br>
+          &emsp;Bismuth Subsalicylate
         </div>
       </div>
     </b-collapse>
