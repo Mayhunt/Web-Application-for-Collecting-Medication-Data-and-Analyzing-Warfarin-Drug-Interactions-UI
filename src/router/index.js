@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 // import store from '../store';
@@ -112,6 +114,25 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
+
+// router.beforeEach((to, from, next) => {
+//   if (to.name !== 'Login' && !isAuthenticated) next('/sign-in');
+//   else next();
+//   console.warn('success');
+// });
+// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line consistent-return
+// router.beforeEach(async (to, from) => {
+//   if (
+//     // make sure the user is authenticated
+//     !isAuthenticated
+//     // ❗️ Avoid an infinite redirect
+//     && to.name !== 'Login'
+//   ) {
+//     // redirect the user to the login page
+//     return { name: 'Login' };
+//   }
+// });
 
 // router.beforeEach((to, from, next) => {
 //   if (to.matched.some((record) => record.meta.requiresAuth)) {

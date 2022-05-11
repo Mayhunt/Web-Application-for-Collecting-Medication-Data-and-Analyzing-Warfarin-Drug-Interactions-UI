@@ -146,10 +146,16 @@
           <div class="pb-5 pt-5"></div>
 
           <div class="fixedbuttons" style="justify-content: center">
-            <router-link to="/currently-drug">
-              <b-button @click="addCurrentlyDrug()" rounded type="is-primary" size="is-medium" expanded>
-                บันทึก</b-button
-              ></router-link
+            <b-button
+              @click="
+                addCurrentlyDrug();
+              "
+              rounded
+              type="is-primary"
+              size="is-medium"
+              expanded
+            >
+              บันทึก</b-button
             >
           </div>
         </div>
@@ -174,13 +180,23 @@ export default {
   }),
   methods: {
     async addCurrentlyDrug() {
-      await axios.post('http://localhost:8080/api/currently-drug', {
-        drugId: this.$store.getters.searchdrugs.id,
-        receiveDate: this.selectedDate,
-        receivePlace: this.receive_place,
-        more: this.more,
-        alertStatus: this.isHide,
-      });
+      await axios
+        .post('http://localhost:8080/api/currently-drug', {
+          drugId: this.$store.getters.searchdrugs.id,
+          receiveDate: this.selectedDate,
+          receivePlace: this.receive_place,
+          more: this.more,
+          alertStatus: this.isHide,
+        })
+        .then((response) => {
+          this.$router.push('/currently-drug');
+          console.log(response);
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-alert
+          alert(error.response.data.message);
+          console.log(error.response.data.message);
+        });
       if (this.isHide === true) {
         const result2 = await axios.post('http://localhost:8080/api/drug-alert', {
           tabs: this.tabs,
