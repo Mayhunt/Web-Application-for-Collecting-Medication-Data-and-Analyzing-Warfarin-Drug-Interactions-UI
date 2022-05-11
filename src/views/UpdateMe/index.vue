@@ -1,18 +1,6 @@
 <template>
   <section class="hero is-primary is-fullheight-with-navbar">
     <div style="background-color: #f2effb; border-radius: 60px 60px 0 0; margin-top: 1rem">
-      <!-- <div style="background-color: rgb(121, 87, 213); max-height: 56px">
-      <b-icon pack="fas" icon="arrow-left" size="is-medium" type="is-white" style="margin: 12px">
-      </b-icon>
-    </div> -->
-      <!-- <section>
-            <b-image
-                :src="require('@/assets/logo.png')"
-                alt="The Buefy Logo"
-                ratio="601by200"
-                :rounded="rounded">
-            </b-image>
-        </section> -->
       <section
         class="hero is-white is-fullheight-with-navbar"
         style="border-radius: 60px 60px 0 0; padding: 1rem"
@@ -22,31 +10,38 @@
                 <h1 style="margin-top:0; text-align:center; margin-bottom:0.25rem">Create Account</h1>
             </div> -->
           <div class="media-body" align="center">
-            <!-- <figure class="image is-128x128 ">
-            <img center class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png" />
-          </figure> -->
-            <figure class="media-left">
-              <p class="image is-128x128">
-                <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png" />
-              </p>
+            <figure v-if="preview" class="image is-128x128">
+              <b-image :src="preview" rounded class="img-fluid" />
+            </figure>
+            <figure v-else class="image is-128x128">
+              <img
+                v-if="me.pic"
+                class="is-rounded image is-128x128"
+                src="https://series-review.net/wp-content/uploads/2022/01/YOU-Season3.jpg"
+              />
+              <img
+                v-else
+                class="is-rounded image is-128x128"
+                src="https://bulma.io/images/placeholders/128x128.png"
+              />
             </figure>
           </div>
-          <!-- edit image icon -->
-          <b-field
-            class="file is-white"
-            :class="{ 'has-name': !!file }"
-            style="justify-content: center"
-          >
-            <b-upload v-model="file" class="file-label" rounded>
-              <span class="file-cta">
-                <b-icon class="file-icon" icon="camera"></b-icon>
-                <span class="file-label">แก้ไขรูปภาพ</span>
-              </span>
-              <span class="file-name" v-if="file">
-                {{ file.name }}
-              </span>
-            </b-upload>
-          </b-field>
+          <div>
+            <!-- <div class="col-md-6"> -->
+            <!-- add image icon -->
+            <input type="file" accept="image/*" @change="previewImage" id="my-file" />
+            <!-- </div> -->
+            <span
+              ><b-button
+                type="is-success"
+                @click="addImage"
+                class="file-icon"
+                pack="mdi"
+                icon-right="cloud-upload"
+              ></b-button
+            ></span>
+            <p class="has-text-danger is-size-7">โปรดคลิกไอคอนเพื่ออัพโหลด</p>
+          </div>
           <!--  -->
 
           <form class="box">
@@ -95,13 +90,13 @@
               </b-input>
             </b-field>
             <b-field label="เบอร์โทร" label-position="on-border">
-              <b-input v-model="me.birthDate" placeholder="XXX-XXXXXXX" rounded> </b-input>
+              <b-input v-model="me.phoneNum" placeholder="XXX-XXXXXXX" rounded> </b-input>
             </b-field>
             <hr />
             <h4>ผู้ติดต่อฉุกเฉิน</h4>
             <br />
             <b-field label="ชื่อ" label-position="on-border">
-              <b-input v-model="this.birthDate" placeholder="ชื่อ" rounded> </b-input>
+              <b-input v-model="me.emergencyContact" placeholder="ชื่อ" rounded> </b-input>
             </b-field>
             <b-field label="เบอร์โทร" label-position="on-border">
               <b-input v-model="me.emergencyPhoneNum" placeholder="XXX-XXXXXXX" rounded> </b-input>
@@ -111,15 +106,13 @@
               style="justify-content: center; margin-top: 2.5rem; margin-bottom: 4rem"
             >
               <div class="fixedbuttons" style="justify-content: center">
-                <router-link to="me">
-                  <b-button
-                    @click="updateProfile()"
-                    rounded
-                    type="is-primary is-light"
-                    size="is-medium"
-                    expanded
-                    >บันทึก</b-button
-                  ></router-link
+                <b-button
+                  @click="updateProfile()"
+                  rounded
+                  type="is-primary is-light"
+                  size="is-medium"
+                  expanded
+                  >บันทึก</b-button
                 >
                 <br />
                 <router-link to="sign-in">
@@ -194,6 +187,8 @@ export default {
       file: null,
       me: {},
       pic: '',
+      preview: null,
+      image: null,
     };
   },
   mounted() {
@@ -207,7 +202,15 @@ export default {
     ...mapGetters(['user']),
     calBMI() {
       const bmi = parseFloat(this.me.weight / (this.me.height / 100) ** 2).toFixed(2);
-      return Number(bmi);
+      // eslint-disable-next-line use-isnan
+      if (bmi === 'NaN') {
+        console.warn(bmi);
+        return 0;
+        // eslint-disable-next-line no-else-return
+      } else {
+        // console.warn(bmi);
+        return Number(bmi);
+      }
     },
     sampleFormat() {
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
@@ -217,9 +220,8 @@ export default {
   },
   methods: {
     async updateProfile() {
-      const result = await axios.patch(
-        `http://localhost:8080/api/auth/${this.$store.getters.id}/update`,
-        {
+      const result = await axios
+        .patch(`http://localhost:8080/api/auth/${this.$store.getters.id}/update`, {
           username: this.me.username,
           password: this.me.password,
           firstName: this.me.first_name,
@@ -235,9 +237,51 @@ export default {
           emergencyContact: this.me.emergency_contact,
           emergencyPhoneNum: this.me.emergency_phone_num,
           pic: this.me.pic,
+        })
+        .then((response) => {
+          this.$router.push('/me');
+          console.log(response);
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-alert
+          alert(error.response.data.message);
+          console.log(error.response.data.message);
+        });
+      // eslint-disable-next-line no-restricted-globals
+      // if (result.status === 200) {
+      //   this.$router.push('/me');
+      // } else {
+      //   // eslint-disable-next-line no-alert
+      //   alert(result.message);
+      //   console.warn(result.status);
+      // }
+      console.warn(result.status);
+    },
+    previewImage(event) {
+      const input = event.target;
+      console.warn(event.target.files[0]);
+      if (input.files) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.preview = e.target.result;
+        };
+        // eslint-disable-next-line prefer-destructuring
+        this.image = input.files[0];
+        reader.readAsDataURL(input.files[0]);
+      }
+      console.warn(this.preview);
+    },
+    async addImage() {
+      // const user =  this.$store.getters.username,
+      const fd = new FormData();
+      fd.append('file', this.image);
+      const result = await axios.post('http://localhost:8080/api/storage', fd, {
+        headers: {
+          'content-type': 'multipart/form-data',
         },
-      );
-      console.warn(result);
+      });
+      this.me.pic = result.data;
+      console.warn(this.me.pic);
     },
   },
 };

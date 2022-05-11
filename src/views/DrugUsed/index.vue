@@ -129,13 +129,18 @@
         aria-close-label="Close notification"
       >
         <p>
-          <strong>พบรายการยาที่อาจก่อให้เกิดอันตรกิริยากับยาวาร์ฟาริน ทั้งหมด {{this.druginteracts.length }} รายการ</strong>
-          <br>
+          <strong
+            >พบรายการยาที่อาจก่อให้เกิดอันตรกิริยากับยาวาร์ฟาริน ทั้งหมด
+            {{ this.druginteracts.length }} รายการ</strong
+          >
+          <br />
           <strong>รายการยา {{ this.druginteracts[0].genericName }}</strong>
           <br />
-          อาจก่อให้เกิด{{ this.druginteracts[0].criteria }} และอาจ{{ this.druginteracts[0].effectInr }}
+          อาจก่อให้เกิด{{ this.druginteracts[0].criteria }} และอาจ{{
+            this.druginteracts[0].effectInr
+          }}
           <br />
-          <strong style="font-size:small">*ผู้ใช้งานควรปรึกษาแพทย์ก่อนการใช้งาน</strong>
+          <strong style="font-size: small">*ผู้ใช้งานควรปรึกษาแพทย์ก่อนการใช้งาน</strong>
           <!-- <strong>บันทึกเพิ่มเติม</strong>
                   <br />
                   {{ Currently.more }} -->
@@ -154,7 +159,16 @@ export default {
     details: {},
     drugcurrently: [],
     druginteract: [],
-    druginteracts: [],
+    druginteracts: [
+      {
+        createAt: '2022-05-05T19:52:23.671Z',
+        criteria: 'ความรุนแรงของปฎิกิริยาระดับสูงหรือปานกลาง (Major or Moderate)',
+        effectInr: 'มีผลกระทบให้ค่า INR เพิ่มขึ้น ',
+        genericName: 'acarbose',
+        id: 'fd1ca17e-eef7-4ac3-95c7-fb3cfefb4975',
+        updateAt: '2022-05-05T19:52:23.671Z',
+      },
+    ],
     isCardModalActive: false,
     isNotification: false,
   }),

@@ -30,12 +30,37 @@
                 <h1 style="margin-top:0; text-align:center; margin-bottom:0.25rem">Create Account</h1>
             </div> -->
         <div class="media-body" align="center">
-          <figure class="image is-128x128">
-            <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png" />
+          <figure v-if="preview" class="image is-128x128">
+            <b-image :src="preview" rounded class="img-fluid" />
+          </figure>
+          <figure v-else class="image is-128x128">
+            <img
+              class="is-rounded image is-128x128"
+              src="https://bulma.io/images/placeholders/128x128.png"
+            />
           </figure>
         </div>
-        <!-- add image icon -->
-        <b-field class="file is-white" :class="{ 'has-name': !!file }"  style="justify-content: center">
+        <div>
+          <!-- <div class="col-md-6"> -->
+          <!-- add image icon -->
+          <input type="file" accept="image/*" @change="previewImage" id="my-file" />
+          <!-- </div> -->
+          <span
+            ><b-button
+              type="is-success"
+              @click="addImage"
+              class="file-icon"
+              pack="mdi"
+              icon-right="cloud-upload"
+            ></b-button
+          ></span>
+          <p class="has-text-danger is-size-7">โปรดคลิกไอคอนเพื่ออัพโหลด</p>
+        </div>
+        <!-- <b-field
+          class="file is-white"
+          :class="{ 'has-name': !!file }"
+          style="justify-content: center"
+        >
           <b-upload v-model="file" class="file-label" rounded>
             <span class="file-cta">
               <b-icon class="file-icon" icon="camera"></b-icon>
@@ -45,8 +70,9 @@
               {{ file.name }}
             </span>
           </b-upload>
-        </b-field>
+        </b-field> -->
         <!--  -->
+        <br />
         <form class="box">
           <b-field label="ชื่อ*" label-position="on-border">
             <b-input v-model="first_name" placeholder="ชื่อ" rounded> </b-input>
@@ -145,6 +171,8 @@ export default {
       pic: '',
       modifyDate: dayjs(this.selected_date).toISOString(),
       file: null,
+      preview: null,
+      image: null,
     };
   },
   methods: {
@@ -169,16 +197,45 @@ export default {
       });
       console.warn(result);
     },
+    async addImage() {
+      // const user =  this.$store.getters.username,
+      const fd = new FormData();
+      fd.append('file', this.image);
+      const result = await axios.post('http://localhost:8080/api/storage', fd, {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      });
+      this.pic = result.data;
+      console.warn(result);
+    },
+    previewImage(event) {
+      const input = event.target;
+      console.warn(event.target.files[0]);
+      if (input.files) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.preview = e.target.result;
+        };
+        // eslint-disable-next-line prefer-destructuring
+        this.image = input.files[0];
+        reader.readAsDataURL(input.files[0]);
+      }
+      console.warn(this.preview);
+    },
   },
   computed: {
     calBMI() {
       const bmi = parseFloat(this.weight / (this.height / 100) ** 2).toFixed(2);
-      return Number(bmi);
-      // if (isFinite(bmi) && bmi > 0) {
-      //   return bmi;
-      // } else {
-      //   return '0';
-      // }
+      // eslint-disable-next-line use-isnan
+      if (bmi === 'NaN') {
+        console.warn(bmi);
+        return 0;
+      // eslint-disable-next-line no-else-return
+      } else {
+        // console.warn(bmi);
+        return Number(bmi);
+      }
     },
   },
   // watch: {
@@ -192,14 +249,6 @@ export default {
   //     },
   //   },
   // },
-  // updateR(event) {
-  //     this.form.sale_rate = event.target.value
-  //     this.form.sale_total = this.form.sale_quantity * this.form.sale_rate
-  //   }
-
-  // updateHeight(event) {
-  //   this.height = event.target.value;
-  //   this.bmi = this.weight / ((this.height / 100) * (this.height / 100));
 };
 </script>
 

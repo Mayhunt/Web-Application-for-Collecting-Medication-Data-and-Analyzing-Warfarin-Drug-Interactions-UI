@@ -181,7 +181,6 @@ export default {
         more: this.more,
         alertStatus: this.isHide,
       });
-      console.warn(this.timeGroup);
       if (this.isHide === true) {
         const result2 = await axios.post('http://localhost:8080/api/drug-alert', {
           tabs: this.tabs,
