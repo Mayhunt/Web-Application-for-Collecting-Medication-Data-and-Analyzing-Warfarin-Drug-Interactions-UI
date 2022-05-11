@@ -131,16 +131,17 @@
 
           <div class="fixedbuttons" style="justify-content: center">
             <router-link to="/currently-drug"
-              ><b-button @click="updateDrug()" type="is-primary is-light" size="is-medium" expanded>
+              ><b-button @click="updateDrug()" type="is-primary is-light" size="is-medium" rounded expanded>
                 บันทึก</b-button
               ></router-link
             >
             <br />
             <router-link to="/currently-drug"
-              ><b-button @click="deleteDrug();" type="is-danger is-light" size="is-medium" expanded>
+              ><b-button @click="deleteDrug();" type="is-danger is-light" size="is-medium" rounded expanded>
                 ลบรายการยานี้</b-button
               ></router-link
             >
+            <div class="pb-5 pt-5"></div>
           </div>
         </div>
       </div>
