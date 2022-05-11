@@ -17,10 +17,10 @@
         <div>
           <div class="content is-medium">
             <!-- <br> -->
-            <h1 style="margin-top: 0; text-align: center; margin-bottom: 0.25rem; padding: 1rem">
+            <h1 style="text-align: center; margin-bottom: 0.25rem; padding: 1rem">
               คำถามรักษาความปลอดภัย
             </h1>
-            <p style="margin-top: 0; text-align: center; margin-bottom: 0.25rem; padding: 2rem">
+            <p style="text-align: center; margin-bottom: 0.25rem; padding-left: 2rem; padding-right: 2rem">
               คำถามรักษาความปลอดภัยตั้งขึ้นเพื่อใช้ในการยืนยันตัวตนในกรณีที่ผู้ใช้งานลืมรหัสผ่านในการเข้าใช้งาน
             </p>
             <!-- <h6 style="font-size:1rem; text-align:center">Welcome back you've been missed</h6> -->
