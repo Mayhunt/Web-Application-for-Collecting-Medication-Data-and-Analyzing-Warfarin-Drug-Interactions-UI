@@ -231,7 +231,7 @@ export default {
       if (bmi === 'NaN') {
         console.warn(bmi);
         return 0;
-      // eslint-disable-next-line no-else-return
+        // eslint-disable-next-line no-else-return
       } else {
         // console.warn(bmi);
         return Number(bmi);
