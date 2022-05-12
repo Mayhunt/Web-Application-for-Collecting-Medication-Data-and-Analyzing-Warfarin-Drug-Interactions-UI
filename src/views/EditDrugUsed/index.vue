@@ -10,7 +10,7 @@
       </div>
       <div>
         <b-image
-          :src="require('@/assets/ex1.png')"
+          :src="`http://localhost:8080/api/storage?key=${this.currentlyDrug.pic}`"
           alt="The Buefy Logo"
           ratio="2by1"
           :rounded="rounded"
@@ -163,9 +163,10 @@ export default {
   }),
   mounted() {
     axios
-      .get(`http://localhost:8080/api/currently-drug/${this.$store.getters.editdrug}`)
+      .get(`http://localhost:8080/api/currently-drug/${this.$store.getters.editdrug.id}`)
       .then((response) => {
         this.currentlyDrug = response.data;
+        this.currentlyDrug.pic = this.$store.getters.editdrug.pic;
         this.currentlyDrug.receiveDate = new Date(this.currentlyDrug.receiveDate);
         this.isHide = this.currentlyDrug.alertStatus;
         console.log(this.currentlyDrug.receiveDate);

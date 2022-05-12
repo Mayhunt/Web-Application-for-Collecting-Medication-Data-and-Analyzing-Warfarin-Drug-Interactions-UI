@@ -11,7 +11,7 @@
       </div>
       <div>
         <b-image
-          :src="require('@/assets/ex1.png')"
+          :src="`http://localhost:8080/api/storage?key=${this.allergicDrug.pic}`"
           alt="The Buefy Logo"
           ratio="2by1"
           :rounded="rounded"
@@ -97,9 +97,10 @@ export default {
   },
   mounted() {
     axios
-      .get(`http://localhost:8080/api/allergic-drug/${this.$store.getters.editdrug}`)
+      .get(`http://localhost:8080/api/allergic-drug/${this.$store.getters.editdrug.id}`)
       .then((response) => {
         this.allergicDrug = response.data;
+        this.allergicDrug.pic = this.$store.getters.editdrug.pic;
         console.log(response);
       });
   },

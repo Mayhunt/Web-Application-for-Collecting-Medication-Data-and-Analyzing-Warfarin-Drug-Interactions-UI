@@ -22,7 +22,7 @@
           <article class="media">
             <div class="media-left">
               <figure class="image is-64x64">
-                <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image" />
+                <img :src="getImgUrl(Currently.pic)" alt="Image" />
               </figure>
             </div>
             <div class="media-content">
@@ -57,7 +57,7 @@
                 <div>
                   <div class="media-content" style="padding-left: 115px">
                     <figure class="image is-128x128">
-                      <img src="https://bulma.io/images/placeholders/128x128.png" />
+                      <img :src="`http://localhost:8080/api/storage?key=${this.details.pic}`" />
                     </figure>
                   </div>
                 </div>
@@ -121,6 +121,7 @@
         </div>
       </b-modal>
       <b-notification
+      style="margin-top: 25px;"
         v-model="isNotification"
         type="is-warning"
         role="alert"
@@ -128,23 +129,24 @@
         position="is-top"
         aria-close-label="Close notification"
       >
-        <p>
+        <!-- <div v-for="(noti) in this.druginteracts"> -->
+        <div>
           <strong
             >พบรายการยาที่อาจก่อให้เกิดอันตรกิริยากับยาวาร์ฟาริน ทั้งหมด
             {{ this.druginteracts.length }} รายการ</strong
           >
           <br />
-          <strong>รายการยา {{ this.druginteracts[0].genericName }}</strong>
-          <br />
-          อาจก่อให้เกิด{{ this.druginteracts[0].criteria }} และอาจ{{
-            this.druginteracts[0].effectInr
-          }}
+          <div v-for="(noti, index) in this.druginteracts" :key="index">
+            <strong>- รายการยา {{ noti.genericName }}</strong>
+            <br />
+            อาจก่อให้เกิด{{ noti.criteria }} และอาจ{{ noti.effectInr }}
+          </div>
           <br />
           <strong style="font-size: small">*ผู้ใช้งานควรปรึกษาแพทย์ก่อนการใช้งาน</strong>
           <!-- <strong>บันทึกเพิ่มเติม</strong>
                   <br />
                   {{ Currently.more }} -->
-        </p>
+        </div>
       </b-notification>
     </div>
   </section>
@@ -157,59 +159,103 @@ export default {
   name: 'drug-currenly',
   data: () => ({
     details: {},
+    allDrug: [],
     drugcurrently: [],
     druginteract: [],
     druginteracts: [
-      {
-        createAt: '2022-05-05T19:52:23.671Z',
-        criteria: 'ความรุนแรงของปฎิกิริยาระดับสูงหรือปานกลาง (Major or Moderate)',
-        effectInr: 'มีผลกระทบให้ค่า INR เพิ่มขึ้น ',
-        genericName: 'acarbose',
-        id: 'fd1ca17e-eef7-4ac3-95c7-fb3cfefb4975',
-        updateAt: '2022-05-05T19:52:23.671Z',
-      },
+      // {
+      //   createAt: '2022-05-05T19:52:23.671Z',
+      //   criteria: 'ความรุนแรงของปฎิกิริยาระดับสูงหรือปานกลาง (Major or Moderate)',
+      //   effectInr: 'มีผลกระทบให้ค่า INR เพิ่มขึ้น ',
+      //   genericName: 'acarbose',
+      //   id: 'fd1ca17e-eef7-4ac3-95c7-fb3cfefb4975',
+      //   updateAt: '2022-05-05T19:52:23.671Z',
+      // },
     ],
     isCardModalActive: false,
     isNotification: false,
   }),
   mounted() {
+    axios.get('http://localhost:8080/api/search').then((response) => {
+      this.allDrug = response.data;
+      // console.log(this.allDrug);
+    });
     axios.get('http://localhost:8080/api/interact').then((response) => {
       this.druginteract = response.data;
-      console.log(this.druginteract);
+      // console.log(this.druginteract);
     });
     axios.get('http://localhost:8080/api/currently-drug').then((response) => {
       this.drugcurrently = response.data;
       this.drugcurrently.receiveDate = new Date(this.drugcurrently.receiveDate);
+      this.picAllergicUsed();
       // eslint-disable-next-line consistent-return
-      this.drugcurrently.forEach((a) => {
-        if (a.id === 'fa879f4f-22af-438f-bf04-1e42d6b9249d') {
+      // eslint-disable-next-line no-restricted-syntax
+      for (const element of this.drugcurrently) {
+        // eslint-disable-next-line space-in-parens
+        // eslint-disable-next-line no-constant-condition
+        if (element.genericName === 'Warfarin (ชมพู) tab 5 mg ' || 'Warfarin (ฟ้า) tab 3 mg'
+          || 'Warfarin (ส้ม) tab 2 mg ') {
           this.interact();
-          return console.warn('success');
+          break;
         }
-      });
-      console.log(this.drugcurrently);
+      }
+      // this.drugcurrently.forEach((a) => {
+      //   // eslint-disable-next-line no-constant-condition
+      //   if (
+      //     a.genericName === 'Warfarin (ชมพู) tab 5 mg ' ||
+      //     'Warfarin (ฟ้า) tab 3 mg' ||
+      //     'Warfarin (ส้ม) tab 2 mg '
+      //   ) {
+      //     this.interact();
+      //     // return console.warn('success');
+      //   }
+      // });
+      // console.log(this.drugcurrently);
     });
   },
   methods: {
     interact() {
+      // console.warn(this.druginteracts);
       this.drugcurrently.forEach((b) => {
         // eslint-disable-next-line consistent-return
         this.druginteract.forEach((c) => {
-          if (b.genericName === c.genericName) {
-            this.isNotification = true;
+          if (b.genericName.toString().toLowerCase() === c.genericName.toString().toLowerCase()) {
+            console.warn(c, b);
             this.druginteracts.push(c);
-            return this.isNotification;
+            // this.isNotification = true;
+            // return this.isNotification;
           }
         });
-        return console.warn(b.id);
+        // return console.warn(b.id);
       });
+      if (this.druginteracts.length > 0) { this.isNotification = true; }
+      console.warn(this.druginteracts);
+    },
+    picAllergicUsed() {
+      this.drugcurrently.forEach((b) => {
+        this.allDrug.forEach((c) => {
+          if (b.genericName === c.genericName) {
+            // eslint-disable-next-line no-param-reassign
+            b.pic = c.pic;
+            // console.warn(b);
+          }
+        });
+        // return console.warn(b.id);
+      });
+    },
+    getImgUrl(pic) {
+      if (pic !== '-') {
+        // eslint-disable-next-line no-unused-vars
+        return `http://localhost:8080/api/storage?key=${pic}`;
+      }
+      return 'http://localhost:8080/api/storage?key=Ac_YXsmD.png';
     },
     sendData(detail) {
       this.details = detail;
       return this.details;
     },
     sendEditDrug() {
-      this.$store.commit('setEditDrug', this.details.id);
+      this.$store.commit('setEditDrug', { id: this.details.id, pic: this.details.pic });
     },
     async deleteDrug() {
       const result = await axios.delete(

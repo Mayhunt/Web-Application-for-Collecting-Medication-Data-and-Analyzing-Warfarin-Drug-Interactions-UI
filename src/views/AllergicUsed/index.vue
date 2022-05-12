@@ -22,7 +22,7 @@
           <article class="media">
             <div class="media-left">
               <figure class="image is-64x64">
-                <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image" />
+                <img :src="getImgUrl(AllergicAll.pic)" alt="Image" />
               </figure>
             </div>
             <div class="media-content">
@@ -66,7 +66,7 @@
                 <div>
                   <div class="media-content" style="padding-left: 115px">
                     <figure class="image is-128x128">
-                      <img src="https://bulma.io/images/placeholders/128x128.png" />
+                      <img :src="`http://localhost:8080/api/storage?key=${this.details.pic}`" />
                     </figure>
                   </div>
                 </div>
@@ -142,22 +142,57 @@ export default {
   data: () => ({
     allergicDrug: [],
     isCardModalActive: false,
+    allDrug: [],
     details: {},
   }),
   mounted() {
+    axios.get('http://localhost:8080/api/search').then((response) => {
+      this.allDrug = response.data;
+      // console.log(this.allDrug);
+    });
     axios.get('http://localhost:8080/api/allergic-drug').then((response) => {
       this.allergicDrug = response.data;
-      console.log(response.data);
+      console.warn(this.allergicDrug);
+      this.picAllergicUsed();
+      // this.allergicDrug.forEach((b) => {
+      //   this.allDrug.forEach((c) => {
+      //     if (b.genericName === c.genericName) {
+      //       // eslint-disable-next-line no-param-reassign
+      //       b.pic = c.pic;
+      //       console.warn(b);
+      //     }
+      //   });
+      //   // return console.warn(b.id);
+      // });
     });
   },
   methods: {
+    picAllergicUsed() {
+      this.allergicDrug.forEach((b) => {
+        this.allDrug.forEach((c) => {
+          if (b.genericName === c.genericName) {
+            // eslint-disable-next-line no-param-reassign
+            b.pic = c.pic;
+            console.warn(b);
+          }
+        });
+        // return console.warn(b.id);
+      });
+    },
     sendData(detail) {
       this.details = detail;
       return this.details;
       // console.warn(detail);
     },
+    getImgUrl(pic) {
+      if (pic !== '-') {
+        // eslint-disable-next-line no-unused-vars
+        return `http://localhost:8080/api/storage?key=${pic}`;
+      }
+      return 'http://localhost:8080/api/storage?key=Ac_YXsmD.png';
+    },
     sendEditDrug() {
-      this.$store.commit('setEditDrug', this.details.id);
+      this.$store.commit('setEditDrug', { id: this.details.id, pic: this.details.pic });
     },
     async deleteDrug() {
       const result = await axios.delete(

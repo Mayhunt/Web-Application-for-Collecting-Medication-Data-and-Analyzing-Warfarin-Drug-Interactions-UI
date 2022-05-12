@@ -34,6 +34,14 @@ const routes = [
     path: '/home',
     name: 'Home',
     component: () => import(/* webpackChunkName: "Home" */ '../views/Home/index.vue'),
+    // beforeEnter: (to, from) => {
+    //   // this.$router.go('/home');
+    //   console.warn(to, from, window.location);
+    //   // window.location.reload();
+    //   // to.reload();
+    //   // reject the navigation
+    //   return false;
+    // },
   },
   {
     path: '/question',

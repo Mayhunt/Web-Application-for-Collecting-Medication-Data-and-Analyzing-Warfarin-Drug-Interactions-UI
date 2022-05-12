@@ -10,7 +10,7 @@
       </div>
       <div>
         <b-image
-          :src="require('@/assets/ex1.png')"
+          :src="`http://localhost:8080/api/storage?key=${this.$store.getters.searchdrugs.pic}`"
           alt="The Buefy Logo"
           ratio="2by1"
           :rounded="rounded"
@@ -144,7 +144,6 @@
             </div>
           </section>
           <div class="pb-5 pt-5"></div>
-
           <div class="fixedbuttons" style="justify-content: center">
             <b-button
               @click="
@@ -158,6 +157,7 @@
               บันทึก</b-button
             >
           </div>
+
         </div>
       </div>
     </div>
