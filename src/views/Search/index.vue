@@ -51,6 +51,7 @@
         <router-link to="/save-allergic"><b-button rounded type="is-danger is-light" size="is-medium" expanded
           >บันทึกไปรายการยาที่แพ้</b-button
         ></router-link>
+        <div class="pb-5 pt-5"></div>
       </div>
     </div>
 

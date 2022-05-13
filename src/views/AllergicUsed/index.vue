@@ -112,6 +112,7 @@
                       แก้ไขรายการยานี้</b-button
                     ></router-link
                   >
+                  <div class="pb-1 pt-1"></div>
                   <b-button
                     @click="
                       deleteDrug();

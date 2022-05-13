@@ -31,6 +31,7 @@
             <!-- add image icon -->
             <input type="file" accept="image/*" @change="previewImage" id="my-file" />
             <!-- </div> -->
+            <div align="right">
             <span
               ><b-button
                 type="is-success"
@@ -40,6 +41,7 @@
                 icon-right="cloud-upload"
               ></b-button
             ></span>
+            </div>
             <p class="has-text-danger is-size-7">โปรดคลิกไอคอนเพื่ออัพโหลด</p>
           </div>
           <!--  -->

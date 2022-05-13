@@ -344,8 +344,8 @@ export default {
       console.warn(this.finalData);
       this.chartData = new google.visualization.DataTable();
       this.chartData.addColumn('number', 'round');
-      this.chartData.addColumn('number', 'ค่า INR ที่คาดหวัง');
       this.chartData.addColumn('number', 'ค่า INR ที่วัดได้');
+      this.chartData.addColumn('number', 'ค่า INR ที่คาดหวัง');
       this.chartData.addRows(this.finalData);
     },
   },

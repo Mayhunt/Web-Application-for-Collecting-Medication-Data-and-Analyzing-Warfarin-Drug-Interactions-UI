@@ -121,9 +121,8 @@
         </div>
       </b-modal>
       <b-notification
-      style="margin-top: 25px;"
+      style="margin-top: 25px;background-color:#FFBF00"
         v-model="isNotification"
-        type="is-warning"
         role="alert"
         has-icon
         position="is-top"
