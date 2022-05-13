@@ -30,6 +30,7 @@
             <!-- <div class="col-md-6"> -->
             <!-- add image icon -->
             <input type="file" accept="image/*" @change="previewImage" id="my-file" />
+            <input type="submit">
             <!-- </div> -->
             <span
               ><b-button
