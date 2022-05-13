@@ -10,7 +10,7 @@
       </div>
       <div>
         <b-image
-          :src="require('@/assets/ex1.png')"
+          :src="`http://localhost:8080/api/storage?key=${this.$store.getters.searchdrugs.pic}`"
           alt="The Buefy Logo"
           ratio="2by1"
           :rounded="rounded"
@@ -43,16 +43,14 @@
             <b-button class="button" size="is-medium" type="is-primary is-light">บันทึก</b-button>
           </div> -->
           <div class="fixedbutton" style="justify-content: center">
-            <router-link to="/allergic-drug"
-              ><b-button
-                @click="addAllergicDrug()"
-                rounded
-                type="is-primary"
-                size="is-medium"
-                expanded
-              >
-                บันทึก</b-button
-              ></router-link
+            ><b-button
+              @click="addAllergicDrug()"
+              rounded
+              type="is-primary"
+              size="is-medium"
+              expanded
+            >
+              บันทึก</b-button
             >
           </div>
         </div>
@@ -77,13 +75,22 @@ export default {
   },
   methods: {
     async addAllergicDrug() {
-      const result = await axios.post('http://localhost:8080/api/allergic-drug', {
-        drugId: this.$store.getters.searchdrugs.id,
-        symptom: this.symptom,
-        place: this.place,
-        more: this.more,
-      });
-      console.warn(result);
+      await axios
+        .post('http://localhost:8080/api/allergic-drug', {
+          drugId: this.$store.getters.searchdrugs.id,
+          symptom: this.symptom,
+          place: this.place,
+          more: this.more,
+        })
+        .then((response) => {
+          this.$router.push('/allergic-drug');
+          console.log(response);
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-alert
+          alert(error.response.data.message);
+          console.log(error.response.data.message);
+        });
     },
   },
 };

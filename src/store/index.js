@@ -8,7 +8,7 @@ export default new Vuex.Store({
   state: {
     username: 'may',
     password: '',
-    editdrug: '',
+    editdrug: [{ id: '', pic: '' }],
     user: '',
     id: '',
     // genericname: '',
