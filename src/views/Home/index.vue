@@ -15,7 +15,7 @@
           :aria-expanded="props.open"
           style="font-family: 'Kanit'"
         >
-          <p class="card-header-title" style="color: white"><font size="6">รายการยาวันนี้</font></p>
+          <p class="card-header-title" style="color: white"><font size="6">รายการยาวันนี้&ensp;<b-icon pack="fas" icon="tablets"></b-icon></font></p>
           <a class="card-header-icon">
             <b-icon :icon="props.open ? 'menu-down' : 'menu-up'"> </b-icon>
           </a>
@@ -27,12 +27,22 @@
           <strong>เช้า&emsp;<b-icon type="is-warning" pack="mdi" icon="weather-partly-cloudy"></b-icon> </strong>
           <br>
           <div v-for="(schedule, index) in drugSchedule" :key="index">
-          <p v-if="schedule.drugAlert.time === 'Breakfast'">&emsp;-{{schedule.genericName}}</p>
+          <p v-if="schedule.drugAlert.time === 'Breakfast'">&emsp;-&ensp;{{schedule.genericName}}</p>
           </div>
           <br>
           <strong>กลางวัน&emsp;<b-icon type="is-warning" pack="mdi" icon="weather-sunny"></b-icon> </strong>
           <div v-for="(schedule, index) in drugSchedule" :key="index">
-          <p v-if="schedule.drugAlert.time === 'Lunch'">&emsp;-{{schedule.genericName}}</p>
+          <p v-if="schedule.drugAlert.time === 'Lunch'">&emsp;-&ensp;{{schedule.genericName}}</p>
+          </div>
+          <br>
+          <strong>เย็น&emsp;<b-icon type="is-warning" pack="mdi" icon="weather-night"></b-icon> </strong>
+          <div v-for="(schedule, index) in drugSchedule" :key="index">
+          <p v-if="schedule.drugAlert.time === 'Dinner'">&emsp;-&ensp;{{schedule.genericName}}</p>
+          </div>
+          <br>
+          <strong>ก่อนนอน&emsp;<b-icon type="is-warning" pack="mdi" icon="bed"></b-icon> </strong>
+          <div v-for="(schedule, index) in drugSchedule" :key="index">
+          <p v-if="schedule.drugAlert.time === 'Before Bed'">&emsp;-&ensp;{{schedule.genericName}}</p>
           </div>
         </div>
       </div>

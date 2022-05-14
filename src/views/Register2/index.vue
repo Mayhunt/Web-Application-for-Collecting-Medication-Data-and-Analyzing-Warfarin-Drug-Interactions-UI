@@ -137,11 +137,9 @@
             class="fixedbuttons"
             style="justify-content: center; margin-top: 2.5rem; margin-bottom: 4rem"
           >
-            <router-link to="/question"
-              ><b-button @click="addProfile()" rounded type="is-primary" size="is-medium" expanded>
+          <b-button @click="addProfile()" rounded type="is-primary" size="is-medium" expanded>
                 ถัดไป</b-button
-              ></router-link
-            >
+              >
           </div>
         </form>
       </div>
@@ -180,6 +178,7 @@ export default {
   methods: {
     async addProfile() {
       // const user =  this.$store.getters.username,
+      // eslint-disable-next-line no-unused-vars
       const result = await axios.post('http://localhost:8080/api/auth/register', {
         username: this.$store.getters.username,
         password: this.$store.getters.password,
@@ -196,8 +195,26 @@ export default {
         emergencyContact: this.emergency_contact,
         emergencyPhoneNum: this.emergency_phone_num,
         pic: this.pic,
-      });
-      console.warn(result);
+      }).then((response) => {
+        // eslint-disable-next-line no-shadow
+        // eslint-disable-next-line no-unused-vars
+        axios.post('http://localhost:8080/api/auth/sign-in', {
+        // console.log(result.data);
+          username: this.$store.getters.username,
+          password: this.$store.getters.password,
+        }).then((res) => {
+          localStorage.setItem('token', res.data.accessToken);
+          this.$store.dispatch('user', res.data);
+          console.warn(localStorage.getItem('token'));
+          this.$router.push('/question');
+          console.log(response);
+        });
+      })
+        .catch((error) => {
+          // eslint-disable-next-line no-alert
+          alert(error.response.data.message);
+          console.log(error.response.data.message);
+        });
     },
     async addImage() {
       // const user =  this.$store.getters.username,

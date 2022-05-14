@@ -99,6 +99,7 @@ export default {
       });
       localStorage.setItem('token', result.data.accessToken);
       this.$store.dispatch('user', result.data);
+      // console.warn(localStorage.getItem('user'));
       console.warn(localStorage.getItem('token'));
     },
   },

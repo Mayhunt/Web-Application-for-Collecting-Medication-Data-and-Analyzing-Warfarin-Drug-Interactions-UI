@@ -76,15 +76,20 @@ export default {
     return {
       question: '',
       answer: '',
+      xxx: 'xxx',
     };
   },
   methods: {
     async addQuestion() {
+      console.warn(localStorage.getItem('token'));
+      // console.warn(localStorage.getItem('user'));
+      console.warn(this.question, this.answer);
       const result = await axios.post('http://localhost:8080/api/question', {
-        question: this.question,
+        question: this.xxx,
         answer: this.answer,
       });
       console.warn(result);
+      // console.warn(localStorage.getItem('token'));
     },
   },
 };

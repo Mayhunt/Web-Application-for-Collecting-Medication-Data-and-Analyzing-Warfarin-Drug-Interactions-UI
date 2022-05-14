@@ -30,6 +30,7 @@
                 type="user"
                 icon="account-circle"
                 icon-clickable
+                required
                 rounded
                 @icon-click="userIconClick"
               >
@@ -41,6 +42,7 @@
                 placeholder="รหัสผ่าน"
                 type="password"
                 icon="lock-question"
+                required
                 icon-clickable
                 password-reveal
                 rounded
@@ -62,11 +64,9 @@
             <!-- </b-field> -->
             <!-- <div class="buttons" style="justify-content: right"><b-button type="is-text" size="is-small">Forget Password</b-button></div> -->
             <div class="fixedbuttons" style="justify-content: center; margin-top: 2rem">
-              <router-link to="/register2"
-                ><b-button @click="sendData" type="is-primary" size="is-medium" rounded expanded>
+              <b-button @click="sendData" type="is-primary" size="is-medium" rounded expanded>
                   ถัดไป</b-button
-                ></router-link
-              >
+                >
 
               <!-- <button class="button is-text">Register</button> -->
             </div>
@@ -91,8 +91,14 @@ export default {
   },
   methods: {
     sendData() {
-      this.$store.commit('setUsername', this.username);
-      this.$store.commit('setPassword', this.password);
+      if (this.username !== '' && this.password !== '') {
+        this.$store.commit('setUsername', this.username);
+        this.$store.commit('setPassword', this.password);
+        this.$router.push('/register2');
+      } else {
+        // eslint-disable-next-line no-alert
+        alert('โปรดกรอก username และ password ให้ครบถ้วน');
+      }
     },
   },
 };
