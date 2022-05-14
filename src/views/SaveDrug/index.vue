@@ -146,9 +146,7 @@
           <div class="pb-5 pt-5"></div>
           <div class="fixedbuttons" style="justify-content: center">
             <b-button
-              @click="
-                addCurrentlyDrug();
-              "
+              @click="addCurrentlyDrug()"
               rounded
               type="is-primary"
               size="is-medium"
@@ -157,7 +155,6 @@
               บันทึก</b-button
             >
           </div>
-
         </div>
       </div>
     </div>
@@ -190,20 +187,32 @@ export default {
         })
         .then((response) => {
           this.$router.push('/currently-drug');
-          console.log(response);
+          this.successCurrentlyDrugId = response.data.id;
+          // console.log(response);
         })
         .catch((error) => {
           // eslint-disable-next-line no-alert
           alert(error.response.data.message);
           console.log(error.response.data.message);
         });
+      // console.warn(this.successCurrentlyDrug);
       if (this.isHide === true) {
-        const result2 = await axios.post('http://localhost:8080/api/drug-alert', {
-          tabs: this.tabs,
-          take: this.takesGroup[0],
-          time: this.timeGroup[0],
-        });
-        console.warn(result2);
+        await axios
+          .post('http://localhost:8080/api/drug-alert', {
+            drugCurrentlyUsedId: this.successCurrentlyDrugId,
+            tabs: this.tabs,
+            take: this.takesGroup[0],
+            time: this.timeGroup[0],
+          })
+          .then((response) => {
+            this.$router.push('/currently-drug');
+            console.log(response);
+          })
+          .catch((error) => {
+            // eslint-disable-next-line no-alert
+            alert(error.response.data.message);
+            console.log(error.response.data.message);
+          });
       }
     },
   },

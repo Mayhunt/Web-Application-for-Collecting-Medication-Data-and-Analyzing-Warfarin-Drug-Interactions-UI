@@ -10,9 +10,9 @@
       </div>
       <div>
         <b-image
+          id="currentlyDrugImageStyle"
           :src="`http://localhost:8080/api/storage?key=${this.currentlyDrug.pic}`"
           alt="The Buefy Logo"
-          ratio="2by1"
           :rounded="rounded"
         >
         </b-image>
@@ -131,13 +131,25 @@
 
           <div class="fixedbuttons" style="justify-content: center">
             <router-link to="/currently-drug"
-              ><b-button @click="updateDrug()" type="is-primary is-light" size="is-medium" rounded expanded>
+              ><b-button
+                @click="updateDrug()"
+                type="is-primary is-light"
+                size="is-medium"
+                rounded
+                expanded
+              >
                 บันทึก</b-button
               ></router-link
             >
             <br />
             <router-link to="/currently-drug"
-              ><b-button @click="deleteDrug();" type="is-danger is-light" size="is-medium" rounded expanded>
+              ><b-button
+                @click="deleteDrug()"
+                type="is-danger is-light"
+                size="is-medium"
+                rounded
+                expanded
+              >
                 ลบรายการยานี้</b-button
               ></router-link
             >
@@ -158,6 +170,7 @@ export default {
     isHide: false,
     currentlyDrug: {},
     drugAlert: [],
+    tabs: Number(),
     takesGroup: [],
     timeGroup: [],
   }),
@@ -168,19 +181,28 @@ export default {
         this.currentlyDrug = response.data;
         this.currentlyDrug.pic = this.$store.getters.editdrug.pic;
         this.currentlyDrug.receiveDate = new Date(this.currentlyDrug.receiveDate);
-        this.isHide = this.currentlyDrug.alertStatus;
+        this.takesGroup.push(this.currentlyDrug.drugAlert.take);
+        this.timeGroup.push(this.currentlyDrug.drugAlert.time);
+        // this.takesGroup = this.currentlyDrug.drugAlert.take;
+        // this.timeGroup = this.currentlyDrug.drugAlert.time;
+        this.tabs = this.currentlyDrug.drugAlert.tabs;
+        if (this.currentlyDrug.drugAlert === null) {
+          this.isHide = false;
+        } else {
+          this.isHide = true;
+        }
         console.log(this.currentlyDrug.receiveDate);
       });
-    if (this.currentlyDrug.alertStatus !== false) {
-      axios.get('http://localhost:8080/api/drug-alert/').then((response) => {
-        // eslint-disable-next-line prefer-destructuring
-        this.drugAlert = response.data[0];
-        // this.drugAlert = this.drugAlert[0];
-        this.takesGroup = [this.drugAlert.take];
-        this.timeGroup = [this.drugAlert.time];
-        console.log(this.drugAlert);
-      });
-    }
+    // if (this.currentlyDrug.alertStatus !== false) {
+    //   axios.get('http://localhost:8080/api/drug-alert/').then((response) => {
+    //     // eslint-disable-next-line prefer-destructuring
+    //     this.drugAlert = response.data[0];
+    //     // this.drugAlert = this.drugAlert[0];
+    //     this.takesGroup = [this.drugAlert.take];
+    //     this.timeGroup = [this.drugAlert.time];
+    //     console.log(this.drugAlert);
+    //   });
+    // }
   },
   methods: {
     async updateDrug() {
@@ -194,32 +216,52 @@ export default {
         },
       );
       console.warn(result);
-      if (this.isHide === true) {
+      if (this.isHide === true && this.currentlyDrug.drugAlert === null) {
+        await axios
+          .post('http://localhost:8080/api/drug-alert', {
+            drugCurrentlyUsedId: this.currentlyDrug.id,
+            tabs: this.tabs,
+            take: this.takesGroup[0],
+            time: this.timeGroup[0],
+          })
+          .then((response) => {
+            this.$router.push('/currently-drug');
+            console.log(response);
+          })
+          .catch((error) => {
+            // eslint-disable-next-line no-alert
+            alert(error.response.data.message);
+            console.log(error.response.data.message);
+          });
+      } else if (this.isHide === true && this.currentlyDrug.drugAlert !== null) {
         const result2 = await axios.patch(
-          `http://localhost:8080/api/drug-alert/${this.drugAlert.id}/update`,
+          `http://localhost:8080/api/drug-alert/${this.currentlyDrug.drugAlert.id}/update`,
           {
-            tabs: this.drugAlert.tabs,
+            tabs: this.tabs,
             take: this.takesGroup[0],
             time: this.timeGroup[0],
           },
         );
         console.warn(result2);
+      } else {
+        const result2 = await axios.delete(
+          `http://localhost:8080/api/drug-alert/${this.currentlyDrug.drugAlert.id}/delete`,
+          {},
+        );
+        console.warn(result2);
       }
-      const result2 = await axios.patch(
-        `http://localhost:8080/api/drug-alert/${this.drugAlert.id}/update`,
-        {
-          tabs: null,
-          take: null,
-          time: null,
-        },
-      );
-      console.warn(result2);
     },
     async deleteDrug() {
       const result = await axios.delete(
         `http://localhost:8080/api/currently-drug/${this.currentlyDrug.id}/delete`,
         {},
       );
+      if (this.currentlyDrug.drugAlert !== null) {
+        await axios.delete(
+          `http://localhost:8080/api/drug-alert/${this.currentlyDrug.drugAlert.id}/delete`,
+          {},
+        );
+      }
       console.warn(result);
     },
     reloadPage() {
@@ -229,4 +271,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.figure {
+  text-align: -webkit-center;
+}
+#currentlyDrugImageStyle > img {
+  height: 200px;
+  width: auto;
+}
+</style>

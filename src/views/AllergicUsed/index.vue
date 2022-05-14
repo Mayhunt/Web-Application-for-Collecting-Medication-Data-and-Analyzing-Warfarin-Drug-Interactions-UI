@@ -149,23 +149,28 @@ export default {
   mounted() {
     axios.get('http://localhost:8080/api/search').then((response) => {
       this.allDrug = response.data;
-      // console.log(this.allDrug);
+      axios.get('http://localhost:8080/api/allergic-drug').then((res) => {
+        this.allergicDrug = res.data;
+        console.warn(this.allergicDrug);
+        this.picAllergicUsed();
+        // console.log(this.allDrug);
+      });
     });
-    axios.get('http://localhost:8080/api/allergic-drug').then((response) => {
-      this.allergicDrug = response.data;
-      console.warn(this.allergicDrug);
-      this.picAllergicUsed();
-      // this.allergicDrug.forEach((b) => {
-      //   this.allDrug.forEach((c) => {
-      //     if (b.genericName === c.genericName) {
-      //       // eslint-disable-next-line no-param-reassign
-      //       b.pic = c.pic;
-      //       console.warn(b);
-      //     }
-      //   });
-      //   // return console.warn(b.id);
-      // });
-    });
+    // axios.get('http://localhost:8080/api/allergic-drug').then((response) => {
+    //   this.allergicDrug = response.data;
+    //   console.warn(this.allergicDrug);
+    //   this.picAllergicUsed();
+    //   // this.allergicDrug.forEach((b) => {
+    //   //   this.allDrug.forEach((c) => {
+    //   //     if (b.genericName === c.genericName) {
+    //   //       // eslint-disable-next-line no-param-reassign
+    //   //       b.pic = c.pic;
+    //   //       console.warn(b);
+    //   //     }
+    //   //   });
+    //   //   // return console.warn(b.id);
+    //   // });
+    // });
   },
   methods: {
     picAllergicUsed() {

@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */ /* eslint-disable no-constant-condition */
 <template>
   <section class="hero is-primary is-fullheight-with-navbar">
     <div
@@ -19,10 +20,15 @@
           :key="index"
           style="border-radius: 30px 30px 30px 30px"
         >
-          <article class="media">
+          <article v-if="Currently.pic !== 'undefined'" class="media">
             <div class="media-left">
               <figure class="image is-64x64">
-                <img :src="getImgUrl(Currently.pic)" alt="Image" />
+                <img
+                  v-if="Currently.pic !== '-'"
+                  :src="`http://localhost:8080/api/storage?key=${Currently.pic}`"
+                  alt="Image"
+                />
+                <img v-else src="http://localhost:8080/api/storage?key=Ac_YXsmD.png" alt="Image" />
               </figure>
             </div>
             <div class="media-content">
@@ -55,7 +61,7 @@
                   </h3>
                 </div>
                 <div>
-                  <div class="media-content" style="padding-left: 115px">
+                  <div class="media-content" style="text-align: -webkit-center">
                     <figure class="image is-128x128">
                       <img :src="`http://localhost:8080/api/storage?key=${this.details.pic}`" />
                     </figure>
@@ -106,7 +112,7 @@
                     <b-button
                       @click="sendEditDrug()"
                       class="button"
-                      type="is-danger"
+                      type="is-primary"
                       size="is-medium"
                       rounded
                       expanded
@@ -114,6 +120,18 @@
                       แก้ไขรายการยานี้</b-button
                     >
                   </router-link>
+                  <div class="pb-1 pt-1"></div>
+                  <b-button
+                    @click="
+                      deleteDrug();
+                    "
+                    type="is-danger"
+                    size="is-medium"
+                    rounded
+                    expanded
+                  >
+                    ลบรายการยานี้
+                  </b-button>
                 </div>
               </div>
             </section>
@@ -121,7 +139,7 @@
         </div>
       </b-modal>
       <b-notification
-      style="margin-top: 25px;background-color:#FFBF00"
+        style="margin-top: 25px; background-color: #ffbf00; color: black"
         v-model="isNotification"
         role="alert"
         has-icon
@@ -177,42 +195,64 @@ export default {
   mounted() {
     axios.get('http://localhost:8080/api/search').then((response) => {
       this.allDrug = response.data;
+      axios.get('http://localhost:8080/api/currently-drug').then((res) => {
+        this.drugcurrently = res.data;
+        console.warn(this.drugcurrently);
+        this.picAllergicUsed();
+        // this.picAllergicUsed();
+        this.drugcurrently.receiveDate = new Date(this.drugcurrently.receiveDate);
+        // eslint-disable-next-line consistent-return
+        // eslint-disable-next-line no-restricted-syntax
+        for (const element of this.drugcurrently) {
+          // eslint-disable-next-line space-in-parens
+          // eslint-disable-next-line no-constant-condition
+          /* eslint-disable */ 
+          if (
+            element.genericName === 'Warfarin (ชมพู) tab 5 mg '
+            || 'Warfarin (ฟ้า) tab 3 mg'
+            || 'Warfarin (ส้ม) tab 2 mg '
+          ) {
+            this.interact();
+            break;
+          }
+        }
+      });
+      this.getActivities();
       // console.log(this.allDrug);
     });
     axios.get('http://localhost:8080/api/interact').then((response) => {
       this.druginteract = response.data;
       // console.log(this.druginteract);
     });
-    axios.get('http://localhost:8080/api/currently-drug').then((response) => {
-      this.drugcurrently = response.data;
-      this.drugcurrently.receiveDate = new Date(this.drugcurrently.receiveDate);
-      this.picAllergicUsed();
-      // eslint-disable-next-line consistent-return
-      // eslint-disable-next-line no-restricted-syntax
-      for (const element of this.drugcurrently) {
-        // eslint-disable-next-line space-in-parens
-        // eslint-disable-next-line no-constant-condition
-        if (element.genericName === 'Warfarin (ชมพู) tab 5 mg ' || 'Warfarin (ฟ้า) tab 3 mg'
-          || 'Warfarin (ส้ม) tab 2 mg ') {
-          this.interact();
-          break;
-        }
-      }
-      // this.drugcurrently.forEach((a) => {
-      //   // eslint-disable-next-line no-constant-condition
-      //   if (
-      //     a.genericName === 'Warfarin (ชมพู) tab 5 mg ' ||
-      //     'Warfarin (ฟ้า) tab 3 mg' ||
-      //     'Warfarin (ส้ม) tab 2 mg '
-      //   ) {
-      //     this.interact();
-      //     // return console.warn('success');
-      //   }
-      // });
-      // console.log(this.drugcurrently);
-    });
+    // axios.get('http://localhost:8080/api/currently-drug').then((response) => {
+    //   this.drugcurrently = response.data;
+    //   console.warn(this.drugcurrently);
+    //   this.getActivities();
+    //   // this.picAllergicUsed();
+    //   this.drugcurrently.receiveDate = new Date(this.drugcurrently.receiveDate);
+    //   // eslint-disable-next-line consistent-return
+    //   // eslint-disable-next-line no-restricted-syntax
+    //   for (const element of this.drugcurrently) {
+    //     // eslint-disable-next-line space-in-parens
+    //     // eslint-disable-next-line no-constant-condition
+    //     if (
+    //       element.genericName === 'Warfarin (ชมพู) tab 5 mg '
+    //       || 'Warfarin (ฟ้า) tab 3 mg'
+    //       || 'Warfarin (ส้ม) tab 2 mg '
+    //     ) {
+    //       this.interact();
+    //       break;
+    //     }
+    //   }
+    // });
   },
   methods: {
+    getActivities() {
+      if (this.allDrug.length === 0 || this.drugcurrently.length === 0) {
+        return;
+      }
+      this.picAllergicUsed();
+    },
     interact() {
       // console.warn(this.druginteracts);
       this.drugcurrently.forEach((b) => {
@@ -227,19 +267,25 @@ export default {
         });
         // return console.warn(b.id);
       });
-      if (this.druginteracts.length > 0) { this.isNotification = true; }
+      if (this.druginteracts.length > 0) {
+        this.isNotification = true;
+      }
       console.warn(this.druginteracts);
     },
     picAllergicUsed() {
       this.drugcurrently.forEach((b) => {
+        // eslint-disable-next-line no-param-reassign
+        b.pic = '-';
+        // console.warn(this.allDrug);
         this.allDrug.forEach((c) => {
+          // console.warn('aaa');
           if (b.genericName === c.genericName) {
             // eslint-disable-next-line no-param-reassign
             b.pic = c.pic;
             // console.warn(b);
           }
         });
-        // return console.warn(b.id);
+        return console.warn(b);
       });
     },
     getImgUrl(pic) {
@@ -258,9 +304,9 @@ export default {
     },
     async deleteDrug() {
       const result = await axios.delete(
-        `http://localhost:8080/api/allergic-drug/${this.details.id}/delete`,
+        `http://localhost:8080/api/currently-drug/${this.details.id}/delete`,
       );
-      console.warn(result);
+      window.location.reload();
     },
     reloadPage() {
       window.location.reload();

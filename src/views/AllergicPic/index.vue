@@ -14,10 +14,10 @@
           v-for="(allergic, index) in allergics"
           :key="index"
           style="border-radius: 30px 30px 30px 30px"
-          @click="isImageModalActive = true"
+          @click="isImageModalActive = true; sendData(allergic);"
         >
           <div>
-            <b-image src="http://localhost:8080/api/storage?key=EB1YVYvR.png" alt="The Buefy Logo" ratio="2by1"> </b-image>
+            <b-image :src="`http://localhost:8080/api/storage?key=${allergic.cardPic}`" alt="The Buefy Logo" ratio="2by1"> </b-image>
           </div>
           <div class="pb-1 pt-1"></div>
 
@@ -34,7 +34,7 @@
         <!-- pop up -->
         <b-modal v-model="isImageModalActive">
           <p class="image">
-            <b-image :src="require('@/assets/allergicpic2.png')" alt="i" :rounded="rounded">
+            <b-image :src="`http://localhost:8080/api/storage?key=${this.details.cardPic}`" alt="i" :rounded="rounded">
             </b-image>
           </p>
         </b-modal>
@@ -74,7 +74,7 @@
                   <div class="buttons" style="justify-content: center; margin-top: 2rem">
                     <b-button
                       class="button"
-                      @click="(isCardModalActive = false), (isImageModalActive = false)"
+                      @click="(isCardModalActive = false), (isImageModalActive = false), deleteCardPic();"
                       type="is-danger"
                       size="is-medium"
                       rounded
@@ -112,7 +112,7 @@
                       />
                     </figure>
                   </div>
-                  <div>
+                  <div style="text-align-last: center;">
                     <!-- <div class="col-md-6"> -->
                     <!-- add image icon -->
                     <br />
@@ -123,7 +123,6 @@
                     <b-button
                       @click="
                         addImage();
-                        reloadPage();
                       "
                       rounded
                       type="is-primary"
@@ -149,21 +148,17 @@ export default {
   name: 'AllergicPage',
 
   data: () => ({
-    allergics: [
-      {
-        imgURL: '',
-      },
-      {
-        imgURL: '',
-      },
-    ],
+    allPic: [],
     data: {},
+    allergics: [],
     isCardModalActive: false,
     isImageModalActive: false,
     isAddModalActive: false,
     preview: null,
     image: null,
     a: null,
+    uploadPic: '',
+    details: {},
   }),
   // mounted() {
   //   axios
@@ -176,6 +171,12 @@ export default {
   //       console.warn(response.request.responseURL);
   //     });
   // },
+  mounted() {
+    axios.get('http://localhost:8080/api/card-pic').then((response) => {
+      this.allergics = response.data;
+      // console.log(this.allDrug);
+    });
+  },
   methods: {
     async addImage() {
       // const user =  this.$store.getters.username,
@@ -186,13 +187,12 @@ export default {
           'content-type': 'multipart/form-data',
         },
       });
-      console.warn(result.data);
-      const result1 = await axios.patch(`http://localhost:8080/api/inr/${this.selected.id}/update`, {
-        followDate: this.selected.followDate,
-        inrExpect: this.selected.inrExpect,
-        inrMeasure: this.selected.inrMeasure,
+      this.uploadPic = result.data;
+      const result1 = await axios.post('http://localhost:8080/api/card-pic', {
+        cardPic: this.uploadPic,
       });
       console.warn(result1);
+      window.location.reload();
     },
     previewImage(event) {
       const input = event.target;
@@ -211,6 +211,17 @@ export default {
     reloadPage() {
       window.location.reload();
       console.warn('reload');
+    },
+    sendData(detail) {
+      this.details = detail;
+      return this.details;
+    },
+    async deleteCardPic() {
+      const result = await axios.delete(
+        `http://localhost:8080/api/card-pic/${this.details.id}/delete`,
+      );
+      console.warn(result);
+      window.location.reload();
     },
   },
 };

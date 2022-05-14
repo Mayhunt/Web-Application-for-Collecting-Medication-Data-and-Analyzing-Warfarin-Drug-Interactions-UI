@@ -17,12 +17,12 @@
               <img
                 v-if="me.pic"
                 class="is-rounded image is-128x128"
-                src="https://series-review.net/wp-content/uploads/2022/01/YOU-Season3.jpg"
+                :src="`http://localhost:8080/api/storage?key=${me.pic}`"
               />
               <img
                 v-else
                 class="is-rounded image is-128x128"
-                src="https://bulma.io/images/placeholders/128x128.png"
+                src="http://localhost:8080/api/storage?key=Ac_YXsmD.png"
               />
             </figure>
           </div>

@@ -24,9 +24,16 @@
 
       <div class="card-content" style="padding:18px">
         <div class="content" style="font-family: 'Kanit'; color: white">
-          <strong>เช้า</strong>
+          <strong>เช้า&emsp;<b-icon type="is-warning" pack="mdi" icon="weather-partly-cloudy"></b-icon> </strong>
           <br>
-          &emsp;Bismuth Subsalicylate
+          <div v-for="(schedule, index) in drugSchedule" :key="index">
+          <p v-if="schedule.drugAlert.time === 'Breakfast'">&emsp;-{{schedule.genericName}}</p>
+          </div>
+          <br>
+          <strong>กลางวัน&emsp;<b-icon type="is-warning" pack="mdi" icon="weather-sunny"></b-icon> </strong>
+          <div v-for="(schedule, index) in drugSchedule" :key="index">
+          <p v-if="schedule.drugAlert.time === 'Lunch'">&emsp;-{{schedule.genericName}}</p>
+          </div>
         </div>
       </div>
     </b-collapse>
@@ -266,6 +273,7 @@ export default {
   },
   data() {
     return {
+      drugSchedule: [],
       selectedDate: new Date(),
       inrMeasure: Number(),
       inrExpect: Number(),
@@ -359,7 +367,14 @@ export default {
   mounted() {
     axios.get(`http://localhost:8080/api/inr`).then((response) => {
       this.data = response.data;
-      console.log(response);
+      console.warn(response);
+    });
+    axios.get(`http://localhost:8080/api/currently-drug`).then((response) => {
+      for (const i of response.data) {
+        if (i.drugAlert !== null) {
+        this.drugSchedule.push(i) }
+      };
+      console.warn(this.drugSchedule);
     });
   },
 };

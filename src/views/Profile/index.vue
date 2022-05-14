@@ -21,9 +21,10 @@
             <!-- <figure class="image is-128x128 ">
             <img center class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png" />
           </figure> -->
-            <figure class="media-left">
+            <figure>
               <p class="image is-128x128">
-                <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png" />
+                <img v-if="me.pic !== '-'" class="is-rounded" :src="`http://localhost:8080/api/storage?key=${me.pic}`" />
+                <img v-else class="is-rounded" src="http://localhost:8080/api/storage?key=Ac_YXsmD.png" />
               </p>
             </figure>
           </div>
