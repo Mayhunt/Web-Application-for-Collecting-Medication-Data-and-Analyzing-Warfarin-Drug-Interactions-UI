@@ -30,7 +30,7 @@
             <!-- <div class="col-md-6"> -->
             <!-- add image icon -->
             <input type="file" accept="image/*" @change="previewImage" id="my-file" />
-            <input type="submit">
+            <input type="submit" />
             <!-- </div> -->
             <span
               ><b-button
@@ -193,11 +193,15 @@ export default {
     };
   },
   mounted() {
-    axios.get(`http://localhost:8080/api/auth/me?id=${this.$store.getters.id}`).then((response) => {
-      this.me = response.data;
-      this.me.birthDate = new Date(this.me.birthDate);
-      console.log(response);
-    });
+    axios
+      .get(
+        `https://senior-project-api-gl8ig.ondigitalocean.app/api/auth/me?id=${this.$store.getters.id}`,
+      )
+      .then((response) => {
+        this.me = response.data;
+        this.me.birthDate = new Date(this.me.birthDate);
+        console.log(response);
+      });
   },
   computed: {
     ...mapGetters(['user']),
@@ -222,7 +226,7 @@ export default {
   methods: {
     async updateProfile() {
       const result = await axios.patch(
-        `http://localhost:8080/api/auth/${this.$store.getters.id}/update`,
+        `https://senior-project-api-gl8ig.ondigitalocean.app/api/auth/${this.$store.getters.id}/update`,
         {
           username: this.me.username,
           password: this.me.password,
@@ -270,11 +274,15 @@ export default {
       // const user =  this.$store.getters.username,
       const fd = new FormData();
       fd.append('file', this.image);
-      const result = await axios.post('http://localhost:8080/api/storage', fd, {
-        headers: {
-          'content-type': 'multipart/form-data',
+      const result = await axios.post(
+        'https://senior-project-api-gl8ig.ondigitalocean.app/api/storage',
+        fd,
+        {
+          headers: {
+            'content-type': 'multipart/form-data',
+          },
         },
-      });
+      );
       this.me.pic = result.data;
       console.warn(this.me.pic);
     },

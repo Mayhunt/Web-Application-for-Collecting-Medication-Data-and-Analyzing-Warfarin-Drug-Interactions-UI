@@ -3,7 +3,11 @@
     <section class="hero">
       <!-- Hero head: will stick at the top -->
       <div class="hero-head is-white">
-        <NavBar v-if="isLogin & isQuestion & isQuestion2 & isRegister1 & isRegister2 & isRegister3 & isConfirm" />
+        <NavBar
+          v-if="
+            isLogin & isQuestion & isQuestion2 & isRegister1 & isRegister2 & isRegister3 & isConfirm
+          "
+        />
       </div>
       <!-- Hero content: will be in the middle -->
       <section class="hero is-primary is-fullheight-with-navbar">
@@ -25,7 +29,7 @@ export default {
     NavBar,
   },
   // async created() {
-  //   const response = await axios.get('http://localhost:8080/api/auth/me');
+  //   const response = await axios.get('https://senior-project-api-gl8ig.ondigitalocean.app/api/auth/me');
   //   this.$store.dispatch('user', response.data);
   // },
   computed: {

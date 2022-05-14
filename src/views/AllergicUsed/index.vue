@@ -66,7 +66,9 @@
                 <div>
                   <div class="media-content">
                     <figure class="image">
-                      <img :src="`http://localhost:8080/api/storage?key=${this.details.pic}`" />
+                      <img
+                        :src="`https://senior-project-api-gl8ig.ondigitalocean.app/api/storage?key=${this.details.pic}`"
+                      />
                     </figure>
                   </div>
                 </div>
@@ -147,16 +149,18 @@ export default {
     details: {},
   }),
   mounted() {
-    axios.get('http://localhost:8080/api/search').then((response) => {
+    axios.get('https://senior-project-api-gl8ig.ondigitalocean.app/api/search').then((response) => {
       this.allDrug = response.data;
-      axios.get('http://localhost:8080/api/allergic-drug').then((res) => {
-        this.allergicDrug = res.data;
-        console.warn(this.allergicDrug);
-        this.picAllergicUsed();
-        // console.log(this.allDrug);
-      });
+      axios
+        .get('https://senior-project-api-gl8ig.ondigitalocean.app/api/allergic-drug')
+        .then((res) => {
+          this.allergicDrug = res.data;
+          console.warn(this.allergicDrug);
+          this.picAllergicUsed();
+          // console.log(this.allDrug);
+        });
     });
-    // axios.get('http://localhost:8080/api/allergic-drug').then((response) => {
+    // axios.get('https://senior-project-api-gl8ig.ondigitalocean.app/api/allergic-drug').then((response) => {
     //   this.allergicDrug = response.data;
     //   console.warn(this.allergicDrug);
     //   this.picAllergicUsed();
@@ -193,16 +197,16 @@ export default {
     getImgUrl(pic) {
       if (pic !== '-') {
         // eslint-disable-next-line no-unused-vars
-        return `http://localhost:8080/api/storage?key=${pic}`;
+        return `https://senior-project-api-gl8ig.ondigitalocean.app/api/storage?key=${pic}`;
       }
-      return 'http://localhost:8080/api/storage?key=Ac_YXsmD.png';
+      return 'https://senior-project-api-gl8ig.ondigitalocean.app/api/storage?key=Ac_YXsmD.png';
     },
     sendEditDrug() {
       this.$store.commit('setEditDrug', { id: this.details.id, pic: this.details.pic });
     },
     async deleteDrug() {
       const result = await axios.delete(
-        `http://localhost:8080/api/allergic-drug/${this.details.id}/delete`,
+        `https://senior-project-api-gl8ig.ondigitalocean.app/api/allergic-drug/${this.details.id}/delete`,
       );
       console.warn(result);
     },

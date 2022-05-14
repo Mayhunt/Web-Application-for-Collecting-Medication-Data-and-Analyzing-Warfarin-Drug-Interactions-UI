@@ -24,7 +24,7 @@
             clearable
             :data="filteredDataArray"
             field="genericName"
-            @select="option => (selected = option, searchDrug())"
+            @select="(option) => ((selected = option), searchDrug())"
             confirm-keys="Select"
             style="padding-left: 1px"
           >
@@ -74,7 +74,11 @@
 
       <template #end>
         <b-navbar-item tag="div">
-          <div class="buttons" @click="logout()" style="justify-content: right; padding-right: 20px">
+          <div
+            class="buttons"
+            @click="logout()"
+            style="justify-content: right; padding-right: 20px"
+          >
             <router-link to="/sign-in">
               <b-icon pack="mdi" icon="logout" type="is-primary" size="is-medium"></b-icon>
               <span style="padding-right: 10px"></span><span>ออกจากระบบ</span>
@@ -112,7 +116,7 @@ export default {
     },
   },
   mounted() {
-    axios.get('http://localhost:8080/api/search').then((response) => {
+    axios.get('https://senior-project-api-gl8ig.ondigitalocean.app/api/search').then((response) => {
       this.data = response.data;
       // this.allData = data.data;
       // data.data.forEach((item) => this.data.push(item.genericName));

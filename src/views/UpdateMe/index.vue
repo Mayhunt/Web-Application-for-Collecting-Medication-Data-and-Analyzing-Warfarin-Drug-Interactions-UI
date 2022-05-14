@@ -17,12 +17,12 @@
               <img
                 v-if="me.pic"
                 class="image is-128x128"
-                :src="`http://localhost:8080/api/storage?key=${me.pic}`"
+                :src="`https://senior-project-api-gl8ig.ondigitalocean.app/api/storage?key=${me.pic}`"
               />
               <img
                 v-else
                 class="image is-128x128"
-                src="http://localhost:8080/api/storage?key=Ac_YXsmD.png"
+                src="https://senior-project-api-gl8ig.ondigitalocean.app/api/storage?key=Ac_YXsmD.png"
               />
             </figure>
           </div>
@@ -32,15 +32,15 @@
             <input type="file" accept="image/*" @change="previewImage" id="my-file" />
             <!-- </div> -->
             <div align="right">
-            <span
-              ><b-button
-                type="is-success"
-                @click="addImage"
-                class="file-icon"
-                pack="mdi"
-                icon-right="cloud-upload"
-              ></b-button
-            ></span>
+              <span
+                ><b-button
+                  type="is-success"
+                  @click="addImage"
+                  class="file-icon"
+                  pack="mdi"
+                  icon-right="cloud-upload"
+                ></b-button
+              ></span>
             </div>
             <p class="has-text-danger is-size-7">โปรดคลิกไอคอนเพื่ออัพโหลด</p>
           </div>
@@ -194,11 +194,15 @@ export default {
     };
   },
   mounted() {
-    axios.get(`http://localhost:8080/api/auth/me?id=${this.$store.getters.id}`).then((response) => {
-      this.me = response.data;
-      this.me.birthDate = new Date(this.me.birthDate);
-      console.log(response);
-    });
+    axios
+      .get(
+        `https://senior-project-api-gl8ig.ondigitalocean.app/api/auth/me?id=${this.$store.getters.id}`,
+      )
+      .then((response) => {
+        this.me = response.data;
+        this.me.birthDate = new Date(this.me.birthDate);
+        console.log(response);
+      });
   },
   computed: {
     ...mapGetters(['user']),
@@ -223,23 +227,26 @@ export default {
   methods: {
     async updateProfile() {
       const result = await axios
-        .patch(`http://localhost:8080/api/auth/${this.$store.getters.id}/update`, {
-          username: this.me.username,
-          password: this.me.password,
-          firstName: this.me.first_name,
-          lastName: this.me.last_name,
-          idCardNumber: this.me.id_card_number,
-          birthDate: this.me.birthDate,
-          bloodGroup: this.me.blood_group,
-          medicationCondition: this.me.medication_condition,
-          weight: this.me.weight,
-          height: this.me.height,
-          bmi: this.me.calBMI,
-          phoneNum: this.me.phone_num,
-          emergencyContact: this.me.emergency_contact,
-          emergencyPhoneNum: this.me.emergency_phone_num,
-          pic: this.me.pic,
-        })
+        .patch(
+          `https://senior-project-api-gl8ig.ondigitalocean.app/api/auth/${this.$store.getters.id}/update`,
+          {
+            username: this.me.username,
+            password: this.me.password,
+            firstName: this.me.first_name,
+            lastName: this.me.last_name,
+            idCardNumber: this.me.id_card_number,
+            birthDate: this.me.birthDate,
+            bloodGroup: this.me.blood_group,
+            medicationCondition: this.me.medication_condition,
+            weight: this.me.weight,
+            height: this.me.height,
+            bmi: this.me.calBMI,
+            phoneNum: this.me.phone_num,
+            emergencyContact: this.me.emergency_contact,
+            emergencyPhoneNum: this.me.emergency_phone_num,
+            pic: this.me.pic,
+          },
+        )
         .then((response) => {
           this.$router.push('/me');
           console.log(response);
@@ -277,11 +284,15 @@ export default {
       // const user =  this.$store.getters.username,
       const fd = new FormData();
       fd.append('file', this.image);
-      const result = await axios.post('http://localhost:8080/api/storage', fd, {
-        headers: {
-          'content-type': 'multipart/form-data',
+      const result = await axios.post(
+        'https://senior-project-api-gl8ig.ondigitalocean.app/api/storage',
+        fd,
+        {
+          headers: {
+            'content-type': 'multipart/form-data',
+          },
         },
-      });
+      );
       this.me.pic = result.data;
       console.warn(this.me.pic);
     },

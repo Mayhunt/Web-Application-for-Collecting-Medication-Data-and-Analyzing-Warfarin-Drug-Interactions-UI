@@ -20,7 +20,14 @@
             <h1 style="text-align: center; margin-bottom: 0.25rem; padding: 1rem">
               คำถามรักษาความปลอดภัย
             </h1>
-            <p style="text-align: center; margin-bottom: 0.25rem; padding-left: 2rem; padding-right: 2rem">
+            <p
+              style="
+                text-align: center;
+                margin-bottom: 0.25rem;
+                padding-left: 2rem;
+                padding-right: 2rem;
+              "
+            >
               คำถามรักษาความปลอดภัยตั้งขึ้นเพื่อใช้ในการยืนยันตัวตนในกรณีที่ผู้ใช้งานลืมรหัสผ่านในการเข้าใช้งาน
             </p>
             <!-- <h6 style="font-size:1rem; text-align:center">Welcome back you've been missed</h6> -->
@@ -54,7 +61,13 @@
             <!-- <div class="buttons" style="justify-content: right"><b-button type="is-text" size="is-small">Forget Password</b-button></div> -->
             <div class="fixedbuttons" style="justify-content: center; margin-top: 2rem">
               <router-link to="/register3"
-                ><b-button @click="addQuestion()" type="is-primary" size="is-medium" rounded expanded>
+                ><b-button
+                  @click="addQuestion()"
+                  type="is-primary"
+                  size="is-medium"
+                  rounded
+                  expanded
+                >
                   ถัดไป</b-button
                 ></router-link
               >
@@ -84,10 +97,13 @@ export default {
       console.warn(localStorage.getItem('token'));
       // console.warn(localStorage.getItem('user'));
       console.warn(this.question, this.answer);
-      const result = await axios.post('http://localhost:8080/api/question', {
-        question: this.xxx,
-        answer: this.answer,
-      });
+      const result = await axios.post(
+        'https://senior-project-api-gl8ig.ondigitalocean.app/api/question',
+        {
+          question: this.xxx,
+          answer: this.answer,
+        },
+      );
       console.warn(result);
       // console.warn(localStorage.getItem('token'));
     },

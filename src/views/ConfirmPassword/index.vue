@@ -20,7 +20,17 @@
             <h1 style="margin-top: 0; text-align: center; margin-bottom: 0.25rem; padding: 1rem">
               ยืนยันคำตอบเพื่อยืนยันตัวตน
             </h1>
-            <p style="margin-top: 0; text-align: center; margin-bottom: 0.25rem; padding-left: 2rem; padding-right: 2rem">กรุณาใส่คำตอบของคำถามที่ท่านได้เคยได้ตั้งไว้</p>
+            <p
+              style="
+                margin-top: 0;
+                text-align: center;
+                margin-bottom: 0.25rem;
+                padding-left: 2rem;
+                padding-right: 2rem;
+              "
+            >
+              กรุณาใส่คำตอบของคำถามที่ท่านได้เคยได้ตั้งไว้
+            </p>
             <!-- <h6 style="font-size:1rem; text-align:center">Welcome back you've been missed</h6> -->
           </div>
           <form class="box">
@@ -33,7 +43,11 @@
 
             <!-- <div class="buttons" style="justify-content: right"><b-button type="is-text" size="is-small">Forget Password</b-button></div> -->
             <div class="fixedbuttons" style="justify-content: center; margin-top: 2rem">
-              <router-link to="/sign-in"><b-button type="is-primary" size="is-medium" rounded expanded> ยืนยันคำตอบ</b-button></router-link>
+              <router-link to="/sign-in"
+                ><b-button type="is-primary" size="is-medium" rounded expanded>
+                  ยืนยันคำตอบ</b-button
+                ></router-link
+              >
               <!-- <button class="button is-text">Register</button> -->
             </div>
           </form>

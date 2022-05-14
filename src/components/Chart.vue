@@ -1,10 +1,6 @@
 <template>
   <div>
-    <Line
-      v-bind:lables="labels"
-      v-bind:datasets="datasets"
-      v-bind:option="option"
-    ></Line>
+    <Line v-bind:lables="labels" v-bind:datasets="datasets" v-bind:option="option"></Line>
   </div>
 </template>
 

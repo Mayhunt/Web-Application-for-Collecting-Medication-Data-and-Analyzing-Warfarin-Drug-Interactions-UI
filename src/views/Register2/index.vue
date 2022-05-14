@@ -34,10 +34,7 @@
             <b-image :src="preview" rounded class="img-fluid" />
           </figure>
           <figure v-else class="image is-128x128">
-            <img
-              class="image is-128x128"
-              src="https://bulma.io/images/placeholders/128x128.png"
-            />
+            <img class="image is-128x128" src="https://bulma.io/images/placeholders/128x128.png" />
           </figure>
         </div>
         <div>
@@ -46,15 +43,15 @@
           <input type="file" accept="image/*" @change="previewImage" id="my-file" />
           <!-- </div> -->
           <div align="right">
-          <span
-            ><b-button
-              type="is-success"
-              @click="addImage"
-              class="file-icon"
-              pack="mdi"
-              icon-right="cloud-upload"
-            ></b-button
-          ></span>
+            <span
+              ><b-button
+                type="is-success"
+                @click="addImage"
+                class="file-icon"
+                pack="mdi"
+                icon-right="cloud-upload"
+              ></b-button
+            ></span>
           </div>
           <p class="has-text-danger is-size-7">โปรดคลิกไอคอนเพื่ออัพโหลด</p>
         </div>
@@ -137,9 +134,9 @@
             class="fixedbuttons"
             style="justify-content: center; margin-top: 2.5rem; margin-bottom: 4rem"
           >
-          <b-button @click="addProfile()" rounded type="is-primary" size="is-medium" expanded>
-                ถัดไป</b-button
-              >
+            <b-button @click="addProfile()" rounded type="is-primary" size="is-medium" expanded>
+              ถัดไป</b-button
+            >
           </div>
         </form>
       </div>
@@ -179,37 +176,41 @@ export default {
     async addProfile() {
       // const user =  this.$store.getters.username,
       // eslint-disable-next-line no-unused-vars
-      const result = await axios.post('http://localhost:8080/api/auth/register', {
-        username: this.$store.getters.username,
-        password: this.$store.getters.password,
-        firstName: this.first_name,
-        lastName: this.last_name,
-        idCardNumber: this.id_card_number,
-        birthDate: this.selected_date,
-        bloodGroup: this.blood_group,
-        medicationCondition: this.medication_condition,
-        weight: this.weight,
-        height: this.height,
-        bmi: this.calBMI,
-        phoneNum: this.phone_num,
-        emergencyContact: this.emergency_contact,
-        emergencyPhoneNum: this.emergency_phone_num,
-        pic: this.pic,
-      }).then((response) => {
-        // eslint-disable-next-line no-shadow
-        // eslint-disable-next-line no-unused-vars
-        axios.post('http://localhost:8080/api/auth/sign-in', {
-        // console.log(result.data);
+      const result = await axios
+        .post('https://senior-project-api-gl8ig.ondigitalocean.app/api/auth/register', {
           username: this.$store.getters.username,
           password: this.$store.getters.password,
-        }).then((res) => {
-          localStorage.setItem('token', res.data.accessToken);
-          this.$store.dispatch('user', res.data);
-          console.warn(localStorage.getItem('token'));
-          this.$router.push('/question');
-          console.log(response);
-        });
-      })
+          firstName: this.first_name,
+          lastName: this.last_name,
+          idCardNumber: this.id_card_number,
+          birthDate: this.selected_date,
+          bloodGroup: this.blood_group,
+          medicationCondition: this.medication_condition,
+          weight: this.weight,
+          height: this.height,
+          bmi: this.calBMI,
+          phoneNum: this.phone_num,
+          emergencyContact: this.emergency_contact,
+          emergencyPhoneNum: this.emergency_phone_num,
+          pic: this.pic,
+        })
+        .then((response) => {
+          // eslint-disable-next-line no-shadow
+          // eslint-disable-next-line no-unused-vars
+          axios
+            .post('https://senior-project-api-gl8ig.ondigitalocean.app/api/auth/sign-in', {
+              // console.log(result.data);
+              username: this.$store.getters.username,
+              password: this.$store.getters.password,
+            })
+            .then((res) => {
+              localStorage.setItem('token', res.data.accessToken);
+              this.$store.dispatch('user', res.data);
+              console.warn(localStorage.getItem('token'));
+              this.$router.push('/question');
+              console.log(response);
+            });
+        })
         .catch((error) => {
           // eslint-disable-next-line no-alert
           alert(error.response.data.message);
@@ -220,11 +221,15 @@ export default {
       // const user =  this.$store.getters.username,
       const fd = new FormData();
       fd.append('file', this.image);
-      const result = await axios.post('http://localhost:8080/api/storage', fd, {
-        headers: {
-          'content-type': 'multipart/form-data',
+      const result = await axios.post(
+        'https://senior-project-api-gl8ig.ondigitalocean.app/api/storage',
+        fd,
+        {
+          headers: {
+            'content-type': 'multipart/form-data',
+          },
         },
-      });
+      );
       this.pic = result.data;
       console.warn(result);
     },
