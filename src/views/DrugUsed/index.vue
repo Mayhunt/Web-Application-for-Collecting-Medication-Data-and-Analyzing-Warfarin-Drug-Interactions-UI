@@ -63,8 +63,8 @@
                 </div>
                 <div>
                   <div class="media-content" style="text-align: -webkit-center">
-                    <figure class="image is-128x128">
-                      <img :src="`http://localhost:8080/api/storage?key=${this.details.pic}`" />
+                    <figure class="image">
+                      <b-image :src="`http://localhost:8080/api/storage?key=${this.details.pic}`"> </b-image>
                     </figure>
                   </div>
                 </div>
@@ -78,7 +78,7 @@
                     <strong><h5>บันทึกเพิ่มเติม</h5></strong>
                     <h4>{{ this.details.more }}</h4>
                   </div>
-                  <b-field label="วันเกิด" label-position="on-border">
+                  <b-field label="วันที่ได้รับยา" label-position="on-border">
                     <b-datepicker
                       :value="new Date(this.details.receiveDate)"
                       :locale="ES"

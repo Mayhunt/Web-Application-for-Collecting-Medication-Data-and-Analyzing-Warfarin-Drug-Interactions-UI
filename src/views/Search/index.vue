@@ -10,7 +10,7 @@
         <h1>{{this.$store.getters.searchdrugs.genericName}}</h1>
       </div>
       <div>
-        <b-image :src="`http://localhost:8080/api/storage?key=${this.$store.getters.searchdrugs.pic}`" alt="ex1" ratio="2by1" :rounded="rounded">
+        <b-image :src="`http://localhost:8080/api/storage?key=${this.$store.getters.searchdrugs.pic}`" alt="ex1" :rounded="rounded">
         </b-image>
       </div>
 

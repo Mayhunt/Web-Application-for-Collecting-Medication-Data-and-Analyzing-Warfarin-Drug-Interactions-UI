@@ -64,8 +64,8 @@
                   </h3>
                 </div>
                 <div>
-                  <div class="media-content" style="padding-left: 115px">
-                    <figure class="image is-128x128">
+                  <div class="media-content">
+                    <figure class="image">
                       <img :src="`http://localhost:8080/api/storage?key=${this.details.pic}`" />
                     </figure>
                   </div>
@@ -79,7 +79,7 @@
                     >
                   </div>
                   <b-field label="อาการที่แพ้" label-position="on-border">
-                    <b-input :value="this.details.symptom" Disabled> </b-input>
+                    <b-input :value="this.details.symptom" Disabled rounded> </b-input>
                   </b-field>
                   <b-field label="สถานที่ได้รับ" label-position="on-border">
                     <b-input

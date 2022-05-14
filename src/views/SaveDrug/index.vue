@@ -12,7 +12,6 @@
         <b-image
           :src="`http://localhost:8080/api/storage?key=${this.$store.getters.searchdrugs.pic}`"
           alt="The Buefy Logo"
-          ratio="2by1"
           :rounded="rounded"
         >
         </b-image>

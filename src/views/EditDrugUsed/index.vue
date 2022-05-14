@@ -13,7 +13,6 @@
           id="currentlyDrugImageStyle"
           :src="`http://localhost:8080/api/storage?key=${this.currentlyDrug.pic}`"
           alt="The Buefy Logo"
-          :rounded="rounded"
         >
         </b-image>
       </div>
@@ -272,11 +271,11 @@ export default {
 </script>
 
 <style>
-.figure {
+/* .figure {
   text-align: -webkit-center;
-}
+} */
 #currentlyDrugImageStyle > img {
-  height: 200px;
+  height: auto;
   width: auto;
 }
 </style>
