@@ -25,7 +25,6 @@
       <div class="card-content" style="padding:18px">
         <div class="content" style="font-family: 'Kanit'; color: white">
           <strong>เช้า&emsp;<b-icon type="is-warning" pack="mdi" icon="weather-partly-cloudy"></b-icon> </strong>
-          <br>
           <div v-for="(schedule, index) in drugSchedule" :key="index">
           <p v-if="schedule.drugAlert.time === 'Breakfast'">&emsp;-&ensp;{{schedule.genericName}}</p>
           </div>
