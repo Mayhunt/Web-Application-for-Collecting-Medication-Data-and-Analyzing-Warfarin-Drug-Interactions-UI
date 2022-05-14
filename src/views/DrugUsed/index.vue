@@ -47,6 +47,7 @@
           </article>
         </div>
       </div>
+      <div class="pb-3 pt-3"></div>
       <b-modal v-model="isCardModalActive" :width="640" scroll="keep">
         <div class="card">
           <div>

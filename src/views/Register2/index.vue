@@ -35,7 +35,7 @@
           </figure>
           <figure v-else class="image is-128x128">
             <img
-              class="is-rounded image is-128x128"
+              class="image is-128x128"
               src="https://bulma.io/images/placeholders/128x128.png"
             />
           </figure>
