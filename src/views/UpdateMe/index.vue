@@ -16,12 +16,12 @@
             <figure v-else class="image is-128x128">
               <img
                 v-if="me.pic"
-                class="is-rounded image is-128x128"
+                class="image is-128x128"
                 :src="`http://localhost:8080/api/storage?key=${me.pic}`"
               />
               <img
                 v-else
-                class="is-rounded image is-128x128"
+                class="image is-128x128"
                 src="http://localhost:8080/api/storage?key=Ac_YXsmD.png"
               />
             </figure>

@@ -23,8 +23,8 @@
           </figure> -->
             <figure>
               <p class="image is-128x128">
-                <img v-if="me.pic !== '-'" class="is-rounded" :src="`http://localhost:8080/api/storage?key=${me.pic}`" />
-                <img v-else class="is-rounded" src="http://localhost:8080/api/storage?key=Ac_YXsmD.png" />
+                <img v-if="me.pic !== '-'"  :src="`http://localhost:8080/api/storage?key=${me.pic}`" />
+                <img v-else src="http://localhost:8080/api/storage?key=Ac_YXsmD.png" />
               </p>
             </figure>
           </div>
