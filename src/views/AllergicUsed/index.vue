@@ -49,6 +49,7 @@
             ></router-link
           >
         </div>
+        <div class="pb-5 pt-5"></div>
       </div>
       <b-modal v-model="isCardModalActive" :width="640" scroll="keep">
         <div class="card">
@@ -239,6 +240,7 @@ export default {
   position: fixed;
   padding-left: 15px;
   padding-right: 15px;
+  padding-bottom: 120px;
   left: 0%;
   bottom: 0px;
   background-color: #f2effb;
