@@ -1,182 +1,483 @@
-/* eslint-disable no-restricted-syntax */
 <template>
-  <section>
-    <!-- b modal infomation picture -->
-    <b-modal v-model="isImageModalActive">
-      <p class="image">
-        <b-image :src="require('@/assets/info.png')" alt="i" :rounded="rounded"> </b-image>
-      </p>
-    </b-modal>
-    <!--  -->
-    <b-navbar :fixed-top="true">
-      <template #brand>
-        <b-navbar-item href="#">
-          <router-link to="/home">
-            <b-icon pack="fas" size="is-large" icon="home" type="is-white"> </b-icon>
-          </router-link>
-        </b-navbar-item>
-        <b-navbar-item>
-          <b-autocomplete
-            rounded
-            placeholder="ค้นหาด้วยชื่อยาสามัญ"
-            icon="magnify"
-            v-model="name"
-            clearable
-            :data="filteredDataArray"
-            field="genericName"
-            @select="(option) => ((selected = option), searchDrug())"
-            confirm-keys="Select"
-            style="padding-left: 1px"
-          >
-            <template #empty>No results found</template>
-          </b-autocomplete>
-          <!-- infomation -->
-          <b-icon
-            pack="fas"
-            icon="info"
-            type="is-grey-lighter"
-            @click.native="isImageModalActive = true"
-            style="padding-left: 5px"
-          >
-          </b-icon>
-          <!--  -->
-        </b-navbar-item>
-      </template>
-      <template #start>
-        <router-link to="/currently-drug">
-          <b-navbar-item href="#">
-            <b-icon pack="mdi" icon="pill" type="is-primary" size="is-medium"> </b-icon>
-            <span style="padding-left: 16px"></span><span>รายการยาที่ใช้ปัจจุบัน</span>
-          </b-navbar-item>
-        </router-link>
-        <router-link to="/allergic-drug">
-          <b-navbar-item>
-            <b-icon pack="mdi" icon="exclamation" type="is-primary" size="is-medium"> </b-icon>
-            <span style="padding-left: 16px"></span><span>รายการยาที่แพ้</span>
-          </b-navbar-item>
-        </router-link>
-        <router-link to="/allergic-pic">
-          <b-navbar-item>
-            <b-icon pack="fas" icon="fa-solid fa-file-image" type="is-primary" size="is-medium">
-            </b-icon>
-            <span style="padding-left: 16px"></span><span>รูปภาพใบแพ้ยา</span>
-          </b-navbar-item>
-        </router-link>
-        <hr />
-        <router-link to="/me">
-          <b-navbar-item>
-            <b-icon pack="mdi" icon="account" type="is-primary" size="is-medium"> </b-icon>
-            <span style="padding-left: 16px"></span><span>ข้อมูลส่วนตัว</span>
-          </b-navbar-item>
-        </router-link>
-        <hr />
-      </template>
-
-      <template #end>
-        <b-navbar-item tag="div">
+  <section class="hero is-primary is-fullheight-with-navbar">
+    <div style="background-color: rgb(121, 87, 213)">
+      <b-collapse
+        class="card"
+        animation="slide"
+        v-model="isOpen"
+        aria-id="contentIdForA11y3"
+        style="background-color: rgb(121, 87, 213)"
+      >
+        <template #trigger="props">
           <div
-            class="buttons"
-            @click="logout()"
-            style="justify-content: right; padding-right: 20px"
+            class="card-header"
+            role="button"
+            aria-controls="contentIdForA11y3"
+            :aria-expanded ="isOpen"
+            style="font-family: 'Kanit'"
           >
-            <router-link to="/sign-in">
-              <b-icon pack="mdi" icon="logout" type="is-primary" size="is-medium"></b-icon>
-              <span style="padding-right: 10px"></span><span>ออกจากระบบ</span>
-            </router-link>
+            <p class="card-header-title" style="color: white">
+              <font size="6">รายการยาวันนี้&ensp;<b-icon pack="fas" icon="tablets"></b-icon></font>
+            </p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'"> </b-icon>
+            </a>
           </div>
-        </b-navbar-item>
-      </template>
-    </b-navbar>
+        </template>
+
+        <div class="card-content" style="padding: 18px">
+          <div class="content" style="font-family: 'Kanit'; color: white">
+            <strong
+              >เช้า&emsp;<b-icon type="is-warning" pack="mdi" icon="weather-partly-cloudy"></b-icon>
+            </strong>
+            <div v-for="(schedule, index) in drugSchedule" :key="index">
+              <p v-if="schedule.drugAlert.time === 'Breakfast'">
+                &emsp;-&ensp;{{ schedule.genericName }}
+              </p>
+            </div>
+            <br />
+            <strong
+              >กลางวัน&emsp;<b-icon type="is-warning" pack="mdi" icon="weather-sunny"></b-icon>
+            </strong>
+            <div v-for="(schedule, index) in drugSchedule" :key="index">
+              <p v-if="schedule.drugAlert.time === 'Lunch'">
+                &emsp;-&ensp;{{ schedule.genericName }}
+              </p>
+            </div>
+            <br />
+            <strong
+              >เย็น&emsp;<b-icon type="is-warning" pack="mdi" icon="weather-night"></b-icon>
+            </strong>
+            <div v-for="(schedule, index) in drugSchedule" :key="index">
+              <p v-if="schedule.drugAlert.time === 'Dinner'">
+                &emsp;-&ensp;{{ schedule.genericName }}
+              </p>
+            </div>
+            <br />
+            <strong>ก่อนนอน&emsp;<b-icon type="is-warning" pack="mdi" icon="bed"></b-icon> </strong>
+            <div v-for="(schedule, index) in drugSchedule" :key="index">
+              <p v-if="schedule.drugAlert.time === 'Before Bed'">
+                &emsp;-&ensp;{{ schedule.genericName }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </b-collapse>
+
+      <section
+        class="hero is-white is-fullheight-with-navbar"
+        style="border-radius: 60px 60px 0 0; margin-top: 1rem"
+      >
+        <div class="container" style="margin: 0 20px">
+          <div class="content is-medium" style="font-family: 'Kanit'">
+            <br />
+            <h2 style="margin-top: 0">INR</h2>
+          </div>
+          <div class="INRChart">
+            <GChart
+              type="LineChart"
+              :options="options"
+              :data="chartData"
+              @ready="onChartReady"
+              :settings="{
+                packages: ['corechart'],
+                callback: () => {
+                  this.drawData();
+                },
+              }"
+            />
+          </div>
+
+          <div class="media-content" style="margin-top: 12px">
+            <b-table
+              :data="data"
+              :narrowed="isNarrowed"
+              :hoverable="isHoverable"
+              :loading="isLoading"
+              :selected.sync="selected"
+              :mobile-cards="hasMobileCards"
+              style="table-cell-border: 0"
+            >
+              <b-table-column
+                field="date"
+                label="วันที่"
+                :th-attrs="dateThAttrs"
+                :td-attrs="columnTdAttrs"
+                centered
+                v-slot="props"
+              >
+                <span class="tag is-primary is-light">
+                  {{ new Date(props.row.followDate).toLocaleDateString() }}
+                </span>
+              </b-table-column>
+
+              <b-table-column
+                field="expectedINR"
+                label="ค่า INR ที่คาดหวัง"
+                :td-attrs="columnTdAttrs"
+                centered
+                v-slot="props"
+              >
+                {{ props.row.inrExpect }}
+              </b-table-column>
+
+              <b-table-column
+                field="actualINR"
+                label="ค่า INR ที่วัดได้"
+                :td-attrs="columnTdAttrs"
+                centered
+                v-slot="props"
+              >
+                {{ props.row.inrMeasure }}
+              </b-table-column>
+            </b-table>
+          </div>
+          <div class="buttons" style="justify-content: center,font-family: 'Kanit'">
+            <b-button
+              rounded
+              label="บันทึกค่า INR"
+              type="is-primary"
+              size="is-medium"
+              @click="isCardModalActive = true"
+              expanded
+              style="margin-top: 20px"
+            />
+            <!-- popup-add inr -->
+            <b-modal v-model="isCardModalActive" :width="640" scroll="keep">
+              <div class="card">
+                <div>
+                  <section
+                    class="hero is-white"
+                    style="border-radius: 60px 60px 0 0; margin-top: 1rem; padding: 1rem"
+                  >
+                    <div>
+                      <div class="content is-medium">
+                        <h1 style="margin-top: 0; text-align: center; margin-bottom: 0.25rem">
+                          บันทึกค่า INR
+                        </h1>
+                      </div>
+                      <form class="box">
+                        <b-field label="วันที่">
+                          <b-datepicker
+                            v-model="selectedDate"
+                            placeholder="เลือกวันที่."
+                            icon="calendar-today"
+                            rounded
+                            trap-focus
+                          >
+                          </b-datepicker>
+                        </b-field>
+
+                        <b-field label="ค่า INR ที่คาดหวัง">
+                          <b-input
+                            v-model.number="inrExpect"
+                            placeholder="ใส่ค่า INR ที่คาดหวัง"
+                            rounded
+                            trap-focus
+                          ></b-input>
+                        </b-field>
+
+                        <b-field label="ค่า INR ที่วัดได้จริง">
+                          <b-input
+                            placeholder="ใส่ค่า INR ที่วัดได้จริง"
+                            rounded
+                            trap-focus
+                            v-model.number="inrMeasure"
+                          ></b-input>
+                        </b-field>
+                        <div class="fixedbuttons" style="justify-content: center; margin-top: 2rem">
+                          <b-button
+                            @click="addInr()"
+                            rounded
+                            type="is-primary"
+                            size="is-medium"
+                            expanded
+                            >บันทึก</b-button
+                          >
+                        </div>
+                      </form>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </b-modal>
+
+            <!-- popup edit inr -->
+            <b-modal v-model="isCardModalActive2" :width="640" scroll="keep">
+              <div class="card">
+                <div>
+                  <section
+                    class="hero is-white"
+                    style="border-radius: 60px 60px 0 0; margin-top: 1rem; padding: 1rem"
+                  >
+                    <div>
+                      <div class="content is-medium">
+                        <h1 style="margin-top: 0; text-align: center; margin-bottom: 0.25rem">
+                          แก้ไขค่า INR
+                        </h1>
+                      </div>
+                      <form class="box">
+                        <b-field label="วันที่">
+                          <b-datepicker
+                            v-model="selected.followDate"
+                            placeholder="เลือกวันที่."
+                            icon="calendar-today"
+                            rounded
+                            trap-focus
+                          >
+                          </b-datepicker>
+                        </b-field>
+
+                        <b-field label="ค่า INR ที่คาดหวัง">
+                          <b-input v-model="selected.inrExpect" rounded trap-focus></b-input>
+                        </b-field>
+
+                        <b-field label="ค่า INR ที่วัดได้จริง">
+                          <b-input
+                            v-model="selected.inrMeasure"
+                            placeholder="ใส่ค่า INR ที่วัดได้จริง"
+                            rounded
+                            trap-focus
+                          ></b-input>
+                        </b-field>
+                        <div class="buttons" style="justify-content: center; margin-top: 2rem">
+                          <b-button
+                            class="button"
+                            @click="
+                              isCardModalActive2 = false;
+                              updateInr();
+                            "
+                            type="is-primary"
+                            size="is-medium"
+                            rounded
+                            expanded
+                            >บันทึก
+                          </b-button>
+                          <b-button
+                            class="button"
+                            @click="
+                              isCardModalActive2 = false;
+                              deleteInr();
+                            "
+                            type="is-danger"
+                            size="is-medium"
+                            rounded
+                            expanded
+                            >ลบรายการนี้</b-button
+                          >
+                        </div>
+                      </form>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </b-modal>
+          </div>
+        </div>
+      </section>
+    </div>
   </section>
 </template>
 
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 <script>
+import { GChart } from 'vue-google-charts';
 import axios from 'axios';
-// eslint-disable-next-line import/no-cycle
-import router from '../../router/index';
-
-// import Store from '../store/index';
-
+import { mapGetters } from 'vuex';
 export default {
-  name: 'NavBar',
+  name: 'HomePage',
+  components: {
+    GChart,
+  },
   data() {
     return {
+      drugSchedule: [],
+      selectedDate: new Date(),
+      inrMeasure: Number(),
+      inrExpect: Number(),
+      isEmpty: false,
+      isBordered: false,
+      isStriped: false,
+      isNarrowed: false,
+      isHoverable: false,
+      isFocusable: false,
+      isLoading: false,
+      hasMobileCards: false,
+      isCardModalActive: false,
+      isCardModalActive2: false,
+      isOpen: false,
+      selected: { id: '', inrMeasure: Number(), inrExpect: Number(), followDate: new Date() },
       data: [],
-      name: '',
-      selected: 'Bisacodyl',
-      // allData: [],
-      isImageModalActive: false,
+      finalData: [],
+      chartData: [],
+      options: {
+        // title: ''
+        width: 350,
+        height: 300,
+        curveType: 'function', // curve
+        lineWidth: 4,
+        legend: { position: 'bottom' },
+        // colors: ['#F1E065,#FF89E2'],
+      },
     };
   },
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      vm.getINRAPI();
+      vm.getCurrentlyAPI();
+      // vm.drawData();
+      console.warn(to, from);
+    });
+  },
   computed: {
-    filteredDataArray() {
-      // eslint-disable-next-line arrow-body-style
-      return this.data.filter((option) => {
-        return option.genericName.toString().toLowerCase().indexOf(this.name.toLowerCase()) >= 0;
+    ...mapGetters(['user']),
+  },
+  methods: {
+    getINRAPI() {
+      axios.get(`https://senior-project-api-gl8ig.ondigitalocean.app/api/inr`).then((response) => {
+      this.data = response.data;
+      console.warn(response);
+    });
+    },
+    getCurrentlyAPI() {
+      axios
+      .get(`https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug`)
+      .then((response) => {
+        for (const i of response.data) {
+          if (i.alertStatus === true) {
+            this.drugSchedule.push(i);
+          }
+        }
+        // console.warn(this.drugSchedule);
       });
+    },
+    async addInr() {
+      const result = await axios
+        .post(`https://senior-project-api-gl8ig.ondigitalocean.app/api/inr`, {
+          followDate: this.selectedDate,
+          inrExpect: this.inrExpect,
+          inrMeasure: this.inrMeasure,
+        })
+        .then((response) => {
+          window.location.reload();
+          // this.$router.push('/currently-dru');
+          console.log(response);
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-alert
+          alert(error.response.data.message);
+          console.log(error.response.data.message);
+        });
+      // console.warn(result);
+    },
+    async updateInr() {
+      const result = await axios.patch(
+        `https://senior-project-api-gl8ig.ondigitalocean.app/api/inr/${this.selected.id}/update`,
+        {
+          followDate: this.selected.followDate,
+          inrExpect: this.selected.inrExpect,
+          inrMeasure: this.selected.inrMeasure,
+        },
+      ).then((response) => {
+        window.location.reload();
+            // this.$router.push('/currently-drug');
+            console.log(response);
+          })
+            .catch((error) => {
+              // eslint-disable-next-line no-alert
+              alert(error.response.data.message);
+              console.log(error.response.data.message);
+            });
+      console.warn(result);
+    },
+    async deleteInr() {
+      const result = await axios.delete(
+        `https://senior-project-api-gl8ig.ondigitalocean.app/api/inr/${this.selected.id}/delete`,
+        {},
+      ).then((response) => {
+        window.location.reload();
+            // this.$router.push('/currently-drug');
+            console.log(response);
+          })
+            .catch((error) => {
+              // eslint-disable-next-line no-alert
+              alert(error.response.data.message);
+              console.log(error.response.data.message);
+            });
+    },
+    reloadPage() {
+      window.location.reload();
+    },
+    // testData() {
+    //   var round = 1;
+    //   this.data.forEach((item) => {
+    //     this.finalData.push([round, item.id, item.inrMeasure, inrExpect]);
+    //     round = round + 1;
+    //     // console.warn(this.finalData)
+    //   });
+    //   console.warn(this.finalData);
+    //   // this.data.forEach((item) => this.finalData.push([item.id,item.genericName]));
+    //   // console.warn(this.finalData)
+    // },
+    drawData() {
+      console.warn('a');
+      var round = 1;
+      this.data.forEach((item) => {
+        this.finalData.push([round, Number(item.inrMeasure), Number(item.inrExpect)]);
+        round = round + 1;
+      });
+      console.warn(this.finalData);
+      this.chartData = new google.visualization.DataTable();
+      this.chartData.addColumn('number', 'round');
+      this.chartData.addColumn('number', 'ค่า INR ที่วัดได้');
+      this.chartData.addColumn('number', 'ค่า INR ที่คาดหวัง');
+      this.chartData.addRows(this.finalData);
+    },
+  },
+  watch: {
+    // whenever question changes, this function will run
+    selected() {
+      return (this.isCardModalActive2 = true);
+      // console.warn(this.selected)
     },
   },
   // mounted() {
-  //   axios.get('https://senior-project-api-gl8ig.ondigitalocean.app/api/search').then((response) => {
+  //   axios.get(`https://senior-project-api-gl8ig.ondigitalocean.app/api/inr`).then((response) => {
   //     this.data = response.data;
-  //     // this.allData = data.data;
-  //     // data.data.forEach((item) => this.data.push(item.genericName));
+  //     console.warn(response);
   //   });
-  // },
-  beforeRouteEnter(to, from, next) {
-    next((vm) => {
-      vm.getDrugAPI();
-    });
-  },
-  methods: {
-    getDrugAPI() {
-      axios.get('https://senior-project-api-gl8ig.ondigitalocean.app/api/search').then((response) => {
-        this.data = response.data;
-        // this.allData = data.data;
-        // data.data.forEach((item) => this.data.push(item.genericName));
-      });
-    },
-    searchDrug() {
-      console.warn(this.selected);
-      if (this.selected != null) {
-        router.push({ name: 'Search' });
-        this.$store.commit('setsearchdrugs', this.selected);
-      }
-    },
-    logout() {
-      localStorage.removeItem('token');
-      console.log(localStorage.getItem('token'));
-    },
-  },
-  // reloadPage() {
-  //   window.location.reload();
-  // },
-  // sendData(option) {
-  //   this.$store.commit('setCaution', option.caution);
-  // eslint-disable-next-line no-restricted-syntax
-  // this.allData.forEach((item) => {
-  //   if (item.genericName === this.selected) {
-  //     console.warn(item.genericName);
-  //   }
-  // });
-  // (item in this.allData) {
-  //   if (item.genericName === this.selected) {
-  //     console.log(item.caution);
-  //   }
-  // }
-  // this.allData.forEach((item) => item.genericName === this.selected);
-  // return console.log(item.caution);
-  // this.$store.commit('setUsername', this.username);
-  // this.$store.commit('setPassword', this.password);
-  // },
-
-  // watch: {
-  //   // whenever question changes, this function will run
-  //   selected() {
-  //     console.warn(this.selected);
-  //     router.push({ name: 'Search' });
-  //     this.$store.commit('setsearchdrugs', this.selected);
-  //   },
+  //   axios
+  //     .get(`https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug`)
+  //     .then((response) => {
+  //       for (const i of response.data) {
+  //         if (i.drugAlert !== null) {
+  //           this.drugSchedule.push(i);
+  //         }
+  //       }
+  //       // console.warn(this.drugSchedule);
+  //     });
   // },
 };
 </script>
+
+<style>
+.fixedbutton {
+  position: fixed;
+  padding-left: 15px;
+  padding-right: 15px;
+  left: 0%;
+  bottom: 0px;
+  width: 100%;
+  height: 15%;
+}
+.table tr.is-selected td,
+.table tr.is-selected th {
+  color: rgb(121, 87, 213);
+  border: 0;
+  border-color: transparent;
+  background-color: #f2effb;
+  text-decoration-style: solid;
+}
+</style>
