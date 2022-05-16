@@ -79,10 +79,8 @@
             @click="logout()"
             style="justify-content: right; padding-right: 20px"
           >
-            <router-link to="/sign-in">
               <b-icon pack="mdi" icon="logout" type="is-primary" size="is-medium"></b-icon>
               <span style="padding-right: 10px"></span><span>ออกจากระบบ</span>
-            </router-link>
           </div>
         </b-navbar-item>
       </template>
@@ -153,6 +151,7 @@ export default {
     },
     logout() {
       localStorage.removeItem('token');
+      this.$router.go('/sign-in');
       console.log(localStorage.getItem('token'));
     },
   },
