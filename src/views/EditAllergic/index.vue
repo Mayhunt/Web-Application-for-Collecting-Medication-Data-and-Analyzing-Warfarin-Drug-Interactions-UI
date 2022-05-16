@@ -89,16 +89,37 @@ export default {
       allergicDrug: {},
     };
   },
-  mounted() {
-    axios
-      .get(`http://localhost:8080/api/allergic-drug/${this.$store.getters.editdrug.id}`)
-      .then((response) => {
-        this.allergicDrug = response.data;
-        this.allergicDrug.pic = this.$store.getters.editdrug.pic;
-        console.log(response);
-      });
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      vm.getEditAllergicAPI();
+      console.warn(to, from);
+    });
   },
+  beforeRouteUpdate(to, from, next) {
+    this.allergicDrug = null;
+    // this.name = null;
+    this.getEditAllergicAPI();
+    next();
+  },
+  // mounted() {
+  //   axios
+  //     .get(`http://localhost:8080/api/allergic-drug/${this.$store.getters.editdrug.id}`)
+  //     .then((response) => {
+  //       this.allergicDrug = response.data;
+  //       this.allergicDrug.pic = this.$store.getters.editdrug.pic;
+  //       console.log(response);
+  //     });
+  // },
   methods: {
+    getEditAllergicAPI() {
+      axios
+        .get(`http://localhost:8080/api/allergic-drug/${this.$store.getters.editdrug.id}`)
+        .then((response) => {
+          this.allergicDrug = response.data;
+          this.allergicDrug.pic = this.$store.getters.editdrug.pic;
+          console.log(response);
+        });
+    },
     async updateDrug() {
       const result = await axios.patch(
         `http://localhost:8080/api/allergic-drug/${this.allergicDrug.id}/update`,

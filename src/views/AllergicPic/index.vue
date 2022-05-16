@@ -171,13 +171,25 @@ export default {
   //       console.warn(response.request.responseURL);
   //     });
   // },
-  mounted() {
-    axios.get('http://localhost:8080/api/card-pic').then((response) => {
-      this.allergics = response.data;
-      // console.log(this.allDrug);
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      vm.getAllergicPicAPI();
+      console.warn(to, from);
     });
   },
+  beforeRouteUpdate(to, from, next) {
+    this.allergics = null;
+    // this.name = null;
+    this.getAllergicPicAPI();
+    next();
+  },
   methods: {
+    getAllergicPicAPI() {
+      axios.get('http://localhost:8080/api/card-pic').then((response) => {
+        this.allergics = response.data;
+      // console.log(this.allDrug);
+      });
+    },
     async addImage() {
       // const user =  this.$store.getters.username,
       const fd = new FormData();

@@ -49,11 +49,9 @@
               <b-button type="is-text" size="is-small">ลืมรหัสผ่าน</b-button>
             </div>
             <div class="fixedbuttons" style="justify-content: center">
-              <router-link to="/home"
-                ><b-button @click="logIn()" rounded type="is-primary" size="is-medium" expanded>
+                <b-button @click="logIn()" rounded type="is-primary" size="is-medium" expanded>
                   เข้าสู่ระบบ</b-button
-                ></router-link
-              >
+                >
               <!-- <b-button @click="logIn()" rounded type="is-primary" size="is-medium" expanded>
                 เข้าสู่ระบบ</b-button
               > -->
@@ -92,15 +90,22 @@ export default {
     //   this.logIn(this.form);
     // },
     async logIn() {
+      // eslint-disable-next-line no-unused-vars
       const result = await axios.post('http://localhost:8080/api/auth/sign-in', {
         // console.log(result.data);
         username: this.username,
         password: this.password,
+      }).then((res) => {
+        localStorage.setItem('token', res.data.accessToken);
+        this.$store.dispatch('user', res.data);
+        this.$router.push('/home');
+      }).catch((error) => {
+        // eslint-disable-next-line no-alert
+        alert(error.response.data.message);
+        console.log(error.response.data.message);
       });
-      localStorage.setItem('token', result.data.accessToken);
-      this.$store.dispatch('user', result.data);
       // console.warn(localStorage.getItem('user'));
-      console.warn(localStorage.getItem('token'));
+      // console.warn(localStorage.getItem('token'));
     },
   },
 };

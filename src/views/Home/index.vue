@@ -239,7 +239,7 @@
                           size="is-medium"
                           rounded
                           expanded
-                          >บันทึก {{ this.selected.followDate }}
+                          >บันทึก
                         </b-button>
                         <b-button
                           class="button"

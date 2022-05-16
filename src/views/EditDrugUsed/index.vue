@@ -173,37 +173,58 @@ export default {
     takesGroup: [],
     timeGroup: [],
   }),
-  mounted() {
-    axios
-      .get(`http://localhost:8080/api/currently-drug/${this.$store.getters.editdrug.id}`)
-      .then((response) => {
-        this.currentlyDrug = response.data;
-        this.currentlyDrug.pic = this.$store.getters.editdrug.pic;
-        this.currentlyDrug.receiveDate = new Date(this.currentlyDrug.receiveDate);
-        this.takesGroup.push(this.currentlyDrug.drugAlert.take);
-        this.timeGroup.push(this.currentlyDrug.drugAlert.time);
-        // this.takesGroup = this.currentlyDrug.drugAlert.take;
-        // this.timeGroup = this.currentlyDrug.drugAlert.time;
-        this.tabs = this.currentlyDrug.drugAlert.tabs;
-        if (this.currentlyDrug.drugAlert === null) {
-          this.isHide = false;
-        } else {
-          this.isHide = true;
-        }
-        console.log(this.currentlyDrug.receiveDate);
-      });
-    // if (this.currentlyDrug.alertStatus !== false) {
-    //   axios.get('http://localhost:8080/api/drug-alert/').then((response) => {
-    //     // eslint-disable-next-line prefer-destructuring
-    //     this.drugAlert = response.data[0];
-    //     // this.drugAlert = this.drugAlert[0];
-    //     this.takesGroup = [this.drugAlert.take];
-    //     this.timeGroup = [this.drugAlert.time];
-    //     console.log(this.drugAlert);
-    //   });
-    // }
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      vm.getEditDrugUSedAPI();
+      console.warn(to, from);
+    });
   },
+  beforeRouteUpdate(to, from, next) {
+    this.currentlyDrug = null;
+    // this.name = null;
+    this.getEditDrugUSedAPI();
+    next();
+  },
+  // mounted() {
+  //   axios
+  //     .get(`http://localhost:8080/api/currently-drug/${this.$store.getters.editdrug.id}`)
+  //     .then((response) => {
+  //       this.currentlyDrug = response.data;
+  //       this.currentlyDrug.pic = this.$store.getters.editdrug.pic;
+  //       this.currentlyDrug.receiveDate = new Date(this.currentlyDrug.receiveDate);
+  //       this.takesGroup.push(this.currentlyDrug.drugAlert.take);
+  //       this.timeGroup.push(this.currentlyDrug.drugAlert.time);
+  //       //
+  //       this.tabs = this.currentlyDrug.drugAlert.tabs;
+  //       if (this.currentlyDrug.drugAlert === null) {
+  //         this.isHide = false;
+  //       } else {
+  //         this.isHide = true;
+  //       }
+  //       console.log(this.currentlyDrug.receiveDate);
+  //     });
+  // },
   methods: {
+    getEditDrugUSedAPI() {
+      axios
+        .get(`http://localhost:8080/api/currently-drug/${this.$store.getters.editdrug.id}`)
+        .then((response) => {
+          this.currentlyDrug = response.data;
+          this.currentlyDrug.pic = this.$store.getters.editdrug.pic;
+          this.currentlyDrug.receiveDate = new Date(this.currentlyDrug.receiveDate);
+          this.takesGroup.push(this.currentlyDrug.drugAlert.take);
+          this.timeGroup.push(this.currentlyDrug.drugAlert.time);
+          // this.takesGroup = this.currentlyDrug.drugAlert.take;
+          // this.timeGroup = this.currentlyDrug.drugAlert.time;
+          this.tabs = this.currentlyDrug.drugAlert.tabs;
+          if (this.currentlyDrug.drugAlert === null) {
+            this.isHide = false;
+          } else {
+            this.isHide = true;
+          }
+          console.log(this.currentlyDrug.receiveDate);
+        });
+    },
     async updateDrug() {
       const result = await axios.patch(
         `http://localhost:8080/api/currently-drug/${this.currentlyDrug.id}/update`,

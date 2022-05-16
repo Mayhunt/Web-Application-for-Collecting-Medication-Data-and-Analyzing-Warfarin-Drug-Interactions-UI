@@ -1,289 +1,182 @@
+/* eslint-disable no-restricted-syntax */
 <template>
-  <section class="hero is-primary is-fullheight-with-navbar">
-    <div style="background-color: #f2effb; border-radius: 60px 60px 0 0; margin-top: 1rem">
-      <section
-        class="hero is-white is-fullheight-with-navbar"
-        style="border-radius: 60px 60px 0 0; padding: 1rem"
-      >
-        <div>
-          <!-- <div class="content is-medium">
-                <h1 style="margin-top:0; text-align:center; margin-bottom:0.25rem">Create Account</h1>
-            </div> -->
-          <div class="media-body" align="center">
-            <figure v-if="preview" class="image is-128x128">
-              <b-image :src="preview" rounded class="img-fluid" />
-            </figure>
-            <figure v-else class="image is-128x128">
-              <img
-                v-if="me.pic"
-                class="is-rounded image is-128x128"
-                src="https://series-review.net/wp-content/uploads/2022/01/YOU-Season3.jpg"
-              />
-              <img
-                v-else
-                class="is-rounded image is-128x128"
-                src="https://bulma.io/images/placeholders/128x128.png"
-              />
-            </figure>
-          </div>
-          <div>
-            <!-- <div class="col-md-6"> -->
-            <!-- add image icon -->
-            <input type="file" accept="image/*" @change="previewImage" id="my-file" />
-            <input type="submit">
-            <!-- </div> -->
-            <span
-              ><b-button
-                type="is-success"
-                @click="addImage"
-                class="file-icon"
-                pack="mdi"
-                icon-right="cloud-upload"
-              ></b-button
-            ></span>
-            <p class="has-text-danger is-size-7">โปรดคลิกไอคอนเพื่ออัพโหลด</p>
-          </div>
+  <section>
+    <!-- b modal infomation picture -->
+    <b-modal v-model="isImageModalActive">
+      <p class="image">
+        <b-image :src="require('@/assets/info.png')" alt="i" :rounded="rounded"> </b-image>
+      </p>
+    </b-modal>
+    <!--  -->
+    <b-navbar :fixed-top="true">
+      <template #brand>
+        <b-navbar-item href="#">
+          <router-link to="/home">
+            <b-icon pack="fas" size="is-large" icon="home" type="is-white"> </b-icon>
+          </router-link>
+        </b-navbar-item>
+        <b-navbar-item>
+          <b-autocomplete
+            rounded
+            placeholder="ค้นหาด้วยชื่อยาสามัญ"
+            icon="magnify"
+            v-model="name"
+            clearable
+            :data="filteredDataArray"
+            field="genericName"
+            @select="(option) => ((selected = option), searchDrug())"
+            confirm-keys="Select"
+            style="padding-left: 1px"
+          >
+            <template #empty>No results found</template>
+          </b-autocomplete>
+          <!-- infomation -->
+          <b-icon
+            pack="fas"
+            icon="info"
+            type="is-grey-lighter"
+            @click.native="isImageModalActive = true"
+            style="padding-left: 5px"
+          >
+          </b-icon>
           <!--  -->
+        </b-navbar-item>
+      </template>
+      <template #start>
+        <router-link to="/currently-drug">
+          <b-navbar-item href="#">
+            <b-icon pack="mdi" icon="pill" type="is-primary" size="is-medium"> </b-icon>
+            <span style="padding-left: 16px"></span><span>รายการยาที่ใช้ปัจจุบัน</span>
+          </b-navbar-item>
+        </router-link>
+        <router-link to="/allergic-drug">
+          <b-navbar-item>
+            <b-icon pack="mdi" icon="exclamation" type="is-primary" size="is-medium"> </b-icon>
+            <span style="padding-left: 16px"></span><span>รายการยาที่แพ้</span>
+          </b-navbar-item>
+        </router-link>
+        <router-link to="/allergic-pic">
+          <b-navbar-item>
+            <b-icon pack="fas" icon="fa-solid fa-file-image" type="is-primary" size="is-medium">
+            </b-icon>
+            <span style="padding-left: 16px"></span><span>รูปภาพใบแพ้ยา</span>
+          </b-navbar-item>
+        </router-link>
+        <hr />
+        <router-link to="/me">
+          <b-navbar-item>
+            <b-icon pack="mdi" icon="account" type="is-primary" size="is-medium"> </b-icon>
+            <span style="padding-left: 16px"></span><span>ข้อมูลส่วนตัว</span>
+          </b-navbar-item>
+        </router-link>
+        <hr />
+      </template>
 
-          <form class="box">
-            <b-field label="ชื่อ*" label-position="on-border">
-              <b-input v-model="me.firstName" placeholder="ชื่อ" rounded> </b-input>
-            </b-field>
-            <b-field label="นามสกุล*" label-position="on-border">
-              <b-input v-model="me.lastName" placeholder="นามสกุล" rounded> </b-input>
-            </b-field>
-            <b-field label="เลขประจำตัวประชาชน" label-position="on-border">
-              <b-input v-model="me.idCardNumber" placeholder="เลขประจำตัวประชาชน 13 หลัก" rounded>
-              </b-input>
-            </b-field>
-            <b-field label="วันเกิด" label-position="on-border">
-              <b-datepicker
-                v-model="me.birthDate"
-                locale="es-ES"
-                placeholder="กดเลือกวันเกิด"
-                icon="calendar-today"
-                rounded
-                trap-focus
-              >
-              </b-datepicker>
-            </b-field>
-            <b-field label="หมู่เลือด" label-position="on-border">
-              <b-input v-model="me.bloodGroup" placeholder="B+" rounded> </b-input>
-            </b-field>
-            <b-field label="โรคประจำตัว" label-position="on-border">
-              <b-input v-model="me.medicationCondition" placeholder="โรคหัวใจ,โรคเบาหวาน" rounded>
-              </b-input>
-            </b-field>
-            <b-field label="น้ำหนัก" label-position="on-border">
-              <b-input v-model.number="me.weight" placeholder="XX " rounded expanded> </b-input>
-              <p class="control">
-                <span class="button is-static is-rounded">กิโลกรัม</span>
-              </p>
-            </b-field>
-            <b-field label="ส่วนสูง" label-position="on-border">
-              <b-input v-model.number="me.height" placeholder="XXX " rounded expanded> </b-input>
-              <p class="control">
-                <span class="button is-static is-rounded">เซนติเมตร</span>
-              </p>
-            </b-field>
-            <b-field label="BMI" label-position="on-border">
-              <b-input v-model.number="calBMI" placeholder="ดัชนีมวลกาย" rounded disabled>
-              </b-input>
-            </b-field>
-            <b-field label="เบอร์โทร" label-position="on-border">
-              <b-input v-model="me.phoneNum" placeholder="XXX-XXXXXXX" rounded> </b-input>
-            </b-field>
-            <hr />
-            <h4>ผู้ติดต่อฉุกเฉิน</h4>
-            <br />
-            <b-field label="ชื่อ" label-position="on-border">
-              <b-input v-model="me.emergencyContact" placeholder="ชื่อ" rounded> </b-input>
-            </b-field>
-            <b-field label="เบอร์โทร" label-position="on-border">
-              <b-input v-model="me.emergencyPhoneNum" placeholder="XXX-XXXXXXX" rounded> </b-input>
-            </b-field>
-            <div
-              class="fixedbuttons"
-              style="justify-content: center; margin-top: 2.5rem; margin-bottom: 4rem"
-            >
-              <div class="fixedbuttons" style="justify-content: center">
-                <b-button
-                  @click="updateProfile()"
-                  rounded
-                  type="is-primary is-light"
-                  size="is-medium"
-                  expanded
-                  >บันทึก</b-button
-                >
-                <br />
-                <router-link to="sign-in">
-                  <b-button type="is-danger is-light" size="is-medium" rounded expanded>
-                    ลบบัญชีผู้ใช้นี้</b-button
-                  ></router-link
-                >
-              </div>
-            </div>
-          </form>
-          <!-- popup add/remove image -->
-          <b-modal v-model="isAddImage" :width="640" scroll="keep">
-            <div class="card">
-              <div>
-                <section
-                  class="hero is-white"
-                  style="border-radius: 60px 60px 60px 60px; margin-top: 1rem; padding: 1rem"
-                >
-                  <div>
-                    <div class="content is-medium">
-                      <h4 style="margin-top: 0; text-align: center; margin-bottom: 0.25rem">
-                        แก้ไขรูปภาพประจำตัว
-                      </h4>
-                      <br />
-                      <div class="columns is-mobile is-centered">
-                        ท่านต้องการแก้ไขรูปภาพประจำตัว
-                      </div>
-                    </div>
-
-                    <div class="buttons" style="justify-content: center; margin-top: 2rem">
-                      <b-button
-                        class="button"
-                        @click="isAddImage = false"
-                        type="is-primary"
-                        size="is-medium"
-                        rounded
-                        expanded
-                        >เพิ่มรูปภาพ</b-button
-                      >
-                      <b-button
-                        class="button"
-                        @click="isAddImage = false"
-                        type="is-danger"
-                        size="is-medium"
-                        rounded
-                        expanded
-                        >ลบรูปภาพ</b-button
-                      >
-                    </div>
-                  </div>
-                </section>
-              </div>
-            </div>
-          </b-modal>
-          <!--  -->
-        </div>
-      </section>
-    </div>
+      <template #end>
+        <b-navbar-item tag="div">
+          <div
+            class="buttons"
+            @click="logout()"
+            style="justify-content: right; padding-right: 20px"
+          >
+            <router-link to="/sign-in">
+              <b-icon pack="mdi" icon="logout" type="is-primary" size="is-medium"></b-icon>
+              <span style="padding-right: 10px"></span><span>ออกจากระบบ</span>
+            </router-link>
+          </div>
+        </b-navbar-item>
+      </template>
+    </b-navbar>
   </section>
 </template>
 
 <script>
 import axios from 'axios';
-import { mapGetters } from 'vuex';
-// import dayjs from 'dayjs';
+// eslint-disable-next-line import/no-cycle
+import router from '../../router/index';
+
+// import Store from '../store/index';
 
 export default {
-  name: 'UpdateMe',
-  components: {},
+  name: 'NavBar',
   data() {
     return {
-      file: null,
-      me: {},
-      pic: '',
-      preview: null,
-      image: null,
+      data: [],
+      name: '',
+      selected: 'Bisacodyl',
+      // allData: [],
+      isImageModalActive: false,
     };
   },
-  mounted() {
-    axios.get(`http://localhost:8080/api/auth/me?id=${this.$store.getters.id}`).then((response) => {
-      this.me = response.data;
-      this.me.birthDate = new Date(this.me.birthDate);
-      console.log(response);
+  computed: {
+    filteredDataArray() {
+      // eslint-disable-next-line arrow-body-style
+      return this.data.filter((option) => {
+        return option.genericName.toString().toLowerCase().indexOf(this.name.toLowerCase()) >= 0;
+      });
+    },
+  },
+  // mounted() {
+  //   axios.get('http://localhost:8080/api/search').then((response) => {
+  //     this.data = response.data;
+  //     // this.allData = data.data;
+  //     // data.data.forEach((item) => this.data.push(item.genericName));
+  //   });
+  // },
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      vm.getDrugAPI();
     });
   },
-  computed: {
-    ...mapGetters(['user']),
-    calBMI() {
-      const bmi = parseFloat(this.me.weight / (this.me.height / 100) ** 2).toFixed(2);
-      // eslint-disable-next-line use-isnan
-      if (bmi === 'NaN') {
-        console.warn(bmi);
-        return 0;
-        // eslint-disable-next-line no-else-return
-      } else {
-        // console.warn(bmi);
-        return Number(bmi);
-      }
-    },
-    sampleFormat() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      this.me.birthDate = new Date(this.me.birthDate);
-      return this.me.birthDate;
-    },
-  },
   methods: {
-    async updateProfile() {
-      const result = await axios.patch(
-        `http://localhost:8080/api/auth/${this.$store.getters.id}/update`,
-        {
-          username: this.me.username,
-          password: this.me.password,
-          firstName: this.me.first_name,
-          lastName: this.me.last_name,
-          idCardNumber: this.me.id_card_number,
-          birthDate: this.me.birthDate,
-          bloodGroup: this.me.blood_group,
-          medicationCondition: this.me.medication_condition,
-          weight: this.me.weight,
-          height: this.me.height,
-          bmi: this.me.calBMI,
-          phoneNum: this.me.phone_num,
-          emergencyContact: this.me.emergency_contact,
-          emergencyPhoneNum: this.me.emergency_phone_num,
-          pic: this.me.pic,
-        },
-      );
-      // eslint-disable-next-line no-restricted-globals
-      if (result.status === '200') {
-        this.$router.push('/me');
-      } else {
-        this.$alert({
-          text: 'error',
-          type: 'error',
-        });
-      }
-      console.warn(result);
-    },
-    previewImage(event) {
-      const input = event.target;
-      console.warn(event.target.files[0]);
-      if (input.files) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          this.preview = e.target.result;
-        };
-        // eslint-disable-next-line prefer-destructuring
-        this.image = input.files[0];
-        reader.readAsDataURL(input.files[0]);
-      }
-      console.warn(this.preview);
-    },
-    async addImage() {
-      // const user =  this.$store.getters.username,
-      const fd = new FormData();
-      fd.append('file', this.image);
-      const result = await axios.post('http://localhost:8080/api/storage', fd, {
-        headers: {
-          'content-type': 'multipart/form-data',
-        },
+    getDrugAPI() {
+      axios.get('http://localhost:8080/api/search').then((response) => {
+        this.data = response.data;
+        // this.allData = data.data;
+        // data.data.forEach((item) => this.data.push(item.genericName));
       });
-      this.me.pic = result.data;
-      console.warn(this.me.pic);
+    },
+    searchDrug() {
+      console.warn(this.selected);
+      if (this.selected != null) {
+        router.push({ name: 'Search' });
+        this.$store.commit('setsearchdrugs', this.selected);
+      }
+    },
+    logout() {
+      localStorage.removeItem('token');
+      console.log(localStorage.getItem('token'));
     },
   },
+  // reloadPage() {
+  //   window.location.reload();
+  // },
+  // sendData(option) {
+  //   this.$store.commit('setCaution', option.caution);
+  // eslint-disable-next-line no-restricted-syntax
+  // this.allData.forEach((item) => {
+  //   if (item.genericName === this.selected) {
+  //     console.warn(item.genericName);
+  //   }
+  // });
+  // (item in this.allData) {
+  //   if (item.genericName === this.selected) {
+  //     console.log(item.caution);
+  //   }
+  // }
+  // this.allData.forEach((item) => item.genericName === this.selected);
+  // return console.log(item.caution);
+  // this.$store.commit('setUsername', this.username);
+  // this.$store.commit('setPassword', this.password);
+  // },
+
+  // watch: {
+  //   // whenever question changes, this function will run
+  //   selected() {
+  //     console.warn(this.selected);
+  //     router.push({ name: 'Search' });
+  //     this.$store.commit('setsearchdrugs', this.selected);
+  //   },
+  // },
 };
 </script>
-
-<style>
-.input {
-  margin-bottom: 0.5rem;
-}
-</style>
