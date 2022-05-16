@@ -24,7 +24,7 @@
             clearable
             :data="filteredDataArray"
             field="genericName"
-            @select="option => (selected = option, searchDrug())"
+            @select="(option) => ((selected = option), searchDrug())"
             confirm-keys="Select"
             style="padding-left: 1px"
           >
@@ -74,7 +74,11 @@
 
       <template #end>
         <b-navbar-item tag="div">
-          <div class="buttons" @click="logout()" style="justify-content: right; padding-right: 20px">
+          <div
+            class="buttons"
+            @click="logout()"
+            style="justify-content: right; padding-right: 20px"
+          >
             <router-link to="/sign-in">
               <b-icon pack="mdi" icon="logout" type="is-primary" size="is-medium"></b-icon>
               <span style="padding-right: 10px"></span><span>ออกจากระบบ</span>
@@ -88,6 +92,7 @@
 
 <script>
 import axios from 'axios';
+// eslint-disable-next-line import/no-cycle
 import router from '../router/index';
 
 // import Store from '../store/index';
@@ -111,14 +116,34 @@ export default {
       });
     },
   },
-  mounted() {
-    axios.get('http://localhost:8080/api/search').then((response) => {
-      this.data = response.data;
-      // this.allData = data.data;
-      // data.data.forEach((item) => this.data.push(item.genericName));
+  // mounted() {
+  //   axios.get('http://localhost:8080/api/search').then((response) => {
+  //     this.data = response.data;
+  //     // this.allData = data.data;
+  //     // data.data.forEach((item) => this.data.push(item.genericName));
+  //   });
+  // },
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      vm.getDrugAPI();
+      console.warn(to, from);
     });
   },
+  beforeRouteUpdate(to, from, next) {
+    this.data = null;
+    // this.name = null;
+    this.getDrugAPI();
+    next();
+  },
   methods: {
+    getDrugAPI() {
+      axios.get('http://localhost:8080/api/search').then((response) => {
+        this.data = response.data;
+        console.warn(this.data);
+        // this.allData = data.data;
+        // data.data.forEach((item) => this.data.push(item.genericName));
+      });
+    },
     searchDrug() {
       console.warn(this.selected);
       if (this.selected != null) {

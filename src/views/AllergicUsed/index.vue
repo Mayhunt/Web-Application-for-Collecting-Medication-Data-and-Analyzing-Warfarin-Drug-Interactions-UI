@@ -146,6 +146,18 @@ export default {
     allDrug: [],
     details: {},
   }),
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      vm.getDrugAPI();
+      console.warn(to, from);
+    });
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.data = null;
+    // this.name = null;
+    this.getDrugAPI();
+    next();
+  },
   mounted() {
     axios.get('http://localhost:8080/api/search').then((response) => {
       this.allDrug = response.data;
