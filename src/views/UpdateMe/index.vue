@@ -273,7 +273,7 @@ export default {
             medicationCondition: this.me.medicationCondition,
             weight: this.me.weight,
             height: this.me.height,
-            bmi: this.me.calBMI,
+            bmi: this.calBMI,
             phoneNum: this.me.phoneNum,
             emergencyContact: this.me.emergencyContact,
             emergencyPhoneNum: this.me.emergencyPhoneNum,
