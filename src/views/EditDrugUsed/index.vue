@@ -477,4 +477,18 @@ export default {
   height: auto;
   width: auto;
 }
+.option {
+  font-family: 'Kanit';
+}
+.choose {
+  /* margin-left: 10px; */
+  width: 135px;
+}
+.takes {
+  /* margin-left: 10px; */
+  width: 140px;
+}
+.control-label {
+  font-size: large;
+}
 </style>
