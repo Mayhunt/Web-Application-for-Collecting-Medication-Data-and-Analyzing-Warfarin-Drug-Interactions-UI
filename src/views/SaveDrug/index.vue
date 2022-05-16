@@ -61,22 +61,22 @@
                   <b-input v-model.number="tabs" placeholder=" 2 เม็ด" rounded> </b-input>
                 </b-field>
                 <b-field grouped position="is-center">
-                  <b-checkbox-button
+                  <b-radio-button
                     class="takes"
                     v-model="takesGroup"
                     native-value="before meal"
                     type="is-primary is-light"
                   >
                     <span>ก่อนอาหาร</span>
-                  </b-checkbox-button>
-                  <b-checkbox-button
+                  </b-radio-button>
+                  <b-radio-button
                     class="takes"
                     v-model="takesGroup"
                     native-value="after meal"
                     type="is-primary is-light"
                   >
                     <span>หลังอาหาร</span>
-                  </b-checkbox-button>
+                  </b-radio-button>
                 </b-field>
                 <!-- <div class="buttons">
                   <b-button rounded type="is-primary" outlined>ก่อนอาหาร</b-button>
@@ -85,7 +85,7 @@
                 <p>เวลา</p>
                 <div>
                   <b-field grouped group-multiline position="is-center">
-                    <b-checkbox-button
+                    <b-radio-button
                       class="choose"
                       v-model="timeGroup"
                       native-value="Breakfast"
@@ -93,8 +93,8 @@
                     >
                       <b-icon pack="mdi" icon="weather-partly-cloudy"></b-icon>
                       <span>เช้า</span>
-                    </b-checkbox-button>
-                    <b-checkbox-button
+                    </b-radio-button>
+                    <b-radio-button
                       class="choose"
                       v-model="timeGroup"
                       native-value="Lunch"
@@ -102,8 +102,8 @@
                     >
                       <b-icon pack="mdi" icon="weather-sunny"></b-icon>
                       <span>กลางวัน</span>
-                    </b-checkbox-button>
-                    <b-checkbox-button
+                    </b-radio-button>
+                    <b-radio-button
                       class="choose"
                       v-model="timeGroup"
                       native-value="Dinner"
@@ -111,8 +111,8 @@
                     >
                       <b-icon pack="mdi" icon="weather-night"></b-icon>
                       <span>เย็น</span>
-                    </b-checkbox-button>
-                    <b-checkbox-button
+                    </b-radio-button>
+                    <b-radio-button
                       class="choose"
                       v-model="timeGroup"
                       native-value="Before Bed"
@@ -120,7 +120,7 @@
                     >
                       <b-icon pack="mdi" icon="bed"></b-icon>
                       <span>ก่อนนอน</span>
-                    </b-checkbox-button>
+                    </b-radio-button>
                   </b-field>
                   <!-- <b-field>
                     <b-checkbox size="is-medium" :value="false"> เช้า </b-checkbox>
@@ -172,8 +172,8 @@ export default {
     receive_place: '',
     more: '',
     tabs: Number(),
-    takesGroup: [],
-    timeGroup: [],
+    takesGroup: '',
+    timeGroup: '',
   }),
   methods: {
     async addCurrentlyDrug() {
@@ -201,8 +201,8 @@ export default {
           .post('https://senior-project-api-gl8ig.ondigitalocean.app/api/drug-alert', {
             drugCurrentlyUsedId: this.successCurrentlyDrugId,
             tabs: this.tabs,
-            take: this.takesGroup[0],
-            time: this.timeGroup[0],
+            take: this.takesGroup,
+            time: this.timeGroup,
           })
           .then((response) => {
             this.$router.push('/currently-drug');

@@ -58,30 +58,30 @@
 
               <div v-if="isHide">
                 <b-field label="จำนวนยา" label-position="on-border">
-                  <b-input v-model.number="drugAlert.tabs" placeholder=" 2 เม็ด" rounded> </b-input>
+                  <b-input v-model.number="tabs" placeholder=" 2 เม็ด" rounded> </b-input>
                 </b-field>
                 <b-field grouped position="is-center">
-                  <b-checkbox-button
+                  <b-radio-button
                     class="takes"
                     v-model="takesGroup"
                     native-value="before meal"
                     type="is-primary is-light"
                   >
                     <span>ก่อนอาหาร</span>
-                  </b-checkbox-button>
-                  <b-checkbox-button
+                  </b-radio-button>
+                  <b-radio-button
                     class="takes"
                     v-model="takesGroup"
                     native-value="after meal"
                     type="is-primary is-light"
                   >
                     <span>หลังอาหาร</span>
-                  </b-checkbox-button>
+                  </b-radio-button>
                 </b-field>
                 <p>เวลา</p>
                 <div>
                   <b-field grouped group-multiline position="is-center">
-                    <b-checkbox-button
+                    <b-radio-button
                       class="choose"
                       v-model="timeGroup"
                       native-value="Breakfast"
@@ -89,8 +89,8 @@
                     >
                       <b-icon pack="mdi" icon="weather-partly-cloudy"></b-icon>
                       <span>เช้า</span>
-                    </b-checkbox-button>
-                    <b-checkbox-button
+                    </b-radio-button>
+                    <b-radio-button
                       class="choose"
                       v-model="timeGroup"
                       native-value="Lunch"
@@ -98,8 +98,8 @@
                     >
                       <b-icon pack="mdi" icon="weather-sunny"></b-icon>
                       <span>กลางวัน</span>
-                    </b-checkbox-button>
-                    <b-checkbox-button
+                    </b-radio-button>
+                    <b-radio-button
                       class="choose"
                       v-model="timeGroup"
                       native-value="Dinner"
@@ -107,8 +107,8 @@
                     >
                       <b-icon pack="mdi" icon="weather-night"></b-icon>
                       <span>เย็น</span>
-                    </b-checkbox-button>
-                    <b-checkbox-button
+                    </b-radio-button>
+                    <b-radio-button
                       class="choose"
                       v-model="timeGroup"
                       native-value="Before Bed"
@@ -116,7 +116,7 @@
                     >
                       <b-icon pack="mdi" icon="bed"></b-icon>
                       <span>ก่อนนอน</span>
-                    </b-checkbox-button>
+                    </b-radio-button>
                   </b-field>
                 </div>
                 <!-- <b-field label="ทุกๆ">
@@ -129,20 +129,17 @@
           </section>
 
           <div class="fixedbuttons" style="justify-content: center">
-            <router-link to="/currently-drug"
-              ><b-button
-                @click="updateDrug()"
+              <b-button
+                @click="updateDrug1()"
                 type="is-primary is-light"
                 size="is-medium"
                 rounded
                 expanded
               >
                 บันทึก</b-button
-              ></router-link
-            >
+              >
             <br />
-            <router-link to="/currently-drug"
-              ><b-button
+            <b-button
                 @click="deleteDrug()"
                 type="is-danger is-light"
                 size="is-medium"
@@ -150,8 +147,7 @@
                 expanded
               >
                 ลบรายการยานี้</b-button
-              ></router-link
-            >
+              >
             <div class="pb-5 pt-5"></div>
           </div>
         </div>
@@ -170,8 +166,8 @@ export default {
     currentlyDrug: {},
     drugAlert: [],
     tabs: Number(),
-    takesGroup: [],
-    timeGroup: [],
+    takesGroup: '',
+    timeGroup: '',
   }),
   beforeRouteEnter(to, from, next) {
     next((vm) => {
@@ -212,77 +208,248 @@ export default {
           this.currentlyDrug = response.data;
           this.currentlyDrug.pic = this.$store.getters.editdrug.pic;
           this.currentlyDrug.receiveDate = new Date(this.currentlyDrug.receiveDate);
-          this.takesGroup.push(this.currentlyDrug.drugAlert.take);
-          this.timeGroup.push(this.currentlyDrug.drugAlert.time);
+          this.isHide = this.currentlyDrug.alertStatus;
+          if (response.data.drugAlert !== null && response.data.alertStatus === false) {
+            // this.takesGroup.push(this.currentlyDrug.drugAlert.take);
+            this.takesGroup = '';
+            this.timeGroup = '';
+            this.tabs = Number();
+          } else {
+            this.takesGroup = this.currentlyDrug.drugAlert.take;
+            this.timeGroup = this.currentlyDrug.drugAlert.time;
+            this.tabs = this.currentlyDrug.drugAlert.tabs;
+          }
+          // this.takesGroup.push(this.currentlyDrug.drugAlert.take);
+          // this.timeGroup.push(this.currentlyDrug.drugAlert.time);
+          // this.tabs = this.currentlyDrug.drugAlert.tabs;
           // this.takesGroup = this.currentlyDrug.drugAlert.take;
           // this.timeGroup = this.currentlyDrug.drugAlert.time;
-          this.tabs = this.currentlyDrug.drugAlert.tabs;
-          if (this.currentlyDrug.drugAlert === null) {
-            this.isHide = false;
-          } else {
-            this.isHide = true;
-          }
-          console.log(this.currentlyDrug.receiveDate);
+          // if (this.currentlyDrug.drugAlert === null) {
+          //   this.isHide = false;
+          // } else {
+          //   this.isHide = true;
+          // }
+          // console.log(this.currentlyDrug.receiveDate);
         });
     },
-    async updateDrug() {
-      const result = await axios.patch(
-        `https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug/${this.currentlyDrug.id}/update`,
-        {
-          more: this.currentlyDrug.more,
-          receiveDate: this.currentlyDrug.receiveDate,
-          receivePlace: this.currentlyDrug.receivePlace,
-          alertStatus: this.isHide,
-        },
-      );
-      console.warn(result);
-      if (this.isHide === true && this.currentlyDrug.drugAlert === null) {
-        await axios
-          .post('https://senior-project-api-gl8ig.ondigitalocean.app/api/drug-alert', {
-            drugCurrentlyUsedId: this.currentlyDrug.id,
-            tabs: this.tabs,
-            take: this.takesGroup[0],
-            time: this.timeGroup[0],
-          })
-          .then((response) => {
+    async updateDrug1() {
+      if (this.currentlyDrug.alertStatus === false) {
+        if (this.isHide === false) {
+          console.warn('a', this.currentlyDrug);
+          // eslint-disable-next-line no-unused-vars
+          const result = await axios.patch(
+            `https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug/${this.currentlyDrug.id}/update`,
+            {
+              more: this.currentlyDrug.more,
+              receiveDate: this.currentlyDrug.receiveDate,
+              receivePlace: this.currentlyDrug.receivePlace,
+              alertStatus: this.isHide,
+            },
+          ).then((response) => {
             this.$router.push('/currently-drug');
             console.log(response);
           })
-          .catch((error) => {
-            // eslint-disable-next-line no-alert
-            alert(error.response.data.message);
-            console.log(error.response.data.message);
-          });
-      } else if (this.isHide === true && this.currentlyDrug.drugAlert !== null) {
-        const result2 = await axios.patch(
-          `https://senior-project-api-gl8ig.ondigitalocean.app/api/drug-alert/${this.currentlyDrug.drugAlert.id}/update`,
-          {
-            tabs: this.tabs,
-            take: this.takesGroup[0],
-            time: this.timeGroup[0],
-          },
-        );
-        console.warn(result2);
-      } else {
-        const result2 = await axios.delete(
-          `https://senior-project-api-gl8ig.ondigitalocean.app/api/drug-alert/${this.currentlyDrug.drugAlert.id}/delete`,
-          {},
-        );
-        console.warn(result2);
+            .catch((error) => {
+              // eslint-disable-next-line no-alert
+              alert(error.response.data.message);
+              console.log(error.response.data.message);
+            });
+        } else if (this.isHide !== false) {
+          if (this.currentlyDrug.drugAlert !== null) {
+            console.warn('x', this.currentlyDrug, this.takesGroup);
+            // eslint-disable-next-line no-unused-vars
+            const result2 = await axios.patch(
+              `https://senior-project-api-gl8ig.ondigitalocean.app/api/drug-alert/${this.currentlyDrug.drugAlert.id}/update`,
+              {
+                tabs: this.tabs,
+                take: this.takesGroup,
+                time: this.timeGroup,
+              },
+            );
+            // eslint-disable-next-line no-unused-vars
+            const result = await axios.patch(
+              `https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug/${this.currentlyDrug.id}/update`,
+              {
+                more: this.currentlyDrug.more,
+                receiveDate: this.currentlyDrug.receiveDate,
+                receivePlace: this.currentlyDrug.receivePlace,
+                alertStatus: this.isHide,
+              },
+            ).then((response) => {
+              this.$router.push('/currently-drug');
+              console.log(response);
+            })
+              .catch((error) => {
+                // eslint-disable-next-line no-alert
+                alert(error.response.data.message);
+                console.log(error.response.data.message);
+              });
+          } else {
+            console.warn('b', this.currentlyDrug, this.takesGroup);
+            await axios
+              .post('https://senior-project-api-gl8ig.ondigitalocean.app/api/drug-alert', {
+                drugCurrentlyUsedId: this.currentlyDrug.id,
+                tabs: this.tabs,
+                take: this.takesGroup,
+                time: this.timeGroup,
+              });
+            // eslint-disable-next-line no-unused-vars
+            const result = await axios.patch(
+              `https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug/${this.currentlyDrug.id}/update`,
+              {
+                more: this.currentlyDrug.more,
+                receiveDate: this.currentlyDrug.receiveDate,
+                receivePlace: this.currentlyDrug.receivePlace,
+                alertStatus: this.isHide,
+              },
+            ).then((response) => {
+              this.$router.push('/currently-drug');
+              console.log(response);
+            })
+              .catch((error) => {
+                // eslint-disable-next-line no-alert
+                alert(error.response.data.message);
+                console.log(error.response.data.message);
+              });
+          }
+        }
+      } else if (this.currentlyDrug.alertStatus === true) {
+        if (this.isHide === false) {
+          console.warn('c', this.currentlyDrug, this.isHide);
+          // eslint-disable-next-line no-unused-vars
+          // const result2 = await axios.delete(
+          //   `https://senior-project-api-gl8ig.ondigitalocean.app/api/drug-alert/${this.currentlyDrug.drugAlert.id}/delete`,
+          //   {},
+          // );
+          // eslint-disable-next-line no-unused-vars
+          const result = await axios.patch(
+            `https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug/${this.currentlyDrug.id}/update`,
+            {
+              more: this.currentlyDrug.more,
+              receiveDate: this.currentlyDrug.receiveDate,
+              receivePlace: this.currentlyDrug.receivePlace,
+              alertStatus: this.isHide,
+            },
+          ).then((response) => {
+            this.$router.push('/currently-drug');
+            console.log(response.data.alertStatus);
+          })
+            .catch((error) => {
+              // eslint-disable-next-line no-alert
+              alert(error.response.data.message);
+              console.log(error.response.data.message);
+            });
+          // eslint-disable-next-line no-unused-vars
+          // const result2 = await axios.delete(
+          //   `https://senior-project-api-gl8ig.ondigitalocean.app/api/drug-alert/${this.currentlyDrug.drugAlert.id}/delete`,
+          //   {},
+          // ).then((response) => {
+          //   this.$router.push('/currently-drug');
+          //   console.log(response);
+          // })
+          //   .catch((error) => {
+          //     // eslint-disable-next-line no-alert
+          //     alert(error.response.data.message);
+          //     console.log(error.response.data.message);
+          //   });
+        } else {
+          console.warn('d', this.currentlyDrug, this.takesGroup);
+          // eslint-disable-next-line no-unused-vars
+          const result2 = await axios.patch(
+            `https://senior-project-api-gl8ig.ondigitalocean.app/api/drug-alert/${this.currentlyDrug.drugAlert.id}/update`,
+            {
+              tabs: this.tabs,
+              take: this.takesGroup,
+              time: this.timeGroup,
+            },
+          );
+          // eslint-disable-next-line no-unused-vars
+          const result = await axios.patch(
+            `https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug/${this.currentlyDrug.id}/update`,
+            {
+              more: this.currentlyDrug.more,
+              receiveDate: this.currentlyDrug.receiveDate,
+              receivePlace: this.currentlyDrug.receivePlace,
+              alertStatus: this.isHide,
+            },
+          ).then((response) => {
+            this.$router.push('/currently-drug');
+            console.log(response);
+          })
+            .catch((error) => {
+              // eslint-disable-next-line no-alert
+              alert(error.response.data.message);
+              console.log(error.response.data.message);
+            });
+        }
       }
     },
+    // async updateDrug() {
+    //   if (this.isHide === true && this.currentlyDrug.drugAlert === null) {
+    //     console.warn('a', this.currentlyDrug.drugAlert.id);
+    //     await axios
+    //       .post('https://senior-project-api-gl8ig.ondigitalocean.app/api/drug-alert', {
+    //         drugCurrentlyUsedId: this.currentlyDrug.id,
+    //         tabs: this.tabs,
+    //         take: this.takesGroup[0],
+    //         time: this.timeGroup[0],
+    //       });
+    //   } else if (this.isHide === true && this.currentlyDrug.drugAlert !== null) {
+    //     console.warn('b', this.currentlyDrug.drugAlert.id);
+    //     // eslint-disable-next-line no-unused-vars
+    //     const result2 = await axios.patch(
+    //       `https://senior-project-api-gl8ig.ondigitalocean.app/api/drug-alert/${this.currentlyDrug.drugAlert.id}/update`,
+    //       {
+    //         tabs: this.tabs,
+    //         take: this.takesGroup[0],
+    //         time: this.timeGroup[0],
+    //       },
+    //     );
+    //   } else {
+    //     console.warn('c', this.currentlyDrug.drugAlert.id);
+    //     // eslint-disable-next-line no-unused-vars
+    //     const result2 = await axios.delete(
+    //       `https://senior-project-api-gl8ig.ondigitalocean.app/api/drug-alert/${this.currentlyDrug.drugAlert.id}/delete`,
+    //       {},
+    //     );
+    //   }
+    //   // eslint-disable-next-line no-unused-vars
+    //   const result = await axios.patch(
+    //     `https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug/${this.currentlyDrug.id}/update`,
+    //     {
+    //       more: this.currentlyDrug.more,
+    //       receiveDate: this.currentlyDrug.receiveDate,
+    //       receivePlace: this.currentlyDrug.receivePlace,
+    //       alertStatus: this.isHide,
+    //     },
+    //   ).then((response) => {
+    //     this.$router.push('/currently-drug');
+    //     console.log(response);
+    //   })
+    //     .catch((error) => {
+    //       // eslint-disable-next-line no-alert
+    //       alert(error.response.data.message);
+    //       console.log(error.response.data.message);
+    //     });
+    // },
     async deleteDrug() {
-      const result = await axios.delete(
-        `https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug/${this.currentlyDrug.id}/delete`,
+      await axios.delete(
+        `https://senior-project-api-gl8ig.ondigitalocean.app/api/drug-alert/${this.currentlyDrug.drugAlert.id}/delete`,
         {},
       );
-      if (this.currentlyDrug.drugAlert !== null) {
-        await axios.delete(
-          `https://senior-project-api-gl8ig.ondigitalocean.app/api/drug-alert/${this.currentlyDrug.drugAlert.id}/delete`,
-          {},
-        );
-      }
-      console.warn(result);
+      // eslint-disable-next-line no-unused-vars
+      // const result = await axios.delete(
+      //   `https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug/${this.currentlyDrug.id}/delete`,
+      //   {},
+      // ).then((response) => {
+      //   this.$router.push('/currently-drug');
+      //   console.log(response);
+      // })
+      //   .catch((error) => {
+      //     // eslint-disable-next-line no-alert
+      //     alert(error.response.data.message);
+      //     console.log(error.response.data.message);
+      //   });
     },
     reloadPage() {
       window.location.reload();

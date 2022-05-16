@@ -198,65 +198,87 @@ export default {
     isCardModalActive: false,
     isNotification: false,
   }),
-  mounted() {
-    axios.get('https://senior-project-api-gl8ig.ondigitalocean.app/api/search').then((response) => {
-      this.allDrug = response.data;
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      vm.getEditDrugUSedAPI();
+      vm.getDrugInteractAPI();
+      console.warn(to, from);
+    });
+  },
+  // mounted() {
+  //   axios.get('https://senior-project-api-gl8ig.ondigitalocean.app/api/search').then((response) => {
+  //     this.allDrug = response.data;
+  //     axios
+  //       .get('https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug')
+  //       .then((res) => {
+  //         this.drugcurrently = res.data;
+  //         this.picAllergicUsed();
+  //         this.drugcurrently.receiveDate = new Date(this.drugcurrently.receiveDate);
+  //         // eslint-disable-next-line consistent-return
+  //         // eslint-disable-next-line no-restricted-syntax
+  //         for (const element of this.drugcurrently) {
+  //           // eslint-disable-next-line space-in-parens
+  //           // eslint-disable-next-line no-constant-condition
+  //           /* eslint-disable */
+  //           if (
+  //             element.genericName === 'Warfarin (ชมพู) tab 5 mg ' ||
+  //             'Warfarin (ฟ้า) tab 3 mg' ||
+  //             'Warfarin (ส้ม) tab 2 mg '
+  //           ) {
+  //             this.interact();
+  //             break;
+  //           }
+  //         }
+  //       });
+  //     this.getActivities();
+  //     // console.log(this.allDrug);
+  //   });
+  //   axios
+  //     .get('https://senior-project-api-gl8ig.ondigitalocean.app/api/interact')
+  //     .then((response) => {
+  //       this.druginteract = response.data;
+  //       // console.log(this.druginteract);
+  //     });
+  // },
+  methods: {
+    getDrugInteractAPI() {
       axios
-        .get('https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug')
-        .then((res) => {
-          this.drugcurrently = res.data;
-          console.warn(this.drugcurrently);
-          this.picAllergicUsed();
-          // this.picAllergicUsed();
-          this.drugcurrently.receiveDate = new Date(this.drugcurrently.receiveDate);
-          // eslint-disable-next-line consistent-return
-          // eslint-disable-next-line no-restricted-syntax
-          for (const element of this.drugcurrently) {
+        .get('https://senior-project-api-gl8ig.ondigitalocean.app/api/interact')
+        .then((response) => {
+          this.druginteract = response.data;
+          // console.log(this.druginteract);
+        });
+    },
+    getEditDrugUSedAPI() {
+      axios.get('https://senior-project-api-gl8ig.ondigitalocean.app/api/search').then((response) => {
+        this.allDrug = response.data;
+        axios
+          .get('https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug')
+          .then((res) => {
+            this.drugcurrently = res.data;
+            this.picAllergicUsed();
+            this.drugcurrently.receiveDate = new Date(this.drugcurrently.receiveDate);
+            // eslint-disable-next-line consistent-return
+            // eslint-disable-next-line no-restricted-syntax
+            for (const element of this.drugcurrently) {
             // eslint-disable-next-line space-in-parens
             // eslint-disable-next-line no-constant-condition
             /* eslint-disable */
-            if (
-              element.genericName === 'Warfarin (ชมพู) tab 5 mg ' ||
-              'Warfarin (ฟ้า) tab 3 mg' ||
-              'Warfarin (ส้ม) tab 2 mg '
-            ) {
-              this.interact();
-              break;
-            }
+              if (
+                element.genericName === 'Warfarin (ชมพู) tab 5 mg ' ||
+                element.genericName === 'Warfarin (ฟ้า) tab 3 mg' ||
+                element.genericName === 'Warfarin (ส้ม) tab 2 mg '
+              ) {
+                // console.log(element.genericName)
+                this.interact();
+                break;
+              }
           }
         });
       this.getActivities();
       // console.log(this.allDrug);
     });
-    axios
-      .get('https://senior-project-api-gl8ig.ondigitalocean.app/api/interact')
-      .then((response) => {
-        this.druginteract = response.data;
-        // console.log(this.druginteract);
-      });
-    // axios.get('https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug').then((response) => {
-    //   this.drugcurrently = response.data;
-    //   console.warn(this.drugcurrently);
-    //   this.getActivities();
-    //   // this.picAllergicUsed();
-    //   this.drugcurrently.receiveDate = new Date(this.drugcurrently.receiveDate);
-    //   // eslint-disable-next-line consistent-return
-    //   // eslint-disable-next-line no-restricted-syntax
-    //   for (const element of this.drugcurrently) {
-    //     // eslint-disable-next-line space-in-parens
-    //     // eslint-disable-next-line no-constant-condition
-    //     if (
-    //       element.genericName === 'Warfarin (ชมพู) tab 5 mg '
-    //       || 'Warfarin (ฟ้า) tab 3 mg'
-    //       || 'Warfarin (ส้ม) tab 2 mg '
-    //     ) {
-    //       this.interact();
-    //       break;
-    //     }
-    //   }
-    // });
-  },
-  methods: {
+    },
     getActivities() {
       if (this.allDrug.length === 0 || this.drugcurrently.length === 0) {
         return;
@@ -269,7 +291,7 @@ export default {
         // eslint-disable-next-line consistent-return
         this.druginteract.forEach((c) => {
           if (b.genericName.toString().toLowerCase() === c.genericName.toString().toLowerCase()) {
-            console.warn(c, b);
+            // console.warn(c, b);
             this.druginteracts.push(c);
             // this.isNotification = true;
             // return this.isNotification;
@@ -280,7 +302,7 @@ export default {
       if (this.druginteracts.length > 0) {
         this.isNotification = true;
       }
-      console.warn(this.druginteracts);
+      // console.warn(this.druginteracts);
     },
     picAllergicUsed() {
       this.drugcurrently.forEach((b) => {
@@ -295,7 +317,7 @@ export default {
             // console.warn(b);
           }
         });
-        return console.warn(b);
+        // return console.warn(b);
       });
     },
     getImgUrl(pic) {
@@ -315,8 +337,15 @@ export default {
     async deleteDrug() {
       const result = await axios.delete(
         `https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug/${this.details.id}/delete`
-      );
-      window.location.reload();
+      ).then((response) => {
+        this.$router.push('/currently-drug');
+        // console.log(response);
+      })
+        .catch((error) => {
+          // eslint-disable-next-line no-alert
+          alert(error.response.data.message);
+          // console.log(error.response.data.message);
+        });
     },
     reloadPage() {
       window.location.reload();
