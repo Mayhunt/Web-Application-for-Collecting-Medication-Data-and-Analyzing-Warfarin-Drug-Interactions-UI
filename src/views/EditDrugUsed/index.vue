@@ -187,7 +187,7 @@ export default {
   },
   // mounted() {
   //   axios
-  //     .get(`http://localhost:8080/api/currently-drug/${this.$store.getters.editdrug.id}`)
+  //     .get(`https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug/${this.$store.getters.editdrug.id}`)
   //     .then((response) => {
   //       this.currentlyDrug = response.data;
   //       this.currentlyDrug.pic = this.$store.getters.editdrug.pic;
@@ -207,7 +207,7 @@ export default {
   methods: {
     getEditDrugUSedAPI() {
       axios
-        .get(`http://localhost:8080/api/currently-drug/${this.$store.getters.editdrug.id}`)
+        .get(`https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug/${this.$store.getters.editdrug.id}`)
         .then((response) => {
           this.currentlyDrug = response.data;
           this.currentlyDrug.pic = this.$store.getters.editdrug.pic;

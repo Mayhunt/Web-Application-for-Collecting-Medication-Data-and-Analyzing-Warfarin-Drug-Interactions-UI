@@ -16,7 +16,7 @@
             style="font-family: 'Kanit'"
           >
             <p class="card-header-title" style="color: white">
-              <font size="6">รายการยาวันนี้&ensp;<b-icon pack="fas" icon="tablets"></b-icon></font>
+              <font size="6">รายการยาวันนี้xxx&ensp;<b-icon pack="fas" icon="tablets"></b-icon></font>
             </p>
             <a class="card-header-icon">
               <b-icon :icon="props.open ? 'menu-down' : 'menu-up'"> </b-icon>

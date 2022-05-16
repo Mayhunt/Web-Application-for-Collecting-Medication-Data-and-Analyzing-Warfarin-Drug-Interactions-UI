@@ -92,7 +92,7 @@ export default {
     // },
     async logIn() {
       // eslint-disable-next-line no-unused-vars
-      const result = await axios.post('http://localhost:8080/api/auth/sign-in', {
+      const result = await axios.post('https://senior-project-api-gl8ig.ondigitalocean.app/api/auth/sign-in', {
         // console.log(result.data);
         username: this.username,
         password: this.password,
