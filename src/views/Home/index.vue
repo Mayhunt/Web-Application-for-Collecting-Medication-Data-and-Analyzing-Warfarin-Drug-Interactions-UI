@@ -335,13 +335,13 @@ export default {
       // console.warn(a);
     });
   },
-  beforeRouteUpdate(to, from, next) {
-    this.getINRAPI();
-    this.getCurrentlyAPI();
-    // this.name = null;
-    // this.getEditDrugUSedAPI();
-    next();
-  },
+  // beforeRouteUpdate(to, from, next) {
+  //   this.getINRAPI();
+  //   this.getCurrentlyAPI();
+  //   // this.name = null;
+  //   // this.getEditDrugUSedAPI();
+  //   next();
+  // },
   computed: {
     ...mapGetters(['user']),
     // sampleFormat() {
