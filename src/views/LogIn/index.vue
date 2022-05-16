@@ -98,7 +98,8 @@ export default {
         password: this.password,
       }).then((res) => {
         localStorage.setItem('token', res.data.accessToken);
-        this.$store.dispatch('user', res.data);
+        console.warn(res.data, localStorage.getItem('token'));
+        this.$store.commit('user', res.data);
         this.$router.push('/home');
       }).catch((error) => {
         // eslint-disable-next-line no-alert

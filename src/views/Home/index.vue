@@ -284,6 +284,7 @@
 
 <script>
 import { GChart } from 'vue-google-charts';
+// import axios from 'axios';
 import axios from 'axios';
 import { mapGetters } from 'vuex';
 export default {
@@ -293,6 +294,9 @@ export default {
   },
   data() {
     return {
+      // tox = '',
+      // fromx = '',
+      c: '',
       drugSchedule: [],
       selectedDate: new Date(),
       inrMeasure: Number(),
@@ -327,18 +331,29 @@ export default {
     next((vm) => {
       vm.getINRAPI();
       vm.getCurrentlyAPI();
+      vm.route(to,from);
+      // const fromx = from;
+      // const tox = to;
+      console.warn(to, '...' , from)
       // vm.drawData();
-      console.warn(to, from);
+      // console.warn(a);
     });
   },
   computed: {
     ...mapGetters(['user']),
   },
   methods: {
+    route(to,from) {
+      this.tox = to.name;
+      this.fromx = from.name;
+      console.warn(this.tox);
+      this.c = 'change';
+    },
     getINRAPI() {
+      console.warn(localStorage.getItem('token'));
       axios.get(`https://senior-project-api-gl8ig.ondigitalocean.app/api/inr`).then((response) => {
       this.data = response.data;
-      console.warn(response);
+      // console.warn(to);
     });
     },
     getCurrentlyAPI() {
@@ -442,6 +457,19 @@ export default {
       return (this.isCardModalActive2 = true);
       // console.warn(this.selected)
     },
+    c() {
+       console.warn('bbbb')
+        if (this.tox ==='Home' && this.fromx === 'Login') {
+          console.warn(this.tox.name,this.fromx.name);
+          window.location.reload();
+        }
+    },
+    // '$route' (to, from) {
+    //   console.warn('aaaa')
+    //     if (to.name === 'Home' && from.name === 'Login') {
+    //       window.location.reload();
+    //     }
+    //   }
   },
   // mounted() {
   //   axios.get(`https://senior-project-api-gl8ig.ondigitalocean.app/api/inr`).then((response) => {

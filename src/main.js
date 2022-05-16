@@ -4,6 +4,7 @@ import feather from 'vue-icon';
 import VModal from 'vue-js-modal';
 import VueGoogleCharts from 'vue-google-charts';
 import VueSimpleAlert from 'vue-simple-alert';
+// import axios from 'axios';
 import App from './App.vue';
 import './registerServiceWorker';
 import router from './router';
@@ -19,6 +20,18 @@ Vue.use(feather, 'v-icon');
 Vue.use(VueGoogleCharts);
 Vue.config.productionTip = false;
 Vue.config.productionTip = false;
+
+// axios.interceptors.response.use(
+//   (response) => response,
+//   (error) => {
+//     const status = error.response;
+//     if (status === 401 || status === 403) {
+//       console.warn(localStorage.getItem('token'));
+//       axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('token')}`;
+
+//     }
+//   },
+// );
 
 new Vue({
   router,
