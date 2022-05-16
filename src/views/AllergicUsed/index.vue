@@ -160,35 +160,33 @@ export default {
   //   this.getDrugAPI();
   //   next();
   // },
-  mounted() {
-    axios.get('https://senior-project-api-gl8ig.ondigitalocean.app/api/search').then((response) => {
-      this.allDrug = response.data;
-      axios
-        .get('https://senior-project-api-gl8ig.ondigitalocean.app/api/allergic-drug')
-        .then((res) => {
-          this.allergicDrug = res.data;
-          console.warn(this.allergicDrug);
-          this.picAllergicUsed();
-          // console.log(this.allDrug);
-        });
-    });
-    // axios.get('https://senior-project-api-gl8ig.ondigitalocean.app/api/allergic-drug').then((response) => {
-    //   this.allergicDrug = response.data;
-    //   console.warn(this.allergicDrug);
-    //   this.picAllergicUsed();
-    //   // this.allergicDrug.forEach((b) => {
-    //   //   this.allDrug.forEach((c) => {
-    //   //     if (b.genericName === c.genericName) {
-    //   //       // eslint-disable-next-line no-param-reassign
-    //   //       b.pic = c.pic;
-    //   //       console.warn(b);
-    //   //     }
-    //   //   });
-    //   //   // return console.warn(b.id);
-    //   // });
-    // });
-  },
+  // mounted() {
+  //   axios.get('https://senior-project-api-gl8ig.ondigitalocean.app/api/search').then((response) => {
+  //     this.allDrug = response.data;
+  //     axios
+  //       .get('https://senior-project-api-gl8ig.ondigitalocean.app/api/allergic-drug')
+  //       .then((res) => {
+  //         this.allergicDrug = res.data;
+  //         console.warn(this.allergicDrug);
+  //         this.picAllergicUsed();
+  //         // console.log(this.allDrug);
+  //       });
+  //   });
+  // },
   methods: {
+    getDrugAPI() {
+      axios.get('https://senior-project-api-gl8ig.ondigitalocean.app/api/search').then((response) => {
+        this.allDrug = response.data;
+        axios
+          .get('https://senior-project-api-gl8ig.ondigitalocean.app/api/allergic-drug')
+          .then((res) => {
+            this.allergicDrug = res.data;
+            console.warn(this.allergicDrug);
+            this.picAllergicUsed();
+            // console.log(this.allDrug);
+          });
+      });
+    },
     picAllergicUsed() {
       this.allergicDrug.forEach((b) => {
         this.allDrug.forEach((c) => {
