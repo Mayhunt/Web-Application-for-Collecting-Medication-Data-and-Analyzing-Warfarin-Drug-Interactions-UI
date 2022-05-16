@@ -192,17 +192,23 @@ export default {
       image: null,
     };
   },
-  mounted() {
-    axios
-      .get(
-        `https://senior-project-api-gl8ig.ondigitalocean.app/api/auth/me?id=${this.$store.getters.id}`,
-      )
-      .then((response) => {
-        this.me = response.data;
-        this.me.birthDate = new Date(this.me.birthDate);
-        console.log(response);
-      });
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      vm.getProfileAPI();
+      console.warn(to, from);
+    });
   },
+  // mounted() {
+  //   axios
+  //     .get(
+  //       `https://senior-project-api-gl8ig.ondigitalocean.app/api/auth/me?id=${this.$store.getters.id}`,
+  //     )
+  //     .then((response) => {
+  //       this.me = response.data;
+  //       this.me.birthDate = new Date(this.me.birthDate);
+  //       console.log(response);
+  //     });
+  // },
   computed: {
     ...mapGetters(['user']),
     calBMI() {
@@ -224,6 +230,17 @@ export default {
     },
   },
   methods: {
+    getProfileAPI() {
+      axios
+        .get(
+          `https://senior-project-api-gl8ig.ondigitalocean.app/api/auth/me?id=${this.$store.getters.id}`,
+        )
+        .then((response) => {
+          this.me = response.data;
+          this.me.birthDate = new Date(this.me.birthDate);
+          console.log(response);
+        });
+    },
     async deleteProfile() {
       // eslint-disable-next-line no-unused-vars
       const result = await axios.delete(
@@ -240,24 +257,25 @@ export default {
         });
     },
     async updateProfile() {
+      console.warn(this.me.phoneNum);
       const result = await axios
         .patch(
           `https://senior-project-api-gl8ig.ondigitalocean.app/api/auth/${this.$store.getters.id}/update`,
           {
             username: this.me.username,
             password: this.me.password,
-            firstName: this.me.first_name,
-            lastName: this.me.last_name,
-            idCardNumber: this.me.id_card_number,
+            firstName: this.me.firstName,
+            lastName: this.me.lastName,
+            idCardNumber: this.me.idCardNumber,
             birthDate: this.me.birthDate,
-            bloodGroup: this.me.blood_group,
-            medicationCondition: this.me.medication_condition,
+            bloodGroup: this.me.bloodGroup,
+            medicationCondition: this.me.medicationCondition,
             weight: this.me.weight,
             height: this.me.height,
             bmi: this.me.calBMI,
-            phoneNum: this.me.phone_num,
-            emergencyContact: this.me.emergency_contact,
-            emergencyPhoneNum: this.me.emergency_phone_num,
+            phoneNum: this.me.phoneNum,
+            emergencyContact: this.me.emergencyContact,
+            emergencyPhoneNum: this.me.emergencyPhoneNum,
             pic: this.me.pic,
           },
         )
