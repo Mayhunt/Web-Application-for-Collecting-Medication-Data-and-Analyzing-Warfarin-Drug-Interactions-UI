@@ -12,7 +12,6 @@
         <b-image
           :src="`https://senior-project-api-gl8ig.ondigitalocean.app/api/storage?key=${this.$store.getters.searchdrugs.pic}`"
           alt="The Buefy Logo"
-          ratio="2by1"
           :rounded="rounded"
         ></b-image>
       </div>
