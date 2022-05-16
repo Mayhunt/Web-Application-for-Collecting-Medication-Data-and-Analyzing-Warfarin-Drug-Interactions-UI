@@ -177,7 +177,7 @@ export default {
       // const user =  this.$store.getters.username,
       // eslint-disable-next-line no-unused-vars
       const result = await axios
-        .post('http://localhost:8080/api/auth/register', {
+        .post('https://senior-project-api-gl8ig.ondigitalocean.app/api/auth/register', {
           username: this.$store.getters.username,
           password: this.$store.getters.password,
           firstName: this.first_name,
@@ -198,7 +198,7 @@ export default {
           // eslint-disable-next-line no-shadow
           // eslint-disable-next-line no-unused-vars
           // eslint-disable-next-line implicit-arrow-linebreak
-          axios.post('http://localhost:8080/api/auth/sign-in', {
+          axios.post('https://senior-project-api-gl8ig.ondigitalocean.app/api/auth/sign-in', {
             // console.log(result.data);
             username: this.$store.getters.username,
             password: this.$store.getters.password,

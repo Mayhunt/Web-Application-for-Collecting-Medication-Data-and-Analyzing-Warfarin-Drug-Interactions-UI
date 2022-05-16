@@ -102,7 +102,7 @@ export default {
   },
   // mounted() {
   //   axios
-  //     .get(`http://localhost:8080/api/allergic-drug/${this.$store.getters.editdrug.id}`)
+  //     .get(`https://senior-project-api-gl8ig.ondigitalocean.app/api/allergic-drug/${this.$store.getters.editdrug.id}`)
   //     .then((response) => {
   //       this.allergicDrug = response.data;
   //       this.allergicDrug.pic = this.$store.getters.editdrug.pic;
@@ -112,7 +112,7 @@ export default {
   methods: {
     getEditAllergicAPI() {
       axios
-        .get(`http://localhost:8080/api/allergic-drug/${this.$store.getters.editdrug.id}`)
+        .get(`https://senior-project-api-gl8ig.ondigitalocean.app/api/allergic-drug/${this.$store.getters.editdrug.id}`)
         .then((response) => {
           this.allergicDrug = response.data;
           this.allergicDrug.pic = this.$store.getters.editdrug.pic;

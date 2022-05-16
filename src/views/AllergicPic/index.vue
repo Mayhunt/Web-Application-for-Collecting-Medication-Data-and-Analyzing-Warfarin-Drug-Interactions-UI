@@ -197,7 +197,7 @@ export default {
   },
   methods: {
     getAllergicPicAPI() {
-      axios.get('http://localhost:8080/api/card-pic').then((response) => {
+      axios.get('https://senior-project-api-gl8ig.ondigitalocean.app/api/card-pic').then((response) => {
         this.allergics = response.data;
       // console.log(this.allDrug);
       });

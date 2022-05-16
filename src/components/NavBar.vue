@@ -117,7 +117,7 @@ export default {
     },
   },
   // mounted() {
-  //   axios.get('http://localhost:8080/api/search').then((response) => {
+  //   axios.get('https://senior-project-api-gl8ig.ondigitalocean.app/api/search').then((response) => {
   //     this.data = response.data;
   //     // this.allData = data.data;
   //     // data.data.forEach((item) => this.data.push(item.genericName));
@@ -137,7 +137,7 @@ export default {
   },
   methods: {
     getDrugAPI() {
-      axios.get('http://localhost:8080/api/search').then((response) => {
+      axios.get('https://senior-project-api-gl8ig.ondigitalocean.app/api/search').then((response) => {
         this.data = response.data;
         console.warn(this.data);
         // this.allData = data.data;
