@@ -42,7 +42,7 @@
           <!-- <div class="buttons has-addons is-centered">
             <b-button class="button" size="is-medium" type="is-primary is-light">บันทึก</b-button>
           </div> -->
-          <div class="fixedbutton" style="justify-content: center">
+          <div class="fixedbuttons" style="justify-content: center">
             <b-button
               @click="addAllergicDrug()"
               rounded
@@ -52,6 +52,7 @@
             >
               บันทึก</b-button
             >
+            <div class="pb-5 pt-5"></div>
           </div>
         </div>
       </div>
