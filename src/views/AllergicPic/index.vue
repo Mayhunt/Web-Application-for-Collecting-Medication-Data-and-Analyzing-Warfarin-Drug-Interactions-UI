@@ -66,7 +66,10 @@
             expanded
             >เพิ่มรูปใบแพ้ยา</b-button
           >
+          <div class="pb-5 pt-5"></div>
         </div>
+        <div class="pb-5 pt-5"></div>
+        <div class="pb-5 pt-5"></div>
         <b-modal v-model="isCardModalActive" :width="640" scroll="keep">
           <div class="card">
             <div>
@@ -130,7 +133,7 @@
                     <!-- <div class="col-md-6"> -->
                     <!-- add image icon -->
                     <br />
-                    <input type="file" accept="image/*" @change="previewImage" id="my-file" />
+                    <input type="file" accept="image/*" @change="previewImage" id="my-file" style="padding-left:100px"/>
                     <!-- </div> -->
                   </div>
                   <div class="fixedbuttons" style="justify-content: center; margin-top: 2rem">
@@ -263,6 +266,7 @@ export default {
   position: fixed;
   padding-left: 15px;
   padding-right: 15px;
+  padding-bottom: 120px;
   left: 0%;
   bottom: 0px;
   background-color: #f2effb;
