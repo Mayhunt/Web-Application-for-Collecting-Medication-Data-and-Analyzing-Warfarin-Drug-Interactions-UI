@@ -175,12 +175,12 @@ export default {
       console.warn(to, from);
     });
   },
-  beforeRouteUpdate(to, from, next) {
-    this.currentlyDrug = null;
-    // this.name = null;
-    this.getEditDrugUSedAPI();
-    next();
-  },
+  // beforeRouteUpdate(to, from, next) {
+  //   this.currentlyDrug = null;
+  //   // this.name = null;
+  //   this.getEditDrugUSedAPI();
+  //   next();
+  // },
   // mounted() {
   //   axios
   //     .get(`https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug/${this.$store.getters.editdrug.id}`)

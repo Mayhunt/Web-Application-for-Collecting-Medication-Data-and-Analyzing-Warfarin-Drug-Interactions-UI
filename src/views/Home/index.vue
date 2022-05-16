@@ -257,7 +257,6 @@
                             @click="
                               isCardModalActive2 = false;
                               deleteInr();
-                              reloadPage();
                             "
                             type="is-danger"
                             size="is-medium"
@@ -322,10 +321,36 @@ export default {
       },
     };
   },
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      vm.getINRAPI();
+      vm.getCurrentlyAPI();
+      vm.drawData();
+      console.warn(to, from);
+    });
+  },
   computed: {
     ...mapGetters(['user']),
   },
   methods: {
+    getINRAPI() {
+      axios.get(`https://senior-project-api-gl8ig.ondigitalocean.app/api/inr`).then((response) => {
+      this.data = response.data;
+      console.warn(response);
+    });
+    },
+    getCurrentlyAPI() {
+      axios
+      .get(`https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug`)
+      .then((response) => {
+        for (const i of response.data) {
+          if (i.drugAlert !== null) {
+            this.drugSchedule.push(i);
+          }
+        }
+        // console.warn(this.drugSchedule);
+      });
+    },
     async addInr() {
       const result = await axios
         .post(`https://senior-project-api-gl8ig.ondigitalocean.app/api/inr`, {
@@ -353,15 +378,32 @@ export default {
           inrExpect: this.selected.inrExpect,
           inrMeasure: this.selected.inrMeasure,
         },
-      );
+      ).then((response) => {
+        window.location.reload();
+            // this.$router.push('/currently-drug');
+            console.log(response);
+          })
+            .catch((error) => {
+              // eslint-disable-next-line no-alert
+              alert(error.response.data.message);
+              console.log(error.response.data.message);
+            });
       console.warn(result);
     },
     async deleteInr() {
       const result = await axios.delete(
         `https://senior-project-api-gl8ig.ondigitalocean.app/api/inr/${this.selected.id}/delete`,
         {},
-      );
-      console.warn(result);
+      ).then((response) => {
+        window.location.reload();
+            // this.$router.push('/currently-drug');
+            console.log(response);
+          })
+            .catch((error) => {
+              // eslint-disable-next-line no-alert
+              alert(error.response.data.message);
+              console.log(error.response.data.message);
+            });
     },
     reloadPage() {
       window.location.reload();
@@ -378,6 +420,7 @@ export default {
     //   // console.warn(this.finalData)
     // },
     drawData() {
+      console.warn('a');
       var round = 1;
       this.data.forEach((item) => {
         this.finalData.push([round, Number(item.inrMeasure), Number(item.inrExpect)]);
@@ -398,22 +441,22 @@ export default {
       // console.warn(this.selected)
     },
   },
-  mounted() {
-    axios.get(`https://senior-project-api-gl8ig.ondigitalocean.app/api/inr`).then((response) => {
-      this.data = response.data;
-      console.warn(response);
-    });
-    axios
-      .get(`https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug`)
-      .then((response) => {
-        for (const i of response.data) {
-          if (i.drugAlert !== null) {
-            this.drugSchedule.push(i);
-          }
-        }
-        // console.warn(this.drugSchedule);
-      });
-  },
+  // mounted() {
+  //   axios.get(`https://senior-project-api-gl8ig.ondigitalocean.app/api/inr`).then((response) => {
+  //     this.data = response.data;
+  //     console.warn(response);
+  //   });
+  //   axios
+  //     .get(`https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug`)
+  //     .then((response) => {
+  //       for (const i of response.data) {
+  //         if (i.drugAlert !== null) {
+  //           this.drugSchedule.push(i);
+  //         }
+  //       }
+  //       // console.warn(this.drugSchedule);
+  //     });
+  // },
 };
 </script>
 
