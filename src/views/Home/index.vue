@@ -315,7 +315,6 @@
                             class="button"
                             @click="
                               isCardModalActive2 = false;
-                              reloadPage();
                               updateInr();
                             "
                             type="is-primary"
