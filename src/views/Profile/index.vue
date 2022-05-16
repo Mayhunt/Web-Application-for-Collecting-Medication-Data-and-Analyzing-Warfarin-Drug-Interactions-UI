@@ -25,12 +25,12 @@
               <p class="image is-128x128">
                 <img
                   v-if="me.pic === '-' || me.pic === ''"
-                  class="is-rounded"
+                  class="image is-128x128"
                   src="https://senior-project-api-gl8ig.ondigitalocean.app/api/storage?key=Ac_YXsmD.png"
                 />
                 <img
                   v-else
-                  class="is-rounded"
+                  class="image is-128x128"
                   :src="`https://senior-project-api-gl8ig.ondigitalocean.app/api/storage?key=${me.pic}`"
                 />
               </p>
