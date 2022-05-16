@@ -118,11 +118,9 @@
                   >บันทึก</b-button
                 >
                 <br />
-                <router-link to="sign-in">
-                  <b-button type="is-danger is-light" size="is-medium" rounded expanded>
-                    ลบบัญชีผู้ใช้นี้</b-button
-                  ></router-link
-                >
+                  <b-button @click="deleteProfile()" type="is-danger is-light" size="is-medium" rounded expanded>
+                    ลบบัญชีผู้ใช้นี้ </b-button
+                  >
               </div>
             </div>
           </form>
@@ -226,6 +224,21 @@ export default {
     },
   },
   methods: {
+    async deleteProfile() {
+      // eslint-disable-next-line no-unused-vars
+      const result = await axios.delete(
+        `https://senior-project-api-gl8ig.ondigitalocean.app/api/auth/${this.$store.getters.id}/delete`,
+        {},
+      ).then((response) => {
+        this.$router.push('/sign-in');
+        console.log(response);
+      })
+        .catch((error) => {
+          // eslint-disable-next-line no-alert
+          alert(error.response.data.message);
+          console.log(error.response.data.message);
+        });
+    },
     async updateProfile() {
       const result = await axios
         .patch(
