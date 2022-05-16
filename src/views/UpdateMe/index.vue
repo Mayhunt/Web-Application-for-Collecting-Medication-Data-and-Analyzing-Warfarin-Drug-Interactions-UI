@@ -30,7 +30,7 @@
             <!-- <div class="col-md-6"> -->
             <!-- add image icon -->
             <div class="pb-1 pt-1"></div>
-            <input type="file" accept="image/*" @change="previewImage" id="my-file" style="padding-left:115px"/>
+            <input type="file" accept="image/*" @change="previewImage" id="my-file" style="padding-left:100px"/>
             <!-- </div> -->
             <div align="right">
               <span
