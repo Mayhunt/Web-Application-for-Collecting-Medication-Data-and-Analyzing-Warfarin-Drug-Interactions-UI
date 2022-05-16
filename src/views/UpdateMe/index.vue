@@ -248,6 +248,7 @@ export default {
         {},
       ).then((response) => {
         this.$router.push('/sign-in');
+        localStorage.removeItem('token');
         console.log(response);
       })
         .catch((error) => {
