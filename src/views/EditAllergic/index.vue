@@ -44,8 +44,7 @@
           </div> -->
 
           <div class="fixedbuttons" style="justify-content: center">
-            <router-link to="/allergic-drug"
-              ><b-button
+            <b-button
                 @click="updateDrug()"
                 rounded
                 type="is-primary is-light"
@@ -53,12 +52,10 @@
                 expanded
               >
                 บันทึก</b-button
-              ></router-link
-            >
+              >
             <br />
 
-            <router-link to="/allergic-drug"
-              ><b-button
+          <b-button
                 @click="deleteDrug()"
                 rounded
                 type="is-danger is-light"
@@ -66,8 +63,7 @@
                 expanded
               >
                 ลบรายการยานี้</b-button
-              ></router-link
-            >
+              >
           </div>
         </div>
       </div>
@@ -119,7 +115,23 @@ export default {
           console.log(response);
         });
     },
+    async deleteDrug() {
+      // eslint-disable-next-line no-unused-vars
+      const result = await axios.delete(
+        `https://senior-project-api-gl8ig.ondigitalocean.app/api/allergic-drug/${this.allergicDrug.id}/delete`,
+        {},
+      ).then((response) => {
+        this.$router.push('/allergic-drug');
+        console.log(response);
+      })
+        .catch((error) => {
+          // eslint-disable-next-line no-alert
+          alert(error.response.data.message);
+          console.log(error.response.data.message);
+        });
+    },
     async updateDrug() {
+      // eslint-disable-next-line no-unused-vars
       const result = await axios.patch(
         `https://senior-project-api-gl8ig.ondigitalocean.app/api/allergic-drug/${this.allergicDrug.id}/update`,
         {
@@ -127,8 +139,15 @@ export default {
           symptom: this.allergicDrug.symptom,
           place: this.allergicDrug.place,
         },
-      );
-      console.warn(result);
+      ).then((response) => {
+        this.$router.push('/allergic-drug');
+        console.log(response);
+      })
+        .catch((error) => {
+          // eslint-disable-next-line no-alert
+          alert(error.response.data.message);
+          console.log(error.response.data.message);
+        });
     },
   },
 };
