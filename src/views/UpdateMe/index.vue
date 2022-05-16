@@ -11,7 +11,7 @@
             </div> -->
           <div class="media-body" align="center">
             <figure v-if="preview" class="image is-128x128">
-              <b-image :src="preview" rounded class="image is-128x128" />
+              <b-image :src="preview" class="image is-128x128" />
             </figure>
             <figure v-else class="image is-128x128">
               <img
