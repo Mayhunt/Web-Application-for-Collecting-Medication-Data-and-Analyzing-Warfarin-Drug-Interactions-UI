@@ -4,6 +4,7 @@
       <b-collapse
         class="card"
         animation="slide"
+        v-model="isOpen"
         aria-id="contentIdForA11y3"
         style="background-color: rgb(121, 87, 213)"
       >
@@ -12,7 +13,7 @@
             class="card-header"
             role="button"
             aria-controls="contentIdForA11y3"
-            :aria-expanded="props.open"
+            :aria-expanded ="isOpen"
             style="font-family: 'Kanit'"
           >
             <p class="card-header-title" style="color: white">
@@ -306,6 +307,7 @@ export default {
       hasMobileCards: false,
       isCardModalActive: false,
       isCardModalActive2: false,
+      isOpen: false,
       selected: { id: '', inrMeasure: Number(), inrExpect: Number(), followDate: new Date() },
       data: [],
       finalData: [],
