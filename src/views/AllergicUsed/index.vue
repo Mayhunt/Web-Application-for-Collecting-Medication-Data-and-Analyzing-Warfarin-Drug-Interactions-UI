@@ -118,7 +118,6 @@
                   <b-button
                     @click="
                       deleteDrug();
-                      reloadPage();
                     "
                     type="is-danger"
                     size="is-medium"
@@ -215,10 +214,18 @@ export default {
       this.$store.commit('setEditDrug', { id: this.details.id, pic: this.details.pic });
     },
     async deleteDrug() {
+      // eslint-disable-next-line no-unused-vars
       const result = await axios.delete(
         `https://senior-project-api-gl8ig.ondigitalocean.app/api/allergic-drug/${this.details.id}/delete`,
-      );
-      console.warn(result);
+      ).then((response) => {
+        this.reloadPage();
+        console.log(response);
+      })
+        .catch((error) => {
+          // eslint-disable-next-line no-alert
+          alert(error.response.data.message);
+          console.log(error.response.data.message);
+        });
     },
     reloadPage() {
       window.location.reload();
