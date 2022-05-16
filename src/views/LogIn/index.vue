@@ -30,6 +30,7 @@
                 icon="account-circle"
                 icon-clickable
                 rounded
+                required
                 @icon-click="userIconClick"
               >
               </b-input>
@@ -43,6 +44,7 @@
                 icon-clickable
                 rounded
                 password-reveal
+                required
                 @icon-click="passwordIconClick"
               >
               </b-input>
