@@ -154,12 +154,12 @@ export default {
       console.warn(to, from);
     });
   },
-  beforeRouteUpdate(to, from, next) {
-    this.data = null;
-    // this.name = null;
-    this.getDrugAPI();
-    next();
-  },
+  // beforeRouteUpdate(to, from, next) {
+  //   this.data = null;
+  //   // this.name = null;
+  //   this.getDrugAPI();
+  //   next();
+  // },
   mounted() {
     axios.get('https://senior-project-api-gl8ig.ondigitalocean.app/api/search').then((response) => {
       this.allDrug = response.data;
