@@ -29,7 +29,8 @@
           <div>
             <!-- <div class="col-md-6"> -->
             <!-- add image icon -->
-            <input type="file" accept="image/*" @change="previewImage" id="my-file" />
+            <div class="pb-1 pt-1"></div>
+            <input type="file" accept="image/*" @change="previewImage" id="my-file" style="padding-left:115px"/>
             <!-- </div> -->
             <div align="right">
               <span
@@ -42,7 +43,7 @@
                 ></b-button
               ></span>
             </div>
-            <p class="has-text-danger is-size-7">โปรดคลิกไอคอนเพื่ออัพโหลด</p>
+            <p class="has-text-danger is-size-7" style="text-align: center;">โปรดคลิกไอคอนเพื่ออัพโหลด</p>
           </div>
           <!--  -->
 
