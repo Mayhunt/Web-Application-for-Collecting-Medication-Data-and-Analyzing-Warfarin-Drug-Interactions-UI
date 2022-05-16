@@ -237,8 +237,9 @@ export default {
         )
         .then((response) => {
           this.me = response.data;
+          console.log(this.me.birthDate);
           this.me.birthDate = new Date(this.me.birthDate);
-          console.log(response);
+          console.log(this.me.birthDate);
         });
     },
     async deleteProfile() {

@@ -79,12 +79,6 @@
               :options="options"
               :data="chartData"
               @ready="onChartReady"
-              :settings="{
-                packages: ['corechart'],
-                callback: () => {
-                  this.drawData();
-                },
-              }"
             />
           </div>
 
@@ -297,6 +291,7 @@ export default {
       // tox = '',
       // fromx = '',
       c: '',
+      // chartData: new google.visualization.DataTable(),
       drugSchedule: [],
       selectedDate: new Date(),
       inrMeasure: Number(),
@@ -341,6 +336,11 @@ export default {
   },
   computed: {
     ...mapGetters(['user']),
+    // sampleFormat() {
+    //   // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+    //   this.data.followDate = new Date(this.data.followDate);
+    //   return this.data.followDate
+    // },
   },
   methods: {
     route(to,from) {
@@ -353,6 +353,23 @@ export default {
       console.warn(localStorage.getItem('token'));
       axios.get(`https://senior-project-api-gl8ig.ondigitalocean.app/api/inr`).then((response) => {
       this.data = response.data;
+      // console.warn(this.data[0].followDate)
+      // this.data[0].followDate = new Date(this.data[0].followDate);
+      // console.warn(this.data[0].followDate)
+      var round = 1;
+      var roundDate = 0;
+      this.finalData =[],
+      this.data.forEach((item) => {
+        this.data[roundDate].followDate = new Date(this.data[roundDate].followDate);
+        this.finalData.push([round, Number(item.inrMeasure), Number(item.inrExpect)]);
+        round = round + 1;
+        roundDate = roundDate + 1;
+      });
+      this.chartData = new google.visualization.DataTable();
+      this.chartData.addColumn('number', 'round');
+      this.chartData.addColumn('number', 'ค่า INR ที่วัดได้');
+      this.chartData.addColumn('number', 'ค่า INR ที่คาดหวัง');
+      this.chartData.addRows(this.finalData);
       // console.warn(to);
     });
     },
@@ -438,22 +455,26 @@ export default {
     // },
     drawData() {
       console.warn('a');
-      var round = 1;
-      this.data.forEach((item) => {
-        this.finalData.push([round, Number(item.inrMeasure), Number(item.inrExpect)]);
-        round = round + 1;
-      });
+      // var round = 1;
+      // this.data.forEach((item) => {
+      //   this.finalData.push([round, Number(item.inrMeasure), Number(item.inrExpect)]);
+      //   round = round + 1;
+      // });
       console.warn(this.finalData);
-      this.chartData = new google.visualization.DataTable();
-      this.chartData.addColumn('number', 'round');
-      this.chartData.addColumn('number', 'ค่า INR ที่วัดได้');
-      this.chartData.addColumn('number', 'ค่า INR ที่คาดหวัง');
-      this.chartData.addRows(this.finalData);
+      // this.chartData = new google.visualization.DataTable();
+      // this.chartData.addColumn('number', 'round');
+      // this.chartData.addColumn('number', 'ค่า INR ที่วัดได้');
+      // this.chartData.addColumn('number', 'ค่า INR ที่คาดหวัง');
+      // this.chartData.addRows(this.finalData);
+      console.warn(this.chartData)
     },
   },
   watch: {
     // whenever question changes, this function will run
     selected() {
+      console.warn(this.selected)
+      // this.selected = new Date(this.selected.followDate)
+      // selected.followDate = new Date(selected.followDate)
       return (this.isCardModalActive2 = true);
       // console.warn(this.selected)
     },

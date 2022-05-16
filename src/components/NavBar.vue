@@ -151,7 +151,7 @@ export default {
     },
     logout() {
       localStorage.removeItem('token');
-      this.$router.go('/sign-in');
+      this.$router.push('/sign-in');
       console.log(localStorage.getItem('token'));
     },
   },
