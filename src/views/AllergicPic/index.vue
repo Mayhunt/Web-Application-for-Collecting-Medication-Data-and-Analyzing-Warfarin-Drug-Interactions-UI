@@ -266,7 +266,7 @@ export default {
   position: fixed;
   padding-left: 15px;
   padding-right: 15px;
-  padding-bottom: 120px;
+  padding-bottom: 80px;
   left: 0%;
   bottom: 0px;
   background-color: #f2effb;
