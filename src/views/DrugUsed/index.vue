@@ -25,10 +25,14 @@
               <figure class="image is-64x64">
                 <img
                   v-if="Currently.pic !== '-'"
-                  :src="`http://localhost:8080/api/storage?key=${Currently.pic}`"
+                  :src="`https://senior-project-api-gl8ig.ondigitalocean.app/api/storage?key=${Currently.pic}`"
                   alt="Image"
                 />
-                <img v-else src="http://localhost:8080/api/storage?key=Ac_YXsmD.png" alt="Image" />
+                <img
+                  v-else
+                  src="https://senior-project-api-gl8ig.ondigitalocean.app/api/storage?key=Ac_YXsmD.png"
+                  alt="Image"
+                />
               </figure>
             </div>
             <div class="media-content">
@@ -64,7 +68,10 @@
                 <div>
                   <div class="media-content" style="text-align: -webkit-center">
                     <figure class="image">
-                      <b-image :src="`http://localhost:8080/api/storage?key=${this.details.pic}`"> </b-image>
+                      <b-image
+                        :src="`https://senior-project-api-gl8ig.ondigitalocean.app/api/storage?key=${this.details.pic}`"
+                      >
+                      </b-image>
                     </figure>
                   </div>
                 </div>
@@ -123,9 +130,7 @@
                   </router-link>
                   <div class="pb-1 pt-1"></div>
                   <b-button
-                    @click="
-                      deleteDrug();
-                    "
+                    @click="deleteDrug()"
                     type="is-danger"
                     size="is-medium"
                     rounded
@@ -194,38 +199,42 @@ export default {
     isNotification: false,
   }),
   mounted() {
-    axios.get('http://localhost:8080/api/search').then((response) => {
+    axios.get('https://senior-project-api-gl8ig.ondigitalocean.app/api/search').then((response) => {
       this.allDrug = response.data;
-      axios.get('http://localhost:8080/api/currently-drug').then((res) => {
-        this.drugcurrently = res.data;
-        console.warn(this.drugcurrently);
-        this.picAllergicUsed();
-        // this.picAllergicUsed();
-        this.drugcurrently.receiveDate = new Date(this.drugcurrently.receiveDate);
-        // eslint-disable-next-line consistent-return
-        // eslint-disable-next-line no-restricted-syntax
-        for (const element of this.drugcurrently) {
-          // eslint-disable-next-line space-in-parens
-          // eslint-disable-next-line no-constant-condition
-          /* eslint-disable */ 
-          if (
-            element.genericName === 'Warfarin (ชมพู) tab 5 mg '
-            || 'Warfarin (ฟ้า) tab 3 mg'
-            || 'Warfarin (ส้ม) tab 2 mg '
-          ) {
-            this.interact();
-            break;
+      axios
+        .get('https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug')
+        .then((res) => {
+          this.drugcurrently = res.data;
+          console.warn(this.drugcurrently);
+          this.picAllergicUsed();
+          // this.picAllergicUsed();
+          this.drugcurrently.receiveDate = new Date(this.drugcurrently.receiveDate);
+          // eslint-disable-next-line consistent-return
+          // eslint-disable-next-line no-restricted-syntax
+          for (const element of this.drugcurrently) {
+            // eslint-disable-next-line space-in-parens
+            // eslint-disable-next-line no-constant-condition
+            /* eslint-disable */
+            if (
+              element.genericName === 'Warfarin (ชมพู) tab 5 mg ' ||
+              'Warfarin (ฟ้า) tab 3 mg' ||
+              'Warfarin (ส้ม) tab 2 mg '
+            ) {
+              this.interact();
+              break;
+            }
           }
-        }
-      });
+        });
       this.getActivities();
       // console.log(this.allDrug);
     });
-    axios.get('http://localhost:8080/api/interact').then((response) => {
-      this.druginteract = response.data;
-      // console.log(this.druginteract);
-    });
-    // axios.get('http://localhost:8080/api/currently-drug').then((response) => {
+    axios
+      .get('https://senior-project-api-gl8ig.ondigitalocean.app/api/interact')
+      .then((response) => {
+        this.druginteract = response.data;
+        // console.log(this.druginteract);
+      });
+    // axios.get('https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug').then((response) => {
     //   this.drugcurrently = response.data;
     //   console.warn(this.drugcurrently);
     //   this.getActivities();
@@ -292,9 +301,9 @@ export default {
     getImgUrl(pic) {
       if (pic !== '-') {
         // eslint-disable-next-line no-unused-vars
-        return `http://localhost:8080/api/storage?key=${pic}`;
+        return `https://senior-project-api-gl8ig.ondigitalocean.app/api/storage?key=${pic}`;
       }
-      return 'http://localhost:8080/api/storage?key=Ac_YXsmD.png';
+      return 'https://senior-project-api-gl8ig.ondigitalocean.app/api/storage?key=Ac_YXsmD.png';
     },
     sendData(detail) {
       this.details = detail;
@@ -305,7 +314,7 @@ export default {
     },
     async deleteDrug() {
       const result = await axios.delete(
-        `http://localhost:8080/api/currently-drug/${this.details.id}/delete`,
+        `https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug/${this.details.id}/delete`
       );
       window.location.reload();
     },

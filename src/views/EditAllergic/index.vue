@@ -10,7 +10,7 @@
       </div>
       <div>
         <b-image
-          :src="`http://localhost:8080/api/storage?key=${this.allergicDrug.pic}`"
+          :src="`https://senior-project-api-gl8ig.ondigitalocean.app/api/storage?key=${this.allergicDrug.pic}`"
         ></b-image>
       </div>
 
@@ -82,8 +82,7 @@ import axios from 'axios';
 
 export default {
   name: 'SaveAllergic',
-  components: {
-  },
+  components: {},
   data() {
     return {
       allergicDrug: {},
@@ -122,7 +121,7 @@ export default {
     },
     async updateDrug() {
       const result = await axios.patch(
-        `http://localhost:8080/api/allergic-drug/${this.allergicDrug.id}/update`,
+        `https://senior-project-api-gl8ig.ondigitalocean.app/api/allergic-drug/${this.allergicDrug.id}/update`,
         {
           more: this.allergicDrug.more,
           symptom: this.allergicDrug.symptom,

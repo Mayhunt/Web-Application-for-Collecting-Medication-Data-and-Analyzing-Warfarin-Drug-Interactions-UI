@@ -7,10 +7,14 @@
       <!-- <div class="container"> -->
       <div class="content is-medium">
         <br />
-        <h1>{{this.$store.getters.searchdrugs.genericName}}</h1>
+        <h1>{{ this.$store.getters.searchdrugs.genericName }}</h1>
       </div>
       <div>
-        <b-image :src="`http://localhost:8080/api/storage?key=${this.$store.getters.searchdrugs.pic}`" alt="ex1" :rounded="rounded">
+        <b-image
+          :src="`https://senior-project-api-gl8ig.ondigitalocean.app/api/storage?key=${this.$store.getters.searchdrugs.pic}`"
+          alt="ex1"
+          :rounded="rounded"
+        >
         </b-image>
       </div>
 
@@ -29,10 +33,10 @@
           </p>
         </b-modal> -->
 
-        {{this.$store.getters.searchdrugs.genericName}}
+        {{ this.$store.getters.searchdrugs.genericName }}
         <hr />
         <strong><h2>ข้อควรระวัง</h2></strong>
-        {{this.$store.getters.searchdrugs.caution}}
+        {{ this.$store.getters.searchdrugs.caution }}
       </div>
       <!-- <div class="fixedbutton justify-content-center is-fullwidth">
           <b-button size="is-medium" class="is-fullwidth" type="is-primary is-light"
@@ -44,13 +48,17 @@
           >
         </div> -->
       <div class="fixedbuttons" style="justify-content: center">
-        <router-link to="/save-drug"><b-button type="is-primary is-light" size="is-medium" rounded expanded
-          >บันทึกไปรายการยาปัจจุบัน</b-button
-        ></router-link>
-        <br/>
-        <router-link to="/save-allergic"><b-button rounded type="is-danger is-light" size="is-medium" expanded
-          >บันทึกไปรายการยาที่แพ้</b-button
-        ></router-link>
+        <router-link to="/save-drug"
+          ><b-button type="is-primary is-light" size="is-medium" rounded expanded
+            >บันทึกไปรายการยาปัจจุบัน</b-button
+          ></router-link
+        >
+        <br />
+        <router-link to="/save-allergic"
+          ><b-button rounded type="is-danger is-light" size="is-medium" expanded
+            >บันทึกไปรายการยาที่แพ้</b-button
+          ></router-link
+        >
         <div class="pb-5 pt-5"></div>
       </div>
     </div>
@@ -69,7 +77,6 @@ export default {
 </script>
 
 <script>
-
 export default {
   name: 'SearchPage',
   data() {

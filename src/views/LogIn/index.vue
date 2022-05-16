@@ -16,8 +16,10 @@
       >
         <div>
           <div class="content is-medium">
-            <h1 style="margin-top: 0; text-align: center; margin-bottom: 0.25rem">ยินดีต้อนรับ !</h1>
-            <h6 style="font-size: 1rem; text-align: center">ยืนดีต้อนรับเข้าสู่ Pillz </h6>
+            <h1 style="margin-top: 0; text-align: center; margin-bottom: 0.25rem">
+              ยินดีต้อนรับ !
+            </h1>
+            <h6 style="font-size: 1rem; text-align: center">ยืนดีต้อนรับเข้าสู่ Pillz</h6>
           </div>
           <form class="box">
             <b-field label="ชื่อผู้ใช้งาน">
@@ -61,7 +63,6 @@
                 >
               </div>
             </div>
-
           </form>
         </div>
       </section>

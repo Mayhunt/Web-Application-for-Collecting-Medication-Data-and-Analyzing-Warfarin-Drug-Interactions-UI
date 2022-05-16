@@ -23,8 +23,16 @@
           </figure> -->
             <figure>
               <p class="image is-128x128">
-                <img v-if="me.pic === '-' || me.pic === ''" class="is-rounded" src="http://localhost:8080/api/storage?key=Ac_YXsmD.png" />
-                <img v-else class="is-rounded" :src="`http://localhost:8080/api/storage?key=${me.pic}`" />
+                <img
+                  v-if="me.pic === '-' || me.pic === ''"
+                  class="is-rounded"
+                  src="https://senior-project-api-gl8ig.ondigitalocean.app/api/storage?key=Ac_YXsmD.png"
+                />
+                <img
+                  v-else
+                  class="is-rounded"
+                  :src="`https://senior-project-api-gl8ig.ondigitalocean.app/api/storage?key=${me.pic}`"
+                />
               </p>
             </figure>
           </div>
@@ -121,11 +129,13 @@ export default {
     ...mapGetters(['user']),
   },
   mounted() {
-    axios.get('http://localhost:8080/api/auth/me').then((response) => {
-      this.me = response.data;
-      this.me.birthDate = new Date(this.me.birthDate);
-      console.warn(this.me.birthDate);
-    });
+    axios
+      .get('https://senior-project-api-gl8ig.ondigitalocean.app/api/auth/me')
+      .then((response) => {
+        this.me = response.data;
+        this.me.birthDate = new Date(this.me.birthDate);
+        console.warn(this.me.birthDate);
+      });
   },
   methods: {
     sendData() {

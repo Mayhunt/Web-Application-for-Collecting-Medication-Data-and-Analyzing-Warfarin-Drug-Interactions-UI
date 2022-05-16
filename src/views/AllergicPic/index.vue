@@ -14,10 +14,18 @@
           v-for="(allergic, index) in allergics"
           :key="index"
           style="border-radius: 30px 30px 30px 30px"
-          @click="isImageModalActive = true; sendData(allergic);"
+          @click="
+            isImageModalActive = true;
+            sendData(allergic);
+          "
         >
           <div>
-            <b-image :src="`http://localhost:8080/api/storage?key=${allergic.cardPic}`" alt="The Buefy Logo" ratio="2by1"> </b-image>
+            <b-image
+              :src="`https://senior-project-api-gl8ig.ondigitalocean.app/api/storage?key=${allergic.cardPic}`"
+              alt="The Buefy Logo"
+              ratio="2by1"
+            >
+            </b-image>
           </div>
           <div class="pb-1 pt-1"></div>
 
@@ -34,7 +42,11 @@
         <!-- pop up -->
         <b-modal v-model="isImageModalActive">
           <p class="image">
-            <b-image :src="`http://localhost:8080/api/storage?key=${this.details.cardPic}`" alt="i" :rounded="rounded">
+            <b-image
+              :src="`https://senior-project-api-gl8ig.ondigitalocean.app/api/storage?key=${this.details.cardPic}`"
+              alt="i"
+              :rounded="rounded"
+            >
             </b-image>
           </p>
         </b-modal>
@@ -74,7 +86,9 @@
                   <div class="buttons" style="justify-content: center; margin-top: 2rem">
                     <b-button
                       class="button"
-                      @click="(isCardModalActive = false), (isImageModalActive = false), deleteCardPic();"
+                      @click="
+                        (isCardModalActive = false), (isImageModalActive = false), deleteCardPic()
+                      "
                       type="is-danger"
                       size="is-medium"
                       rounded
@@ -112,7 +126,7 @@
                       />
                     </figure>
                   </div>
-                  <div style="text-align-last: center;">
+                  <div style="text-align-last: center">
                     <!-- <div class="col-md-6"> -->
                     <!-- add image icon -->
                     <br />
@@ -121,9 +135,7 @@
                   </div>
                   <div class="fixedbuttons" style="justify-content: center; margin-top: 2rem">
                     <b-button
-                      @click="
-                        addImage();
-                      "
+                      @click="addImage()"
                       rounded
                       type="is-primary"
                       size="is-medium"
@@ -162,7 +174,7 @@ export default {
   }),
   // mounted() {
   //   axios
-  //     .get('http://localhost:8080/api/storage', {
+  //     .get('https://senior-project-api-gl8ig.ondigitalocean.app/api/storage', {
   //       params: { key: 'R7YD7nsy.png' },
   //       responseType: 'arraybuffer',
   //     })
@@ -194,15 +206,22 @@ export default {
       // const user =  this.$store.getters.username,
       const fd = new FormData();
       fd.append('file', this.image);
-      const result = await axios.post('http://localhost:8080/api/storage', fd, {
-        headers: {
-          'content-type': 'multipart/form-data',
+      const result = await axios.post(
+        'https://senior-project-api-gl8ig.ondigitalocean.app/api/storage',
+        fd,
+        {
+          headers: {
+            'content-type': 'multipart/form-data',
+          },
         },
-      });
+      );
       this.uploadPic = result.data;
-      const result1 = await axios.post('http://localhost:8080/api/card-pic', {
-        cardPic: this.uploadPic,
-      });
+      const result1 = await axios.post(
+        'https://senior-project-api-gl8ig.ondigitalocean.app/api/card-pic',
+        {
+          cardPic: this.uploadPic,
+        },
+      );
       console.warn(result1);
       window.location.reload();
     },
@@ -230,7 +249,7 @@ export default {
     },
     async deleteCardPic() {
       const result = await axios.delete(
-        `http://localhost:8080/api/card-pic/${this.details.id}/delete`,
+        `https://senior-project-api-gl8ig.ondigitalocean.app/api/card-pic/${this.details.id}/delete`,
       );
       console.warn(result);
       window.location.reload();

@@ -10,7 +10,7 @@
       </div>
       <div>
         <b-image
-          :src="`http://localhost:8080/api/storage?key=${this.$store.getters.searchdrugs.pic}`"
+          :src="`https://senior-project-api-gl8ig.ondigitalocean.app/api/storage?key=${this.$store.getters.searchdrugs.pic}`"
           alt="The Buefy Logo"
           ratio="2by1"
           :rounded="rounded"
@@ -76,7 +76,7 @@ export default {
   methods: {
     async addAllergicDrug() {
       await axios
-        .post('http://localhost:8080/api/allergic-drug', {
+        .post('https://senior-project-api-gl8ig.ondigitalocean.app/api/allergic-drug', {
           drugId: this.$store.getters.searchdrugs.id,
           symptom: this.symptom,
           place: this.place,

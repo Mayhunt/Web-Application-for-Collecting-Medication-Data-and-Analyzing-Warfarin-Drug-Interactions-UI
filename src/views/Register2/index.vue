@@ -219,11 +219,15 @@ export default {
       // const user =  this.$store.getters.username,
       const fd = new FormData();
       fd.append('file', this.image);
-      const result = await axios.post('http://localhost:8080/api/storage', fd, {
-        headers: {
-          'content-type': 'multipart/form-data',
+      const result = await axios.post(
+        'https://senior-project-api-gl8ig.ondigitalocean.app/api/storage',
+        fd,
+        {
+          headers: {
+            'content-type': 'multipart/form-data',
+          },
         },
-      });
+      );
       this.pic = result.data;
       console.warn(result);
     },

@@ -11,7 +11,7 @@
       <div>
         <b-image
           id="currentlyDrugImageStyle"
-          :src="`http://localhost:8080/api/storage?key=${this.currentlyDrug.pic}`"
+          :src="`https://senior-project-api-gl8ig.ondigitalocean.app/api/storage?key=${this.currentlyDrug.pic}`"
           alt="The Buefy Logo"
         >
         </b-image>
@@ -227,7 +227,7 @@ export default {
     },
     async updateDrug() {
       const result = await axios.patch(
-        `http://localhost:8080/api/currently-drug/${this.currentlyDrug.id}/update`,
+        `https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug/${this.currentlyDrug.id}/update`,
         {
           more: this.currentlyDrug.more,
           receiveDate: this.currentlyDrug.receiveDate,
@@ -238,7 +238,7 @@ export default {
       console.warn(result);
       if (this.isHide === true && this.currentlyDrug.drugAlert === null) {
         await axios
-          .post('http://localhost:8080/api/drug-alert', {
+          .post('https://senior-project-api-gl8ig.ondigitalocean.app/api/drug-alert', {
             drugCurrentlyUsedId: this.currentlyDrug.id,
             tabs: this.tabs,
             take: this.takesGroup[0],
@@ -255,7 +255,7 @@ export default {
           });
       } else if (this.isHide === true && this.currentlyDrug.drugAlert !== null) {
         const result2 = await axios.patch(
-          `http://localhost:8080/api/drug-alert/${this.currentlyDrug.drugAlert.id}/update`,
+          `https://senior-project-api-gl8ig.ondigitalocean.app/api/drug-alert/${this.currentlyDrug.drugAlert.id}/update`,
           {
             tabs: this.tabs,
             take: this.takesGroup[0],
@@ -265,7 +265,7 @@ export default {
         console.warn(result2);
       } else {
         const result2 = await axios.delete(
-          `http://localhost:8080/api/drug-alert/${this.currentlyDrug.drugAlert.id}/delete`,
+          `https://senior-project-api-gl8ig.ondigitalocean.app/api/drug-alert/${this.currentlyDrug.drugAlert.id}/delete`,
           {},
         );
         console.warn(result2);
@@ -273,12 +273,12 @@ export default {
     },
     async deleteDrug() {
       const result = await axios.delete(
-        `http://localhost:8080/api/currently-drug/${this.currentlyDrug.id}/delete`,
+        `https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug/${this.currentlyDrug.id}/delete`,
         {},
       );
       if (this.currentlyDrug.drugAlert !== null) {
         await axios.delete(
-          `http://localhost:8080/api/drug-alert/${this.currentlyDrug.drugAlert.id}/delete`,
+          `https://senior-project-api-gl8ig.ondigitalocean.app/api/drug-alert/${this.currentlyDrug.drugAlert.id}/delete`,
           {},
         );
       }

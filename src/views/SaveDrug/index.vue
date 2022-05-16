@@ -10,7 +10,7 @@
       </div>
       <div>
         <b-image
-          :src="`http://localhost:8080/api/storage?key=${this.$store.getters.searchdrugs.pic}`"
+          :src="`https://senior-project-api-gl8ig.ondigitalocean.app/api/storage?key=${this.$store.getters.searchdrugs.pic}`"
           alt="The Buefy Logo"
           :rounded="rounded"
         >
@@ -178,7 +178,7 @@ export default {
   methods: {
     async addCurrentlyDrug() {
       await axios
-        .post('http://localhost:8080/api/currently-drug', {
+        .post('https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug', {
           drugId: this.$store.getters.searchdrugs.id,
           receiveDate: this.selectedDate,
           receivePlace: this.receive_place,
@@ -198,7 +198,7 @@ export default {
       // console.warn(this.successCurrentlyDrug);
       if (this.isHide === true) {
         await axios
-          .post('http://localhost:8080/api/drug-alert', {
+          .post('https://senior-project-api-gl8ig.ondigitalocean.app/api/drug-alert', {
             drugCurrentlyUsedId: this.successCurrentlyDrugId,
             tabs: this.tabs,
             take: this.takesGroup[0],

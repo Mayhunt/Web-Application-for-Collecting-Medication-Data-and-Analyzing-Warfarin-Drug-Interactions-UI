@@ -65,8 +65,8 @@
             <!-- <div class="buttons" style="justify-content: right"><b-button type="is-text" size="is-small">Forget Password</b-button></div> -->
             <div class="fixedbuttons" style="justify-content: center; margin-top: 2rem">
               <b-button @click="sendData" type="is-primary" size="is-medium" rounded expanded>
-                  ถัดไป</b-button
-                >
+                ถัดไป</b-button
+              >
 
               <!-- <button class="button is-text">Register</button> -->
             </div>

@@ -14,14 +14,14 @@
 //   },
 //   actions: {
 //     async logIn(_, credentials) {
-//       await axios.post('http://localhost:8080/api/auth/sign-in', credentials);
+//       await axios.post('https://senior-project-api-gl8ig.ondigitalocean.app/api/auth/sign-in', credentials);
 //       console.log(credentials);
 //     //   dispatch('attempt', response.data.accessToken);
 //     },
 //     // async attempt({ commit }) {
 //     //   commit('SET_TOKEN, token');
 //     //   try {
-//     //     const response = await axios.get('http://localhost:8080/api/auth/me');
+//     //     const response = await axios.get('https://senior-project-api-gl8ig.ondigitalocean.app/api/auth/me');
 //     //     commit('SET_USER', response.data);
 //     //   } catch (e) {
 //     //     console.log('failed');
