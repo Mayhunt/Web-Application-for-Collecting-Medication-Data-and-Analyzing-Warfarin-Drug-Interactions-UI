@@ -77,6 +77,7 @@
             <GChart
               type="LineChart"
               :options="options"
+              style="justify-content:center"
               :data="chartData"
               @ready="onChartReady"
             />
@@ -313,8 +314,8 @@ export default {
       chartData: [],
       options: {
         // title: ''
-        width: 350,
-        height: 300,
+        // width: 350,
+        // height: 300,
         curveType: 'function', // curve
         lineWidth: 4,
         legend: { position: 'bottom' },
@@ -528,5 +529,10 @@ export default {
   border-color: transparent;
   background-color: #f2effb;
   text-decoration-style: solid;
+}
+.INRChart {
+  height: 100%;
+  width: auto;
+  align-content: center !important;
 }
 </style>
