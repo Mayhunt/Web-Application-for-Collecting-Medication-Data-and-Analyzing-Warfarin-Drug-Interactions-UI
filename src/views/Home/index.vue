@@ -186,9 +186,7 @@
                         </b-field>
                         <div class="fixedbuttons" style="justify-content: center; margin-top: 2rem">
                           <b-button
-                            @click="
-                              addInr();
-                            "
+                            @click="addInr()"
                             rounded
                             type="is-primary"
                             size="is-medium"
@@ -200,75 +198,6 @@
                     </div>
                   </section>
                 </div>
-              </div>
-              </b-modal>
-                    <b-modal v-model="isCardModalActive2" :width="640" scroll="keep">
-              <div class="card">
-                <div>
-                  <section
-                    class="hero is-white"
-                    style="border-radius: 60px 60px 0 0; margin-top: 1rem; padding: 1rem"
-                  >
-                      <div class="content is-medium">
-                        <h1 style="margin-top: 0; text-align: center; margin-bottom: 0.25rem">
-                          แก้ไขค่า INR
-                        </h1>
-                      </div>
-                    <form class="box">
-                      <b-field label="วันที่">
-                        <b-datepicker
-                          v-model="selected.followDate"
-                          placeholder="เลือกวันที่."
-                          icon="calendar-today"
-                          rounded
-                          trap-focus
-                        >
-                        </b-datepicker>
-                      </b-field>
-
-                      <b-field label="ค่า INR ที่คาดหวัง">
-                        <b-input v-model="selected.inrExpect" rounded trap-focus></b-input>
-                      </b-field>
-
-                      <b-field label="ค่า INR ที่วัดได้จริง">
-                        <b-input
-                          v-model="selected.inrMeasure"
-                          placeholder="ใส่ค่า INR ที่วัดได้จริง"
-                          rounded
-                          trap-focus
-                        ></b-input>
-                      </b-field>
-                      <div class="buttons" style="justify-content: center; margin-top: 2rem">
-                        <b-button
-                          class="button"
-                          @click="
-                            isCardModalActive2 = false;
-                            reloadPage();
-                            updateInr();
-                          "
-                          type="is-primary"
-                          size="is-medium"
-                          rounded
-                          expanded
-                          >บันทึก
-                        </b-button>
-                        <b-button
-                          class="button"
-                          @click="
-                            isCardModalActive2 = false;
-                            deleteInr();
-                            reloadPage();
-                          "
-                          type="is-danger"
-                          size="is-medium"
-                          rounded
-                          expanded
-                          >ลบรายการนี้</b-button
-                        >
-                      </div>
-                    </form>
-                </section>
-              </div>
               </div>
             </b-modal>
 
@@ -399,23 +328,22 @@ export default {
   },
   methods: {
     async addInr() {
-      const result = await axios.post(
-        `https://senior-project-api-gl8ig.ondigitalocean.app/api/inr`,
-        {
+      const result = await axios
+        .post(`https://senior-project-api-gl8ig.ondigitalocean.app/api/inr`, {
           followDate: this.selectedDate,
           inrExpect: this.inrExpect,
           inrMeasure: this.inrMeasure,
-        }
-      ).then((response) => {
+        })
+        .then((response) => {
           window.location.reload();
-            // this.$router.push('/currently-dru');
-            console.log(response);
-          })
-          .catch((error) => {
-            // eslint-disable-next-line no-alert
-            alert(error.response.data.message);
-            console.log(error.response.data.message);
-          });
+          // this.$router.push('/currently-dru');
+          console.log(response);
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-alert
+          alert(error.response.data.message);
+          console.log(error.response.data.message);
+        });
       // console.warn(result);
     },
     async updateInr() {
@@ -425,14 +353,14 @@ export default {
           followDate: this.selected.followDate,
           inrExpect: this.selected.inrExpect,
           inrMeasure: this.selected.inrMeasure,
-        }
+        },
       );
       console.warn(result);
     },
     async deleteInr() {
       const result = await axios.delete(
         `https://senior-project-api-gl8ig.ondigitalocean.app/api/inr/${this.selected.id}/delete`,
-        {}
+        {},
       );
       console.warn(result);
     },
