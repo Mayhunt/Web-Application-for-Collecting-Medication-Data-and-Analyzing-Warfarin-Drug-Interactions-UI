@@ -12,7 +12,7 @@
             class="card-header"
             role="button"
             aria-controls="contentIdForA11y3"
-            :aria-expanded="props.open"
+            :aria-expanded="!props.open"
             style="font-family: 'Kanit'"
           >
             <p class="card-header-title" style="color: white">
