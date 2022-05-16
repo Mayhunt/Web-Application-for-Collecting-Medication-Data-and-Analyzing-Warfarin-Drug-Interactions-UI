@@ -488,7 +488,7 @@ export default {
     },
     c() {
        console.warn('bbbb')
-        if (this.tox ==='Home' && this.fromx === 'Login') {
+        if (this.tox ==='Home' && (this.fromx === 'Login' || this.fromx === 'Register3')) {
           console.warn(this.tox.name,this.fromx.name);
           window.location.reload();
         }
