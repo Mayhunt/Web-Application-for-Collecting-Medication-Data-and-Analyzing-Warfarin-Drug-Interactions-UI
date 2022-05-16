@@ -67,6 +67,11 @@
               <b-button @click="sendData" type="is-primary" size="is-medium" rounded expanded>
                 ถัดไป</b-button
               >
+              <div class="buttons" style="justify-content: center">
+              <router-link to="/sign-in"
+                  ><b-button type="is-text">ย้อนกลับ</b-button></router-link
+                >
+              </div>
 
               <!-- <button class="button is-text">Register</button> -->
             </div>
