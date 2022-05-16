@@ -116,34 +116,34 @@ export default {
       });
     },
   },
-  // mounted() {
-  //   axios.get('https://senior-project-api-gl8ig.ondigitalocean.app/api/search').then((response) => {
-  //     this.data = response.data;
-  //     // this.allData = data.data;
-  //     // data.data.forEach((item) => this.data.push(item.genericName));
-  //   });
-  // },
-  beforeRouteEnter(to, from, next) {
-    next((vm) => {
-      vm.getDrugAPI();
-      console.warn(to, from);
+  mounted() {
+    axios.get('https://senior-project-api-gl8ig.ondigitalocean.app/api/search').then((response) => {
+      this.data = response.data;
+      // this.allData = data.data;
+      // data.data.forEach((item) => this.data.push(item.genericName));
     });
   },
-  beforeRouteUpdate(to, from, next) {
-    this.data = null;
-    // this.name = null;
-    this.getDrugAPI();
-    next();
-  },
+  // beforeRouteEnter(to, from, next) {
+  //   next((vm) => {
+  //     vm.getDrugAPI();
+  //     console.warn(to, from);
+  //   });
+  // },
+  // beforeRouteUpdate(to, from, next) {
+  //   this.data = null;
+  //   // this.name = null;
+  //   this.getDrugAPI();
+  //   next();
+  // },
   methods: {
-    getDrugAPI() {
-      axios.get('https://senior-project-api-gl8ig.ondigitalocean.app/api/search').then((response) => {
-        this.data = response.data;
-        console.warn(this.data);
-        // this.allData = data.data;
-        // data.data.forEach((item) => this.data.push(item.genericName));
-      });
-    },
+    // getDrugAPI() {
+    //   axios.get('https://senior-project-api-gl8ig.ondigitalocean.app/api/search').then((response) => {
+    //     this.data = response.data;
+    //     console.warn(this.data);
+    //     // this.allData = data.data;
+    //     // data.data.forEach((item) => this.data.push(item.genericName));
+    //   });
+    // },
     searchDrug() {
       console.warn(this.selected);
       if (this.selected != null) {

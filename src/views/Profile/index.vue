@@ -128,16 +128,31 @@ export default {
   computed: {
     ...mapGetters(['user']),
   },
-  mounted() {
-    axios
-      .get('https://senior-project-api-gl8ig.ondigitalocean.app/api/auth/me')
-      .then((response) => {
-        this.me = response.data;
-        this.me.birthDate = new Date(this.me.birthDate);
-        console.warn(this.me.birthDate);
-      });
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      vm.getProfileAPI();
+      console.warn(to, from);
+    });
   },
+  // mounted() {
+  //   axios
+  //     .get('https://senior-project-api-gl8ig.ondigitalocean.app/api/auth/me')
+  //     .then((response) => {
+  //       this.me = response.data;
+  //       this.me.birthDate = new Date(this.me.birthDate);
+  //       console.warn(this.me.birthDate);
+  //     });
+  // },
   methods: {
+    getProfileAPI() {
+      axios
+        .get('https://senior-project-api-gl8ig.ondigitalocean.app/api/auth/me')
+        .then((response) => {
+          this.me = response.data;
+          this.me.birthDate = new Date(this.me.birthDate);
+          console.warn(this.me.birthDate);
+        });
+    },
     sendData() {
       this.$store.commit('getId', this.me.id);
     },

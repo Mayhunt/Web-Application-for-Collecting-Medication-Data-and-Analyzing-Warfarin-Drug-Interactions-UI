@@ -43,7 +43,7 @@
             <b-button class="button" size="is-medium" type="is-primary is-light">บันทึก</b-button>
           </div> -->
           <div class="fixedbutton" style="justify-content: center">
-            ><b-button
+            <b-button
               @click="addAllergicDrug()"
               rounded
               type="is-primary"
