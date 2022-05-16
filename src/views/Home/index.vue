@@ -199,6 +199,22 @@
                         </div>
                       </form>
                     </div>
+                  </section>
+                </div>
+              </div>
+              </b-modal>
+                    <b-modal v-model="isCardModalActive2" :width="640" scroll="keep">
+              <div class="card">
+                <div>
+                  <section
+                    class="hero is-white"
+                    style="border-radius: 60px 60px 0 0; margin-top: 1rem; padding: 1rem"
+                  >
+                      <div class="content is-medium">
+                        <h1 style="margin-top: 0; text-align: center; margin-bottom: 0.25rem">
+                          แก้ไขค่า INR
+                        </h1>
+                      </div>
                     <form class="box">
                       <b-field label="วันที่">
                         <b-datepicker
