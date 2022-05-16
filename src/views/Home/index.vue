@@ -325,7 +325,7 @@ export default {
     next((vm) => {
       vm.getINRAPI();
       vm.getCurrentlyAPI();
-      vm.drawData();
+      // vm.drawData();
       console.warn(to, from);
     });
   },
@@ -344,7 +344,7 @@ export default {
       .get(`https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug`)
       .then((response) => {
         for (const i of response.data) {
-          if (i.drugAlert !== null) {
+          if (i.alertStatus === true) {
             this.drugSchedule.push(i);
           }
         }
