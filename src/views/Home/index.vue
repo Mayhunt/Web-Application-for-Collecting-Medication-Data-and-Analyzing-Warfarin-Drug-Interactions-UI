@@ -188,7 +188,6 @@
                           <b-button
                             @click="
                               addInr();
-                              reloadPage();
                             "
                             rounded
                             type="is-primary"
@@ -407,7 +406,16 @@ export default {
           inrExpect: this.inrExpect,
           inrMeasure: this.inrMeasure,
         }
-      );
+      ).then((response) => {
+          window.location.reload();
+            // this.$router.push('/currently-dru');
+            console.log(response);
+          })
+          .catch((error) => {
+            // eslint-disable-next-line no-alert
+            alert(error.response.data.message);
+            console.log(error.response.data.message);
+          });
       // console.warn(result);
     },
     async updateInr() {
