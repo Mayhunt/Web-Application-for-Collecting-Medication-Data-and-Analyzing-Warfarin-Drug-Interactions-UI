@@ -78,6 +78,7 @@
               type="LineChart"
               :options="options"
               :data="chartData"
+              style="justify-content:center"
               @ready="onChartReady"
               :settings="{
                 packages: ['corechart'],
@@ -314,8 +315,8 @@ export default {
       chartData: [],
       options: {
         // title: ''
-        width: 350,
-        height: 300,
+        // width: 350,
+        // height: 300,
         curveType: 'function', // curve
         lineWidth: 4,
         legend: { position: 'bottom' },
@@ -479,5 +480,10 @@ export default {
   border-color: transparent;
   background-color: #f2effb;
   text-decoration-style: solid;
+}
+.INRChart {
+  height: 100%;
+  width: auto;
+  align-content: center !important;
 }
 </style>
