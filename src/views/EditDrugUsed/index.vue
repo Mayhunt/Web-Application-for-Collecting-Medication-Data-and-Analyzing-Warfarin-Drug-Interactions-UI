@@ -434,9 +434,20 @@ export default {
     // },
     async deleteDrug() {
       await axios.delete(
-        `https://senior-project-api-gl8ig.ondigitalocean.app/api/drug-alert/${this.currentlyDrug.drugAlert.id}/delete`,
+        `https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug/${this.currentlyDrug.id}/delete`,
         {},
-      );
+      // eslint-disable-next-line no-unused-vars
+      ).then((response) => {
+        this.$router.push('/currently-drug');
+        // window.location.reload();
+        // this.$router.push('/currently-drug');
+        // console.log(response);
+      })
+        .catch((error) => {
+          // eslint-disable-next-line no-alert
+          alert(error.response.data.message);
+          // console.log(error.response.data.message);
+        });
       // eslint-disable-next-line no-unused-vars
       // const result = await axios.delete(
       //   `https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug/${this.currentlyDrug.id}/delete`,

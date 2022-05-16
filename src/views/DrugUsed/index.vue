@@ -338,7 +338,8 @@ export default {
       const result = await axios.delete(
         `https://senior-project-api-gl8ig.ondigitalocean.app/api/currently-drug/${this.details.id}/delete`
       ).then((response) => {
-        this.$router.push('/currently-drug');
+        window.location.reload();
+        // this.$router.push('/currently-drug');
         // console.log(response);
       })
         .catch((error) => {
