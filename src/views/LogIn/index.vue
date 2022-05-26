@@ -15,6 +15,50 @@
         style="border-radius: 60px 60px 0 0; margin-top: 1rem; padding: 1rem"
       >
         <div>
+          <b-modal v-model="isImageModalActive">
+            <b-carousel :arrow="arrow" :repeat="arrowBoth">
+              <b-carousel-item>
+                <b-image :src="require('@/assets/Slide0.png')"> </b-image>
+              </b-carousel-item>
+              <b-carousel-item>
+                <b-image :src="require('@/assets/Slide1.png')"> </b-image>
+              </b-carousel-item>
+              <b-carousel-item>
+                <b-image :src="require('@/assets/Slide2.png')"> </b-image>
+              </b-carousel-item>
+              <b-carousel-item>
+                <b-image :src="require('@/assets/Slide3.png')"> </b-image>
+              </b-carousel-item>
+              <b-carousel-item>
+                <b-image :src="require('@/assets/Slide4.png')"> </b-image>
+              </b-carousel-item>
+              <b-carousel-item>
+                <b-image :src="require('@/assets/Slide5.png')"> </b-image>
+              </b-carousel-item>
+              <b-carousel-item>
+                <b-image :src="require('@/assets/Slide6.png')"> </b-image>
+              </b-carousel-item>
+              <b-carousel-item>
+                <b-image :src="require('@/assets/Slide7.png')"> </b-image>
+              </b-carousel-item>
+              <b-carousel-item>
+                <b-image :src="require('@/assets/Slide8.png')"> </b-image>
+              </b-carousel-item>
+              <b-carousel-item>
+                <b-image :src="require('@/assets/Slide9.png')"> </b-image>
+              </b-carousel-item>
+              <b-carousel-item>
+                <b-image :src="require('@/assets/Slide10.png')"> </b-image>
+              </b-carousel-item>
+              <!-- <b-carousel-item v-for="(carousel, i) in carousels" :key="i">
+                  <section :class="`hero is-medium is-${carousel.color}`">
+                      <div class="hero-body has-text-centered">
+                          <h1 class="title">{{carousel.text}}</h1>
+                      </div>
+                  </section>
+              </b-carousel-item> -->
+            </b-carousel>
+          </b-modal>
           <div class="content is-medium">
             <h1 style="margin-top: 0; text-align: center; margin-bottom: 0.25rem">
               ยินดีต้อนรับ !
@@ -83,6 +127,7 @@ export default {
     return {
       username: this.username,
       password: this.password,
+      isImageModalActive: true,
     };
   },
   methods: {

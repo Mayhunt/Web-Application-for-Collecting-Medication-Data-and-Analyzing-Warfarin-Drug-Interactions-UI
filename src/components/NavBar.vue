@@ -3,9 +3,48 @@
   <section>
     <!-- b modal infomation picture -->
     <b-modal v-model="isImageModalActive">
-      <p class="image">
-        <b-image :src="require('@/assets/info.png')" alt="i" :rounded="rounded"> </b-image>
-      </p>
+      <b-carousel :arrow="arrow" :repeat="arrowBoth">
+              <b-carousel-item>
+                <b-image :src="require('@/assets/Slide0.png')"> </b-image>
+              </b-carousel-item>
+              <b-carousel-item>
+                <b-image :src="require('@/assets/info.png')"> </b-image>
+              </b-carousel-item>
+              <b-carousel-item>
+                <b-image :src="require('@/assets/Slide2.png')"> </b-image>
+              </b-carousel-item>
+              <b-carousel-item>
+                <b-image :src="require('@/assets/Slide3.png')"> </b-image>
+              </b-carousel-item>
+              <b-carousel-item>
+                <b-image :src="require('@/assets/Slide4.png')"> </b-image>
+              </b-carousel-item>
+              <b-carousel-item>
+                <b-image :src="require('@/assets/Slide5.png')"> </b-image>
+              </b-carousel-item>
+              <b-carousel-item>
+                <b-image :src="require('@/assets/Slide6.png')"> </b-image>
+              </b-carousel-item>
+              <b-carousel-item>
+                <b-image :src="require('@/assets/Slide7.png')"> </b-image>
+              </b-carousel-item>
+              <b-carousel-item>
+                <b-image :src="require('@/assets/Slide8.png')"> </b-image>
+              </b-carousel-item>
+              <b-carousel-item>
+                <b-image :src="require('@/assets/Slide9.png')"> </b-image>
+              </b-carousel-item>
+              <b-carousel-item>
+                <b-image :src="require('@/assets/Slide10.png')"> </b-image>
+              </b-carousel-item>
+              <!-- <b-carousel-item v-for="(carousel, i) in carousels" :key="i">
+                  <section :class="`hero is-medium is-${carousel.color}`">
+                      <div class="hero-body has-text-centered">
+                          <h1 class="title">{{carousel.text}}</h1>
+                      </div>
+                  </section>
+              </b-carousel-item> -->
+            </b-carousel>
     </b-modal>
     <!--  -->
     <b-navbar :fixed-top="true">
