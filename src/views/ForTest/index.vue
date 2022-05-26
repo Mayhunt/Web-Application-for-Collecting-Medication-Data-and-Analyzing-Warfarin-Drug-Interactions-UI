@@ -18,34 +18,34 @@
           <b-modal v-model="isImageModalActive">
             <b-carousel :arrow="arrow" :repeat="arrowBoth">
               <b-carousel-item>
-                <b-image :src="require('@/assets/Slide1.JPG')"> </b-image>
+                <b-image :src="require('@/assets/Slide1.jpeg')"> </b-image>
               </b-carousel-item>
               <b-carousel-item>
-                <b-image :src="require('@/assets/Slide2.JPG')"> </b-image>
+                <b-image :src="require('@/assets/Slide2.jpeg')"> </b-image>
               </b-carousel-item>
               <b-carousel-item>
-                <b-image :src="require('@/assets/Slide3.JPG')"> </b-image>
+                <b-image :src="require('@/assets/Slide1.jpeg')"> </b-image>
               </b-carousel-item>
               <b-carousel-item>
-                <b-image :src="require('@/assets/Slide4.JPG')"> </b-image>
+                <b-image :src="require('@/assets/Slide1.jpeg')"> </b-image>
               </b-carousel-item>
               <b-carousel-item>
-                <b-image :src="require('@/assets/Slide5.JPG')"> </b-image>
+                <b-image :src="require('@/assets/Slide1.jpeg')"> </b-image>
               </b-carousel-item>
               <b-carousel-item>
-                <b-image :src="require('@/assets/Slide6.JPG')"> </b-image>
+                <b-image :src="require('@/assets/Slide6.jpeg')"> </b-image>
               </b-carousel-item>
               <b-carousel-item>
-                <b-image :src="require('@/assets/Slide7.JPG')"> </b-image>
+                <b-image :src="require('@/assets/Slide7.jpeg')"> </b-image>
               </b-carousel-item>
               <b-carousel-item>
-                <b-image :src="require('@/assets/Slide8.JPG')"> </b-image>
+                <b-image :src="require('@/assets/Slide8.jpeg')"> </b-image>
               </b-carousel-item>
               <b-carousel-item>
-                <b-image :src="require('@/assets/Slide9.JPG')"> </b-image>
+                <b-image :src="require('@/assets/Slide9.jpeg')"> </b-image>
               </b-carousel-item>
               <b-carousel-item>
-                <b-image :src="require('@/assets/Slide10.JPG')"> </b-image>
+                <b-image :src="require('@/assets/Slide10.jpeg')"> </b-image>
               </b-carousel-item>
               <!-- <b-carousel-item v-for="(carousel, i) in carousels" :key="i">
                   <section :class="`hero is-medium is-${carousel.color}`">
