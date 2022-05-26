@@ -20,10 +20,7 @@
             :repeat="arrowBoth">
             <b-carousel-item>
                  <b-image
-          :src="require('@/assets/logo2.jpeg')"
-          alt="The Buefy Logo"
-          ratio="5by3"
-          :rounded="rounded"
+          src="https://senior-project-api-gl8ig.ondigitalocean.app/api/storage?key=Ac_YXsmD.png"
         >
         </b-image>
               </b-carousel-item>
