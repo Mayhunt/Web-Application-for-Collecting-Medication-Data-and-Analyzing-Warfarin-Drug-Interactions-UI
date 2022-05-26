@@ -18,13 +18,15 @@
           <b-modal v-model="isImageModalActive">
             <b-carousel :arrow="arrow"
             :repeat="arrowBoth">
-            <b-image
+            <b-carousel-item>
+                 <b-image
           :src="require('@/assets/logo2.jpeg')"
           alt="The Buefy Logo"
           ratio="5by3"
           :rounded="rounded"
         >
         </b-image>
+              </b-carousel-item>
               <!-- <b-carousel-item v-for="(carousel, i) in carousels" :key="i">
                   <section :class="`hero is-medium is-${carousel.color}`">
                       <div class="hero-body has-text-centered">
