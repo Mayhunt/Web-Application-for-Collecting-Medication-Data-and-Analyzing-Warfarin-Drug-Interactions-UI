@@ -20,7 +20,13 @@
             :repeat="arrowBoth">
             <b-carousel-item>
                  <b-image
-          src="https://senior-project-api-gl8ig.ondigitalocean.app/api/storage?key=Ac_YXsmD.png"
+         :src="require('@/assets/logo2.jpeg')"
+        >
+        </b-image>
+              </b-carousel-item>
+              <b-carousel-item>
+                 <b-image
+         :src="require('@/assets/ex1.png')"
         >
         </b-image>
               </b-carousel-item>
